@@ -13,8 +13,10 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://github.com/iamStephenFang/stephenfang.github.io
-root: /stephenfang.github.io/
+# url: https://github.com/iamStephenFang/stephenfang.github.io
+# root: /stephenfang.github.io/
+url: https://stephefang.me
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
