@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: StephenFang's GitHub Page
+title: "StephenFang's GitHub Page"
 subtitle: ''
-description: 'StephenFang's Blog'
-keywords:
-author: StephenFang
+description: "StephenFang's Blog"
+keywords: 
+author: Stephen Fang
 language: en
 timezone: 'Asia/Shanghai'
 
@@ -93,7 +93,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
