@@ -3,11 +3,11 @@
   <title>STEPHENFANG</title>
   
   
-  <link href="/stephenfang.github.io/atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
-  <link href="https://github.com/iamStephenFang/stephenfang.github.io/"/>
-  <updated>2020-02-07T16:31:24.571Z</updated>
-  <id>https://github.com/iamStephenFang/stephenfang.github.io/</id>
+  <link href="https://stephefang.me/"/>
+  <updated>2020-02-07T16:59:39.628Z</updated>
+  <id>https://stephefang.me/</id>
   
   <author>
     <name>Stephen Fang</name>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>Apple Watch程序设计</title>
-    <link href="https://github.com/iamStephenFang/stephenfang.github.io/2020/02/07/test/"/>
-    <id>https://github.com/iamStephenFang/stephenfang.github.io/2020/02/07/test/</id>
+    <link href="https://stephefang.me/2020/02/07/test/"/>
+    <id>https://stephefang.me/2020/02/07/test/</id>
     <published>2020-02-07T08:45:28.000Z</published>
-    <updated>2020-02-07T16:31:24.571Z</updated>
+    <updated>2020-02-07T16:59:39.628Z</updated>
     
     <content type="html"><![CDATA[<h2 id="设计Apple-Watch程序"><a href="#设计Apple-Watch程序" class="headerlink" title="设计Apple Watch程序"></a>设计Apple Watch程序</h2><h3 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h3><p>设计Apple Watch应用程序与设计iOS程序存在很大不同，我们需要从不同角度理解是什么让Apple Watch成为了出色的微型电脑，同时了解其是iPhone的功能拓展。</p><p>作为设计者，我们需要考量Apple Watch屏幕大小以及理解其设计方式与iPhone完全不同。因为Apple Watch的尺寸带来了新的手势操作和UI/UX 设计，使得这一切变得尤为重要。</p><p><img src="https://images.ctfassets.net/ooa29xqb8tix/4hJw3TcYIU0qUO8YIUiq0w/cd74ff44fa960052c3ba8e7c6c978cad/iPhone_208_20Plus_20and_20AppleWatch_20Screens.jpg" alt="https://images.ctfassets.net/ooa29xqb8tix/4hJw3TcYIU0qUO8YIUiq0w/cd74ff44fa960052c3ba8e7c6c978cad/iPhone_208_20Plus_20and_20AppleWatch_20Screens.jpg"></p>]]></content>
     
@@ -36,14 +36,14 @@
     
     
     
-      <category term="design" scheme="https://github.com/iamStephenFang/stephenfang.github.io/tags/design/"/>
+      <category term="design" scheme="https://stephefang.me/tags/design/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://github.com/iamStephenFang/stephenfang.github.io/2020/02/07/hello-world/"/>
-    <id>https://github.com/iamStephenFang/stephenfang.github.io/2020/02/07/hello-world/</id>
+    <link href="https://stephefang.me/2020/02/07/hello-world/"/>
+    <id>https://stephefang.me/2020/02/07/hello-world/</id>
     <published>2020-02-07T08:15:57.491Z</published>
     <updated>2020-02-07T15:04:09.004Z</updated>
     
