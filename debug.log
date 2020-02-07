@@ -401,3 +401,44 @@
 {"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mtag\u001b[39m","time":"2020-02-07T11:57:43.524Z","v":0}
 {"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mindex\u001b[39m","time":"2020-02-07T11:57:43.524Z","v":0}
 {"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35masset\u001b[39m","time":"2020-02-07T11:57:43.525Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Theme config loaded.","time":"2020-02-07T12:12:36.596Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Processed: \u001b[35m_config.yml\u001b[39m","time":"2020-02-07T12:12:36.596Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mpage\u001b[39m","time":"2020-02-07T12:12:36.700Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mpost\u001b[39m","time":"2020-02-07T12:12:36.701Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35marchive\u001b[39m","time":"2020-02-07T12:12:36.701Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mcategory\u001b[39m","time":"2020-02-07T12:12:36.701Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mtag\u001b[39m","time":"2020-02-07T12:12:36.701Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mindex\u001b[39m","time":"2020-02-07T12:12:36.701Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35masset\u001b[39m","time":"2020-02-07T12:12:36.702Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Theme config loaded.","time":"2020-02-07T12:13:02.284Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Processed: \u001b[35m_config.yml\u001b[39m","time":"2020-02-07T12:13:02.285Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mpage\u001b[39m","time":"2020-02-07T12:13:02.392Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mpost\u001b[39m","time":"2020-02-07T12:13:02.392Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35marchive\u001b[39m","time":"2020-02-07T12:13:02.392Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mcategory\u001b[39m","time":"2020-02-07T12:13:02.392Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mtag\u001b[39m","time":"2020-02-07T12:13:02.392Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mindex\u001b[39m","time":"2020-02-07T12:13:02.393Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35masset\u001b[39m","time":"2020-02-07T12:13:02.394Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mpage\u001b[39m","time":"2020-02-07T12:46:07.337Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mpost\u001b[39m","time":"2020-02-07T12:46:07.337Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35marchive\u001b[39m","time":"2020-02-07T12:46:07.337Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mcategory\u001b[39m","time":"2020-02-07T12:46:07.338Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mtag\u001b[39m","time":"2020-02-07T12:46:07.338Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mindex\u001b[39m","time":"2020-02-07T12:46:07.338Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35masset\u001b[39m","time":"2020-02-07T12:46:07.339Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mpage\u001b[39m","time":"2020-02-07T12:46:10.944Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mpost\u001b[39m","time":"2020-02-07T12:46:10.944Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35marchive\u001b[39m","time":"2020-02-07T12:46:10.944Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mcategory\u001b[39m","time":"2020-02-07T12:46:10.944Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mtag\u001b[39m","time":"2020-02-07T12:46:10.944Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mindex\u001b[39m","time":"2020-02-07T12:46:10.944Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35masset\u001b[39m","time":"2020-02-07T12:46:10.945Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mpage\u001b[39m","time":"2020-02-07T12:46:55.752Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mpost\u001b[39m","time":"2020-02-07T12:46:55.752Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35marchive\u001b[39m","time":"2020-02-07T12:46:55.752Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mcategory\u001b[39m","time":"2020-02-07T12:46:55.752Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mtag\u001b[39m","time":"2020-02-07T12:46:55.752Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35mindex\u001b[39m","time":"2020-02-07T12:46:55.752Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Generator: \u001b[35masset\u001b[39m","time":"2020-02-07T12:46:55.753Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":30,"msg":"Bye!","time":"2020-02-07T12:47:15.854Z","v":0}
+{"name":"hexo","hostname":"Stephens-MBP.lan","pid":28635,"level":20,"msg":"Database saved","time":"2020-02-07T12:47:15.861Z","v":0}
