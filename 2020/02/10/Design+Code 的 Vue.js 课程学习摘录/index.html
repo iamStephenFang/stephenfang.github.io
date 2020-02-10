@@ -46,20 +46,20 @@
   };
 </script>
 
-  <meta name="description" content="联系方式如果您对我的博文感兴趣，可以通过以下几种社交网络与我保持联系。  GitHub: iamStephenFang  Instagram: iamStephenFang  E-Mail: StephenFang  Weibo: iamStephenFang  Twitter: Fangxuanmiao">
+  <meta name="description" content="配置组件的data属性课程初提及的定义data的方法经过测试不可行，即如下代码片段。 12345678910111213&lt;script&gt;export default &amp;#123;  name: &quot;SignIn&quot;,  data: &amp;#123;    isDarkMode: true  &amp;#125;,  methods: &amp;#123;    toggleDarkMode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://stephefang.me/2020/02/10/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F/index.html">
-<meta property="og:site_name" content="STEPHENFANG">
-<meta property="og:description" content="联系方式如果您对我的博文感兴趣，可以通过以下几种社交网络与我保持联系。  GitHub: iamStephenFang  Instagram: iamStephenFang  E-Mail: StephenFang  Weibo: iamStephenFang  Twitter: Fangxuanmiao">
+<meta property="og:title" content="Design+Code 的 Vue.js 课程学习摘录">
+<meta property="og:url" content="https://stephefang.me/2020/02/10/Design+Code%20%E7%9A%84%20Vue.js%20%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E6%91%98%E5%BD%95/index.html">
+<meta property="og:site_name" content="StephenFang">
+<meta property="og:description" content="配置组件的data属性课程初提及的定义data的方法经过测试不可行，即如下代码片段。 12345678910111213&lt;script&gt;export default &amp;#123;  name: &quot;SignIn&quot;,  data: &amp;#123;    isDarkMode: true  &amp;#125;,  methods: &amp;#123;    toggleDarkMode">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-10T17:51:18.500Z">
-<meta property="article:modified_time" content="2020-02-10T17:51:18.500Z">
+<meta property="article:published_time" content="2020-02-10T17:20:20.000Z">
+<meta property="article:modified_time" content="2020-02-10T18:17:10.167Z">
 <meta property="article:author" content="Stephen Fang">
-<meta property="article:tag" content="about">
+<meta property="article:tag" content="tech">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://stephefang.me/2020/02/10/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F/">
+<link rel="canonical" href="https://stephefang.me/2020/02/10/Design+Code%20%E7%9A%84%20Vue.js%20%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E6%91%98%E5%BD%95/">
 
 
 <script id="page-configurations">
@@ -71,7 +71,7 @@
   };
 </script>
 
-  <title>Hello World | STEPHENFANG</title>
+  <title>Design+Code 的 Vue.js 课程学习摘录 | StephenFang</title>
   
 
 
@@ -102,7 +102,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="STEPHENFANG" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="StephenFang" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -116,7 +116,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">STEPHENFANG</span>
+        <span class="site-title">StephenFang</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://stephefang.me/2020/02/10/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://stephefang.me/2020/02/10/Design+Code%20%E7%9A%84%20Vue.js%20%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E6%91%98%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/favicon.png">
@@ -197,11 +197,11 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="STEPHENFANG">
+      <meta itemprop="name" content="StephenFang">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          Design+Code 的 Vue.js 课程学习摘录
         </h1>
 
         <div class="post-meta">
@@ -210,8 +210,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-02-11 01:51:18" itemprop="dateCreated datePublished" datetime="2020-02-11T01:51:18+08:00">2020-02-11</time>
+              <time title="创建时间：2020-02-11 01:20:20 / 修改时间：02:17:10" itemprop="dateCreated datePublished" datetime="2020-02-11T01:20:20+08:00">2020-02-11</time>
             </span>
 
           
@@ -225,15 +226,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h1><p>如果您对我的博文感兴趣，可以通过以下几种社交网络与我保持联系。</p>
-<ul>
-<li>GitHub: <a href="https://github.com/iamstephenfang" target="_blank" rel="noopener">iamStephenFang</a> </li>
-<li>Instagram: <a href="https://instagram.com/iamstephenfang" target="_blank" rel="noopener">iamStephenFang</a> </li>
-<li>E-Mail: <a href="mailto:fangxuanmiao@gmail.com">StephenFang</a> </li>
-<li>Weibo: <a href="https://weibo.com/iamstephenfang" target="_blank" rel="noopener">iamStephenFang</a> </li>
-<li>Twitter: <a href="https://twitter.com/fangxuanmiao" target="_blank" rel="noopener">Fangxuanmiao</a> </li>
-</ul>
+        <h2 id="配置组件的data属性"><a href="#配置组件的data属性" class="headerlink" title="配置组件的data属性"></a>配置组件的data属性</h2><p>课程初提及的定义<strong>data</strong>的方法经过测试不可行，即如下代码片段。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;SignIn&quot;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    isDarkMode: true</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    toggleDarkMode() &#123;</span><br><span class="line">      this.isDarkMode &#x3D; !this.isDarkMode;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
 
+<p><strong>data</strong> 包含可以在触发组件更新的数据。<br><strong>methods</strong> 包含可以触发数据更改的函数。</p>
+<p>后文中解释了需要作出的更改：</p>
+<blockquote>
+<p>为了让效果工作，我们需要的data属性是一个函数。这是 Vue组件的规则，并不是<code>App.vue</code>的规则。因此需要将当前数据属性替换为：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">      isDarkMode: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>经查阅官方文档，了解到 data 必须是一个函数。</p>
+<blockquote>
+<p>当我们定义 <button-counter> 组件时，你可能会发现它的 data 并不是直接提供一个对象，取而代之的是，一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝。如果 Vue 没有这条规则，点击一个按钮就可能会影响到其它所有实例。</p>
+</blockquote>
+<p>解释得非常清楚，学习 <code>Vue.js</code> 等前端技术或许可以速成，但文档一定是不可或缺的一块。</p>
+<h2 id="配置全局样式"><a href="#配置全局样式" class="headerlink" title="配置全局样式"></a>配置全局样式</h2><p>可以在CSS <code>&lt;style&gt;</code>的开头导入<code>.css</code>文件，但对其进行配置可以使其用于整个项目的 Vue 文件。<br><code>vue.config.js</code> 是一个可选的配置文件，如果项目的 (和 <code>package.json</code> 同级的) 根目录中存在这个文件，那么它会被 <code>@vue/cli-service</code> 自动加载。<a href="https://cli.vuejs.org/zh/config/#chainwebpack" target="_blank" rel="noopener">官方文档</a>详细解释了全局 CLI 配置方法。<br>教程指导做的是在项目的根目录中创建一个名为<code>vue.config.js</code>的文件，并且在此输入以下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; vue.config.js</span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    css: &#123;</span><br><span class="line">        loaderOptions: &#123;</span><br><span class="line">            sass: &#123;</span><br><span class="line">                data: &#96;</span><br><span class="line">                    @import &quot;@&#x2F;global-styles&#x2F;colors.scss&quot;;</span><br><span class="line">                    @import &quot;@&#x2F;global-styles&#x2F;typography.scss&quot;;</span><br><span class="line">                &#96;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果使用的是最新版本的 <code>Vue CLI</code>，尽管进行了到 <strong>Vue CLI &gt; in Project Tasks &gt; serve</strong> 重新运行任务，还是会提示报错无法运行。</p>
+<p>新版本的 <code>Vue CLI</code> 提供了 <code>Dart Sass</code> 与 <code>node-sass</code> 两种类型的 Sass 配置，在<code>sass-loader</code>的<a href="https://github.com/webpack-contrib/sass-loader" target="_blank" rel="noopener">implementation</a>中两者有所不同。</p>
+<p>原因在于在 <code>sass-loader</code> v7 中，<code>prependData</code>选项名是 “data”，已经不适用。<br>默认情况下 <code>sass</code> 选项会同时对 <code>sass</code> 和 <code>scss</code> 语法同时生效，因为 <code>scss</code> 语法在内部也是由 sass-loader 处理的，但是在配置 <code>data</code> 选项的时候，<code>scss</code> 语法会要求语句结尾必须有分号，<code>sass</code> 则要求必须没有分号。在这种情况下，我们可以使用 <code>scss</code> 选项，对 <code>scss</code> 语法进行单独配置。实例代码来自<a href="https://cli.vuejs.org/zh/guide/css.html#css-modules" target="_blank" rel="noopener">官方文档</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; vue.config.js</span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">  css: &#123;</span><br><span class="line">    loaderOptions: &#123;</span><br><span class="line">      &#x2F;&#x2F; 给 sass-loader 传递选项</span><br><span class="line">      sass: &#123;</span><br><span class="line">        &#x2F;&#x2F; @&#x2F; 是 src&#x2F; 的别名</span><br><span class="line">        &#x2F;&#x2F; 假设存在 &#96;src&#x2F;variables.sass&#96; 这个文件</span><br><span class="line">        prependData: &#96;@import &quot;~@&#x2F;variables.sass&quot;&#96;</span><br><span class="line">      &#125;,</span><br><span class="line">      scss: &#123;</span><br><span class="line">        prependData: &#96;@import &quot;~@&#x2F;variables.scss&quot;;&#96;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2>
     </div>
 
     
@@ -291,7 +307,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/about/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/tech/" rel="tag"><i class="fa fa-tag"></i></a>
           </div>
 
         
@@ -303,10 +319,7 @@
     <a href="/2020/02/07/Apple%20Watch/" rel="prev" title="Apple Watch程序设计">
       <i class="fa fa-chevron-left"></i> Apple Watch程序设计
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/10/hello-world/" rel="next" title="Hello World">
-      Hello World <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -366,7 +379,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#联系方式"><span class="nav-number">1.</span> <span class="nav-text">联系方式</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置组件的data属性"><span class="nav-number">1.</span> <span class="nav-text">配置组件的data属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置全局样式"><span class="nav-number">2.</span> <span class="nav-text">配置全局样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未完待续"><span class="nav-number">3.</span> <span class="nav-text">未完待续</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -382,7 +395,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
