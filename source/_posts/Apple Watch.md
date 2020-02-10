@@ -3,7 +3,6 @@ title: Apple Watch程序设计
 date: 2020-02-07 16:45:28
 tags: design
 ---
-# 设计Apple Watch程序
 
 ## 基本原则
 
