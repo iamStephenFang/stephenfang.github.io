@@ -7,9 +7,10 @@ tags:
 - struts
 - Action
 - JavaEE
+- 总结
+- 实验
 ---
 
-# 控制器组件 Action 应用实验
 
 ## 知识梳理
 

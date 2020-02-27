@@ -1,14 +1,14 @@
 ---
-title: Struts 2 应用实验
+title: Struts 2 基础应用实验
 date: 2020-02-23 18:10:20
 categories: 
 - tech
 tags: 
 - struts
 - JavaEE
+- 总结
+- 实验
 ---
-
-# Struts 2 应用实验
 
 ## 知识梳理
 
