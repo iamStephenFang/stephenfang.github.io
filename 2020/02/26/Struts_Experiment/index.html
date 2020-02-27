@@ -74,7 +74,7 @@
 <meta property="og:image" content="https://stephefang.me/2020/02/26/Struts_Experiment/19.png">
 <meta property="og:image" content="https://stephefang.me/2020/02/26/Struts_Experiment/20.png">
 <meta property="article:published_time" content="2020-02-26T10:10:20.000Z">
-<meta property="article:modified_time" content="2020-02-26T10:04:31.973Z">
+<meta property="article:modified_time" content="2020-02-27T04:28:51.016Z">
 <meta property="article:author" content="Stephen Fang">
 <meta property="article:tag" content="tech">
 <meta name="twitter:card" content="summary">
@@ -231,10 +231,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-02-26 18:10:20 / 修改时间：18:04:31" itemprop="dateCreated datePublished" datetime="2020-02-26T18:10:20+08:00">2020-02-26</time>
+              <time title="创建时间：2020-02-26 18:10:20" itemprop="dateCreated datePublished" datetime="2020-02-26T18:10:20+08:00">2020-02-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-27 12:28:51" itemprop="dateModified" datetime="2020-02-27T12:28:51+08:00">2020-02-27</time>
+              </span>
 
           
 
@@ -300,7 +306,7 @@
 <p>11、通过将不同语言版本的字符保存在属性文件中，Struts2 的国际化机制能够在不需要修改程序主体的前提下，实现不同语言版本的应用； </p>
 <p>12、在 Web 应用中选择需要进行国际化的内容，不在页面中直接输出该信息，而是通过 Struts2 标签输出一个键值，该键值在不同语言环境下对应不同的字符串；如：<code>&lt;s:textfield name=&quot;loginUser.account&quot; lable=&quot;请输入用户名&quot;/&gt;</code>代码中的“请输入用户名”是需要国际化的内容,将其以键值代替为<code>&lt;s:textfield name=&quot;loginUser.account&quot; key=&quot;login.account.lable&quot;/&gt;</code> </p>
 <p>13、需要进行国际化的内容以键值对（key=value） 的形式写入 Struts2 的国际化资源文件中，如<code>login.account.lable=请输入用户名”；</code>该资源文件名可以自定义，但是后缀必须是 properties；资源文件应放在 Web 应用的类加载路径下； 每一个语言版本需要创建一个资源文件； </p>
-<p>14、通过 Struts2 的配置文件 <code>struts.properties 来配置资源文件的基础名，若资源文 件的基础名为 message，则</code>message_zh_CN.properties<code>是对应的中文资源文件，</code>message_en_US.properties` 是对应的美国英语资源文件； </p>
+<p>14、通过 Struts2 的配置文件 <code>struts.properties</code> 来配置资源文件的基础名，若资源文 件的基础名为 message，则 <code>message_zh_CN.properties</code> 是对应的中文资源文件， <code>message_en_US.properties</code> 是对应的美国英语资源文件； </p>
 <p>15、浏览器将根据其默认的语言版本，自动调用相应语言的资源文件，从而在页面中展示不同的语言效果。</p>
 <h2 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h2><p>1、实验中各个文件的作用：</p>
 <p>(1)jsp页面：负责展示视图</p>
@@ -310,7 +316,7 @@
 <p>(5)Filter：起中央控制器作用的过滤器</p>
 <p>(6)struts.xml：核心配置文件</p>
 <p>2、Struts2 应用中从请求到响应的完整流程</p>
-<p>客户端首先向Action发送一个请求Request,Container通过web.xml映射请求，并获得Controller的名字；Container调用控制StrutsPrepareAndExecuteFilter；Controller通过ActionMapper获得Action的信息，调用ActionProxy；ActionProxy读取struts.xml文件获取action和interceptor stack的信息，把request请求传递给ActionInvocation；ActionInvocation依次调用action和interceptor；根据action的配置信息，产生result，Result信息返回给ActionInvocation，产生一个HttpServletResponse响应，产生的响应行为发送给客户端。</p>
+<p>客户端首先向Action发送一个请求Request,Container通过<code>web.xml</code>映射请求，并获得Controller的名字；Container调用控制StrutsPrepareAndExecuteFilter；Controller通过ActionMapper获得Action的信息，调用ActionProxy；ActionProxy读取<code>struts.xml</code>文件获取action和interceptor stack的信息，把request请求传递给ActionInvocation；ActionInvocation依次调用action和interceptor；根据action的配置信息，产生result，Result信息返回给ActionInvocation，产生一个HttpServletResponse响应，产生的响应行为发送给客户端。</p>
 <p>3、MVC框架体现：</p>
 <p>Model：JavaBean、Action类</p>
 <p>View：JSP页面</p>
@@ -335,7 +341,7 @@
 <p>(3)password标签：默认不显示输入内容的textfield。包含确定是否显示内容的showPassword属性、字段最大长度maxlength属性、定义字段尺寸size属性等</p>
 <p>(4)if/elseif/else标签：通过逻辑值控制流程。包含决定标签内容是否显示的test属性、标示元素id的id属性。</p>
 <p>(5)iterator标签：用于遍历集合元素。包含产生IteratorStatus对象实例的status属性、标示元素id的id属性等</p>
-<p>8、配置文件 struts.properties 的作用</p>
+<p>8、配置文件 <code>struts.properties</code> 的作用</p>
 <p>定义了Struts 2框架的大量属性，开发者可以通过改变这些属性来满足应用的需求。其中<code>struts.configuration</code>属性指定加载Struts 2配置文件的配置文件管理器。struts.locale属性指定Web应用的默认<code>Locale。struts.i18n.encoding</code>指定Web应用的默认编码集。</p>
 <h2 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h2><h3 id="基础实验"><a href="#基础实验" class="headerlink" title="基础实验"></a>基础实验</h3><p>1、登录 <a href="http://struts.apache.org/download.cgi" target="_blank" rel="noopener">http://struts.apache.org/download.cgi</a> 站点，下载 Struts2 的最新版（Full Distribution）； </p>
 <p>2、新建 Web 工程 struts-prj1； </p>
@@ -538,7 +544,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
