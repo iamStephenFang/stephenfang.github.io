@@ -47,7 +47,7 @@ tags: tech
 
 13、需要进行国际化的内容以键值对（key=value） 的形式写入 Struts2 的国际化资源文件中，如`login.account.lable=请输入用户名”；`该资源文件名可以自定义，但是后缀必须是 properties；资源文件应放在 Web 应用的类加载路径下； 每一个语言版本需要创建一个资源文件； 
 
-14、通过 Struts2 的配置文件 `struts.properties 来配置资源文件的基础名，若资源文 件的基础名为 message，则 `message_zh_CN.properties` 是对应的中文资源文件， `message_en_US.properties` 是对应的美国英语资源文件； 
+14、通过 Struts2 的配置文件 `struts.properties` 来配置资源文件的基础名，若资源文 件的基础名为 message，则 `message_zh_CN.properties` 是对应的中文资源文件， `message_en_US.properties` 是对应的美国英语资源文件； 
 
 15、浏览器将根据其默认的语言版本，自动调用相应语言的资源文件，从而在页面中展示不同的语言效果。
 
@@ -68,7 +68,7 @@ tags: tech
 
 2、Struts2 应用中从请求到响应的完整流程
 
-客户端首先向Action发送一个请求Request,Container通过web.xml映射请求，并获得Controller的名字；Container调用控制StrutsPrepareAndExecuteFilter；Controller通过ActionMapper获得Action的信息，调用ActionProxy；ActionProxy读取struts.xml文件获取action和interceptor stack的信息，把request请求传递给ActionInvocation；ActionInvocation依次调用action和interceptor；根据action的配置信息，产生result，Result信息返回给ActionInvocation，产生一个HttpServletResponse响应，产生的响应行为发送给客户端。
+客户端首先向Action发送一个请求Request,Container通过`web.xml`映射请求，并获得Controller的名字；Container调用控制StrutsPrepareAndExecuteFilter；Controller通过ActionMapper获得Action的信息，调用ActionProxy；ActionProxy读取`struts.xml`文件获取action和interceptor stack的信息，把request请求传递给ActionInvocation；ActionInvocation依次调用action和interceptor；根据action的配置信息，产生result，Result信息返回给ActionInvocation，产生一个HttpServletResponse响应，产生的响应行为发送给客户端。
 
 3、MVC框架体现：
 
@@ -118,7 +118,7 @@ Controller：FilterDispatcher
 
 (5)iterator标签：用于遍历集合元素。包含产生IteratorStatus对象实例的status属性、标示元素id的id属性等
 
-8、配置文件 struts.properties 的作用
+8、配置文件 `struts.properties` 的作用
 
 定义了Struts 2框架的大量属性，开发者可以通过改变这些属性来满足应用的需求。其中`struts.configuration`属性指定加载Struts 2配置文件的配置文件管理器。struts.locale属性指定Web应用的默认`Locale。struts.i18n.encoding`指定Web应用的默认编码集。
 
