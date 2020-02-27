@@ -1,7 +1,11 @@
 ---
 title: Struts 2 应用实验
-date: 2020-02-26 18:10:20
-tags: tech
+date: 2020-02-23 18:10:20
+categories: 
+- tech
+tags: 
+- struts
+- JavaEE
 ---
 
 # Struts 2 应用实验
@@ -82,7 +86,7 @@ Controller：FilterDispatcher
 
 表单元素的action属性值对应了action的name属性值，Action只是一个逻辑控制器，他不直接对请求者生成任何响应，而是通过result子元素将指定的返回值呈现给客户端，如返回字符串为success则跳转至loginSuccess.jsp页面.
 
-5、Action 的 execute()方法的作用和特点
+5、Action 的 execute() 方法的作用和特点
 
 作用：处理业务逻辑
 

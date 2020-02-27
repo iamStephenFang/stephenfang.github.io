@@ -1,7 +1,12 @@
 ---
 title: 控制器组件 Action 实验
 date: 2020-02-26 11:10:20
-tags: tech
+categories: 
+- tech
+tags: 
+- struts
+- Action
+- JavaEE
 ---
 
 # 控制器组件 Action 应用实验
@@ -100,7 +105,7 @@ redirect采用客户端重定向的方式，而默认的dispatcher采用服务�
 - url:网址校验器  
 - regex：正则表达式校验器 
 
-```
+```xml
 <validators>
   <field name="被校验的字段">
      <field-validator type="校验器的类型">
@@ -112,7 +117,8 @@ redirect采用客户端重定向的方式，而默认的dispatcher采用服务�
 </validators>
 ```
 
-```<valiators>
+```xml
+<valiators>
   <validator type="校验器类型名">
      <!--fieldName固定的 N必须大写-->
      <param name="fieldName">需要被校验的字段</param>
@@ -184,9 +190,11 @@ Action与Servlet API直接耦合，需要调用ServletContext和ServletRequest�
 
 ![](2.png)
 
-12、修改 loginSuccess.jsp，在页面中使用<s:property>标签输出 Action 中的 count 值； 
+12、修改 `loginSuccess.jsp`，在页面中使用<s:property>标签输出 Action 中的 count 值； 
 
-```<s:property value="count" />```
+```
+<s:property value="count" />
+```
 
 13、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 login.jsp 页面， 并刷新多次，记录运行结果； 
 

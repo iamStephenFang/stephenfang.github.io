@@ -1,14 +1,18 @@
 ---
 title: Design+Code 的 Vue.js 课程学习摘录
 date: 2020-02-11 01:20:20
-tags: tech
+categories: 
+- tech
+tags: 
+- Vue.js
+- 前端框架
 ---
 
 ## 配置组件的data属性
 
 课程初提及的定义**data**的方法经过测试不可行，即如下代码片段。
 
-```
+```js
 <script>
 export default {
   name: "SignIn",
@@ -31,7 +35,7 @@ export default {
 
 >为了让效果工作，我们需要的data属性是一个函数。这是 Vue组件的规则，并不是`App.vue`的规则。因此需要将当前数据属性替换为：
 
-```
+```js
 data() {
   return {
       isDarkMode: true
@@ -51,7 +55,7 @@ data() {
 `vue.config.js` 是一个可选的配置文件，如果项目的 (和 `package.json` 同级的) 根目录中存在这个文件，那么它会被 `@vue/cli-service` 自动加载。[官方文档](https://cli.vuejs.org/zh/config/#chainwebpack)详细解释了全局 CLI 配置方法。
 教程指导做的是在项目的根目录中创建一个名为`vue.config.js`的文件，并且在此输入以下配置：
 
-```
+```js
 // vue.config.js
 module.exports = {
     css: {
@@ -74,7 +78,7 @@ module.exports = {
 原因在于在 `sass-loader ` v7 中，`prependData`选项名是 "data”，已经不适用。
 默认情况下 `sass` 选项会同时对 `sass` 和 `scss` 语法同时生效，因为 `scss` 语法在内部也是由 sass-loader 处理的，但是在配置 `data` 选项的时候，`scss` 语法会要求语句结尾必须有分号，`sass` 则要求必须没有分号。在这种情况下，我们可以使用 `scss` 选项，对 `scss` 语法进行单独配置。实例代码来自[官方文档](https://cli.vuejs.org/zh/guide/css.html#css-modules)。
 
-```
+```js
 // vue.config.js
 module.exports = {
   css: {

@@ -1,7 +1,12 @@
 ---
 title: 在Mac上配置OpenCV与Xcode开发环境
 date: 2020-02-26 16:20:20
-tags: tech
+categories: 
+- tech
+tags: 
+- OpenCV
+- Xcode
+- Apple
 ---
 
 下学期选了数字图像处理课程，接下来的`OpenCV`学习过程我会从零开始记录，第零课是开发环境的配置。
@@ -111,7 +116,7 @@ pkg-config --cflags --libs /usr/local/Cellar/opencv/<版本号>/lib/pkgconfig/op
 
 你需要按照后文中“使用相对路径”方法配置相对路径并添加图片`test.jpeg`到项目文件夹。
 
-```
+```cpp
 #include<opencv2/opencv.hpp>
 #include <iostream>
 

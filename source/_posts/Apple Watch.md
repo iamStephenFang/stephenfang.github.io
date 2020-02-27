@@ -1,7 +1,11 @@
 ---
 title: Apple Watch程序设计
 date: 2020-02-07 16:45:28
-tags: design
+categories: 
+- design
+tags: 
+- Apple
+- Xcode
 ---
 
 ## 基本原则
