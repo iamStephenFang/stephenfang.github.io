@@ -181,6 +181,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stephefang.me/2020/03/16/OpenCV_Grayscale/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.png">
+      <meta itemprop="name" content="Stephen Fang">
+      <meta itemprop="description" content="StephenFang's GitHub Page">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StephenFang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/16/OpenCV_Grayscale/" class="post-title-link" itemprop="url">OpenCV 图像直方图与均衡化</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-16 16:20:20" itemprop="dateCreated datePublished" datetime="2020-03-16T16:20:20+08:00">2020-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-17 00:42:22" itemprop="dateModified" datetime="2020-03-17T00:42:22+08:00">2020-03-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>如果您不知道如何在 Mac 上使用 Xcode 配置 <code>OpenCV</code>，可以参考我写的上一篇博文。</p>
+</blockquote>
+<p>直方图是图像的一种统计表达，反映了图像中灰度的分布情况。以概率论为基础的，通过改变图像的直方图来改变图象中像素的灰度，以达到图像增强的目标，常称直方图修正。</p>
+<img src="/2020/03/16/OpenCV_Grayscale/%E7%9B%B4%E6%96%B9%E5%9B%BE.png" class="">
+
+<p>直方图均衡化原理即借助直方图变换实现（归一的）灰度映射，实现思想为对在图像中像素个数多的灰度级进行展宽，而对像素个数少的灰度级进行缩减。从而达到清晰图像的目的。</p>
+<p>回到 <code>OpenCV</code>，<code>OpenCV</code>中提供了<code>equalizeHist</code>函数实现灰度图像直方图均衡化，给出如下函数原型及相关文档。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cv::equalizeHist</span>	<span class="params">(	InputArray src,</span></span></span><br><span class="line"><span class="function"><span class="params">OutputArray 	dst </span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span></span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/16/OpenCV_Grayscale/equa.jpg" class="">
+
+<p>实现的图像直方图均衡化算法就是把直方图的每个灰度级进行归一化处理，求各个灰度的累积分布并得到一个映射的灰度映射表，最后根据相应的灰度值来修正原图中的每个像素的像素值。</p>
+<p><code>OpenCV</code>中提供了<code>cvtColor</code>函数实现彩色图像转为灰度图像，给出如下函数原型及相关文档。</p>
+<img src="/2020/03/16/OpenCV_Grayscale/cvcolor.png" class="">
+<p><img src="media/15843608120528/cvcolor.png" alt="cvcolo"></p>
+<p>至于直方图的绘制方法，<code>OpenCV</code>中提供了<code>calcList</code>函数计算图像直方图，尝试使用函数来实现会更符合操作流程。</p>
+<img src="/2020/03/16/OpenCV_Grayscale/calcHist.jpg" class="">
+
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本次实验需要完成以下任务：</p>
+<ol>
+<li>完成直方图的绘制</li>
+<li>使 RGB 图像变为灰度图像</li>
+<li>完成图像直方图均衡化<br>给出如下代码：</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"> <span class="function">MatND <span class="title">getHistogram</span><span class="params">(Mat &amp;image)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    MatND hist;</span><br><span class="line">    <span class="keyword">int</span> channels[] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> dims = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> histSize[] = &#123;<span class="number">256</span>&#125;;</span><br><span class="line">    <span class="keyword">float</span> granges[] = &#123;<span class="number">0</span>, <span class="number">255</span>&#125;;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">float</span> *ranges[] = &#123;granges&#125;;</span><br><span class="line">    calcHist(&amp;image, <span class="number">1</span>, channels, Mat(), hist, dims, histSize, ranges);</span><br><span class="line">    <span class="keyword">return</span> hist;</span><br><span class="line">&#125;</span><br><span class="line"> <span class="comment">//  将图像直方图展示出来</span></span><br><span class="line"> <span class="function">Mat <span class="title">getHistogramImage</span><span class="params">(Mat &amp;image)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    MatND hist = getHistogram(image);</span><br><span class="line">    <span class="function">Mat <span class="title">showImage</span><span class="params">(<span class="number">256</span>,<span class="number">256</span>, CV_8U,Scalar(<span class="number">0</span>))</span></span>;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">double</span> maxValue = <span class="number">0</span>;</span><br><span class="line">    minMaxLoc(hist, <span class="number">0</span>, &amp;maxValue, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">float</span> value = hist.at&lt;<span class="keyword">float</span>&gt;(i);</span><br><span class="line">        <span class="keyword">int</span> intensity = saturate_cast&lt;<span class="keyword">int</span>&gt;(<span class="number">256</span> - <span class="number">256</span>* (value/maxValue));</span><br><span class="line">        rectangle(showImage, Point(i,<span class="number">256</span> - <span class="number">1</span>), Point((i+<span class="number">1</span>)<span class="number">-1</span>, intensity), Scalar(<span class="number">255</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> showImage;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Mat src= imread(<span class="string">"original.jpeg"</span>);<span class="comment">// 读取图片</span></span><br><span class="line">    Mat gray,equa;</span><br><span class="line">    Mat grayHistogram,equaHistogram;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!src.data)             <span class="comment">// 检查非法输入</span></span><br><span class="line">      &#123;</span><br><span class="line">          <span class="built_in">cout</span> &lt;&lt;  <span class="string">"无法读取照片"</span> &lt;&lt; <span class="built_in">endl</span> ;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    namedWindow(<span class="string">"RGB"</span>,WINDOW_AUTOSIZE);   <span class="comment">// 创建图片显示自动调整大小的窗口</span></span><br><span class="line">    imshow(<span class="string">"RGB"</span>,src);    <span class="comment">// 在窗口显示原始图片</span></span><br><span class="line">    </span><br><span class="line">    cvtColor(src, gray, COLOR_BGR2GRAY);</span><br><span class="line">    namedWindow(<span class="string">"GRAY"</span>,WINDOW_AUTOSIZE);</span><br><span class="line">    imshow(<span class="string">"GRAY"</span>,gray);    <span class="comment">// 在窗口显示灰度图片</span></span><br><span class="line">    </span><br><span class="line">    grayHistogram = getHistogramImage(gray);</span><br><span class="line">    <span class="comment">//获得灰度图直方图</span></span><br><span class="line">    namedWindow(<span class="string">"FirstHistogram"</span>,WINDOW_AUTOSIZE);</span><br><span class="line">    imshow(<span class="string">"FirstHistogram"</span>,grayHistogram); <span class="comment">// 在窗口显示灰度图直方图</span></span><br><span class="line">    </span><br><span class="line">    equalizeHist(gray, equa);</span><br><span class="line">    namedWindow(<span class="string">"EQUA"</span>,WINDOW_AUTOSIZE); </span><br><span class="line">    imshow(<span class="string">"EQUA"</span>,equa);    <span class="comment">// 在窗口显示均衡化处理后图片</span></span><br><span class="line">    </span><br><span class="line">    imwrite(<span class="string">"result.jpg"</span>, equa); <span class="comment">// 存储实验结果</span></span><br><span class="line">    </span><br><span class="line">    equaHistogram = getHistogramImage(equa);  <span class="comment">//获得均衡化处理后直方图</span></span><br><span class="line">    namedWindow(<span class="string">"SecondHistogram"</span>,WINDOW_AUTOSIZE; </span><br><span class="line"> imshow(<span class="string">"SecondHistogram"</span>,equaHistogram);    <span class="comment">// 在窗口显示均衡化处理后</span></span><br><span class="line">    </span><br><span class="line">    waitKey(<span class="number">0</span>); <span class="comment">// 按键等待，需要在窗口任意输入字符退出，0代表永久等待</span></span><br><span class="line">    </span><br><span class="line">    src.release();</span><br><span class="line">    gray.release();</span><br><span class="line">    equa.release();</span><br><span class="line">    grayHistogram.release();</span><br><span class="line">    equaHistogram.release();</span><br><span class="line">    destroyWindow(<span class="string">"RGB"</span>);</span><br><span class="line">    destroyWindow(<span class="string">"GRAY"</span>);</span><br><span class="line">    destroyWindow(<span class="string">"EQUA"</span>);</span><br><span class="line">    destroyWindow(<span class="string">"FirstHistogram"</span>);</span><br><span class="line">    destroyWindow(<span class="string">"SecondHistogram"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><img src="/2020/03/16/OpenCV_Grayscale/result.png" class="">
+<p>第一张图片为未处理过的原图，第二张图片为灰度处理后的图片。第三张图片为均衡化处理后的灰度图，从直方图很能看出区别。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://docs.opencv.org/master/" target="_blank" rel="noopener">Dongcheng Lai的知乎专栏</a><br><a href="https://zhuanlan.zhihu.com/p/73201428" target="_blank" rel="noopener">Dongcheng Lai的知乎专栏</a><br><a href="https://blog.csdn.net/piaoxuezhong/article/details/54588270" target="_blank" rel="noopener">opencv图像直方图的计算及绘制-Naruto_Q的博客</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://stephefang.me/2020/02/26/Setting_up_OpenCV_environment_in_Xcode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -597,7 +702,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-27 20:20:41" itemprop="dateModified" datetime="2020-02-27T20:20:41+08:00">2020-02-27</time>
+                <time title="修改时间：2020-02-27 20:12:58" itemprop="dateModified" datetime="2020-02-27T20:12:58+08:00">2020-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -735,7 +840,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-27 20:20:41" itemprop="dateModified" datetime="2020-02-27T20:20:41+08:00">2020-02-27</time>
+                <time title="修改时间：2020-02-27 20:18:41" itemprop="dateModified" datetime="2020-02-27T20:18:41+08:00">2020-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1396,7 +1501,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1409,7 +1514,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
