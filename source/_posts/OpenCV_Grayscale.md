@@ -31,7 +31,7 @@ OutputArray 	dst
 
 `OpenCV`中提供了`cvtColor`函数实现彩色图像转为灰度图像，给出如下函数原型及相关文档。
 {% asset_img cvcolor.png %}
-![cvcolo](media/15843608120528/cvcolor.png)
+![cvcolor](media/15843608120528/cvcolor.png)
 
 至于直方图的绘制方法，`OpenCV`中提供了`calcList`函数计算图像直方图，尝试使用函数来实现会更符合操作流程。
 {% asset_img calcHist.jpg %}
