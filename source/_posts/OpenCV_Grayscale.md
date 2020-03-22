@@ -7,6 +7,7 @@ tags:
 - OpenCV
 - Xcode
 - Grayscale
+copyright: true
 ---
 
 > 如果您不知道如何在 Mac 上使用 Xcode 配置 `OpenCV`，可以参考我写的上一篇博文。
@@ -133,6 +134,6 @@ int main()
 第一张图片为未处理过的原图，第二张图片为灰度处理后的图片。第三张图片为均衡化处理后的灰度图，从直方图很能看出区别。
 
 ## 参考
-[Dongcheng Lai的知乎专栏](https://docs.opencv.org/master/)
+[OpenCV官方文档](https://docs.opencv.org/master/)
 [Dongcheng Lai的知乎专栏](https://zhuanlan.zhihu.com/p/73201428)
 [opencv图像直方图的计算及绘制-Naruto_Q的博客](https://blog.csdn.net/piaoxuezhong/article/details/54588270)

@@ -1,3 +1,5 @@
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
 {%- if theme.footer.beian.enable %}
   <div class="beian">
     {{- next_url('http://www.beian.miit.gov.cn', theme.footer.beian.icp + ' ') }}
@@ -45,6 +47,9 @@
 {%- if theme.footer.powered.enable %}
   <div class="powered-by">
      {{- __('footer.powered', next_url('https://hexo.io', 'Hexo')) }}
+  <span id="busuanzi_container_site_uv">| 本站访客数:<span id="busuanzi_value_site_uv"></span>
+   <span class="post-count">| 博客全站共{{ totalcount(site) }}字</span>
+</span>
   </div>
 {%- endif %}
 

@@ -7,6 +7,7 @@ tags:
 - OpenCV
 - Xcode
 - Apple
+copyright: true
 ---
 
 下学期选了数字图像处理课程，接下来的`OpenCV`学习过程我会从零开始记录，第零课是开发环境的配置。

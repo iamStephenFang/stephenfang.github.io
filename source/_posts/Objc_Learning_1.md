@@ -7,6 +7,7 @@ tags:
 - iOS
 - Xcode
 - Objective-C
+copyright: true
 ---
 
 # 

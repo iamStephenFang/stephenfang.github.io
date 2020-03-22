@@ -217,6 +217,12 @@
       {{ partial('_partials/post/post-related.swig') }}
     {%- endif %}
 
+     <div>
+      {% if not is_index %}
+        {% include 'my-copyright.swig' %}
+      {% endif %}
+     </div>
+     
     {%- if not is_index %}
       {{- next_inject('postBodyEnd') }}
 
