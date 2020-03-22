@@ -46,16 +46,16 @@
   };
 </script>
 
-  <meta name="description" content="最近开始学习 Objective-C 夯实基础，并在学习基础上尝试开发出简单的 iOS 应用程序。有 C 语言基础的同学应该能够比较快上手。在此处总结可以方便本人更好地记忆。 示例代码先给出第一课学习的代码。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152">
+  <meta name="description" content="最近开始学习 Objective-C 夯实基础，并在学习基础上尝试开发出简单的 iOS 应用程序。有 C 语言基础的同学应该能够比较快上手。在此处总结可以方便本人更好地记忆。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Objective-C 学习笔记(一）">
 <meta property="og:url" content="https://stephefang.me/2020/03/21/Objc_Learning_1/index.html">
 <meta property="og:site_name" content="StephenFang">
-<meta property="og:description" content="最近开始学习 Objective-C 夯实基础，并在学习基础上尝试开发出简单的 iOS 应用程序。有 C 语言基础的同学应该能够比较快上手。在此处总结可以方便本人更好地记忆。 示例代码先给出第一课学习的代码。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152">
+<meta property="og:description" content="最近开始学习 Objective-C 夯实基础，并在学习基础上尝试开发出简单的 iOS 应用程序。有 C 语言基础的同学应该能够比较快上手。在此处总结可以方便本人更好地记忆。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stephefang.me/2020/03/21/Objc_Learning_1/1.jpg">
 <meta property="article:published_time" content="2020-03-21T01:20:20.000Z">
-<meta property="article:modified_time" content="2020-03-22T12:39:49.721Z">
+<meta property="article:modified_time" content="2020-03-22T13:04:35.108Z">
 <meta property="article:author" content="Stephen Fang">
 <meta property="article:tag" content="Xcode">
 <meta property="article:tag" content="iOS">
@@ -218,7 +218,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-22 20:39:49" itemprop="dateModified" datetime="2020-03-22T20:39:49+08:00">2020-03-22</time>
+                <time title="修改时间：2020-03-22 21:04:35" itemprop="dateModified" datetime="2020-03-22T21:04:35+08:00">2020-03-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,6 +251,7 @@
 
       
         <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>最近开始学习 Objective-C 夯实基础，并在学习基础上尝试开发出简单的 iOS 应用程序。有 C 语言基础的同学应该能够比较快上手。在此处总结可以方便本人更好地记忆。</p>
+<a id="more"></a>
 <h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>先给出第一课学习的代码。</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Device</span> : <span class="title">NSObject</span></span></span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>) wakeUp;</span><br><span class="line">-(<span class="keyword">void</span>) setPasswd: (<span class="keyword">int</span>)input;</span><br><span class="line">-(<span class="keyword">void</span>) verifyPasswd;</span><br><span class="line">-(<span class="keyword">int</span>) getPasswd;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Device</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> passwd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)wakeUp&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"The device was woken up."</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)setPasswd:(<span class="keyword">int</span>)input &#123;</span><br><span class="line">    passwd = input;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)verifyPasswd &#123;</span><br><span class="line">    <span class="keyword">if</span>( passwd == <span class="number">1111</span> )</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"The password of this device is correct."</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"The password of this device is incorrect!"</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">int</span>) getPasswd &#123;</span><br><span class="line">    <span class="keyword">return</span> passwd;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        Device *iPhone = [[Device alloc] init];</span><br><span class="line">        Device *iPad = [[Device alloc] init];</span><br><span class="line">        </span><br><span class="line">        [iPhone wakeUp];</span><br><span class="line">        [iPhone setPasswd:<span class="number">1000</span>];</span><br><span class="line">        [iPhone verifyPasswd];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"The password of iPhone is %i."</span>,[iPhone getPasswd]);</span><br><span class="line">        </span><br><span class="line">        [iPad wakeUp];</span><br><span class="line">        [iPad setPasswd:<span class="number">1111</span>];</span><br><span class="line">        [iPad verifyPasswd];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"The password of iPad is %i."</span>,[iPad getPasswd]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -301,7 +302,7 @@
   <p><span>本文标题:</span><a href="/2020/03/21/Objc_Learning_1/">Objective-C 学习笔记(一）</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Stephen Fang 的个人博客">Stephen Fang</a></p>
   <p><span>发布时间:</span>2020年03月21日 - 09:20</p>
-  <p><span>最后更新:</span>2020年03月22日 - 20:39</p>
+  <p><span>最后更新:</span>2020年03月22日 - 21:04</p>
   <p><span>原始链接:</span><a href="/2020/03/21/Objc_Learning_1/" title="Objective-C 学习笔记(一）">https://stephefang.me/2020/03/21/Objc_Learning_1/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://stephefang.me/2020/03/21/Objc_Learning_1/"  aria-label="复制成功！"></i></span>
   </p>
@@ -389,7 +390,10 @@
     <a href="/2020/03/16/OpenCV_Grayscale/" rel="prev" title="OpenCV 图像直方图与均衡化">
       <i class="fa fa-chevron-left"></i> OpenCV 图像直方图与均衡化
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/22/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -532,7 +536,7 @@
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> 构建
   <span id="busuanzi_container_site_uv">| 本站访客数:<span id="busuanzi_value_site_uv"></span>
-   <span class="post-count">| 博客全站共15.7k字</span>
+   <span class="post-count">| 博客全站共15.9k字</span>
 </span>
   </div>
   <span class="post-meta-divider"></span>
