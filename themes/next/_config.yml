@@ -710,12 +710,12 @@ cnzz_siteid:
 # Do not enable both `valine.visitor` and `leancloud_visitors`.
 leancloud_visitors:
   enable: true
-  app_id: YfGz0i7sSI8BcfvwaFGXdaut-gzGzoHsz
-  app_key: NHsMf3fVpAGWeHPjKczCSCuz
+  app_id: 6OBkNjDebe2UETJs6Fy0aaUI-gzGzoHsz
+  app_key: p7DGhEIA07fK9Sodmm8yHihs
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
   # If you don't care about security in leancloud counter and just want to use it directly
   # (without hexo-leancloud-counter-security plugin), set `security` to `false`.
-  security: true
+  security: false
   betterPerformance: false
 
 # Another tool to show number of visitors to each article.
