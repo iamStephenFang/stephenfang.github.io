@@ -10,6 +10,8 @@ tags:
 - 实验
 ---
 
+包含Struts 2知识梳理、实验总结、实验步骤三方面的总结。
+<!--more-->
 ## 知识梳理
 
 1、Struts2 是从 WebWork 框架上发展起来的 MVC 框架； 
@@ -26,16 +28,16 @@ tags:
 
 6、编译运行基于 Struts2 框架的 Web 工程，需要导入 struts2 的 8 个核心 jar 包： 
 
-| 文件名 | 说明 |
-| --- | --- |
-| struts2-core-2.3.15.1.jar | Struts 2 框架的核心类库 |
-| xwork-core-2.3.15.1.jar | XWork 类库，Struts 2 的构建基础 |
-| Ognl-3.0.6.jar | Struts 2 使用的一种表达式语言类库 |
-| freemarker-2.3.19.jar | Struts 2 的标签模板使用类库 |
-| javassist-3.11.0.GA.jar | 代码生成工具包 |
-| commons-lang3-3.1.jar | Apache 语言包，是 java.lang 包的扩展 |
-| commons-io-2.0.1.jar | Apache IO 包 |
-| commons-fileupload-1.3.jar | Struts 2 文件上传依赖包 |
+| 文件名                     | 说明                                 |
+| -------------------------- | ------------------------------------ |
+| struts2-core-2.3.15.1.jar  | Struts 2 框架的核心类库              |
+| xwork-core-2.3.15.1.jar    | XWork 类库，Struts 2 的构建基础      |
+| Ognl-3.0.6.jar             | Struts 2 使用的一种表达式语言类库    |
+| freemarker-2.3.19.jar      | Struts 2 的标签模板使用类库          |
+| javassist-3.11.0.GA.jar    | 代码生成工具包                       |
+| commons-lang3-3.1.jar      | Apache 语言包，是 java.lang 包的扩展 |
+| commons-io-2.0.1.jar       | Apache IO 包                         |
+| commons-fileupload-1.3.jar | Struts 2 文件上传依赖包              |
 
 7、使用 Struts2 标签的形式来表达页面逻辑，可以尽量避免在视图中使用 Java 代码，让逻辑与显示分离，提高视图的可维护性； 
 

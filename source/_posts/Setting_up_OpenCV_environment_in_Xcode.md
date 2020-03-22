@@ -14,6 +14,8 @@ copyright: true
 
 由于笔者使用的是Mac，相较于`C++`，笔者的`Python`功底不是很扎实，所以使用Xcode与`C++`实践`OpenCV`项目。在网络上搜寻了许多关于`OpenCV`与 Xcode 开发环境的配置资料均不是很完善,于是决定自己写一篇，希望对 Mac 用户有所帮助。
 
+<!--more-->
+
 ## 准备工作
 
 ### 1.安装 Xcode

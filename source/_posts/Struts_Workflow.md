@@ -10,6 +10,8 @@ tags:
 - 总结
 ---
 
+包含Struts 工作流程知识梳理、实验总结、实验步骤三方面的总结。
+<!--more-->
 
 ## 知识梳理
 
@@ -18,6 +20,7 @@ tags:
 2、过滤器是 Struts2 控制器的最前端控制器，过滤器的使用需要在 `web.xml` 中进行配置；FilterDispatcher 是 Struts2 应用中必须配置使用的过滤器，该过滤器的主要功能 包括执行 Action、清空 ActionContext 对象等； 
 
 3、拦截器是 Struts2 中第二个层次的控制器，能够在 Action 执行前后完成一些通用功能； 
+
 
 4、Struts2 内建了大量拦截器， 这些拦截器以 name-class 对的形式配置在 `strutsdefault.xml` 文件中，如果 `struts.xml 中定义的 package 继承了 Struts2 默 认的 `struts-default` 包，便可以直接使用默认拦截器栈 defaultStack； 
 
