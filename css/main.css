@@ -1250,7 +1250,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #38ff87;
+  background: #f082f4;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1555,23 +1555,37 @@ pre .javascript .function {
 }
 .back-to-top {
   background: #222;
+  bottom: -100px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
   font-size: 12px;
-  margin: 8px -10px -20px;
-  opacity: 0;
+  left: 30px;
+  opacity: 1;
+  padding: 0 6px;
+  position: fixed;
   text-align: center;
+  transition-property: bottom;
+  z-index: 1300;
   transition-delay: 0s;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
+  width: 24px;
 }
 .back-to-top span {
   display: none;
 }
-.back-to-top.back-to-top-on {
-  cursor: pointer;
-  opacity: 1;
+.back-to-top:hover {
+  color: #87daff;
 }
-.back-to-top.back-to-top-on:hover {
-  opacity: 0.8;
+.back-to-top.back-to-top-on {
+  bottom: 19px;
+}
+@media (max-width: 991px) {
+  .back-to-top {
+    left: 20px;
+    opacity: 0.8;
+  }
 }
 .post-body {
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -2567,4 +2581,83 @@ hr {
 }
 .sub-menu .menu-item {
   display: inline-block;
+}
+.darkScheme body {
+  background: #202124;
+  color: #fafafa;
+}
+.darkScheme .exturl a:hover {
+  color: #1e88e5;
+}
+.darkScheme a:hover {
+  color: #1e88e5;
+}
+.darkScheme .footer {
+  background: #202124;
+  color: #fafafa;
+}
+.darkScheme .header {
+  background: #1d1d1d;
+}
+.darkScheme sidebar-inner {
+  background: #202124;
+}
+.darkScheme post-expand {
+  background: #202124;
+}
+.darkScheme .site-title {
+  color: #fafafa;
+}
+.darkScheme .note.info {
+  background: #fafafa;
+}
+.darkScheme .note.info p {
+  color: #000;
+}
+.darkScheme post-block {
+  color: #fafafa;
+}
+.darkScheme .post-title-link {
+  color: #fafafa;
+}
+.darkScheme .copy-btn {
+  background: #202124;
+  color: #fafafa;
+}
+.darkScheme .post-copyright {
+  background-color: #202124;
+}
+.darkScheme .menu .menu-item a {
+  color: #fafafa;
+}
+.darkScheme .pagination .page-number.current {
+  background: #1e88e5;
+  border-top-color: #1e88e5;
+  color: #fafafa;
+}
+.darkScheme .menu-item-active a,
+.darkScheme .menu .menu-item a:hover,
+.darkScheme .menu .menu-item span.exturl:hover {
+  background: #1e88e5;
+}
+.night-mode {
+  margin-top: 10px;
+  text-align: center;
+}
+.night-mode a {
+  display: inline-block;
+  padding: 0 15px;
+  color: #fc6423;
+  border: 1px solid #fc6423 !important;
+  border-radius: 4px;
+}
+.night-mode a i {
+  color: #fc6423;
+}
+.night-mode a:hover {
+  color: #fafafa;
+  background: #fc6423;
+}
+.night-mode a:hover i {
+  color: #fafafa;
 }

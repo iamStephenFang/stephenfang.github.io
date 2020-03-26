@@ -24,9 +24,9 @@
     scheme: 'Mist',
     version: '7.7.1',
     exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},
+    sidebar: {"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},
     copycode: {"enable":true,"show_result":true,"style":"default"},
-    back2top: {"enable":true,"sidebar":true,"scrollpercent":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
@@ -59,7 +59,7 @@
 <meta property="og:image" content="https://stephefang.me/2020/03/16/OpenCV_Grayscale/calcHist.jpg">
 <meta property="og:image" content="https://stephefang.me/2020/03/16/OpenCV_Grayscale/result.png">
 <meta property="article:published_time" content="2020-03-16T08:20:20.000Z">
-<meta property="article:modified_time" content="2020-03-22T13:24:35.892Z">
+<meta property="article:modified_time" content="2020-03-26T14:34:37.676Z">
 <meta property="article:author" content="Stephen Fang">
 <meta property="article:tag" content="Xcode">
 <meta property="article:tag" content="OpenCV">
@@ -77,6 +77,14 @@
     isHome: false,
     isPost: true
   };
+</script>
+<script>
+  ((w, d) => {
+    'use strict';
+      const userScheme = localStorage.getItem('Scheme');
+      if (!userScheme) return;
+    d.documentElement.className += ' darkScheme';
+  })(window, document);
 </script>
 
   <title>OpenCV 图像直方图与均衡化 | StephenFang</title>
@@ -175,6 +183,10 @@
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
   <a href="https://github.com/iamstephenfang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
@@ -222,7 +234,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-22 21:24:35" itemprop="dateModified" datetime="2020-03-22T21:24:35+08:00">2020-03-22</time>
+                <time title="修改时间：2020-03-26 22:34:37" itemprop="dateModified" datetime="2020-03-26T22:34:37+08:00">2020-03-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -304,7 +316,7 @@
   <p><span>本文标题:</span><a href="/2020/03/16/OpenCV_Grayscale/">OpenCV 图像直方图与均衡化</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Stephen Fang 的个人博客">Stephen Fang</a></p>
   <p><span>发布时间:</span>2020年03月16日 - 16:20</p>
-  <p><span>最后更新:</span>2020年03月22日 - 21:24</p>
+  <p><span>最后更新:</span>2020年03月26日 - 22:34</p>
   <p><span>原始链接:</span><a href="/2020/03/16/OpenCV_Grayscale/" title="OpenCV 图像直方图与均衡化">https://stephefang.me/2020/03/16/OpenCV_Grayscale/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://stephefang.me/2020/03/16/OpenCV_Grayscale/"  aria-label="复制成功！"></i></span>
   </p>
@@ -484,7 +496,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -508,12 +520,14 @@
   </div>
 
 
+<div class="night-mode motion-element">
+  <a role="button" class="night-btn">
+    <i class="fa fa-lightbulb-o"></i>
+    Night Mode
+  </a>
+</div>
 
       </div>
-        <div class="back-to-top motion-element">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
 
     </div>
   </aside>
@@ -538,7 +552,7 @@
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> 构建
   <span id="busuanzi_container_site_uv">| 本站访客数:<span id="busuanzi_value_site_uv"></span>
-   <span class="post-count">| 博客全站共15.9k字</span>
+   <span class="post-count">| 博客全站共17.3k字</span>
 </span>
   </div>
   <span class="post-meta-divider"></span>
@@ -624,15 +638,15 @@
     }
   }
 
-  fetch('https://app-router.leancloud.cn/2/route?appId=6OBkNjDebe2UETJs6Fy0aaUI-gzGzoHsz')
+  fetch('https://app-router.leancloud.cn/2/route?appId=0CslNpeNeYs4Qiwo0r6iSQG1-gzGzoHsz')
     .then(response => response.json())
     .then(({ api_server }) => {
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,
           headers: {
-            'X-LC-Id': '6OBkNjDebe2UETJs6Fy0aaUI-gzGzoHsz',
-            'X-LC-Key': 'p7DGhEIA07fK9Sodmm8yHihs',
+            'X-LC-Id': '0CslNpeNeYs4Qiwo0r6iSQG1-gzGzoHsz',
+            'X-LC-Key': 'vszS71O5vs5qqt3nOCxJtD4I',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data)
@@ -691,6 +705,25 @@
   
 
   
+<script>
+  ((w, d) => {
+    'use strict';
+      let userScheme = localStorage.getItem('Scheme');
+      if (userScheme) d.documentElement.className += ' darkScheme';
+      const btn = d.querySelector('.night-btn');
+      w.addEventListener('keydown', e => {
+        if (e.altKey && e.code === 'KeyX') btn.click();
+      });
+      btn.addEventListener('click', () => {
+        d.documentElement.classList.toggle('darkScheme');
+        if ( d.documentElement.classList.contains('darkScheme') ) {
+          localStorage.setItem('Scheme', 'Dark');
+          return;
+        }
+        localStorage.removeItem('Scheme');
+      });
+  })(window, document);
+</script>
 
 </body>
 </html>
