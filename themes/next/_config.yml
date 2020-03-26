@@ -155,7 +155,7 @@ sidebar:
   #  - always  expand for all pages automatically.
   #  - hide    expand only when click on the sidebar toggle icon.
   #  - remove  totally remove sidebar including sidebar toggle.
-  display: post
+  display: always
 
   # Sidebar padding in pixels.
   padding: 18
@@ -381,7 +381,7 @@ codeblock:
 back2top:
   enable: true
   # Back to top in sidebar.
-  sidebar: true
+  sidebar: false
   # Scroll percent label in b2t button.
   scrollpercent: false
 
@@ -632,8 +632,8 @@ changyan:
 # For more information: https://valine.js.org, https://github.com/xCss/Valine
 valine:
   enable: false
-  appid: # Your leancloud application appid
-  appkey: # Your leancloud application appkey
+  appid: 0CslNpeNeYs4Qiwo0r6iSQG1-gzGzoHsz
+  appkey: vszS71O5vs5qqt3nOCxJtD4I
   notify: false # Mail notifier
   verify: false # Verification code
   placeholder: Just go go # Comment box placeholder
@@ -710,8 +710,8 @@ cnzz_siteid:
 # Do not enable both `valine.visitor` and `leancloud_visitors`.
 leancloud_visitors:
   enable: true
-  app_id: 6OBkNjDebe2UETJs6Fy0aaUI-gzGzoHsz
-  app_key: p7DGhEIA07fK9Sodmm8yHihs
+  app_id: 0CslNpeNeYs4Qiwo0r6iSQG1-gzGzoHsz
+  app_key: vszS71O5vs5qqt3nOCxJtD4I
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
   # If you don't care about security in leancloud counter and just want to use it directly
   # (without hexo-leancloud-counter-security plugin), set `security` to `false`.
@@ -738,6 +738,21 @@ busuanzi_count:
   post_views: true
   post_views_icon: eye
 
+next_nightmode:
+  enable: true
+  # FontAwesome or ForkAwesome icon in sidebar button.
+  icon: lightbulb-o
+  # Text for sidebar button.
+  text: Night Mode
+  # If true, when you disable Night Mode, Hexo will show warning messages in your console.
+  reminder: false
+  # Debugger for alpha option below.
+  debugger: false
+  # Support experimental prefers-color-scheme media query.
+  # For now if alpha mode enabled, sidebar button will be disabled.
+  # The only way to toggle night mode is changing your device scheme.
+  # Also see: https://caniuse.com/#feat=prefers-color-scheme.
+  alpha: false
 
 # ---------------------------------------------------------------
 # Search Services

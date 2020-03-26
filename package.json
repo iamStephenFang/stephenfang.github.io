@@ -12,8 +12,8 @@
     "version": "4.2.0"
   },
   "dependencies": {
+    "@1v9/hexo-next-nightmode": "github:1v9/hexo-next-nightmode",
     "acorn": "^7.1.1",
-    "darkmode-js": "^1.5.5",
     "hexo": "^4.0.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
