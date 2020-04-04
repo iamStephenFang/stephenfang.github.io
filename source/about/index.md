@@ -2,6 +2,7 @@
 title: 关于本站
 date: 2020-02-07 21:52:18
 type: about
+comments: false
 ---
 [StephenFang](https://github.com/iamStephenFang) 使用 [Hexo](https://hexo.io/zh-cn/docs/)  搭建的 [GitHub Pages](https://pages.github.com/)，主要分享技术与设计方面的内容。
 

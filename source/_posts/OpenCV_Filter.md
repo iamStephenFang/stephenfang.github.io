@@ -8,17 +8,19 @@ tags:
 - Xcode
 copyright: true
 ---
+> 如果您不知道如何在 Mac 上使用 Xcode 配置 `OpenCV`，可以参考我之前的博文。
 
+利用像素本身以及其邻域象素的灰度关系进行增强的方法常称为滤波，而滤波器通过邻域运算实现。
 
-## 理解滤波
-
-给出滤波相关知识结构图。利用像素本身以及其邻域象素的灰度关系进行增强的方法常称为滤波，而滤波器通过邻域运算实现。
+开始之前先给出滤波相关知识结构图。
 
 <!--more-->
 
-> 如果您不知道如何在 Mac 上使用 Xcode 配置 `OpenCV`，可以参考我之前的博文。
-
 ![滤波](http://images.stephenfang.xyz/mweb/滤波.png)
+
+## 理解滤波
+
+
 
 先给出邻域操作的过程；
 1. 将模板在输入图象中漫游，并将模板中心与图象中某个像素位置重合
@@ -42,7 +44,7 @@ copyright: true
 将运算结果“10”填充至中间位置，与原有结果相同。
 ![](http://images.stephenfang.xyz/mweb/15857302402257.jpg)
 至此完成了卷积模版最基本操作，接下来尝试遍历扫描整个图像，即通过对模板的平移完成对整个图像的运算，如下图所示：
-![](http://images.stephenfang.xyz/mweb/15857305800473.jpg)![](http://images.stephenfang.xyz/mweb/15857305984728.jpg)
+![-w229](http://images.stephenfang.xyz/mweb/15857305800473.jpg)![-w229](http://images.stephenfang.xyz/mweb/15857305984728.jpg)
 此时运算过程为：
 ```
   1/9 *(10x1 + 0x1 + 0x1 + 11x1 + 1x1 + 0x1 + 10x1 + 0x1 + 2x1) 
