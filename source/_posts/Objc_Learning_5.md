@@ -197,7 +197,7 @@ array[index] = object
 ```
 下一节会参照书本给的样例进行编写。
 
-## 参考
+### 参考
 [int vs. NSInteger vs. NSNumber](http://monkey-oyster.blogspot.com/2014/10/int-vs-nsinteger-vs-nsnumber.html)
 [Why use int at all?-Stack overflow](https://stackoverflow.com/questions/4445173/when-to-use-nsinteger-vs-int/5320359#5320359)
 [Objective-C 程序设计 (第六版)]()
