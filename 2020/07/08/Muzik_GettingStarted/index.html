@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://stephefang.me').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="最近又放弃了使用 Apple Music，作为一个从音乐下载时代过来的人，我仍然保持着将歌曲同步至 iPhone 再聆听的习惯，即使我仍然无法摆脱流媒体的束缚。话说回来，Apple 原生的 Music.app 的体验除了交互，于我而言是糟糕的，我更希望有一款 Tab Based 的 iOS App 支撑这种体验，作为一个有一些 iOS 基础的人，我决定自己开发一个简单的本地音乐播放器，正好学习一些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Muzik开发总结 — AVAudioPlayer 实践">
+<meta property="og:url" content="https://stephefang.me/2020/07/08/Muzik_GettingStarted/index.html">
+<meta property="og:site_name" content="StephenFang">
+<meta property="og:description" content="最近又放弃了使用 Apple Music，作为一个从音乐下载时代过来的人，我仍然保持着将歌曲同步至 iPhone 再聆听的习惯，即使我仍然无法摆脱流媒体的束缚。话说回来，Apple 原生的 Music.app 的体验除了交互，于我而言是糟糕的，我更希望有一款 Tab Based 的 iOS App 支撑这种体验，作为一个有一些 iOS 基础的人，我决定自己开发一个简单的本地音乐播放器，正好学习一些">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://images.stephenfang.xyz/screen1.png">
+<meta property="og:image" content="http://images.stephenfang.xyz/screen2.png">
+<meta property="article:published_time" content="2020-07-08T11:20:20.000Z">
+<meta property="article:modified_time" content="2020-07-12T09:37:19.836Z">
+<meta property="article:author" content="Stephen Fang">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="AudioPlayer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://images.stephenfang.xyz/screen1.png">
+
+<link rel="canonical" href="https://stephefang.me/2020/07/08/Muzik_GettingStarted/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<script>
+  ((w, d) => {
+    'use strict';
+      const userScheme = localStorage.getItem('Scheme');
+      if (!userScheme) return;
+    d.documentElement.className += ' darkScheme';
+  })(window, document);
+</script>
+
+  <title>Muzik开发总结 — AVAudioPlayer 实践 | StephenFang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="StephenFang" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StephenFang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/iamstephenfang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stephefang.me/2020/07/08/Muzik_GettingStarted/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.png">
+      <meta itemprop="name" content="Stephen Fang">
+      <meta itemprop="description" content="StephenFang's GitHub Page">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StephenFang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Muzik开发总结 — AVAudioPlayer 实践
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-08 19:20:20" itemprop="dateCreated datePublished" datetime="2020-07-08T19:20:20+08:00">2020-07-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-12 17:37:19" itemprop="dateModified" datetime="2020-07-12T17:37:19+08:00">2020-07-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/07/08/Muzik_GettingStarted/" class="post-meta-item leancloud_visitors" data-flag-title="Muzik开发总结 — AVAudioPlayer 实践" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/08/Muzik_GettingStarted/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/08/Muzik_GettingStarted/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近又放弃了使用 Apple Music，作为一个从音乐下载时代过来的人，我仍然保持着将歌曲同步至 iPhone 再聆听的习惯，即使我仍然无法摆脱流媒体的束缚。话说回来，Apple 原生的 Music.app 的体验除了交互，于我而言是糟糕的，我更希望有一款 Tab Based 的 iOS App 支撑这种体验，作为一个有一些 iOS 基础的人，我决定自己开发一个简单的本地音乐播放器，正好学习一些 UIKit 控件。</p>
+<a id="more"></a>
+
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>本系列文章是开发一个简易的音乐播放器（暂时命名为“Muzik”）的博客记录，本篇目的在于实践一个简单的 AVAudioPlayer Demo 模拟 Music.app 的播放功能，内容十分基础。<br>需要注意的是，此 Demo 并没有采用读取系统音乐资料库需要的 MPMediaPlayer。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>Swift 5</li>
+<li>iOS 13.5</li>
+<li>Xcode 11.5</li>
+</ul>
+<p>在 Xcode 项目属性的 General 选项卡中点击底部的 Frameworks and Libraries，搜索AVFoundation Framework 将其添加至项目中。</p>
+<h2 id="歌曲列表界面"><a href="#歌曲列表界面" class="headerlink" title="歌曲列表界面"></a>歌曲列表界面</h2><p>为了进行简单的 Demo，我将两首下载好歌曲添加到 Xcode 项目文件夹下，分别为<code>Song1.mp3</code>与<code>Song2.mp3</code>，并创建简单的结构体命名为 Song：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Song</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> songName: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> albumName: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> artistName: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> imageName: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> trackName: <span class="type">String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了在播放时展示专辑封面，我将两首 .mp3 文件的专辑封面添加至 Assets，参照 Song 命名为 Cover1 与 Cover 2。我比较习惯于 AutoLayout 与代码布局共同使用，使用 StoryBoard 进行小项目的简单布局十分方便。<br>首先，创建一个<code>ViewController</code>展示歌曲页面，添加<code>UITableView</code>并调整约束，需要将 TableView 对象的 <code>Content</code> 属性改为 <code>Dynamic Prototypes</code>，将 对象的Cell的 <code>Style</code>属性更改为<code>Subtitle</code>，至此 StoryBoard 部分已经完成。<br>来到与该<code>ViewController</code>相对应的<code>ViewController.swift</code>文件，由于是在Storyboard中创建<code>UITableView</code>，所以需要通过<code>@IBOutlet</code>连接之前创建的<code>UITableView</code>，方法如Ctrl+拖拽，同时需要在<code>viewDidLoad()</code>中设置<code>UITableView</code>对象的<code>delegate</code>与<code>dataSource</code>。需要注意的是使用<code>UITableView</code>的方法需要 conforms to 相关的 protocols, 以上均为基本操作。<br>我需要在<code>viewDidLoad()</code>阶段加载歌曲的相关信息，于是创建<code>configureSongs()</code>方法为<code>songs</code>数组添加相关数据（需要在之前创建）。<br>尝试完成页面功能布局，作为Demo该 TableView 对象只包含一个 Section 的内容，如果需要调用系统音乐资料库的 <code>MPMediaItem</code>，需要使用 NSRange 对不同 Section 的内容进行排序（A-Z）。为了避免列表中图片大小显示不一致问题，我将 Row 的高度更改为60。在<code>cellForRowAt</code>方法中定制 cell，在<code>didSelectRowAt</code>方法中令其 present 播放器页面，相关内容在后文中讨论，目前这个页面看起来是这样的(先忽略 Tab 的效果)。<br><img src="http://images.stephenfang.xyz/screen1.png" alt=""><br>懒人代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span>, <span class="title">UITableViewDelegate</span>, <span class="title">UITableViewDataSource</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">var</span> songTable: <span class="type">UITableView!</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> songs = [<span class="type">Song</span>]()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        configureSongs()</span><br><span class="line">        songTable.delegate = <span class="keyword">self</span></span><br><span class="line">        songTable.dataSource = <span class="keyword">self</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">configureSongs</span><span class="params">()</span></span> &#123;</span><br><span class="line">        songs.append(<span class="type">Song</span>(songName: <span class="string">"Pretender"</span>, albumName: <span class="string">"Pretender"</span>, artistName: <span class="string">"Official鬍子男dism"</span>, imageName: <span class="string">"Cover1"</span>, trackName: <span class="string">"Song1"</span>))</span><br><span class="line">        songs.append(<span class="type">Song</span>(songName: <span class="string">"Imagine"</span>, albumName: <span class="string">"The Mango Tree"</span>, artistName: <span class="string">"Jack Johnson"</span>, imageName: <span class="string">"Cover2"</span>, trackName: <span class="string">"Song2"</span>))</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(<span class="number">_</span> tableView: UITableView, numberOfRowsInSection section: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> songs.<span class="built_in">count</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(<span class="number">_</span> tableView: UITableView, heightForRowAt indexPath: IndexPath)</span></span> -&gt; <span class="type">CGFloat</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">60</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(<span class="number">_</span> tableView: UITableView, cellForRowAt indexPath: IndexPath)</span></span> -&gt; <span class="type">UITableViewCell</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> songCell = tableView.dequeueReusableCell(withIdentifier: <span class="string">"songCell"</span>, <span class="keyword">for</span>: indexPath)</span><br><span class="line">        <span class="keyword">let</span> song = songs[indexPath.row]</span><br><span class="line">        </span><br><span class="line">        songCell.textLabel?.text = song.songName</span><br><span class="line">        songCell.detailTextLabel?.text = song.albumName + <span class="string">"  "</span> + song.artistName</span><br><span class="line">        songCell.imageView?.image = <span class="type">UIImage</span>(named: song.imageName)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> songCell</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(<span class="number">_</span> tableView: UITableView, didSelectRowAt indexPath: IndexPath)</span></span> &#123;</span><br><span class="line">        tableView.deselectRow(at: indexPath, animated: <span class="literal">true</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> position = indexPath.row</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> songView = storyboard?.instantiateViewController(identifier: <span class="string">"player"</span>) <span class="keyword">as</span>? <span class="type">PlayerViewController</span> <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        songView.position = position</span><br><span class="line">        songView.songs = songs</span><br><span class="line">        </span><br><span class="line">        present(songView,animated: <span class="literal">true</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="正在播放界面"><a href="#正在播放界面" class="headerlink" title="正在播放界面"></a>正在播放界面</h2><p>创建<code>PlayerViewController</code>展示正在播放的页面，不需要与任何View进行连接，之后创建一个 UIView 令其紧贴 Safe Area 将其命名为 holder。这次我采用代码进行布局，最终看起来应该是这样的，虽然很不美观但是 it just works。<br><img src="http://images.stephenfang.xyz/screen2.png" alt="">。<br>在开始代码注解前了解一下我的思路。其中<code>viewDidLayoutSubviews</code>方法在controller 的子视图的 position 和 size 被改变的时候被调用。在 view 已经被设计 subviews 并且还没有被展示在屏幕上时候，可以调用此方法改变这个view。任何依赖于 bounds 并且需要完成的操作都应该放在<code>viewDidLayoutSubviews</code>中而不是<code>viewDidLoad</code>或<code>viewWillAppear</code>中，因为 view 的 frame 和 bounds 直到 AutoLayout 完成工作的时候才会被确定，所以在执行完Auto Layout之后会调用此方法。<br>当用户点击上一首歌曲或下一首歌曲按钮后，需要改变控件内容的显示，我的想法是通过调用<code>removeFromSuperview()</code>方法，该方法即进行视图节点删除的操作，执行这个方法等于在 View 的树形结构中找到该节点并删除该节点及其子节点，而并非只是删除该节点自己，同时把该对象从响应者链中移除。在ARC的情况下执行<code>removeFromSuperview</code>方法多次也没有问题因为由系统自动管理。<br>那么在调用<code>removeFromSuperview</code>后势必需要重新载入页面元素，并且控制播放的过程，这个时候可以采用一个统一的方法在页面载入、切换的时候进行操作。对于 <code>AVAudioPlayer</code>的调用方面，需要导入<code>AVFoundation</code>框架并初始化<code>AVAudioPlayer</code>对象。由于之前导入了 .mp3 文件，需要做的是让<code>AVAudioPlayer</code>获取待播放的歌曲 url，之前的 ViewController 对 Song 的具体内容有定义，而<code>Bundle.main.path</code>代表获取工程目录下的文件。系统启动时会激活 <code>AVAudioSession</code>，通过设置<code>active</code>为”true”激活 Session，设置为“false”解除 Session 的激活状态，<code>options</code>使用 “.notifyOthersOnDeactivation” 使音频会话停用时其它音频会话可以返回到其它活动状态。对于<code>sharedInstance</code>包含五种设置方法，希望深入了解的参见这篇文章 <a href="https://www.jianshu.com/p/ae843162ace1" target="_blank" rel="noopener">AVAudioSession - Category、Model、Options、Error参数详解</a><br>Int 类型的变量<code>position</code>代表当前用户点按的歌曲在 songs 中所处下标，相关的 UIElement 配置都很容易理解不在此赘述，为了模拟 Music.app 的效果，我尝试使用</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UIView</span>.animate(withDuration: <span class="number">0.2</span>, animations: &#123;</span><br><span class="line">               <span class="keyword">self</span>.albumImageView.frame = <span class="type">CGRect</span>(x: <span class="number">30</span>, y: <span class="number">30</span>, width: <span class="keyword">self</span>.holder.frame.size.width - <span class="number">60</span>, height: <span class="keyword">self</span>.holder.frame.size.width - <span class="number">60</span>)</span><br><span class="line">           &#125;)</span><br></pre></td></tr></table></figure>
+<p>实现类似的点击暂停或播放按钮后专辑封面大小变化的的效果，如果页面上已经对元素进行了大小限制使用<code>CGAffineTransform(scaleX: &lt;CGFloat&gt;, y: &lt;CGFloat&gt;)</code>也能够达到类似的效果。最后给出此次 Demo 所有的代码，对于播放器的开发进展我会持续更新，🦔本系列的第一篇文章。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"><span class="keyword">import</span> AVFoundation</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PlayerViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> position: <span class="type">Int</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> songs: [<span class="type">Song</span>] = []</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> holder: <span class="type">UIView!</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> player: <span class="type">AVAudioPlayer?</span></span><br><span class="line">    <span class="keyword">let</span> playPauseButton = <span class="type">UIButton</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> albumImageView: <span class="type">UIImageView</span> = &#123;</span><br><span class="line">        <span class="keyword">let</span> imageView = <span class="type">UIImageView</span>()</span><br><span class="line">        imageView.contentMode = .scaleAspectFill</span><br><span class="line">        <span class="keyword">return</span> imageView</span><br><span class="line">    &#125; ()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> nameLabel: <span class="type">UILabel</span> = &#123;</span><br><span class="line">        <span class="keyword">let</span> label = <span class="type">UILabel</span>()</span><br><span class="line">        label.textAlignment = .center</span><br><span class="line">        label.numberOfLines = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> label</span><br><span class="line">    &#125; ()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> albumLabel: <span class="type">UILabel</span> = &#123;</span><br><span class="line">        <span class="keyword">let</span> label = <span class="type">UILabel</span>()</span><br><span class="line">        label.textAlignment = .center</span><br><span class="line">        label.numberOfLines = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> label</span><br><span class="line">    &#125; ()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> artistLabel: <span class="type">UILabel</span> = &#123;</span><br><span class="line">        <span class="keyword">let</span> label = <span class="type">UILabel</span>()</span><br><span class="line">        label.textAlignment = .center</span><br><span class="line">        label.numberOfLines = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> label</span><br><span class="line">    &#125; ()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLayoutSubviews</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLayoutSubviews()</span><br><span class="line">        <span class="keyword">if</span> holder.subviews.<span class="built_in">count</span> == <span class="number">0</span> &#123;</span><br><span class="line">            configurePlayer()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewWillDisappear</span><span class="params">(<span class="number">_</span> animated: Bool)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewWillDisappear(animated)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> player = player &#123;</span><br><span class="line">            player.stop()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">configurePlayer</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">let</span> song = songs[position]</span><br><span class="line">        <span class="keyword">let</span> urlString = <span class="type">Bundle</span>.main.path(forResource: song.trackName, ofType: <span class="string">".mp3"</span>)</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> <span class="type">AVAudioSession</span>.sharedInstance().setMode(.<span class="keyword">default</span>)</span><br><span class="line">            <span class="keyword">try</span> <span class="type">AVAudioSession</span>.sharedInstance().setActive(<span class="literal">true</span>, options: .notifyOthersOnDeactivation)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> urlString = urlString <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            player = <span class="keyword">try</span> <span class="type">AVAudioPlayer</span>(contentsOf: <span class="type">URL</span>(string: urlString)!)</span><br><span class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> player = player <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">            player.volume = <span class="number">0.5</span></span><br><span class="line">            </span><br><span class="line">            player.play()</span><br><span class="line">        &#125; <span class="keyword">catch</span>  &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"Error occurred"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// UI</span></span><br><span class="line">        <span class="comment">// Album</span></span><br><span class="line">        albumImageView.frame = <span class="type">CGRect</span>(x: <span class="number">10</span>,</span><br><span class="line">                                      y: <span class="number">10</span>,</span><br><span class="line">                                      width: holder.frame.size.width - <span class="number">20</span>,</span><br><span class="line">                                      height: holder.frame.size.width - <span class="number">20</span>)</span><br><span class="line">        albumImageView.image = <span class="type">UIImage</span>(named: song.imageName)</span><br><span class="line">        holder.addSubview(albumImageView)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Label</span></span><br><span class="line">        nameLabel.frame = <span class="type">CGRect</span>(x: <span class="number">10</span>, y: albumImageView.frame.size.height + <span class="number">10</span>, width: holder.frame.size.width - <span class="number">20</span> , height: <span class="number">70</span>)</span><br><span class="line">        albumLabel.frame = <span class="type">CGRect</span>(x: <span class="number">10</span>, y: albumImageView.frame.size.height + <span class="number">80</span>, width: holder.frame.size.width - <span class="number">20</span> , height: <span class="number">70</span>)</span><br><span class="line">        artistLabel.frame = <span class="type">CGRect</span>(x: <span class="number">10</span>, y: albumImageView.frame.size.height + <span class="number">140</span>, width: holder.frame.size.width - <span class="number">20</span> , height: <span class="number">70</span>)</span><br><span class="line">        </span><br><span class="line">        nameLabel.text = song.songName</span><br><span class="line">        albumLabel.text = song.albumName</span><br><span class="line">        artistLabel.text = song.artistName</span><br><span class="line">        </span><br><span class="line">        holder.addSubview(nameLabel)</span><br><span class="line">        holder.addSubview(albumLabel)</span><br><span class="line">        holder.addSubview(artistLabel)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Button</span></span><br><span class="line">        <span class="keyword">let</span> nextButton = <span class="type">UIButton</span>()</span><br><span class="line">        <span class="keyword">let</span> backButton = <span class="type">UIButton</span>()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> buttonSize: <span class="type">CGFloat</span> = <span class="number">50</span></span><br><span class="line">        </span><br><span class="line">        playPauseButton.frame = <span class="type">CGRect</span>(x: (holder.frame.size.width - buttonSize)/<span class="number">2.0</span>, y: artistLabel.frame.origin.y + <span class="number">90</span>, width: buttonSize, height: buttonSize)</span><br><span class="line">        nextButton.frame = <span class="type">CGRect</span>(x: holder.frame.size.width - <span class="number">20</span> - buttonSize, y: artistLabel.frame.origin.y + <span class="number">90</span>, width: buttonSize, height: buttonSize)</span><br><span class="line">        backButton.frame = <span class="type">CGRect</span>(x: <span class="number">20</span>, y: artistLabel.frame.origin.y + <span class="number">90</span>, width: buttonSize, height: buttonSize)</span><br><span class="line">        </span><br><span class="line">        playPauseButton.addTarget(<span class="keyword">self</span>, action: #selector(didTapPauseButton), <span class="keyword">for</span>: .touchUpInside)</span><br><span class="line">        nextButton.addTarget(<span class="keyword">self</span>, action: #selector(didTapNextButton), <span class="keyword">for</span>: .touchUpInside)</span><br><span class="line">        backButton.addTarget(<span class="keyword">self</span>, action: #selector(didTapBackButton), <span class="keyword">for</span>: .touchUpInside)</span><br><span class="line">        </span><br><span class="line">        playPauseButton.setBackgroundImage(<span class="type">UIImage</span>(systemName: <span class="string">"pause.fill"</span>), <span class="keyword">for</span>: .normal)</span><br><span class="line">        nextButton.setBackgroundImage(<span class="type">UIImage</span>(systemName: <span class="string">"forward.fill"</span>), <span class="keyword">for</span>: .normal)</span><br><span class="line">        backButton.setBackgroundImage(<span class="type">UIImage</span>(systemName: <span class="string">"backward.fill"</span>), <span class="keyword">for</span>: .normal)</span><br><span class="line">        </span><br><span class="line">        playPauseButton.tintColor = .black</span><br><span class="line">        nextButton.tintColor = .black</span><br><span class="line">        backButton.tintColor = .black</span><br><span class="line">        </span><br><span class="line">        holder.addSubview(playPauseButton)</span><br><span class="line">        holder.addSubview(nextButton)</span><br><span class="line">        holder.addSubview(backButton)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Element</span></span><br><span class="line">        <span class="keyword">let</span> slider = <span class="type">UISlider</span>(frame: <span class="type">CGRect</span>(x: <span class="number">20</span>, y: holder.frame.size.height - <span class="number">60</span>, width: holder.frame.size.width - <span class="number">40</span>, height: <span class="number">50</span>))</span><br><span class="line">        </span><br><span class="line">        slider.value = <span class="number">50</span></span><br><span class="line">        slider.addTarget(<span class="keyword">self</span>, action: #selector(didSlideSlider(<span class="number">_</span>:)), <span class="keyword">for</span>: .valueChanged)</span><br><span class="line">        holder.addSubview(slider)</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">didSlideSlider</span> <span class="params">(<span class="number">_</span> slider: UISlider)</span></span>&#123;</span><br><span class="line">        <span class="keyword">let</span> value = slider.value</span><br><span class="line">        player?.volume = value</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">didTapPauseButton</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> player?.isPlaying == <span class="literal">true</span> &#123;</span><br><span class="line">            player?.pause()</span><br><span class="line">            playPauseButton.setBackgroundImage(<span class="type">UIImage</span>(systemName: <span class="string">"play.fill"</span>), <span class="keyword">for</span>: .normal)</span><br><span class="line">            <span class="type">UIView</span>.animate(withDuration: <span class="number">0.2</span>, animations: &#123;</span><br><span class="line">                <span class="keyword">self</span>.albumImageView.frame = <span class="type">CGRect</span>(x: <span class="number">30</span>, y: <span class="number">30</span>, width: <span class="keyword">self</span>.holder.frame.size.width - <span class="number">60</span>, height: <span class="keyword">self</span>.holder.frame.size.width - <span class="number">60</span>)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            player?.play()</span><br><span class="line">            playPauseButton.setBackgroundImage(<span class="type">UIImage</span>(systemName: <span class="string">"pause.fill"</span>), <span class="keyword">for</span>: .normal)</span><br><span class="line">            <span class="type">UIView</span>.animate(withDuration: <span class="number">0.2</span>, animations: &#123;</span><br><span class="line">                <span class="keyword">self</span>.albumImageView.frame = <span class="type">CGRect</span>(x: <span class="number">10</span>, y: <span class="number">10</span>, width: <span class="keyword">self</span>.holder.frame.size.width - <span class="number">20</span>, height: <span class="keyword">self</span>.holder.frame.size.width - <span class="number">20</span>)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">didTapNextButton</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> position &lt; (songs.<span class="built_in">count</span> - <span class="number">1</span> )&#123;</span><br><span class="line">            position = position + <span class="number">1</span></span><br><span class="line">            player?.stop()</span><br><span class="line">            <span class="keyword">for</span> subview <span class="keyword">in</span> holder.subviews &#123;</span><br><span class="line">                subview.removeFromSuperview()</span><br><span class="line">            &#125;</span><br><span class="line">            configurePlayer()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">didTapBackButton</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> position &gt; <span class="number">0</span> &#123;</span><br><span class="line">            position = position - <span class="number">1</span></span><br><span class="line">            player?.stop()</span><br><span class="line">            <span class="keyword">for</span> subview <span class="keyword">in</span> holder.subviews &#123;</span><br><span class="line">                subview.removeFromSuperview()</span><br><span class="line">            &#125;</span><br><span class="line">            configurePlayer()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+     <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/07/08/Muzik_GettingStarted/">Muzik开发总结 — AVAudioPlayer 实践</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Stephen Fang 的个人博客">Stephen Fang</a></p>
+  <p><span>发布时间:</span>2020年07月08日 - 19:20</p>
+  <p><span>最后更新:</span>2020年07月12日 - 17:37</p>
+  <p><span>原始链接:</span><a href="/2020/07/08/Muzik_GettingStarted/" title="Muzik开发总结 — AVAudioPlayer 实践">https://stephefang.me/2020/07/08/Muzik_GettingStarted/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://stephefang.me/2020/07/08/Muzik_GettingStarted/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      
+     </div>
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://twitter.com/username">
+                <span class="icon">
+                  <i class="fa fa-twitter"></i>
+                </span>
+
+                <span class="label">Twitter</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://t.me/joinchat/AAAAAFdtyKy69-Dr_ai7RQ">
+                <span class="icon">
+                  <i class="fa fa-telegram"></i>
+                </span>
+
+                <span class="label">Telegram</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/images/wechat_account.jpg">
+                <span class="icon">
+                  <i class="fa fa-wechat"></i>
+                </span>
+
+                <span class="label">Wechat</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/AudioPlayer/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/04/Design_Thoughts/" rel="prev" title="设计、摄影与编码的碎碎念">
+      <i class="fa fa-chevron-left"></i> 设计、摄影与编码的碎碎念
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#歌曲列表界面"><span class="nav-number">3.</span> <span class="nav-text">歌曲列表界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正在播放界面"><span class="nav-number">4.</span> <span class="nav-text">正在播放界面</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stephen Fang"
+      src="/images/favicon.png">
+  <p class="site-author-name" itemprop="name">Stephen Fang</p>
+  <div class="site-description" itemprop="description">StephenFang's GitHub Page</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamstephenfang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fangxuanmiao@gmail.com" title="E-Mail → mailto:fangxuanmiao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/iamstephenfang" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/fangxuanmiao" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;fangxuanmiao" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/iamstephenfang" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+  </div>
+
+
+<div class="night-mode motion-element">
+  <a role="button" class="night-btn">
+    <i class="fa fa-lightbulb-o"></i>
+    Night Mode
+  </a>
+</div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stephen Fang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> 构建
+  <span id="busuanzi_container_site_uv">| 本站访客数:<span id="busuanzi_value_site_uv"></span>
+   <span class="post-count">| 博客全站共49.4k字</span>
+</span>
+  </div>
+  <span class="post-meta-divider"></span>
+  <div class="theme-info">
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+  ((w, d) => {
+    'use strict';
+      let userScheme = localStorage.getItem('Scheme');
+      if (userScheme) d.documentElement.className += ' darkScheme';
+      const btn = d.querySelector('.night-btn');
+      w.addEventListener('keydown', e => {
+        if (e.altKey && e.code === 'KeyX') btn.click();
+      });
+      btn.addEventListener('click', () => {
+        d.documentElement.classList.toggle('darkScheme');
+        if ( d.documentElement.classList.contains('darkScheme') ) {
+          localStorage.setItem('Scheme', 'Dark');
+          return;
+        }
+        localStorage.removeItem('Scheme');
+      });
+  })(window, document);
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'QnhiKXiUBCNtXH1MOoOB9EuB-MdYXbMMI',
+      appKey: '1oyNoEMdzuJrPz8c97G4vQQ0',
+      placeholder: "请留下您的见解.",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+
+var infoEle = document.querySelector("#valine-comments > div.info");
+if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+  infoEle.childNodes.forEach(function(item) {
+    item.parentNode.removeChild(item);
+  });
+}
+</script>
+
+</body>
+</html>

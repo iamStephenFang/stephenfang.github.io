@@ -2,177 +2,198 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://stephefang.me/tags/index.html</loc>
-    
-    <lastmod>2020-07-11T07:33:26.560Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/2020/02/24/Struts_Workflow/</loc>
-    
-    <lastmod>2020-07-11T07:33:26.560Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/2020/04/22/WEKA_Association/</loc>
-    
-    <lastmod>2020-07-11T07:33:26.560Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/categories/index.html</loc>
-    
-    <lastmod>2020-07-11T07:33:26.560Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/about/index.html</loc>
-    
-    <lastmod>2020-07-11T07:33:26.560Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/archives/index.html</loc>
-    
-    <lastmod>2020-07-11T07:33:26.560Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/2020/02/23/Struts_Experiment/</loc>
-    
-    <lastmod>2020-07-11T07:33:26.540Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://stephefang.me/2020/06/07/Singleton_Pattern/</loc>
     
-    <lastmod>2020-07-11T07:33:26.540Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/2020/02/26/Setting_up_OpenCV_environment_in_Xcode/</loc>
-    
-    <lastmod>2020-07-11T07:33:26.528Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/2020/03/16/OpenCV_Grayscale/</loc>
-    
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/2020/02/07/Apple%20Watch/</loc>
-    
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/2020/02/25/Hibernate_Basic/</loc>
-    
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/2020/02/10/Design+Code_Vue.js_Learning/</loc>
-    
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
+    <lastmod>2020-07-12T09:37:19.868Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://stephefang.me/2020/06/03/Mediator_Pattern/</loc>
     
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
+    <lastmod>2020-07-12T09:37:19.836Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://stephefang.me/2020/04/13/Objc_Learning_5/</loc>
+    <loc>https://stephefang.me/2020/07/04/Design_Thoughts/</loc>
     
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/2020/04/17/Objc_Learning_6/</loc>
-    
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
+    <lastmod>2020-07-12T09:37:19.836Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://stephefang.me/2020/04/19/Objc_Learning_7/</loc>
+    <loc>https://stephefang.me/2020/07/01/Haze-Free/</loc>
     
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
+    <lastmod>2020-07-12T09:37:19.836Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/07/08/Muzik_GettingStarted/</loc>
+    
+    <lastmod>2020-07-12T09:37:19.836Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://stephefang.me/2020/03/21/Objc_Learning_1/</loc>
     
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
+    <lastmod>2020-07-12T09:37:19.836Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://stephefang.me/2020/03/26/Objc_Learning_2/</loc>
+    <loc>https://stephefang.me/about/index.html</loc>
     
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://stephefang.me/2020/04/05/Objc_Learning_3/</loc>
-    
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
+    <lastmod>2020-07-12T09:23:01.853Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://stephefang.me/2020/04/11/Objc_Learning_4/</loc>
+    <loc>https://stephefang.me/2020/02/26/OpenCV_Xcode/</loc>
     
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
+    <lastmod>2020-07-12T09:20:01.148Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/04/22/WEKA_Association/</loc>
+    
+    <lastmod>2020-04-25T03:49:54.649Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://stephefang.me/2020/04/24/Objc_Learning_8/</loc>
     
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
+    <lastmod>2020-04-25T03:36:44.433Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://stephefang.me/2020/04/01/OpenCV_Filter/</loc>
+    <loc>https://stephefang.me/2020/04/19/Objc_Learning_7/</loc>
     
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
+    <lastmod>2020-04-19T15:51:11.458Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/04/13/Objc_Learning_5/</loc>
+    
+    <lastmod>2020-04-17T10:10:09.102Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/04/17/Objc_Learning_6/</loc>
+    
+    <lastmod>2020-04-17T10:10:04.356Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/04/05/Objc_Learning_3/</loc>
+    
+    <lastmod>2020-04-17T10:10:02.108Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://stephefang.me/2020/04/11/Digital_Life/</loc>
     
-    <lastmod>2020-07-11T07:33:26.508Z</lastmod>
+    <lastmod>2020-04-13T14:57:51.682Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/04/11/Objc_Learning_4/</loc>
+    
+    <lastmod>2020-04-11T07:42:48.745Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/03/26/Objc_Learning_2/</loc>
+    
+    <lastmod>2020-04-11T07:41:19.536Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/archives/index.html</loc>
+    
+    <lastmod>2020-04-04T15:36:00.247Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/categories/index.html</loc>
+    
+    <lastmod>2020-04-04T15:35:50.727Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/tags/index.html</loc>
+    
+    <lastmod>2020-04-04T15:35:39.795Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/04/01/OpenCV_Filter/</loc>
+    
+    <lastmod>2020-04-02T04:19:19.321Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/02/07/Apple%20Watch/</loc>
+    
+    <lastmod>2020-03-22T13:01:24.465Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/02/10/Design+Code_Vue.js_Learning/</loc>
+    
+    <lastmod>2020-03-22T13:01:06.779Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/02/25/Hibernate_Basic/</loc>
+    
+    <lastmod>2020-03-22T12:57:43.737Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/02/23/Struts_Experiment/</loc>
+    
+    <lastmod>2020-03-22T12:57:27.786Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://stephefang.me/2020/02/26/Action_Experiment/</loc>
     
-    <lastmod>2020-07-11T07:33:26.496Z</lastmod>
+    <lastmod>2020-03-22T12:57:22.407Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/02/24/Struts_Workflow/</loc>
+    
+    <lastmod>2020-03-22T12:54:53.608Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/2020/03/16/OpenCV_Grayscale/</loc>
+    
+    <lastmod>2020-03-22T12:51:18.806Z</lastmod>
     
   </url>
   
