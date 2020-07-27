@@ -2,12 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://stephefang.me/2020/06/07/Singleton_Pattern/</loc>
-    <lastmod>2020-07-12</lastmod>
+    <lastmod>2020-07-27</lastmod>
   </url>  <url>
     <loc>https://stephefang.me/2020/06/03/Mediator_Pattern/</loc>
-    <lastmod>2020-07-12</lastmod>
+    <lastmod>2020-07-27</lastmod>
   </url>  <url>
-    <loc>https://stephefang.me/2020/07/04/Design_Thoughts/</loc>
+    <loc>https://stephefang.me/2020/07/15/Muzik_Progress/</loc>
+    <lastmod>2020-07-27</lastmod>
+  </url>  <url>
+    <loc>https://stephefang.me/2020/03/21/Objc_Learning_1/</loc>
     <lastmod>2020-07-12</lastmod>
   </url>  <url>
     <loc>https://stephefang.me/2020/07/01/Haze-Free/</loc>
@@ -16,7 +19,7 @@
     <loc>https://stephefang.me/2020/07/08/Muzik_GettingStarted/</loc>
     <lastmod>2020-07-12</lastmod>
   </url>  <url>
-    <loc>https://stephefang.me/2020/03/21/Objc_Learning_1/</loc>
+    <loc>https://stephefang.me/2020/07/04/Design_Thoughts/</loc>
     <lastmod>2020-07-12</lastmod>
   </url>  <url>
     <loc>https://stephefang.me/2020/02/26/OpenCV_Xcode/</loc>
