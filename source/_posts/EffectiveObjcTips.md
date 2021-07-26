@@ -14,7 +14,6 @@ copyright: true
 
 <!--more-->
 
-
 ## 第一节
 
 - Objective-C 采用了动态绑定的消息结构，在运行时检查对象的类型，运行期环境决定了接受消息后需要执行的代码。
@@ -251,7 +250,7 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
 
 ## 第十九节
 
-- 如果从其他框架中继承子类务必遵循命名惯例，如从UIView中继承自定义子类则类名末尾词为View，若创建自定义委托协议末尾应跟上Delegate一词。
+如果从其他框架中继承子类务必遵循命名惯例，如从UIView中继承自定义子类则类名末尾词为View，若创建自定义委托协议末尾应跟上Delegate一词。
 
 {% asset_img Untitled5.png %}
 
@@ -314,7 +313,7 @@ if (ret) {
 
    {% asset_img Untitled8.png %}
 
-    ## 第二十三节
+## 第二十三节
 
    {% asset_img Untitled9.png %}
 
@@ -328,7 +327,7 @@ if (ret) {
 
    {% asset_img Untitled14.png %}
 
-    存放委托对象的属性需要为weak（在对象销毁时自动清空）或unsafe_unretained（不需要自动清空）。
+存放委托对象的属性需要为weak（在对象销毁时自动清空）或unsafe_unretained（不需要自动清空）。
 
    {% asset_img Untitled15.png %}
 
@@ -336,12 +335,12 @@ if (ret) {
 
    {% asset_img Untitled17.png %}
 
-    - 某个对象从另一个对象获取数据可以使用委托模式，亦成为数据源模式，数据的流动如上图所示
-    - 如果有必要可以实现有段位的结构体将委托对象是否能响应相关协议的信息缓存至其中
+- 某个对象从另一个对象获取数据可以使用委托模式，亦成为数据源模式，数据的流动如上图所示
+- 如果有必要可以实现有段位的结构体将委托对象是否能响应相关协议的信息缓存至其中
 
-    ## 第二十四条
+## 第二十四条
 
-    - 通过分类机制将代码划分为易于管理的小块
+- 通过分类机制将代码划分为易于管理的小块
 
    {% asset_img Untitled18.png %}
 
@@ -351,23 +350,23 @@ if (ret) {
 
    {% asset_img Untitled21.png %}
 
-    - 可以创建名为Private的分类并将私有方法放在里面，这个分类的方法只在类和框架内部使用无需对外公布
+- 可以创建名为Private的分类并将私有方法放在里面，这个分类的方法只在类和框架内部使用无需对外公布
 
-    ## 第二十五条
+## 第二十五条
 
-    - 向第三方类中添加分类时给分类名与方法名加上前缀
+- 向第三方类中添加分类时给分类名与方法名加上前缀
 
    {% asset_img Untitled22.png %}
 
-    ## 第二十六条
+## 第二十六条
 
-    - 在实现分类时所有属性都应该定义在主接口内，类所封装的所有数据都应该定义在主接口内
+- 在实现分类时所有属性都应该定义在主接口内，类所封装的所有数据都应该定义在主接口内
 
    {% asset_img Untitled23.png %}
 
-    ## 第二十七条
+## 第二十七条
 
-    - class-continuation 分类中可以定义方法和实例变量，如下方式中_anotherInstanceVariable 是隐藏的状态
+- class-continuation 分类中可以定义方法和实例变量，如下方式中_anotherInstanceVariable 是隐藏的状态
 
     ```objectivec
     @interface STFPerson() {
@@ -385,34 +384,34 @@ if (ret) {
 
    {% asset_img Untitled24.png %}
 
-    - WebKit、CoreAnimation 底层大部分代码用C++编写，对外展示的为Objective-C接口
+- WebKit、CoreAnimation 底层大部分代码用C++编写，对外展示的为Objective-C接口
 
    {% asset_img Untitled25.png %}
 
-    - 上图方式可以随意调用setFirstName与setLastName方法与点语法设置属性，同时外界无法修改对象，完成了类型的拓展
+- 上图方式可以随意调用setFirstName与setLastName方法与点语法设置属性，同时外界无法修改对象，完成了类型的拓展
 
    {% asset_img Untitled26.png %}
 
     - 不需要在公共接口中声明类遵从了私有协议，而应该改到 class-continuation 分类内进行声明
 
-    ## 第二十八条
+## 第二十八条
 
-    - 协议可以在某种程度上提供匿名类型，具体的对象类型淡化成为遵从某个协议的id类型，协议离规定对象应该实现的方法。下图中与数据库连接相关的类名称就无法泄漏
+- 协议可以在某种程度上提供匿名类型，具体的对象类型淡化成为遵从某个协议的id类型，协议离规定对象应该实现的方法。下图中与数据库连接相关的类名称就无法泄漏
 
-       {% asset_img Untitled27.png %}
+    {% asset_img Untitled27.png %}
 
-    - 使用匿名对象实现类型名称的隐藏，需要注意的是对象需要能够响应定义在协议中的方法
-    - 下图中其中sectionInfo为匿名对象，把section数组中返回的内部状态对象视为遵从NSFetchedResultsSectionInfo的匿名对象，隐藏了相关实现细节。
+- 使用匿名对象实现类型名称的隐藏，需要注意的是对象需要能够响应定义在协议中的方法
+- 下图中其中sectionInfo为匿名对象，把section数组中返回的内部状态对象视为遵从NSFetchedResultsSectionInfo的匿名对象，隐藏了相关实现细节。
 
-       {% asset_img Untitled28.png %}
+    {% asset_img Untitled28.png %}
 
-    ## 第二十九条
+## 第二十九条
 
-    - 对象创建完成后引用计数至少为1，如果需要保留该对象需要调用retain方法，如果不再需要该对象则调用release、autorelease方法，当引用计数归零时对象被回收
+- 对象创建完成后引用计数至少为1，如果需要保留该对象需要调用retain方法，如果不再需要该对象则调用release、autorelease方法，当引用计数归零时对象被回收
 
-       {% asset_img Untitled29.png %}
+    {% asset_img Untitled29.png %}
 
-    - 为了避免使用无效对象一般在完成调用release之后清空指针，保证不会出现指向无效对象的指针
+- 为了避免使用无效对象一般在完成调用release之后清空指针，保证不会出现指向无效对象的指针
 
     ```objectivec
     NSNumber *number = [[NSNumber alloc]initWithInt: 1234];
@@ -421,64 +420,64 @@ if (ret) {
     number = nil;
     ```
 
-    ## 第三十条
+## 第三十条
 
-    - ARC会自动执行retain、release、autorelease等操作，不能直接对这些方法（还包括dealloc）进行调用
-    - ARC在调用这些方法并不通过Objective-C消息派发机制，而是直接调用底层C语言版本，能够带来更好的性能
-    - 若方法名以以下的几个四个词语开头则表示返回的对象归调用者所有，反之返回的对象会自动释放
-        - copy
-        - mutableCopy
-        - new
-        - alloc
+- ARC会自动执行retain、release、autorelease等操作，不能直接对这些方法（还包括dealloc）进行调用
+- ARC在调用这些方法并不通过Objective-C消息派发机制，而是直接调用底层C语言版本，能够带来更好的性能
+- 若方法名以以下的几个四个词语开头则表示返回的对象归调用者所有，反之返回的对象会自动释放
+    - copy
+    - mutableCopy
+    - new
+    - alloc
 
-    ## 第三十一条
+## 第三十一条
 
    {% asset_img Untitled30.png %}
 
-    - 如果对象持有文件描述符等系统资源，应该专门写一个方法释放此类资源，用完使用close方法
-    - 执行异步任务的方法和只能在正常状态下执行的方法不应在dealloc中调用
+- 如果对象持有文件描述符等系统资源，应该专门写一个方法释放此类资源，用完使用close方法
+- 执行异步任务的方法和只能在正常状态下执行的方法不应在dealloc中调用
 
-    ## 第三十二条
+## 第三十二条
 
-    - ARC不生成安全处理异常所需的清理代码，开启编译器标志后可以生成这种代码但是会导致应用程序变大，且会降低运行效率
+- ARC不生成安全处理异常所需的清理代码，开启编译器标志后可以生成这种代码但是会导致应用程序变大，且会降低运行效率
 
    {% asset_img Untitled31.png %}
 
-    ## 第三十三条
+## 第三十三条
 
-    - 当指向EOCClassA的实例引用移除后unsafe_unretained属性仍然指向已经回收的实例，而weak属性指向nil
+- 当指向EOCClassA的实例引用移除后unsafe_unretained属性仍然指向已经回收的实例，而weak属性指向nil
 
     {% asset_img Untitled32.png %}
 
-    ## 第三十四条
+## 第三十四条
 
-    系统会自动创建一些线程，如主线程或GCD机制中的线程都有自动释放池，这些线程都有autoreleasepool，每次执行event loop就会将其清空
+系统会自动创建一些线程，如主线程或GCD机制中的线程都有自动释放池，这些线程都有autoreleasepool，每次执行event loop就会将其清空
 
    {% asset_img Untitled33.png %}
 
    {% asset_img Untitled34.png %}
 
-    ## 第三十五条
+## 第三十五条
 
-    - 系统在回收对象时可以将其转化为僵尸对象，通过环境变量NSZombieEnabled可以开启该功能，或在Xcode中开启
+- 系统在回收对象时可以将其转化为僵尸对象，通过环境变量NSZombieEnabled可以开启该功能，或在Xcode中开启
 
-       {% asset_img Untitled35.png %}
+{% asset_img Untitled35.png %}
 
-    - 系统修改对象的isa指针指向特殊的僵尸类可以时该对象成为僵尸对鲜花，僵尸类能够响应所有的selector，在打印一条包含消息内容及接受者的消息后终止应用程序
+- 系统修改对象的isa指针指向特殊的僵尸类可以时该对象成为僵尸对鲜花，僵尸类能够响应所有的selector，在打印一条包含消息内容及接受者的消息后终止应用程序
 
-    ## 第三十六条
+## 第三十六条
 
-    在 ARC 下调用查询对象当前引用计数的方法会触发崩溃
+在 ARC 下调用查询对象当前引用计数的方法会触发崩溃
 
     ```objectivec
     - (NSUInteger)retainCount
     ```
 
-    事实上该方法不应该调用，方法返回的retainCount是某个给定时间点上的数值，并未考虑系统会稍后清空自动释放池，无法反应对象生命期的全貌。
+事实上该方法不应该调用，方法返回的retainCount是某个给定时间点上的数值，并未考虑系统会稍后清空自动释放池，无法反应对象生命期的全貌。
 
-    ## 第三十七条
+## 第三十七条
 
-    - Block与定义它的函数共享同一个范围内的信息，块自有其相关类型，可以将块赋值给变量并使用它
+- Block与定义它的函数共享同一个范围内的信息，块自有其相关类型，可以将块赋值给变量并使用它
 
     ```objectivec
     void (^someBlock) () = ^ {
@@ -522,15 +521,15 @@ if (ret) {
                                           completed:(SDWebImageDownloaderCompletedBlock)completedBlock;
     ```
 
-    ## 第三十九条
+## 第三十九条
 
-    - 简洁程度上Delegate与Block的对比
+- 简洁程度上Delegate与Block的对比
 
    {% asset_img Untitled39.png %}
 
    {% asset_img Untitled40.png %}
 
-    - 处理多个请求时Delegate与Block的对比
+- 处理多个请求时Delegate与Block的对比
 
    {% asset_img Untitled41.png %}
 
@@ -540,7 +539,7 @@ if (ret) {
 
    {% asset_img Untitled44.png %}
 
-    - 在处理请求时采用两个独立的处理Block（1/2）
+- 在处理请求时采用两个独立的处理Block（1/2）
 
    {% asset_img Untitled45.png %}
 
@@ -548,27 +547,27 @@ if (ret) {
 
    {% asset_img Untitled47.png %}
 
-    - 在处理请求时采用同一个处理Block，令Block更为灵活但更为冗长
+- 在处理请求时采用同一个处理Block，令Block更为灵活但更为冗长
 
    {% asset_img Untitled48.png %}
 
    {% asset_img Untitled49.png %}
 
-    ## 第四十条
+## 第四十条
 
-    大部分网络通信库写法
+大部分网络通信库写法
 
    {% asset_img Untitled50.png %}
 
-    为了使得在下载完成后通过以下方法执行调用者指定的Block，需要将completion handler保存至实例变量，一旦运行完completion handler之后没有必要对其进行保留，从而避免出现retain cycle
+为了使得在下载完成后通过以下方法执行调用者指定的Block，需要将completion handler保存至实例变量，一旦运行完completion handler之后没有必要对其进行保留，从而避免出现retain cycle
 
    {% asset_img Untitled51.png %}
 
    {% asset_img Untitled52.png %}
 
-    ## 第四十一条
+## 第四十一条
 
-    - 串行队列，将读取操作与写入操作安排到同个队列中保证数据同步，可以将设置方法由同步派发改为异步执派发
+- 串行队列，将读取操作与写入操作安排到同个队列中保证数据同步，可以将设置方法由同步派发改为异步执派发
 
    {% asset_img Untitled53.png %}
 
@@ -586,28 +585,28 @@ if (ret) {
 
    {% asset_img Untitled58.png %}
 
-    ## 第四十二条
+## 第四十二条
 
-    - performSelector接受的参数类型为id，限定了传入参数必须是对象，不能是整数或者浮点数，并且最多只能接受两个参数
+- performSelector接受的参数类型为id，限定了传入参数必须是对象，不能是整数或者浮点数，并且最多只能接受两个参数
 
    {% asset_img Untitled59.png %}
 
-    - 延后执行某项任务，优先使用GCD的方式
+- 延后执行某项任务，优先使用GCD的方式
 
    {% asset_img Untitled60.png %}
 
-    - 把任务放到主线程上执行，把任务封装至Block中用GCD相关方法更为合适
+- 把任务放到主线程上执行，把任务封装至Block中用GCD相关方法更为合适
 
    {% asset_img Untitled61.png %}
 
-    - performSelector在内存管理方面存在缺失，无法确定将执行的Selector具体是什么
+- performSelector在内存管理方面存在缺失，无法确定将执行的Selector具体是什么
 
-    ## 第四十三条
+## 第四十三条
 
-    - GCD是纯C的API，操作队列是Objective-C的对象
-    - Block是轻量级的书籍结构而Operation是重量级的Objective-C对象
-    - 在执行后台任务时GCD并不一定是最佳方式
-    - 使用NSOperation与NSOperationQueue有以下好处，能够实现纯GCD具备的绝大部分功能
+- GCD是纯C的API，操作队列是Objective-C的对象
+- Block是轻量级的书籍结构而Operation是重量级的Objective-C对象
+- 在执行后台任务时GCD并不一定是最佳方式
+- 使用NSOperation与NSOperationQueue有以下好处，能够实现纯GCD具备的绝大部分功能
 
    {% asset_img Untitled62.png %}
 
@@ -615,72 +614,70 @@ if (ret) {
 
    {% asset_img Untitled64.png %}
 
-    - NSNotificationCenter 的 addObserverForName: 方法接受的参数是块而不是Selector
+- NSNotificationCenter 的 addObserverForName: 方法接受的参数是块而不是Selector
 
    {% asset_img Untitled65.png %}
 
-    - 确定哪一种方法的最好方式是测试性能
+- 确定哪一种方法的最好方式是测试性能
 
     ## 第四十四条
 
-    - dispatch group 能够将任务分组，调用者可以等待这组任务执行完毕同时也可以在提供回调函数之后继续执行
-    - 如下函数是dispatch_async的变体
+- dispatch group 能够将任务分组，调用者可以等待这组任务执行完毕同时也可以在提供回调函数之后继续执行
+- 如下函数是dispatch_async的变体
 
-       {% asset_img Untitled66.png %}
+{% asset_img Untitled66.png %}
 
-    - 如下函数用于等待 dispatch group 执行完毕，timeout 参数表示阻塞时间，若执行时间短于timeout返回0
+- 如下函数用于等待 dispatch group 执行完毕，timeout 参数表示阻塞时间，若执行时间短于timeout返回0
 
-       {% asset_img Untitled67.png %}
+{% asset_img Untitled67.png %}
 
-    - 如下函数中可以传入在特定线程上执行的Block
+- 如下函数中可以传入在特定线程上执行的Block
 
-   {% asset_img Untitled68.png %}
+{% asset_img Untitled68.png %}
 
-    - 令数组每个对象都执行某个任务，并且等待每个任务都执行完毕可以使用如下GCD特性
+- 令数组每个对象都执行某个任务，并且等待每个任务都执行完毕可以使用如下GCD特性
 
-   {% asset_img Untitled69.png %}
+{% asset_img Untitled69.png %}
 
-    - 若当前线程不阻塞可以使用notify函数取代wait
+- 若当前线程不阻塞可以使用notify函数取代wait
 
-   {% asset_img Untitled70.png %}
+{% asset_img Untitled70.png %}
 
-    - 区分任务的优先级放置于不同的线程执行，同时将所有任务归于一个dispatch group，并且在执行完毕后获得通知（并发队列）
+- 区分任务的优先级放置于不同的线程执行，同时将所有任务归于一个dispatch group，并且在执行完毕后获得通知（并发队列）
 
-       {% asset_img Untitled71.png %}
+{% asset_img Untitled71.png %}
 
-    - 将任务提交到串行队列中并用dispatch group 跟踪执行情况
+- 将任务提交到串行队列中并用dispatch group 跟踪执行情况
 
-       {% asset_img Untitled72.png %}
+{% asset_img Untitled72.png %}
 
-   {% asset_img Untitled73.png %}
+{% asset_img Untitled73.png %}
 
-    ## 第四十五条
+## 第四十五条
 
-    - 常用的一种共享单例的方法
+- 常用的一种共享单例的方法
 
    {% asset_img Untitled74.png %}
 
-    - 使用GCD实现共享单例的方法
+- 使用GCD实现共享单例的方法
 
    {% asset_img Untitled75.png %}
 
-    - 使用 dispatch_once 能够简化代码并且彻底保证线程安全开发者无需关心加锁或同步，所有问题都由GCD在底层进行处理，static 作用域能够保证编译器在每次执行该方法时复用该变量而不是重复创建
+- 使用 dispatch_once 能够简化代码并且彻底保证线程安全开发者无需关心加锁或同步，所有问题都由GCD在底层进行处理，static 作用域能够保证编译器在每次执行该方法时复用该变量而不是重复创建
 
-    ## 第四十六条
+## 第四十六条
 
-    - dispatch_get_current_queue 函数尽量不要使用
+- dispatch_get_current_queue 函数尽量不要使用
 
-    ## 第四十七条
+## 第四十七条
 
-    - 框架指一系列代码被封装为动态库，并且在其中放入描述接口的头文件，iOS平台的系统框架仍然采用了动态库
-    - iOS应用程序不允许在其中包含动态库于是就出现了静态库
-    - 关于静态库与动态库的了解可以参考
+- 框架指一系列代码被封装为动态库，并且在其中放入描述接口的头文件，iOS平台的系统框架仍然采用了动态库
+- iOS应用程序不允许在其中包含动态库于是就出现了静态库
+- 关于静态库与动态库的了解可以参考 [细说iOS静态库和动态库](https://juejin.cn/post/6844904031937101838)
 
-    [细说iOS静态库和动态库](https://juejin.cn/post/6844904031937101838)
-
-    - Cocoa 本身并不是框架而是集成了一批创建应用程序时需要用到的框架
-    - Objective-C编程的一个重要特点是经常需要用到底层的C语言级API
-    - CoreAnimation 使用Objective-C进行编写，而 CoreGraphics 框架采用C语言进行编写，两者均为 UI 框架之下的一等框架
+- Cocoa 本身并不是框架而是集成了一批创建应用程序时需要用到的框架
+- Objective-C编程的一个重要特点是经常需要用到底层的C语言级API
+- CoreAnimation 使用Objective-C进行编写，而 CoreGraphics 框架采用C语言进行编写，两者均为 UI 框架之下的一等框架
 
 ## 第四十八条
 
@@ -788,9 +785,9 @@ if (ret) {
 
     NSEnumerationOptions 类型为enum，如果开启了NSEnumerationConcurrent 底层会使用GCD处理出发执行事宜，采用其他方法很难实现。
 
-    ## 第四十九条
+## 第四十九条
 
-    - 使用桥接技术可以实现定义在Foundation框架内的Objective-C类与CoreFoundation 框架中的 C 数据结构的相互转换
+- 使用桥接技术可以实现定义在Foundation框架内的Objective-C类与CoreFoundation 框架中的 C 数据结构的相互转换
 
     ```objectivec
     NSArray *anNSArray = @[@1, @2, @3, @4, @5];
@@ -805,30 +802,30 @@ if (ret) {
                                                 ]; 
     ```
 
-    - __bridge 含义为ARC具备该对象的所有权，__bridge_retained表示ARC交出该对象的所有权， 通过__bridge告诉ARC如何处理转换涉及的Objective-C对象
-    - Foundation 框架中的 Objective-C 类具备的某些功能是 CoreFoundation 框架中的 C语言数据结构不具备的
+- __bridge 含义为ARC具备该对象的所有权，__bridge_retained表示ARC交出该对象的所有权， 通过__bridge告诉ARC如何处理转换涉及的Objective-C对象
+- Foundation 框架中的 Objective-C 类具备的某些功能是 CoreFoundation 框架中的 C语言数据结构不具备的
 
-    ## 第五十条
+## 第五十条
 
-    - NSCache 在系统资源耗尽时能够自动删减缓存，采用LRU策略
-    - NSCache并不会直接拷贝键，而是保留键
-    - NSCache是线程安全的，多个线程可以同时访问NSCache
-    - NSCache可以设置针对对象个数以及总成本的上限
+- NSCache 在系统资源耗尽时能够自动删减缓存，采用LRU策略
+- NSCache并不会直接拷贝键，而是保留键
+- NSCache是线程安全的，多个线程可以同时访问NSCache
+- NSCache可以设置针对对象个数以及总成本的上限
 
-    缓存的一般用法
+缓存的一般用法
 
    {% asset_img Untitled77.png %}
 
    {% asset_img Untitled78.png %}
 
-    加入 NSPurgeable 的缓存用法
+加入 NSPurgeable 的缓存用法
 
    {% asset_img Untitled79.png %}
 
    {% asset_img Untitled80.png %}
 
-    - 重复计算会带来性能开销的数据值得被放入缓存，从而提高应用程序的响应速度
-    - NSPurgeableData 与 NSCache 一起使用能够实现自动清除数据的功能
+- 重复计算会带来性能开销的数据值得被放入缓存，从而提高应用程序的响应速度
+- NSPurgeableData 与 NSCache 一起使用能够实现自动清除数据的功能
 
 ## 第五十一条
 
