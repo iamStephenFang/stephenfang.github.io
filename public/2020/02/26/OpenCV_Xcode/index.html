@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://stephefang.me').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="下学期选了数字图像处理课程，接下来的OpenCV学习过程我会从零开始记录，第零课是开发环境的配置。 由于笔者使用的是Mac，相较于C++，笔者的Python功底不是很扎实，所以使用Xcode与C++实践OpenCV项目。在网络上搜寻了许多关于OpenCV与 Xcode 开发环境的配置资料均不是很完善,于是决定自己写一篇，希望对 Mac 用户有所帮助。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Mac上配置OpenCV与Xcode开发环境">
+<meta property="og:url" content="https://stephefang.me/2020/02/26/OpenCV_Xcode/index.html">
+<meta property="og:site_name" content="StephenFang">
+<meta property="og:description" content="下学期选了数字图像处理课程，接下来的OpenCV学习过程我会从零开始记录，第零课是开发环境的配置。 由于笔者使用的是Mac，相较于C++，笔者的Python功底不是很扎实，所以使用Xcode与C++实践OpenCV项目。在网络上搜寻了许多关于OpenCV与 Xcode 开发环境的配置资料均不是很完善,于是决定自己写一篇，希望对 Mac 用户有所帮助。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-26T08:20:20.000Z">
+<meta property="article:modified_time" content="2020-07-12T09:20:01.148Z">
+<meta property="article:author" content="Stephen Fang">
+<meta property="article:tag" content="Apple">
+<meta property="article:tag" content="Xcode">
+<meta property="article:tag" content="OpenCV">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://stephefang.me/2020/02/26/OpenCV_Xcode/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<script>
+  ((w, d) => {
+    'use strict';
+      const userScheme = localStorage.getItem('Scheme');
+      if (!userScheme) return;
+    d.documentElement.className += ' darkScheme';
+  })(window, document);
+</script>
+
+  <title>在Mac上配置OpenCV与Xcode开发环境 | StephenFang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="StephenFang" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StephenFang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/iamstephenfang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stephefang.me/2020/02/26/OpenCV_Xcode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.png">
+      <meta itemprop="name" content="Stephen Fang">
+      <meta itemprop="description" content="StephenFang's GitHub Page">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StephenFang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在Mac上配置OpenCV与Xcode开发环境
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-26 16:20:20" itemprop="dateCreated datePublished" datetime="2020-02-26T16:20:20+08:00">2020-02-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-12 17:20:01" itemprop="dateModified" datetime="2020-07-12T17:20:01+08:00">2020-07-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/02/26/OpenCV_Xcode/" class="post-meta-item leancloud_visitors" data-flag-title="在Mac上配置OpenCV与Xcode开发环境" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/02/26/OpenCV_Xcode/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/26/OpenCV_Xcode/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>下学期选了数字图像处理课程，接下来的<code>OpenCV</code>学习过程我会从零开始记录，第零课是开发环境的配置。</p>
+<p>由于笔者使用的是Mac，相较于<code>C++</code>，笔者的<code>Python</code>功底不是很扎实，所以使用Xcode与<code>C++</code>实践<code>OpenCV</code>项目。在网络上搜寻了许多关于<code>OpenCV</code>与 Xcode 开发环境的配置资料均不是很完善,于是决定自己写一篇，希望对 Mac 用户有所帮助。</p>
+<a id="more"></a>
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="1-安装-Xcode"><a href="#1-安装-Xcode" class="headerlink" title="1.安装 Xcode"></a>1.安装 Xcode</h3>
+
+<p>从 App Store 安装 Xcode。目前 Xcode（11.3）的安装后大小约为19 GB，因此可能需要近半小时的下载与安装时间，具体取决于互联网速度与设备运行速度。</p>
+<h3 id="2-安装-Homebrew"><a href="#2-安装-Homebrew" class="headerlink" title="2.安装 Homebrew"></a>2.安装 Homebrew</h3><p><a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 是 Mac 上必备的包管理工具，诸多优点不复赘述。<br>如果你还没有安装过 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> ，只需打开任意终端并粘贴以下代码并回车即可完成安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install)&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-安装-OpenCV"><a href="#3-安装-OpenCV" class="headerlink" title="3.安装 OpenCV"></a>3.安装 OpenCV</h3><p>完成 Homebrew 的安装后， 即可使用<code>brew</code>命令完成<code>OpenCV</code>的安装部署。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install opencv</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-安装-pkg-config"><a href="#4-安装-pkg-config" class="headerlink" title="4.安装 pkg-config"></a>4.安装 pkg-config</h3><p><code>pkg-config</code>是在编译应用程序和库时使用的辅助工具，可以帮助我们找到找到正确的OpenCV 链接器符号 (Linker Flags) ，在后续的步骤中会用到。<br>你需要使用如下命令完成对<code>pkg-config</code>的安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install pkg-config</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-使用-pkg-config"><a href="#5-使用-pkg-config" class="headerlink" title="5.使用 pkg-config"></a>5.使用 pkg-config</h3><p>查看您的<code>opencv.pc</code>文件所在位置，一般<code>opencv.pc</code>文件所在位置为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;opencv&#x2F;&lt;版本号&gt;&#x2F;lib&#x2F;pkgconfig&#x2F;opencv.pc</span><br></pre></td></tr></table></figure>
+
+<p>如我安装的最新版本<code>OpenCV</code>的相关<code>opencv.pc</code>文件在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;opencv&#x2F;4.2.0_1&#x2F;lib&#x2F;pkgconfig&#x2F;opencv.pc</span><br></pre></td></tr></table></figure>
+
+<p>使用下面的命令查看<code>OpenCV</code>的链接器符号 (Linker Flags) ，请务必修改其中的版本信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg-config --cflags --libs &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;opencv&#x2F;&lt;版本号&gt;&#x2F;lib&#x2F;pkgconfig&#x2F;opencv.pc</span><br></pre></td></tr></table></figure>
+
+<p>你会得到类似于如下的输出结果，我们需要参照输出结果在 Xcode 中进行配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-I&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;opencv&#x2F;4.2.0_1&#x2F;include&#x2F;opencv4&#x2F;opencv -I&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;opencv&#x2F;4.2.0_1&#x2F;include&#x2F;opencv4 -L&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;opencv&#x2F;4.2.0_1&#x2F;lib -lopencv_gapi -lopencv_stitching -lopencv_aruco -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_dnn_objdetect -lopencv_dnn_superres -lopencv_dpm -lopencv_highgui -lopencv_face -lopencv_freetype -lopencv_fuzzy -lopencv_hfs -lopencv_img_hash -lopencv_line_descriptor -lopencv_quality -lopencv_reg -lopencv_rgbd -lopencv_saliency -lopencv_sfm -lopencv_stereo -lopencv_structured_light -lopencv_phase_unwrapping -lopencv_superres -lopencv_optflow -lopencv_surface_matching -lopencv_tracking -lopencv_datasets -lopencv_text -lopencv_dnn -lopencv_plot -lopencv_videostab -lopencv_videoio -lopencv_xfeatures2d -lopencv_shape -lopencv_ml -lopencv_ximgproc -lopencv_video -lopencv_xobjdetect -lopencv_objdetect -lopencv_calib3d -lopencv_imgcodecs -lopencv_features2d -lopencv_flann -lopencv_xphoto -lopencv_photo -lopencv_imgproc -lopencv_core</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-Xcode"><a href="#配置-Xcode" class="headerlink" title="配置 Xcode"></a>配置 Xcode</h2><h3 id="6-创建-Xcode-项目"><a href="#6-创建-Xcode-项目" class="headerlink" title="6.创建 Xcode 项目"></a>6.创建 Xcode 项目</h3><p>在正式运行 OpenCV C++代码之前，首先需要在 Xcode 中创建一个空的<code>C++</code>项目。具体创建过程不在这里叙述。</p>
+
+
+<p>需要注意的是项目的 <em>Language</em> 应选择为 C++。</p>
+<h3 id="7-设置-Header-Search-Paths"><a href="#7-设置-Header-Search-Paths" class="headerlink" title="7.设置 Header Search Paths"></a>7.设置 Header Search Paths</h3>
+
+<p>在 Xcode 中设置 <em>Header Search Paths<em>，先单击 Xco​​de 项目，然后点击 *Build Settings</em>，然后搜索“Header Search Paths”。将 *Header Search Paths</em> 路径设置为刚才得到的输出结果“-I”之后的路径，如我需要对如下路径进行添加。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;opencv&#x2F;4.2.0_1&#x2F;include&#x2F;opencv4&#x2F;opencv </span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;opencv&#x2F;4.2.0_1&#x2F;include&#x2F;opencv4</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-设置-Library-Search-Paths"><a href="#8-设置-Library-Search-Paths" class="headerlink" title="8.设置 Library Search Paths"></a>8.设置 Library Search Paths</h3>
+
+<p>类似地，在 <em>Build Settings</em> 中搜索“Library Search Paths”，将 <em>Library Search Paths</em> 路径设置为刚才得到的输出结果“-L”之后的路径，如我需要对如下路径进行添加。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;opencv&#x2F;4.2.0_1&#x2F;lib</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-设置-Other-Linker-Flags"><a href="#9-设置-Other-Linker-Flags" class="headerlink" title="9.设置 Other Linker Flags"></a>9.设置 Other Linker Flags</h3>
+
+<p>同样，在 <em>Build Settings</em> 中搜索“Other Linker Flags”，将 <em>Other Linker Flags</em> 路径设置为刚才得到的输出结果中的其他内容，即 Linker Flags，我需要对如下 Linker Flags 进行添加。（无需手动输入，只需单击输入框粘贴相关内容）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-lopencv_gapi -lopencv_stitching -lopencv_aruco -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_dnn_objdetect -lopencv_dnn_superres -lopencv_dpm -lopencv_highgui -lopencv_face -lopencv_freetype -lopencv_fuzzy -lopencv_hfs -lopencv_img_hash -lopencv_line_descriptor -lopencv_quality -lopencv_reg -lopencv_rgbd -lopencv_saliency -lopencv_sfm -lopencv_stereo -lopencv_structured_light -lopencv_phase_unwrapping -lopencv_superres -lopencv_optflow -lopencv_surface_matching -lopencv_tracking -lopencv_datasets -lopencv_text -lopencv_dnn -lopencv_plot -lopencv_videostab -lopencv_videoio -lopencv_xfeatures2d -lopencv_shape -lopencv_ml -lopencv_ximgproc -lopencv_video -lopencv_xobjdetect -lopencv_objdetect -lopencv_calib3d -lopencv_imgcodecs -lopencv_features2d -lopencv_flann -lopencv_xphoto -lopencv_photo -lopencv_imgproc -lopencv_core</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-测试运行"><a href="#9-测试运行" class="headerlink" title="9.测试运行"></a>9.测试运行</h3><p>配置到这一步 Xcode 相关内容已经结束。可以尝试运行简单的<code>OpenCV</code>程序判断是否能够正常运行，以下给出简单的示例程序，功能仅为打开图片与退出。</p>
+<p>你需要按照后文中“使用相对路径”方法配置相对路径并添加图片<code>test.jpeg</code>到项目文件夹。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Mat image= imread(<span class="string">"test.jpeg"</span>);<span class="comment">// 读取图片</span></span><br><span class="line">    <span class="keyword">if</span>(!image.data)             <span class="comment">// 检查非法输入</span></span><br><span class="line">      &#123;</span><br><span class="line">          <span class="built_in">cout</span> &lt;&lt;  <span class="string">"无法读取照片"</span> &lt;&lt; <span class="built_in">endl</span> ;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    namedWindow(<span class="string">"Display window"</span>,WINDOW_AUTOSIZE);   <span class="comment">// 创建图片显示自动调整大小的窗口</span></span><br><span class="line">    imshow(<span class="string">"img"</span>,image);    <span class="comment">// 在窗口显示图片</span></span><br><span class="line">    </span><br><span class="line">    waitKey(<span class="number">0</span>); <span class="comment">// 按键等待，需要在窗口任意输入字符退出，0代表永久等待</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>若运行过程出现问题请检查上述步骤是否正确，后文中给出了部分问题的解决方案，可能对您有帮助。</p>
+<h2 id="其他设置"><a href="#其他设置" class="headerlink" title="其他设置"></a>其他设置</h2><h3 id="使用相对路径"><a href="#使用相对路径" class="headerlink" title="使用相对路径"></a>使用相对路径</h3>
+
+<p>Xcode使用图像或资源的绝对路径。为了设置相对路径需要设置<em>Working Directory</em>。依次点击 <code>菜单栏Product &gt; Scheme &gt; Edit Scheme</code> 中转到<em>Run</em>中的<em>check Use Custom Working Directory</em>选项，然后自定义项目目录。</p>
+<h2 id="可能出现的错误"><a href="#可能出现的错误" class="headerlink" title="可能出现的错误"></a>可能出现的错误</h2><h3 id="出现-“Not-a-Doxygen-trailing-comment”-错误"><a href="#出现-“Not-a-Doxygen-trailing-comment”-错误" class="headerlink" title="出现 “Not a Doxygen trailing comment” 错误"></a>出现 “Not a Doxygen trailing comment” 错误</h3>
+
+<p>在 <em>Build Settings</em> 中搜索 “Documentation Comments”，将 <em>Documentation Comments</em> 设置为”No”即可解决该问题。<code>Doxygen</code> 只是一种格式可以选择跳过检查。</p>
+<h3 id="出现-“dyld-Library-not-loaded…”-错误"><a href="#出现-“dyld-Library-not-loaded…”-错误" class="headerlink" title="出现 “dyld: Library not loaded…” 错误"></a>出现 “dyld: Library not loaded…” 错误</h3>
+
+<p>在 <em>Signing &amp; Capabilities</em> 中打开<em>Disable Library Validation</em>，即可解决该问题。问题的原因是<code>brew</code>安装的<code>OpenCV</code>存在签名问题，暂且可以先认可没有被签名的 Library。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://medium.com/@jaskaranvirdi/setting-up-opencv-and-c-development-environment-in-xcode-b6027728003" target="_blank" rel="noopener">Setting up OpenCV and C++ development environment in Xcode for Computer Vision projects</a></p>
+<p><a href="https://github.com/opencv/opencv/issues/15645#issuecomment-554495051" target="_blank" rel="noopener">Xcode in macox 10.15 beta library code signature problem</a></p>
+<p><a href="https://stackoverflow.com/questions/39929199/not-a-doxygen-trailing-comment" target="_blank" rel="noopener">Not a Doxygen trailing comment</a></p>
+<p><a href="https://docs.opencv.org/2.4/doc/tutorials/introduction/display_image/display_image.html" target="_blank" rel="noopener">Load and Display an Image</a></p>
+
+    </div>
+
+    
+    
+    
+
+     <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/02/26/OpenCV_Xcode/">在Mac上配置OpenCV与Xcode开发环境</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问  的个人博客"></a></p>
+  <p><span>发布时间:</span>2020年02月26日 - 16:20</p>
+  <p><span>最后更新:</span>2020年07月12日 - 17:20</p>
+  <p><span>原始链接:</span><a href="/2020/02/26/OpenCV_Xcode/" title="在Mac上配置OpenCV与Xcode开发环境">https://stephefang.me/2020/02/26/OpenCV_Xcode/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://stephefang.me/2020/02/26/OpenCV_Xcode/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      
+     </div>
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://twitter.com/username">
+                <span class="icon">
+                  <i class="fa fa-twitter"></i>
+                </span>
+
+                <span class="label">Twitter</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://t.me/joinchat/AAAAAFdtyKy69-Dr_ai7RQ">
+                <span class="icon">
+                  <i class="fa fa-telegram"></i>
+                </span>
+
+                <span class="label">Telegram</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/images/wechat_account.jpg">
+                <span class="icon">
+                  <i class="fa fa-wechat"></i>
+                </span>
+
+                <span class="label">Wechat</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Apple/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/Xcode/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/OpenCV/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/26/Action_Experiment/" rel="prev" title="控制器组件 Action 实验">
+      <i class="fa fa-chevron-left"></i> 控制器组件 Action 实验
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/16/OpenCV_Grayscale/" rel="next" title="OpenCV 图像直方图与均衡化">
+      OpenCV 图像直方图与均衡化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85-Xcode"><span class="nav-number">1.1.</span> <span class="nav-text">1.安装 Xcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85-Homebrew"><span class="nav-number">1.2.</span> <span class="nav-text">2.安装 Homebrew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85-OpenCV"><span class="nav-number">1.3.</span> <span class="nav-text">3.安装 OpenCV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%89%E8%A3%85-pkg-config"><span class="nav-number">1.4.</span> <span class="nav-text">4.安装 pkg-config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E4%BD%BF%E7%94%A8-pkg-config"><span class="nav-number">1.5.</span> <span class="nav-text">5.使用 pkg-config</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Xcode"><span class="nav-number">2.</span> <span class="nav-text">配置 Xcode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%88%9B%E5%BB%BA-Xcode-%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.1.</span> <span class="nav-text">6.创建 Xcode 项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E8%AE%BE%E7%BD%AE-Header-Search-Paths"><span class="nav-number">2.2.</span> <span class="nav-text">7.设置 Header Search Paths</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E8%AE%BE%E7%BD%AE-Library-Search-Paths"><span class="nav-number">2.3.</span> <span class="nav-text">8.设置 Library Search Paths</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E8%AE%BE%E7%BD%AE-Other-Linker-Flags"><span class="nav-number">2.4.</span> <span class="nav-text">9.设置 Other Linker Flags</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E6%B5%8B%E8%AF%95%E8%BF%90%E8%A1%8C"><span class="nav-number">2.5.</span> <span class="nav-text">9.测试运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">其他设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">3.1.</span> <span class="nav-text">使用相对路径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%94%99%E8%AF%AF"><span class="nav-number">4.</span> <span class="nav-text">可能出现的错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BA%E7%8E%B0-%E2%80%9CNot-a-Doxygen-trailing-comment%E2%80%9D-%E9%94%99%E8%AF%AF"><span class="nav-number">4.1.</span> <span class="nav-text">出现 “Not a Doxygen trailing comment” 错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BA%E7%8E%B0-%E2%80%9Cdyld-Library-not-loaded%E2%80%A6%E2%80%9D-%E9%94%99%E8%AF%AF"><span class="nav-number">4.2.</span> <span class="nav-text">出现 “dyld: Library not loaded…” 错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stephen Fang"
+      src="/images/favicon.png">
+  <p class="site-author-name" itemprop="name">Stephen Fang</p>
+  <div class="site-description" itemprop="description">StephenFang's GitHub Page</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamstephenfang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fangxuanmiao@gmail.com" title="E-Mail → mailto:fangxuanmiao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/iamstephenfang" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/fangxuanmiao" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;fangxuanmiao" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/iamstephenfang" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+  </div>
+
+
+<div class="night-mode motion-element">
+  <a role="button" class="night-btn">
+    <i class="fa fa-lightbulb-o"></i>
+    Night Mode
+  </a>
+</div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stephen Fang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> 构建
+  <span id="busuanzi_container_site_uv">| 本站访客数:<span id="busuanzi_value_site_uv"></span>
+   <span class="post-count">| 博客全站共58.2k字</span>
+</span>
+  </div>
+  <span class="post-meta-divider"></span>
+  <div class="theme-info">
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+  ((w, d) => {
+    'use strict';
+      let userScheme = localStorage.getItem('Scheme');
+      if (userScheme) d.documentElement.className += ' darkScheme';
+      const btn = d.querySelector('.night-btn');
+      w.addEventListener('keydown', e => {
+        if (e.altKey && e.code === 'KeyX') btn.click();
+      });
+      btn.addEventListener('click', () => {
+        d.documentElement.classList.toggle('darkScheme');
+        if ( d.documentElement.classList.contains('darkScheme') ) {
+          localStorage.setItem('Scheme', 'Dark');
+          return;
+        }
+        localStorage.removeItem('Scheme');
+      });
+  })(window, document);
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'QnhiKXiUBCNtXH1MOoOB9EuB-MdYXbMMI',
+      appKey: '1oyNoEMdzuJrPz8c97G4vQQ0',
+      placeholder: "请留下您的见解.",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+
+var infoEle = document.querySelector("#valine-comments > div.info");
+if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+  infoEle.childNodes.forEach(function(item) {
+    item.parentNode.removeChild(item);
+  });
+}
+</script>
+
+</body>
+</html>

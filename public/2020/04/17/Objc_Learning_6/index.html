@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://stephefang.me').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="最近开始学习 Objective-C 夯实基础，在此处总结可以方便本人更好地整理学习内容，此文为本系列的第六篇文章，主要复习了 Objective-C Foundation 框架中关于数组排序、字典对象以及集合对象的内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective-C 学习笔记(六）">
+<meta property="og:url" content="https://stephefang.me/2020/04/17/Objc_Learning_6/index.html">
+<meta property="og:site_name" content="StephenFang">
+<meta property="og:description" content="最近开始学习 Objective-C 夯实基础，在此处总结可以方便本人更好地整理学习内容，此文为本系列的第六篇文章，主要复习了 Objective-C Foundation 框架中关于数组排序、字典对象以及集合对象的内容。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-17T09:43:20.000Z">
+<meta property="article:modified_time" content="2020-04-17T10:10:04.356Z">
+<meta property="article:author" content="Stephen Fang">
+<meta property="article:tag" content="Xcode">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="Objective-C">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://stephefang.me/2020/04/17/Objc_Learning_6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<script>
+  ((w, d) => {
+    'use strict';
+      const userScheme = localStorage.getItem('Scheme');
+      if (!userScheme) return;
+    d.documentElement.className += ' darkScheme';
+  })(window, document);
+</script>
+
+  <title>Objective-C 学习笔记(六） | StephenFang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="StephenFang" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StephenFang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/iamstephenfang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stephefang.me/2020/04/17/Objc_Learning_6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.png">
+      <meta itemprop="name" content="Stephen Fang">
+      <meta itemprop="description" content="StephenFang's GitHub Page">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StephenFang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Objective-C 学习笔记(六）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-17 17:43:20 / 修改时间：18:10:04" itemprop="dateCreated datePublished" datetime="2020-04-17T17:43:20+08:00">2020-04-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/17/Objc_Learning_6/" class="post-meta-item leancloud_visitors" data-flag-title="Objective-C 学习笔记(六）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/17/Objc_Learning_6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/17/Objc_Learning_6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近开始学习 <code>Objective-C</code> 夯实基础，在此处总结可以方便本人更好地整理学习内容，此文为本系列的第六篇文章，主要复习了 <code>Objective-C</code> Foundation 框架中关于数组排序、字典对象以及集合对象的内容。</p>
+<a id="more"></a>
+
+<h3 id="关于数组排序"><a href="#关于数组排序" class="headerlink" title="关于数组排序"></a>关于数组排序</h3><h4 id="简单排序示例"><a href="#简单排序示例" class="headerlink" title="简单排序示例"></a>简单排序示例</h4><p><code>Objective-C</code> 中对于 NSArray 排序方法主要有以下几种。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sortedArrayUsingSelector:</span><br><span class="line">sortedArrayUsingComparator:</span><br><span class="line">sortedArrayUsingDescriptors:</span><br></pre></td></tr></table></figure>
+<p>给出前两者排序的简单示例，如果只是对字符串简单做排序，sortedArrayUsingSelector:方法已足够，sortedArrayUsingComparator: 中用到了block内容。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])&#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSArray</span> *array = [<span class="built_in">NSArray</span> arrayWithObjects:<span class="string">@"abc"</span>,<span class="string">@"456"</span>,<span class="string">@"123"</span>,<span class="string">@"789"</span>,<span class="string">@"ef"</span>, <span class="literal">nil</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//sortedArrayUsingSelector</span></span><br><span class="line">        <span class="built_in">NSArray</span> *sortedArray1 = [array sortedArrayUsingSelector:<span class="keyword">@selector</span>(compare:)];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"SortedArray1:"</span>);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,sortedArray1);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//sortedArrayUsingComparator:</span></span><br><span class="line">        <span class="built_in">NSArray</span> *sortedArray2 = [array sortedArrayUsingComparator:^<span class="built_in">NSComparisonResult</span>(<span class="keyword">id</span> obj1, <span class="keyword">id</span> obj2) &#123;</span><br><span class="line">             <span class="built_in">NSComparisonResult</span> result = [obj1 compare:obj2];</span><br><span class="line">             <span class="keyword">return</span> result;</span><br><span class="line">         &#125;];</span><br><span class="line">         <span class="built_in">NSLog</span>(<span class="string">@"SortedArray2:"</span>);</span><br><span class="line">         <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,sortedArray2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用区块排序"><a href="#使用区块排序" class="headerlink" title="使用区块排序"></a>使用区块排序</h4><p>NSArray和NSMutableArray类中具有使用区块对数组中元素进行排序的方法。<br>NSArray的排序方法一般格式为: </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSArray</span> *) sortedArrayUsingComparator: (<span class="built_in">NSComparator</span>) block</span><br></pre></td></tr></table></figure>
+<p>NSMutableArray的排序方法格式为: </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>) sortUsingComparator: (<span class="built_in">NSComparator</span>) block</span><br></pre></td></tr></table></figure>
+<p>NSComparator作为typedef定义在系统头文件中:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NSComparisonResult</span> (^<span class="built_in">NSComparator</span>) (<span class="keyword">id</span> obj1, <span class="keyword">id</span> obj2);</span><br></pre></td></tr></table></figure>
+
+<p>NSComparator是一个区块，使用两个待比较对象作为参数，并返回 NSComparisonResult 类型的值。预期会返回一个标识，说明第一个对象是否小于、等于或者大于第二个对象，这一点与不使用区块的数组排序方法是一致的。区块对于大数组排序能够提升一些速度，可以考虑在程序中使用。</p>
+<h4 id="关于描述器排序"><a href="#关于描述器排序" class="headerlink" title="关于描述器排序"></a>关于描述器排序</h4><p>给出使用描述器排序的一个代码样例。<br>代码中定义了三种车与五个人，并将车与人的信息载入数组，通过构建排序描述器，将排序描述器按照一定顺序放入数组，最后能够按照你所期望的顺序对信息进行输出，因为代码中重写了description，故能够按照格式进行输出。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.m</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Car.h"</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Person.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])&#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">            Car *car1 = [Car initWithName:<span class="string">@"Audio"</span>];</span><br><span class="line">            Car *car2 = [Car initWithName:<span class="string">@"Rolls-Royce"</span>];</span><br><span class="line">            Car *car3 = [Car initWithName:<span class="string">@"BMW"</span>];</span><br><span class="line">            </span><br><span class="line">            Person *p1 = [Person personWithAge:<span class="number">23</span> withName:<span class="string">@"zhangsan"</span> withCar:car2];</span><br><span class="line">            Person *p2 = [Person personWithAge:<span class="number">21</span> withName:<span class="string">@"zhangsan"</span> withCar:car1];</span><br><span class="line">            Person *p3 = [Person personWithAge:<span class="number">24</span> withName:<span class="string">@"lisi"</span> withCar:car1];</span><br><span class="line">            Person *p4 = [Person personWithAge:<span class="number">23</span> withName:<span class="string">@"wangwu"</span> withCar:car3];</span><br><span class="line">            Person *p5 = [Person personWithAge:<span class="number">23</span> withName:<span class="string">@"wangwu"</span> withCar:car2];</span><br><span class="line"></span><br><span class="line">            <span class="built_in">NSArray</span> *array = [<span class="built_in">NSArray</span> arrayWithObjects:p1,p2,p3,p4,p5, <span class="literal">nil</span>];</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">NSSortDescriptor</span> *carNameDesc = [<span class="built_in">NSSortDescriptor</span> sortDescriptorWithKey:<span class="string">@"car.name"</span> ascending:<span class="literal">YES</span>];</span><br><span class="line">            <span class="built_in">NSSortDescriptor</span> *personNameDesc = [<span class="built_in">NSSortDescriptor</span> sortDescriptorWithKey:<span class="string">@"name"</span> ascending:<span class="literal">YES</span>];</span><br><span class="line">            <span class="built_in">NSSortDescriptor</span> *personAgeDesc = [<span class="built_in">NSSortDescriptor</span> sortDescriptorWithKey:<span class="string">@"age"</span> ascending:<span class="literal">YES</span>];</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">NSArray</span> *descriptorArray = [<span class="built_in">NSArray</span> arrayWithObjects:personAgeDesc,carNameDesc,personNameDesc, <span class="literal">nil</span>];</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">NSArray</span> *sortedArray = [array sortedArrayUsingDescriptors: descriptorArray];</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,sortedArray);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Car.h</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Car</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span> *name;</span><br><span class="line">+(Car *)initWithName:(<span class="built_in">NSString</span> *)name;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Person.h</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Car.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="built_in">NSString</span> *name;</span><br><span class="line">    Car *car;</span><br><span class="line">&#125;</span><br><span class="line">+(Person *)personWithAge:(<span class="keyword">int</span>)age withName:(<span class="built_in">NSString</span> *)name withCar:(Car *)car;</span><br><span class="line">-(<span class="built_in">NSString</span> *)description;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Car.m</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Car.h"</span></span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Car</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@synthesize</span> name = _name;</span><br><span class="line"></span><br><span class="line">+(Car *)initWithName:(<span class="built_in">NSString</span> *)name&#123;</span><br><span class="line">    Car *car = [[Car alloc] init];</span><br><span class="line">    car.name = name;</span><br><span class="line">    <span class="keyword">return</span> car;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Person.m</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Person.h"</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"Car.h"</span></span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Person</span></span></span><br><span class="line"></span><br><span class="line">+(Person *)personWithAge:(<span class="keyword">int</span>)age withName:(<span class="built_in">NSString</span> *)name withCar:(Car *)car&#123;</span><br><span class="line">    Person *person = [[Person alloc] init];</span><br><span class="line">    person-&gt;age = age;</span><br><span class="line">    person-&gt;name = name;</span><br><span class="line">    person-&gt;car = car;</span><br><span class="line">    <span class="keyword">return</span> person;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="built_in">NSString</span> *)description&#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"age is %i , name is %@, car is %@"</span>,age,name,car.name];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2020-04-17 17:04:05.775056+0800 DemoProgram[55124:1325210] (</span><br><span class="line">    &quot;age is 21 , name is zhangsan, car is Audio&quot;,</span><br><span class="line">    &quot;age is 23 , name is wangwu, car is BMW&quot;,</span><br><span class="line">    &quot;age is 23 , name is wangwu, car is Rolls-Royce&quot;,</span><br><span class="line">    &quot;age is 23 , name is zhangsan, car is Rolls-Royce&quot;,</span><br><span class="line">    &quot;age is 24 , name is lisi, car is Audio&quot;</span><br><span class="line">)</span><br><span class="line">Program ended with exit code: 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="关于字典对象"><a href="#关于字典对象" class="headerlink" title="关于字典对象"></a>关于字典对象</h3><p>词典 (dictionary) 是由键——对象对组成的数据集合。通过对象的键可以从<code>Objective-C</code>词典中获取需要的对象。词典中的键必须是单值的，通常它们是字符串，但也可以是其他对象类型。和键关联的值可以是任何对象类型，但不能是nil。词典可以是固定的，也可以是可变的。可变词典中的记录可以动态添加和删除。可以使用键检索词典，也可以枚举它们的内容。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])&#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSMutableDictionary</span> *dict = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line">        dict[<span class="string">@"key1"</span>] = <span class="string">@"This is key 1"</span>;</span><br><span class="line">        dict[<span class="string">@"key2"</span>] = <span class="string">@"This is key 2"</span>;</span><br><span class="line">        dict[<span class="string">@"key3"</span>] = <span class="string">@"This is key 3"</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Key note for Key 1: %@"</span>,dict[<span class="string">@"key1"</span>]);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Key note for Key 2: %@"</span>,dict[<span class="string">@"key2"</span>]);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Key note for Key 3: %@"</span>,dict[<span class="string">@"key3"</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])&#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSMutableDictionary</span> *dict = [<span class="built_in">NSMutableDictionary</span> dictionary];</span><br><span class="line">        [dict setObject:<span class="string">@"This is key 1"</span> forKey:<span class="string">@"key1"</span>];</span><br><span class="line">        [dict setObject:<span class="string">@"This is key 1"</span> forKey:<span class="string">@"key2"</span>];</span><br><span class="line">        [dict setObject:<span class="string">@"This is key 3"</span> forKey:<span class="string">@"key3"</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Key note for Key 1: %@"</span>,[dict objectForKey:<span class="string">@"key1"</span>]);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Key note for Key 2: %@"</span>,[dict objectForKey:<span class="string">@"key2"</span>]);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Key note for Key 3: %@"</span>,[dict objectForKey:<span class="string">@"key3"</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是若Key存在重复则会出现无法显示某一重复Key问题.<br>创建词典后可以利用循环语句枚举词典的内容。<br>键从词典中依次检索,没有特定顺序。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])&#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSDictionary</span> *dict = [<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</span><br><span class="line">                                     <span class="string">@"This is key 1"</span>,<span class="string">@"key1"</span>,</span><br><span class="line">                                     <span class="string">@"This is key 2"</span>,<span class="string">@"key2"</span>,</span><br><span class="line">                                     <span class="string">@"This is key 3"</span>,<span class="string">@"key3"</span>,</span><br><span class="line">                              <span class="literal">nil</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">NSDictionary</span> *dictItem <span class="keyword">in</span> dict ) &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%@:%@"</span>,dictItem,[dict objectForKey:dictItem]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="关于集合对象"><a href="#关于集合对象" class="headerlink" title="关于集合对象"></a>关于集合对象</h3><p>Set是一组单值对象集合，可以是可变的，也可以是不变的。Set的操作包括搜索、添加、删除集合中的成员(仅用于可变集合)，比较两个集合，计算两个集合的交集和并集等，这些操作在示例程序中得以体现。</p>
+<p>需要注意的是 NSCountedSet，该Set中同一对象可以出现多次，然而在 NSCountedSet 中并非存放了多个对象，而是维护一个次数计数。第一次将对象添加到集合中时，对象的 count 值被置为1,然后每次将该对象添加到集合中 count 值就会增1, 相应地，每次从集合删除对象，count 值就会减1。当对象的 count 值为零时，实际上对象本身就被删除了。</p>
+<p>示例程序对 NSSet、 NSMutableSet、NSCountedSet 和 NSIndexSet进行了演示。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSSet</span> (<span class="title">Printing</span>)</span></span><br><span class="line">-(<span class="keyword">void</span>) print;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSSet</span> (<span class="title">Printing</span>)</span></span><br><span class="line">- (<span class="keyword">void</span>) print &#123;</span><br><span class="line">    printf(<span class="string">"&#123;"</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSNumber</span> *element <span class="keyword">in</span> <span class="keyword">self</span>)</span><br><span class="line">        printf(<span class="string">"%li"</span>,(<span class="keyword">long</span>)[element integerValue]);</span><br><span class="line">    printf(<span class="string">"&#125;\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])&#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSMutableSet</span> *set1 = [<span class="built_in">NSMutableSet</span> setWithObjects:@<span class="number">1</span>, @<span class="number">3</span>, @<span class="number">5</span>,  @<span class="number">7</span>, <span class="literal">nil</span>];</span><br><span class="line">        <span class="built_in">NSSet</span> *set2 = [<span class="built_in">NSSet</span> setWithObjects:@<span class="number">2</span>, @<span class="number">4</span>, @<span class="number">6</span>, @<span class="number">8</span>, <span class="literal">nil</span>];</span><br><span class="line">        <span class="built_in">NSCountedSet</span> *set3 = [<span class="built_in">NSCountedSet</span> setWithObjects:@<span class="number">1</span>, @<span class="number">1</span>, @<span class="number">3</span>, @<span class="number">5</span>, <span class="literal">nil</span>];</span><br><span class="line"> </span><br><span class="line">        <span class="built_in">NSIndexSet</span> * indexSet1 = [[<span class="built_in">NSIndexSet</span> alloc] initWithIndexesInRange:<span class="built_in">NSMakeRange</span>(<span class="number">1</span>,<span class="number">3</span>)];</span><br><span class="line">        <span class="built_in">NSMutableIndexSet</span> *indexSet2 =[[<span class="built_in">NSMutableIndexSet</span> alloc] init];</span><br><span class="line">        [indexSet2 addIndex:<span class="number">0</span>];</span><br><span class="line">        [indexSet2 addIndex:<span class="number">3</span>];</span><br><span class="line">        [indexSet2 addIndex:<span class="number">5</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">long</span> index;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"IndexSet1:"</span>);</span><br><span class="line">        <span class="keyword">for</span> (index = [indexSet1 firstIndex];</span><br><span class="line">             index != <span class="built_in">NSNotFound</span>;</span><br><span class="line">             index = [indexSet1 indexGreaterThanIndex: index])  &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%lu"</span>,index);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"IndexSet2:"</span>);</span><br><span class="line">        <span class="keyword">for</span> (index = [indexSet2 firstIndex];</span><br><span class="line">             index != <span class="built_in">NSNotFound</span>;</span><br><span class="line">             index = [indexSet2 indexGreaterThanIndex: index])  &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%lu"</span>,index);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Set1:"</span>);</span><br><span class="line">        [set1 print];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Set2:"</span>);</span><br><span class="line">        [set2 print];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Set3:"</span>);</span><br><span class="line">        [set3 print];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>([set1 isEqualToSet: set2] == <span class="literal">YES</span>)</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"Set 1 equals set2"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"Set 1 is not equal to Set2"</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>([set1 containsObject: @<span class="number">1</span>])&#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"Set1 contains element 1"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"Set1 does not contains element 1"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"The count of 1 in Set3: %lu"</span>,(<span class="keyword">unsigned</span> <span class="keyword">long</span>)[set3 countForObject:@<span class="number">1</span>]);</span><br><span class="line">        [set1 addObject:@<span class="number">2</span>];</span><br><span class="line">        [set1 removeObject:@<span class="number">1</span>];</span><br><span class="line">        [set1 print];</span><br><span class="line">        [set1 intersectSet:set2];</span><br><span class="line">        [set1 print];</span><br><span class="line">        [set1 unionSet:set2];</span><br><span class="line">        [set1 print];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相应的运行结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">2020-04-17 11:40:23.646162+0800 DemoProgram[51926:1202542] IndexSet1:</span><br><span class="line">2020-04-17 11:40:23.646584+0800 DemoProgram[51926:1202542] 1</span><br><span class="line">2020-04-17 11:40:23.646627+0800 DemoProgram[51926:1202542] 2</span><br><span class="line">2020-04-17 11:40:23.646679+0800 DemoProgram[51926:1202542] 3</span><br><span class="line">2020-04-17 11:40:23.646733+0800 DemoProgram[51926:1202542] IndexSet2:</span><br><span class="line">2020-04-17 11:40:23.646762+0800 DemoProgram[51926:1202542] 0</span><br><span class="line">2020-04-17 11:40:23.646786+0800 DemoProgram[51926:1202542] 3</span><br><span class="line">2020-04-17 11:40:23.646808+0800 DemoProgram[51926:1202542] 5</span><br><span class="line">2020-04-17 11:40:23.646825+0800 DemoProgram[51926:1202542] Set1:</span><br><span class="line">&#123;7351&#125;</span><br><span class="line">2020-04-17 11:40:23.646871+0800 DemoProgram[51926:1202542] Set2:</span><br><span class="line">&#123;6284&#125;</span><br><span class="line">2020-04-17 11:40:23.646898+0800 DemoProgram[51926:1202542] Set3:</span><br><span class="line">&#123;315&#125;</span><br><span class="line">2020-04-17 11:40:23.646934+0800 DemoProgram[51926:1202542] Set 1 is not equal to Set2</span><br><span class="line">2020-04-17 11:40:23.646957+0800 DemoProgram[51926:1202542] Set1 contains element 1</span><br><span class="line">2020-04-17 11:40:23.646979+0800 DemoProgram[51926:1202542] The count of 1 in Set3: 2</span><br><span class="line">&#123;7325&#125;</span><br><span class="line">&#123;2&#125;</span><br><span class="line">&#123;6284&#125;</span><br><span class="line">Program ended with exit code: 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他总结"><a href="#其他总结" class="headerlink" title="其他总结"></a>其他总结</h3><p>根据写代码过程中遇到的一些问题查找的答案做一些阶段性总结。</p>
+<h4 id="实例变量的范围类型"><a href="#实例变量的范围类型" class="headerlink" title="实例变量的范围类型"></a>实例变量的范围类型</h4><p><strong>@private</strong><br>该类型的实例变量只有声明它的类能够访问它。<br><strong>@protected</strong><br>该类型的实例变量能被声明它的类和子类访问。<br>所有没有显式标识范围的实例变量默认为 @protected。<br><strong>@public</strong><br>该类型实例变量可以在任何地方被访问。<br><strong>@package</strong><br>在modern runtime下，@package 实例变量的范围在实现这个类的可执行文件镜像中是@public，但是在实现这个类的可执行文件镜像外部是 @private。<br>Objective-C 中的 @package 与 C 语言中变量和函数的 private_extern 类似，任何在实现类的镜像外的代码想使用这个实例变量都会引发link error错误。<br>@package 对于框架类的实例变量十分受用，在这种环境下使用 @private 可能太受限制，使用@protected 或者 @public 又过于开放。@package 类型的变量在 Framework 内部相当于 @protected，在 Framework 外部，相当于@private。</p>
+<h4 id="类方法与实例方法"><a href="#类方法与实例方法" class="headerlink" title="类方法与实例方法"></a>类方法与实例方法</h4><ul>
+<li>实例方法在类的具体实例的范围内执行，在调用一个实例方法前必须首先创建类的实例。需要在方法声明前加上“-”，表示实例（对象）方法 (动态方法)。</li>
+<li>类方法不需要创建实例，不依赖于对象，直接用类名调用，执行效率较高；当方法内部不需要使用成员变量时，就可以使用类方法。需要在方法生命前加上“-”，表示类方法 (静态方法)。</li>
+</ul>
+<h4 id="声明方式"><a href="#声明方式" class="headerlink" title="声明方式"></a>声明方式</h4><p>在网上查找资料时发现属性声明存在三种方式，通过查资料对三种方式进行总结</p>
+<ol>
+<li>直接在 @interface 中声明。该方法声明的成员变量只能在类内部使用，即不能通过类名. 点的方式访问变量，需要使用 -&gt; 的方式。</li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Test</span> : <span class="title">NSObject</span></span>&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *test;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 在<span class="class"><span class="keyword">@interface</span>中声明，然后再在@<span class="title">property</span>中声明。该方法为过时的声明变量方式，<span class="title">Xcode</span> 在早期 @<span class="title">systhesize</span> 没有自动合成属性器之前，需要手写 <span class="title">getter</span> 与 <span class="title">setter</span> 方法。在<span class="title">Xcode</span>有自动合成属性器后，编译器会自动生成一个以下划线开头的的实例变量，所以不必同时声明属性与变量。即可以直接用 @<span class="title">property</span> 声明一个成员属性，在 .<span class="title">m</span> 文件中无需使用 @<span class="title">systhesize</span>，<span class="title">Xcode</span> 会自动生成 <span class="title">getter</span> 与 <span class="title">setter</span>.</span></span><br><span class="line"></span><br><span class="line">```objc </span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Test</span> : <span class="title">NSObject</span></span>&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *_test;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *mystr;</span><br></pre></td></tr></table></figure>
+<p>同时在.m文件中插入</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@synthesize</span> mystr = _myStr;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>直接用@property声明。该方法声明的成员变量能够在类内部和外部使用，在类的内部可以通过下划线+变量名 或 self.变量名 的方式来访问变量。</li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Test</span> : <span class="title">NSObject</span></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *test;</span><br></pre></td></tr></table></figure>
+<p>同时在.m文件中插入</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@synthesize</span> test = _test;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="">Objective-C 程序设计 (第六版)</a><br><a target="_blank" rel="noopener" href="https://my.oschina.net/pengloo53/blog/173810">Objective C中数组排序几种情况的总结</a><br><a href="https://liuzhichao.com/p/1256.html" target="_blank" rel="noopener">Objective-C入门教程14：集合对象(NSSet,NSMutableSet,NSIndexSet)</a><br><a href="https://www.cnblogs.com/stevenwuzheng/p/4605232.html" target="_blank" rel="noopener">iOS中四种实例变量的范围类型</a><br><a href="https://blog.csdn.net/shenjie12345678/article/details/39052659" target="_blank" rel="noopener">OC声明变量在@interface括号中与使用@property的区别</a></p>
+
+    </div>
+
+    
+    
+    
+
+     <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/04/17/Objc_Learning_6/">Objective-C 学习笔记(六）</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问  的个人博客"></a></p>
+  <p><span>发布时间:</span>2020年04月17日 - 17:43</p>
+  <p><span>最后更新:</span>2020年04月17日 - 18:10</p>
+  <p><span>原始链接:</span><a href="/2020/04/17/Objc_Learning_6/" title="Objective-C 学习笔记(六）">https://stephefang.me/2020/04/17/Objc_Learning_6/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://stephefang.me/2020/04/17/Objc_Learning_6/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      
+     </div>
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://twitter.com/username">
+                <span class="icon">
+                  <i class="fa fa-twitter"></i>
+                </span>
+
+                <span class="label">Twitter</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://t.me/joinchat/AAAAAFdtyKy69-Dr_ai7RQ">
+                <span class="icon">
+                  <i class="fa fa-telegram"></i>
+                </span>
+
+                <span class="label">Telegram</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/images/wechat_account.jpg">
+                <span class="icon">
+                  <i class="fa fa-wechat"></i>
+                </span>
+
+                <span class="label">Wechat</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Xcode/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/Objective-C/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/13/Objc_Learning_5/" rel="prev" title="Objective-C 学习笔记(五）">
+      <i class="fa fa-chevron-left"></i> Objective-C 学习笔记(五）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/19/Objc_Learning_7/" rel="next" title="Objective-C 学习笔记(七）">
+      Objective-C 学习笔记(七） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">关于数组排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.1.</span> <span class="nav-text">简单排序示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%9D%97%E6%8E%92%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text">使用区块排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%8F%8F%E8%BF%B0%E5%99%A8%E6%8E%92%E5%BA%8F"><span class="nav-number">1.3.</span> <span class="nav-text">关于描述器排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%AD%97%E5%85%B8%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">关于字典对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E9%9B%86%E5%90%88%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">关于集合对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">其他总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F%E7%9A%84%E8%8C%83%E5%9B%B4%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">实例变量的范围类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E6%96%B9%E6%B3%95%E4%B8%8E%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">类方法与实例方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E6%96%B9%E5%BC%8F"><span class="nav-number">4.3.</span> <span class="nav-text">声明方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stephen Fang"
+      src="/images/favicon.png">
+  <p class="site-author-name" itemprop="name">Stephen Fang</p>
+  <div class="site-description" itemprop="description">StephenFang's GitHub Page</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamstephenfang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fangxuanmiao@gmail.com" title="E-Mail → mailto:fangxuanmiao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/iamstephenfang" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/fangxuanmiao" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;fangxuanmiao" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/iamstephenfang" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+  </div>
+
+
+<div class="night-mode motion-element">
+  <a role="button" class="night-btn">
+    <i class="fa fa-lightbulb-o"></i>
+    Night Mode
+  </a>
+</div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stephen Fang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> 构建
+  <span id="busuanzi_container_site_uv">| 本站访客数:<span id="busuanzi_value_site_uv"></span>
+   <span class="post-count">| 博客全站共58.2k字</span>
+</span>
+  </div>
+  <span class="post-meta-divider"></span>
+  <div class="theme-info">
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+  ((w, d) => {
+    'use strict';
+      let userScheme = localStorage.getItem('Scheme');
+      if (userScheme) d.documentElement.className += ' darkScheme';
+      const btn = d.querySelector('.night-btn');
+      w.addEventListener('keydown', e => {
+        if (e.altKey && e.code === 'KeyX') btn.click();
+      });
+      btn.addEventListener('click', () => {
+        d.documentElement.classList.toggle('darkScheme');
+        if ( d.documentElement.classList.contains('darkScheme') ) {
+          localStorage.setItem('Scheme', 'Dark');
+          return;
+        }
+        localStorage.removeItem('Scheme');
+      });
+  })(window, document);
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'QnhiKXiUBCNtXH1MOoOB9EuB-MdYXbMMI',
+      appKey: '1oyNoEMdzuJrPz8c97G4vQQ0',
+      placeholder: "请留下您的见解.",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+
+var infoEle = document.querySelector("#valine-comments > div.info");
+if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+  infoEle.childNodes.forEach(function(item) {
+    item.parentNode.removeChild(item);
+  });
+}
+</script>
+
+</body>
+</html>

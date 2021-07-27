@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://stephefang.me').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="本篇内容主要包含在 iOS 项目项目中添加 OpenCV 库、Objective-C++ 与 Swift 的结合使用，及桥接文件的添加等等，为 OpenCV 系列的第四篇文章。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 图像处理 App - OpenCV 与 Swift 开发">
+<meta property="og:url" content="https://stephefang.me/2020/07/01/Haze-Free/index.html">
+<meta property="og:site_name" content="StephenFang">
+<meta property="og:description" content="本篇内容主要包含在 iOS 项目项目中添加 OpenCV 库、Objective-C++ 与 Swift 的结合使用，及桥接文件的添加等等，为 OpenCV 系列的第四篇文章。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2015.18.30.png">
+<meta property="og:image" content="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2015.54.22.png">
+<meta property="og:image" content="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.40.11.png">
+<meta property="og:image" content="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.51.25.png">
+<meta property="og:image" content="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.56.25.png">
+<meta property="og:image" content="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.58.22.png">
+<meta property="og:image" content="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.44.23.png">
+<meta property="og:image" content="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.46.41.png">
+<meta property="og:image" content="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.51.50.png">
+<meta property="og:image" content="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.54.28.png">
+<meta property="article:published_time" content="2020-07-01T01:20:20.000Z">
+<meta property="article:modified_time" content="2020-07-12T09:32:08.120Z">
+<meta property="article:author" content="Stephen Fang">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="OpenCV">
+<meta property="article:tag" content="Swift">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2015.18.30.png">
+
+<link rel="canonical" href="https://stephefang.me/2020/07/01/Haze-Free/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<script>
+  ((w, d) => {
+    'use strict';
+      const userScheme = localStorage.getItem('Scheme');
+      if (!userScheme) return;
+    d.documentElement.className += ' darkScheme';
+  })(window, document);
+</script>
+
+  <title>iOS 图像处理 App - OpenCV 与 Swift 开发 | StephenFang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="StephenFang" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StephenFang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/iamstephenfang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stephefang.me/2020/07/01/Haze-Free/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.png">
+      <meta itemprop="name" content="Stephen Fang">
+      <meta itemprop="description" content="StephenFang's GitHub Page">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StephenFang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          iOS 图像处理 App - OpenCV 与 Swift 开发
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-01 09:20:20" itemprop="dateCreated datePublished" datetime="2020-07-01T09:20:20+08:00">2020-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-12 17:32:08" itemprop="dateModified" datetime="2020-07-12T17:32:08+08:00">2020-07-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/07/01/Haze-Free/" class="post-meta-item leancloud_visitors" data-flag-title="iOS 图像处理 App - OpenCV 与 Swift 开发" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/01/Haze-Free/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/01/Haze-Free/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本篇内容主要包含在 iOS 项目项目中添加 OpenCV 库、Objective-C++ 与 Swift 的结合使用，及桥接文件的添加等等，为 OpenCV 系列的第四篇文章。</p>
+<a id="more"></a>
+
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>本学期选修了 OpenCV 相关课程，最后课程设计为完成一个图像去雾功能的小程序。作为一个具备 iOS 相关基础的程序员，我没有选用老师推荐的 Qt 平台，而是选择在 iOS 平台上实现算法的应用。最终实现效果还不错，而其中去雾算法参考了何凯明博士的论文<a href="http://kaiminghe.com/publications/cvpr09.pdf" target="_blank" rel="noopener">Kaiming He. Single Image Haze Removal Using Dark Channel Prior</a>，不在本文的讨论范畴，本文主要对Objective-C++ 与 Swift 的结合开发做一个总结。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>Swift 5</li>
+<li>iOS 13.4</li>
+<li>Xcode 11.5</li>
+<li>OpenCV Framework 4.3.0</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>OpenCV Package 可以通过以下两种方式添加到 iOS 项目当中：</p>
+<ol>
+<li>使用 CocoaPods 添加<br>Profile 中添加 OpenCV：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">target &#39;Haze-Free&#39; do</span><br><span class="line">  use_frameworks!</span><br><span class="line">  pod &#39;OpenCV&#39;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>2.自行下载并添加<br>在官网下载相应版本的<a href="https://opencv.org/releases/" target="_blank" rel="noopener">iOS Pack</a>，解压后得到一个 opencv2.framework 库，创建项目并右键添加文件到项目。</p>
+<h2 id="桥接"><a href="#桥接" class="headerlink" title="桥接"></a>桥接</h2><p>OpenCV 框架由 C++ 进行编码，通过将 C++ 代码插入 Objective-C 就成为了 Objective-C++ 代码。但是 Swift 本身与 Objective-C / Objective-C++ 并不兼容，所以需要一个Bridging Header 将 OpenCV 的功能接口暴露给 Swift。<br>以下为简单的示意图。<br><img src="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2015.18.30.png" alt=""></p>
+<p>添加一个 Objective-C 文件到项目中将其命名为“OpenCvWrapper”，包含<code>OpenCvWrapper.h</code>与<code>OpenCvWrapper.m</code>两个文件，需要将文件扩展名“.m”改为“.mm”。如果自动弹出提示是否添加 Bridging-Header 文件选择添加；如果没有提示，则手动添加一个 Bridging-Header 文件，即添加一个头文件（Header file），重命名为“项目名-Bridging-Header.h”（本例中为：Haze-Free-Bridging-Header.h），部分项目结构图如下。<br><img src="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2015.54.22.png" alt=""></p>
+<h2 id="业务逻辑"><a href="#业务逻辑" class="headerlink" title="业务逻辑"></a>业务逻辑</h2><p>如果你对 C++ 和 Objective-C 有一定了解，那完全能够理解以下的步骤。<br>其中 Bridging-Header 对 Objective-C++ 类及方法进行定义，而 OpenCVWrapper 主要面向具体定义的类及方法实现。<br>假设我需要对图片进行灰度化处理，需要调用的 OpenCV 函数为</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cvtColor(source, target, COLOR_BGR2GRAY);</span><br></pre></td></tr></table></figure>
+<p>我尝试在<code>OpenCvWrapper.h</code>中声明实现的方法。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+(UIImage *) makeGary: (UIImage *) <span class="built_in">image</span>;</span><br></pre></td></tr></table></figure>
+<p>显然 Swift 无法接受 Mat 类型的数据，若需要对图像进行处理并在 View 中显示，需要的是ImageView 获取到 image，换言之，我们需要进行 UIImage 与 Mat 之间的类型转换，而 OpenCV iOS 框架中就做了这样的事情。所以我们的<code>OpenCvWrapper.mm</code>看起来会是这样。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;opencv2/imgcodecs/ios.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"OpenCvWrapper.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"></span><br><span class="line">@implementation OpenCvWrapper</span><br><span class="line"></span><br><span class="line">+(UIImage *) makeGary: (UIImage *) <span class="built_in">image</span></span><br><span class="line">&#123;</span><br><span class="line">    Mat source,target;</span><br><span class="line">    UIImageToMat(<span class="built_in">image</span>,source);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(source.channels() == <span class="number">1</span>) <span class="keyword">return</span> <span class="built_in">image</span>;</span><br><span class="line">    cvtColor(source, target, COLOR_BGR2GRAY);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> MatToUIImage(target);</span><br><span class="line">&#125;</span><br><span class="line">@<span class="built_in">end</span></span><br></pre></td></tr></table></figure>
+<p>接下来需要做的事情就轻车熟路了，只需要通过<code>OpenCvWrapper.makeGary(image)</code>方法即可返回一个经过处理的 UIImage 对象。</p>
+<h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><p>我给予了 Haze-Free 图像处理App三种图像处理功能，分别是去雾、灰度化与中值滤波，考虑到处理图像本身需要一定的等待时间，我添加了 UIActivityIndicatorView 并放置了一个无法交互的 UIView 在需要的时候出现，同时 GCD 也可以加以运用，以下为部分改进后的代码。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">private</span> <span class="keyword">let</span> queue = <span class="type">DispatchQueue</span>(label: <span class="string">"process-queue"</span>, qos: .userInitiated)</span><br><span class="line"> </span><br><span class="line"> <span class="class"><span class="keyword">enum</span> <span class="title">ProcessType</span> </span>&#123;</span><br><span class="line">     <span class="keyword">case</span> toGrayScale, toHazeFree, toSoftFilter</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewWillAppear</span><span class="params">(<span class="number">_</span> animated: Bool)</span></span> &#123;</span><br><span class="line">     <span class="keyword">super</span>.viewWillAppear(<span class="literal">true</span>)</span><br><span class="line">     <span class="keyword">self</span>.loadingOverlayView.isHidden = <span class="literal">true</span></span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">toGrayScale</span><span class="params">(<span class="number">_</span> sender: <span class="keyword">Any</span>)</span></span> &#123;</span><br><span class="line">     processImage(withType: .toGrayScale)</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">toHazeFree</span><span class="params">(<span class="number">_</span> sender: <span class="keyword">Any</span>)</span></span> &#123;</span><br><span class="line">     processImage(withType: .toHazeFree)</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">toSoftFilter</span><span class="params">(<span class="number">_</span> sender: <span class="keyword">Any</span>)</span></span> &#123;</span><br><span class="line">     processImage(withType: .toSoftFilter)</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">processImage</span><span class="params">(withType type: ProcessType)</span></span> &#123;</span><br><span class="line">     <span class="keyword">self</span>.loadingOverlayView.isHidden = <span class="literal">false</span></span><br><span class="line">     <span class="keyword">let</span> image = <span class="keyword">self</span>.demoImageView.image!</span><br><span class="line">     queue.async &#123;</span><br><span class="line">         <span class="keyword">let</span> processed: <span class="type">UIImage</span></span><br><span class="line">         <span class="keyword">switch</span> type &#123;</span><br><span class="line">         <span class="keyword">case</span> .toHazeFree:</span><br><span class="line">             processed = <span class="type">OpenCvWrapper</span>.hazeFree(image)</span><br><span class="line">         <span class="keyword">case</span> .toSoftFilter:</span><br><span class="line">             processed = <span class="type">OpenCvWrapper</span>.softFilter(image)</span><br><span class="line">         <span class="keyword">case</span> .toGrayScale:</span><br><span class="line">             processed = <span class="type">OpenCvWrapper</span>.makeGary(image)</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">self</span>.processed = processed</span><br><span class="line">         <span class="type">DispatchQueue</span>.main.async &#123;</span><br><span class="line">             <span class="keyword">self</span>.performSegue(withIdentifier: <span class="string">"SavingPhoto"</span>, sender: <span class="literal">nil</span>)</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h2><p>在写 App 的过程中遇到了一个重大问题，去雾算法验证无误后始终无法得到正确的去雾图像，于是开始对去雾步骤中所有的阶段性图像打断点，一一验证得到的图像结果。最后根据StackOverFlow 上的解释以及断点结果查明了原因，原因出在 <code>UIImageToMat</code> 方法返回的Mat 类型上。<br><img src="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.40.11.png" alt=""><br><code>UIImageToMat</code> 方法返回的Mat类型为 <code>CV_8UC4</code>，而程序中需要的 Mat 格式为 <code>CV_8UC3</code>，需要使用<code>cvtColor()</code> 方法对其进行转换，改正后程序正常运行。<br>在使用 SFSymbols 时遇到了一些bug，UIButton的 image 使用 SFSymbol出现了无法显示Background 的问题，Debug View Hierarchy也看不出来名堂，最后只好换了自定义的icon。<br><img src="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.51.25.png" alt=""></p>
+<h2 id="App-总结"><a href="#App-总结" class="headerlink" title="App 总结"></a>App 总结</h2><h3 id="UI总结"><a href="#UI总结" class="headerlink" title="UI总结"></a>UI总结</h3><p>研究了iOS的设计原则后，针对该程序设计了以下页面，包含欢迎页面、权限获取页面、图像浏览页面、图像处理页面与图像分享页面，尽最大程度减少不同页面之间的耦合，使整体的页面逻辑更加清晰。<br><img src="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.56.25.png" alt=""><br>在对iOS开发框架进行实践后，为 App 增加了中值滤波和灰度转换的功能，同时嵌入了Unsplash 获取图像的SDK，使得程序不仅能够从相册、相机获取图像，还能够直接从 Unsplash 无版权图像网站通过关键字检索获取图像。同时新增了图像分享的入口。为了适应新的变化将页面进行了部分重组，使其更加符合开发需求。<br><img src="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.58.22.png" alt=""><br>未来可能会考虑将该项目进行开源，现阶段仍然希望其具备更多的功能，以下为软件的运行测试。</p>
+<h3 id="页面逻辑"><a href="#页面逻辑" class="headerlink" title="页面逻辑"></a>页面逻辑</h3><p><img src="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.44.23.png" alt=""></p>
+<ul>
+<li>开启App后进入引导页面，提示用户使用该App需遵守相关用户协议。</li>
+<li>点击开始处理后跳转至第二个页面，页面显示提示需要选择图像</li>
+<li>点击选择图像后，用户需要在三种图像获取图形中做出选择，或选择取消</li>
+</ul>
+<h3 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h3><p><img src="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.46.41.png" alt=""></p>
+<ul>
+<li>处理相册图片实例，点选最近拍摄的照片，程序在本视图中加载此图像</li>
+<li>点击三个处理按钮中的最右者，即中值滤波效果，视图会进行跳转</li>
+<li>新的视图包含了保存和分享图像的功能，若点击保存，程序会将图像写入相册并告知用户</li>
+</ul>
+<p><img src="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.51.50.png" alt=""></p>
+<ul>
+<li>尝试从相册加载一张新图像，可以看到图像中的树林被雾霾覆盖</li>
+<li>点击最左侧的去雾操作，由于去雾操作运算量较大，并且为了避免用户在运算过程中点按按钮，整个可操作区域不可点按，同时有活动指示环展示加载进度</li>
+<li>需要注意的是三个图像操作都采用了多线程的方式</li>
+<li>处理完成图像后可以点击分享按钮使用系统内建的分享服务进行图像的分享</li>
+</ul>
+<p><img src="http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2016.54.28.png" alt=""></p>
+<ul>
+<li>尝试从相机拍摄一张图像</li>
+<li>点击拍摄按钮后图像被获取，可以使用该图像进行处理</li>
+<li>在视图中加载图像后尝试点击中间的灰度化图像处理</li>
+<li>图像灰度化操作完成可以预览效果和保存、分享</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] Kaiming He. Single Image Haze Removal Using Dark Channel Prior [D]. 2009,CVPR<br>[2] Alexander Shishkov, Kirill Kornyakov. Instant OpenCV for iOS (English Edition) [M]. Packt Publishing, 2013<br>[3] Matthijs Hollemans. The iOS Apprentice [M]. Razeware LLC, 2014</p>
+
+    </div>
+
+    
+    
+    
+
+     <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/07/01/Haze-Free/">iOS 图像处理 App - OpenCV 与 Swift 开发</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问  的个人博客"></a></p>
+  <p><span>发布时间:</span>2020年07月01日 - 09:20</p>
+  <p><span>最后更新:</span>2020年07月12日 - 17:32</p>
+  <p><span>原始链接:</span><a href="/2020/07/01/Haze-Free/" title="iOS 图像处理 App - OpenCV 与 Swift 开发">https://stephefang.me/2020/07/01/Haze-Free/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://stephefang.me/2020/07/01/Haze-Free/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      
+     </div>
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://twitter.com/username">
+                <span class="icon">
+                  <i class="fa fa-twitter"></i>
+                </span>
+
+                <span class="label">Twitter</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://t.me/joinchat/AAAAAFdtyKy69-Dr_ai7RQ">
+                <span class="icon">
+                  <i class="fa fa-telegram"></i>
+                </span>
+
+                <span class="label">Telegram</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/images/wechat_account.jpg">
+                <span class="icon">
+                  <i class="fa fa-wechat"></i>
+                </span>
+
+                <span class="label">Wechat</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/OpenCV/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/07/Singleton_Pattern/" rel="prev" title="软件设计模式 - 单例模式">
+      <i class="fa fa-chevron-left"></i> 软件设计模式 - 单例模式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/05/Design_Thoughts/" rel="next" title="设计、摄影与编码的碎碎念">
+      设计、摄影与编码的碎碎念 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%A5%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">桥接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91"><span class="nav-number">5.</span> <span class="nav-text">业务逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B"><span class="nav-number">6.</span> <span class="nav-text">改进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF"><span class="nav-number">7.</span> <span class="nav-text">错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#App-%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">App 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UI%E6%80%BB%E7%BB%93"><span class="nav-number">8.1.</span> <span class="nav-text">UI总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E9%80%BB%E8%BE%91"><span class="nav-number">8.2.</span> <span class="nav-text">页面逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95"><span class="nav-number">8.3.</span> <span class="nav-text">运行测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stephen Fang"
+      src="/images/favicon.png">
+  <p class="site-author-name" itemprop="name">Stephen Fang</p>
+  <div class="site-description" itemprop="description">StephenFang's GitHub Page</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamstephenfang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fangxuanmiao@gmail.com" title="E-Mail → mailto:fangxuanmiao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/iamstephenfang" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/fangxuanmiao" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;fangxuanmiao" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/iamstephenfang" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+  </div>
+
+
+<div class="night-mode motion-element">
+  <a role="button" class="night-btn">
+    <i class="fa fa-lightbulb-o"></i>
+    Night Mode
+  </a>
+</div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stephen Fang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> 构建
+  <span id="busuanzi_container_site_uv">| 本站访客数:<span id="busuanzi_value_site_uv"></span>
+   <span class="post-count">| 博客全站共58.2k字</span>
+</span>
+  </div>
+  <span class="post-meta-divider"></span>
+  <div class="theme-info">
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+  ((w, d) => {
+    'use strict';
+      let userScheme = localStorage.getItem('Scheme');
+      if (userScheme) d.documentElement.className += ' darkScheme';
+      const btn = d.querySelector('.night-btn');
+      w.addEventListener('keydown', e => {
+        if (e.altKey && e.code === 'KeyX') btn.click();
+      });
+      btn.addEventListener('click', () => {
+        d.documentElement.classList.toggle('darkScheme');
+        if ( d.documentElement.classList.contains('darkScheme') ) {
+          localStorage.setItem('Scheme', 'Dark');
+          return;
+        }
+        localStorage.removeItem('Scheme');
+      });
+  })(window, document);
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'QnhiKXiUBCNtXH1MOoOB9EuB-MdYXbMMI',
+      appKey: '1oyNoEMdzuJrPz8c97G4vQQ0',
+      placeholder: "请留下您的见解.",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+
+var infoEle = document.querySelector("#valine-comments > div.info");
+if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+  infoEle.childNodes.forEach(function(item) {
+    item.parentNode.removeChild(item);
+  });
+}
+</script>
+
+</body>
+</html>

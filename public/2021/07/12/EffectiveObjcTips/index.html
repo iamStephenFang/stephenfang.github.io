@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://stephefang.me').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"always","padding":18,"offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="准备开始写 Objective-C 之前花了一些时间重新阅读这本经典的《Effective Objective-C》，在阅读的过程中对重点内容进行了一些摘录，在方便自己复习的同时将相关内容在博客分享出来供参考。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective Objective-C 总结">
+<meta property="og:url" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/index.html">
+<meta property="og:site_name" content="StephenFang">
+<meta property="og:description" content="准备开始写 Objective-C 之前花了一些时间重新阅读这本经典的《Effective Objective-C》，在阅读的过程中对重点内容进行了一些摘录，在方便自己复习的同时将相关内容在博客分享出来供参考。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled1.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled2.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled3.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled4.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled5.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled6.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled7.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled8.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled9.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled10.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled11.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled12.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled13.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled14.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled15.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled16.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled17.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled18.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled19.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled20.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled21.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled22.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled23.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled24.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled25.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled26.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled27.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled28.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled29.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled30.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled31.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled32.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled33.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled34.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled35.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled36.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled37.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled38.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled39.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled40.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled41.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled42.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled43.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled44.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled45.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled46.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled47.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled48.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled49.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled50.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled51.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled52.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled53.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled54.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled55.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled56.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled57.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled58.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled59.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled60.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled61.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled62.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled63.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled64.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled65.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled66.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled67.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled68.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled69.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled70.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled71.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled72.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled73.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled74.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled75.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled76.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled77.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled78.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled79.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled80.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled81.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled82.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled83.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled84.png">
+<meta property="og:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled85.png">
+<meta property="article:published_time" content="2021-07-12T03:34:32.000Z">
+<meta property="article:modified_time" content="2021-07-26T08:44:20.385Z">
+<meta property="article:author" content="Stephen Fang">
+<meta property="article:tag" content="Xcode">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="Objective-C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://stephefang.me/2021/07/12/EffectiveObjcTips/Untitled.png">
+
+<link rel="canonical" href="https://stephefang.me/2021/07/12/EffectiveObjcTips/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+<script>
+  ((w, d) => {
+    'use strict';
+      const userScheme = localStorage.getItem('Scheme');
+      if (!userScheme) return;
+    d.documentElement.className += ' darkScheme';
+  })(window, document);
+</script>
+
+  <title>Effective Objective-C 总结 | StephenFang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="StephenFang" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">StephenFang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/iamstephenfang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stephefang.me/2021/07/12/EffectiveObjcTips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.png">
+      <meta itemprop="name" content="Stephen Fang">
+      <meta itemprop="description" content="StephenFang's GitHub Page">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StephenFang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Effective Objective-C 总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-12 11:34:32" itemprop="dateCreated datePublished" datetime="2021-07-12T11:34:32+08:00">2021-07-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-26 16:44:20" itemprop="dateModified" datetime="2021-07-26T16:44:20+08:00">2021-07-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index">
+                    <span itemprop="name">tech</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/07/12/EffectiveObjcTips/" class="post-meta-item leancloud_visitors" data-flag-title="Effective Objective-C 总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/07/12/EffectiveObjcTips/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/12/EffectiveObjcTips/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>准备开始写 Objective-C 之前花了一些时间重新阅读这本经典的《Effective Objective-C》，在阅读的过程中对重点内容进行了一些摘录，在方便自己复习的同时将相关内容在博客分享出来供参考。</p>
+<a id="more"></a>
+
+<h2 id="第一节"><a href="#第一节" class="headerlink" title="第一节"></a>第一节</h2><ul>
+<li>Objective-C 采用了动态绑定的消息结构，在运行时检查对象的类型，运行期环境决定了接受消息后需要执行的代码。</li>
+<li>Objective-C 对象所占内存分配在堆空间中，分配在堆空间中的内存必须直接管理。</li>
+<li>定义中不含*的变量分配在栈空间上，分配在栈的用于保存变量的内存会在栈帧弹出时自动清理。</li>
+<li>如果需要存储int、float、double、char等非对象类型推荐使用结构体。</li>
+</ul>
+<h2 id="第二节"><a href="#第二节" class="headerlink" title="第二节"></a>第二节</h2><ul>
+<li>在 .h 文件中使用@class 标识需要引入的类并且在 .m 文件中引入相关头文件，该种方式被称为向前声明，简单的说，将引入头文件的时机尽量向后可以减短编译的时间，并且能够解决互相引用问题。尽量不要引入头文件，降低类之间的耦合。</li>
+<li>有时无法使用向前声明，比如要声明某个类遵循一项协议。此时应尽量把“该类遵循某协议〞的这条声明移至“class-continuation 分类” 中。如果不行就把协议单独放在一个头文件中然后将其引人。</li>
+</ul>
+<h2 id="第三节"><a href="#第三节" class="headerlink" title="第三节"></a>第三节</h2><ul>
+<li>尽量使用字面量语法创建字符串、数值、数组、字典</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSNumber</span> *intNumber = @<span class="number">1</span>;</span><br><span class="line"><span class="built_in">NSNumber</span> *floatNumber = @<span class="number">1.1</span>f;</span><br><span class="line"><span class="built_in">NSNumber</span> *doubleNumber = @<span class="number">1.123456</span>;</span><br><span class="line"><span class="built_in">NSNumber</span> *boolNumber = @YES;</span><br><span class="line"><span class="built_in">NSNumber</span> *charNumber = @<span class="string">'a'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> numberInt = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">float</span> numberFloat = <span class="number">1.23</span>f;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSArray</span> *animals = @[<span class="string">@"cat"</span>, <span class="string">@"dog"</span>, <span class="string">@"mouse"</span>];</span><br><span class="line"><span class="built_in">NSString</span> *dog = <span class="string">@"shiba"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSDictionary</span> *personData = @&#123;<span class="string">@"firstName"</span> : <span class="string">@"Stephen"</span>,</span><br><span class="line">														 <span class="string">@"lastName"</span> : <span class="string">@"Fang"</span>,</span><br><span class="line">														 <span class="string">@"gender"</span> : <span class="string">@"male"</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>NSArray 的 arrayWithObjects 方法依次处理各个参数直到发现nil，而如果使用字面量的方法在创建时就会抛出异常终止程序执行，需要确保创建的数组与字典中不含有nil</li>
+<li>尽量使用取下标的方式来访问数组或字典中的元素</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *dog = animals[<span class="number">1</span>];</span><br><span class="line"><span class="built_in">NSString</span> *lastName = personData[<span class="string">@"lastName"</span>];</span><br></pre></td></tr></table></figure>
+
+<h2 id="第四节"><a href="#第四节" class="headerlink" title="第四节"></a>第四节</h2><ul>
+<li>#define预处理指令声明全局变量尽量少用，编译器只会执行查找和替换操作，不会产生重复定义的警告信息</li>
+<li>尽量使用 static const 声明的方式来完成变量的声明，static表示该变量在定义此变量的编译单元中可见，而static const不会创建符号，只是将变量替换为常量</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">NSTimeInterval</span> kAnimationDuration = <span class="number">0.3</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编译器看到extern关键字得知全局符号表中包含该符号无需查看该定义就允许只用该常量，该类常量只可以定义一次，命名最好使用与之相关的类名作为前缀</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// In the header file</span></span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> EOCStringConstant;</span><br><span class="line"></span><br><span class="line"><span class="comment">// In the implementation file </span></span><br><span class="line"><span class="built_in">NSString</span> *<span class="keyword">const</span> EOCStringConstant = <span class="string">@"DEMO"</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="第五节"><a href="#第五节" class="headerlink" title="第五节"></a>第五节</h2><ul>
+<li>保证枚举由底层数据类型实现，不采用编译器所选类型</li>
+<li>凡是需要以按位或操作来组合的枚举都应使用NS_OPTIONS定义，若枚举不需要相互组合应使用NS_ENUM来定义</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSUInteger</span>, STFFeedPageType) &#123;</span><br><span class="line">    STFFeedPageTypeNone = <span class="number">0</span>,             <span class="comment">// 未知</span></span><br><span class="line">    STFFeedPageTypeFollow = <span class="number">1</span>,           <span class="comment">// 关注页</span></span><br><span class="line">    STFFeedPageTypeRecommend = <span class="number">2</span>,        <span class="comment">// 推荐页</span></span><br><span class="line">    STFFeedPageTypeFeatured = <span class="number">3</span>,         <span class="comment">// 精选页</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_OPTIONS</span>(<span class="built_in">NSUInteger</span>, AgoraAudioSessionOperationRestriction) &#123;</span><br><span class="line">    <span class="comment">/** No restriction, the SDK has full control of the audio session operations. */</span></span><br><span class="line">    AgoraAudioSessionOperationRestrictionNone              = <span class="number">0</span>,</span><br><span class="line">    <span class="comment">/** The SDK does not change the audio session category. */</span></span><br><span class="line">    AgoraAudioSessionOperationRestrictionSetCategory       = <span class="number">1</span>,</span><br><span class="line">    <span class="comment">/** The SDK does not change any setting of the audio session (category, mode, categoryOptions). */</span></span><br><span class="line">    AgoraAudioSessionOperationRestrictionConfigureSession  = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,</span><br><span class="line">    <span class="comment">/** The SDK keeps the audio session active when leaving a channel. */</span></span><br><span class="line">    AgoraAudioSessionOperationRestrictionDeactivateSession = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,</span><br><span class="line">    <span class="comment">/** The SDK does not configure the audio session anymore. */</span></span><br><span class="line">    AgoraAudioSessionOperationRestrictionAll               = <span class="number">1</span> &lt;&lt; <span class="number">7</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>处理枚举类型的switch语句不要实现default分支</li>
+</ul>
+<h2 id="第六节"><a href="#第六节" class="headerlink" title="第六节"></a>第六节</h2><ul>
+<li>在iOS中一般不使用atomic，因为同步锁会带来较大的开销，且无法保证线程安全</li>
+<li>尽量使用@property语法定义对象封装的数据</li>
+<li>在设置属性对应的实例变量时需要遵从属性声明的语义</li>
+<li>针对CGFloat、NSInteger此类纯量类型采用assign声明即可</li>
+<li>copy类型用于保护NSString*类型的封装性，在ARC下直接访问一个声明为copy的属性并不会直接拷贝而是保留新值释放旧值</li>
+</ul>
+<h2 id="第七节"><a href="#第七节" class="headerlink" title="第七节"></a>第七节</h2><ul>
+<li>在对象内部尽量直接访问实例变量<ul>
+<li>速度更快且生成的代码会直接访问对象实例变量的那块内存</li>
+<li>不会调用“设置方法”</li>
+<li>不会触发KVO，但需要确定是否会产生问题</li>
+<li>通过给getter、setter设置断点可以进行监控和确定访问时机</li>
+</ul>
+</li>
+<li>在写入实例变量时可以通过属性写入，读取实例变量时直接访问，可以作为一种折中方案</li>
+<li>在初始化方法及dealloc方法中，应该直接通过实例变量读取数据，即_</li>
+<li>懒加载方式中必须使用getter的方式访问属性，如果在没有用getter的情况下直接访问实例变量会导致得到是尚未设置好的变量</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (STFComponent*)component &#123;</span><br><span class="line">		<span class="keyword">if</span> (!_component) &#123;</span><br><span class="line">					_component = [SFComponent new];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> _component;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="第八节"><a href="#第八节" class="headerlink" title="第八节"></a>第八节</h2><ul>
+<li>== 操作符对比的是两个指针本身并非所指对象</li>
+<li>NSString类实现了一个等同判断方法即isEqualToString，执行该方法的速度快于执行isEqual</li>
+<li>检测对象的等同性需要提供 isEqual 与 hash 方法，NSObject对于两个方法默认实现是仅当指针值完全相等才返回相等，需要针对具体的需求制定检测方案</li>
+<li>编写hash方法时需要使用计算速度快且哈希碰撞低的算法</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- （<span class="built_in">BOOL</span>）isEqual:(<span class="keyword">id</span>)object &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">self</span> == object) <span class="keyword">return</span> <span class="literal">YES</span>; <span class="comment">// 指向同一个对象必然相等</span></span><br><span class="line">		<span class="keyword">if</span> ([<span class="keyword">self</span> <span class="keyword">class</span>] != [object <span class="keyword">class</span>]) <span class="keyword">return</span> <span class="literal">NO</span>; <span class="comment">//不属于同一个类不相等</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// 检测每一个属性是否相等</span></span><br><span class="line">		STFPerson *someone = (STFPerson*) object;</span><br><span class="line">		<span class="keyword">if</span> (![_firstName isEqualToString:someone.firstName])</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">		<span class="keyword">if</span> (![_lastName isEqualToString:someone.lastName])</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">		<span class="keyword">if</span> (![_age != someone.age])</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"> - (<span class="built_in">NSUInteger</span>)hash &#123;</span><br><span class="line">		<span class="built_in">NSUInteger</span> firstNameHash = [_firstName hash]；</span><br><span class="line">		<span class="built_in">NSUInteger</span> lastNameHash = [_lastName hash]；</span><br><span class="line">		<span class="built_in">NSUInteger</span> ageHash = [_ageHash hash]；</span><br><span class="line">		<span class="keyword">return</span> firstNameHash ^ lastNameHash ^ ageHash；</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>NSArray有等同性判定方法”isEqualToArray:”，而NSDictionary有等同性判定方法”isEqualToDictionary:”， NSArray检测方式为首先核对两个数组包含对象的个数是否相等，若相等在每个对应位置调用”isEqual:”方法</li>
+<li>在编写判定方法时应一并覆写”isEqual:”方法，如果接收该消息的对象与受测参数来自一个类就调用自己编写的判定方法，负责交由超类判定</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-  (<span class="built_in">BOOL</span>)isEqual:(<span class="keyword">id</span>)object &#123;</span><br><span class="line">		<span class="keyword">if</span> ([<span class="keyword">self</span> <span class="keyword">class</span>] == [object <span class="keyword">class</span>]) </span><br><span class="line">				<span class="keyword">return</span> [<span class="keyword">self</span> isEqualToPerson:(STFPerson*)object];</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> [<span class="keyword">super</span> isEqual: object];</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="第九节"><a href="#第九节" class="headerlink" title="第九节"></a>第九节</h2><ul>
+<li>UIButton类使用者无需关系创建出来的按钮属于哪个子类也无需考虑按钮绘制方式等细节</li>
+<li>类族的使用需要遵循以下原则<ul>
+<li>子类应该继承自类族的抽象基类</li>
+<li>子类应该定义自己的数据存储方式</li>
+<li>子类应该覆写超类文档中需要覆写的方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="第十节"><a href="#第十节" class="headerlink" title="第十节"></a>第十节</h2><ul>
+<li>在其他做法不可行的条件下可以选用关联对象，因为这种做法同样会引入难以查找的bug（不建议使用）</li>
+</ul>
+<h2 id="第十一节"><a href="#第十一节" class="headerlink" title="第十一节"></a>第十一节</h2><ul>
+<li>在编译期就能决定运行时所需要调用的函数为静态绑定，而所需要调用的函数直到运行期才能确定为动态绑定</li>
+<li>runtime决定了对象收到消息后调用哪个方法，甚至在程序运行时可以改变。发送给对象的所有消息都由动态信息派发系统处理</li>
+<li>objc_msgSend函数根据receive和selector的类型调用适当的方法，通过查找每个类中的“表格”查找需要执行的方法并跳转至相应的实现</li>
+<li>尾调用优化在函数的最后一项是调用另一个函数时生效，编译器生成跳转至另一个函数所需的指令码</li>
+</ul>
+<h2 id="第十二节"><a href="#第十二节" class="headerlink" title="第十二节"></a>第十二节</h2><ul>
+<li><p>消息转发分为两个阶段</p>
+<ul>
+<li><p>第一阶段：动态方法解析</p>
+</li>
+<li><p>第二阶段：消息转发机制</p>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled.png" class="">
+</li>
+</ul>
+</li>
+<li><p>receiver在每一步都有机会处理消息且步骤越往后处理消息的代价越大</p>
+</li>
+<li><p>如果对象没有办法响应某个selector则进入消息转发流程,runtime的动态方法解析可以在需要某个方法时将其加入类中，对象可以将无法解析的selector转交给其他对象处理。这一步结束后若仍然无法处理selector则启动消息转发机制</p>
+</li>
+</ul>
+<h2 id="第十三节"><a href="#第十三节" class="headerlink" title="第十三节"></a>第十三节</h2><ul>
+<li>在runtime中可以向类中新增或替换selector对应的方法实现，但一般只用于调试</li>
+<li>method swizzling，即使用另一份实现替换原有的方法实现，可以用于向原有的实现中添加新功能</li>
+</ul>
+<h2 id="第十四节"><a href="#第十四节" class="headerlink" title="第十四节"></a>第十四节</h2><ul>
+<li>每个Objective-C对象实例都有指向Class对象的指针，每个对象结构体的首个成员是Class类的变量，该变量定义了对象所属的类，通常称为”is a”指针</li>
+<li>isMemberOfClass 判断对象是否为某个特定类的实例，isKindOfClass 判断对象是否是某类或派生类的实例</li>
+<li>动态类型特性可以用于从 collection 中获取对象（类型信息查询方法）</li>
+<li>假设名为SomeClass的子类继承自NSObject可以得到以下继承体系</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled1.png" class="">
+
+<h2 id="第十五节"><a href="#第十五节" class="headerlink" title="第十五节"></a>第十五节</h2><ul>
+<li>类名、分类名都应该加上相应的前缀，如果使用三方库编写自己的代码并分发尤其需要注意重复符号问题</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled2.png" class="">
+
+<h2 id="第十六节"><a href="#第十六节" class="headerlink" title="第十六节"></a>第十六节</h2><ul>
+<li>在类中实现一个designated initializer，尽量在文档中指明初始化需要调用该方法</li>
+<li>若designated initializer不同于超类则需覆写超类对应方法</li>
+<li>如果超类的初始化方法不适用于子类应覆写超类方法并抛出异常</li>
+</ul>
+<h2 id="第十七节"><a href="#第十七节" class="headerlink" title="第十七节"></a>第十七节</h2><ul>
+<li>实现description方法能够返回一个有意义的字符串来描述实例，需要打印出类的名字和指针地址因为有时候会用到</li>
+<li>使用NSDictionary来编写description方法使代码更容易维护</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled3.png" class="">
+
+<ul>
+<li>在调试时打印更为详尽的对象描述信息应实现debugDescription方法</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled4.png" class="">
+
+<h2 id="第十八节"><a href="#第十八节" class="headerlink" title="第十八节"></a>第十八节</h2><ul>
+<li>尽量创建不可变对象，把对外公开的属性设置为只读且在必要时对外公布属性</li>
+<li>某属性仅用于对象内部修改应将其从readonly改为readwrite属性</li>
+<li>可变的collection不应作为属性公开，而应提供相关方法修改可变的collection</li>
+</ul>
+<h2 id="第十九节"><a href="#第十九节" class="headerlink" title="第十九节"></a>第十九节</h2><p>如果从其他框架中继承子类务必遵循命名惯例，如从UIView中继承自定义子类则类名末尾词为View，若创建自定义委托协议末尾应跟上Delegate一词。</p>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled5.png" class="">
+
+<h2 id="第二十节"><a href="#第二十节" class="headerlink" title="第二十节"></a>第二十节</h2><ul>
+<li>适当给私有方法加上前缀可以很容易将其与公共方法进行区分</li>
+<li>不应使用一个下划线做私有方法的前缀，如 _resetViewController 方法已经被苹果实现</li>
+</ul>
+<h2 id="第二十一节"><a href="#第二十一节" class="headerlink" title="第二十一节"></a>第二十一节</h2><ul>
+<li>Objective-C对于异常采取的态度为：只有在极为罕见的情况下才抛出异常，并在异常抛出后无需考虑恢复问题，应用程序此时应该退出。异常应该运用于极其严重的问题</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled6.png" class="">
+
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)doSomething:(<span class="built_in">NSError</span>**) error</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">BOOL</span>)doSomething:(<span class="built_in">NSError</span>**) error &#123;</span><br><span class="line">	<span class="comment">// do something that may cause an error</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( <span class="comment">/* there was an error */</span> ) &#123;</span><br><span class="line">			<span class="keyword">if</span> (error) &#123;</span><br><span class="line">					*error = [<span class="built_in">NSErrorerrorwithDomain</span>:domain code:code userInfo:userInfo];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSError</span> *error = <span class="literal">nil</span>;</span><br><span class="line"><span class="built_in">BOOL</span> ret = [object doSomething: &amp;error];</span><br><span class="line"><span class="keyword">if</span> (ret) &#123;</span><br><span class="line">     <span class="comment">// handle error </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/07/12/EffectiveObjcTips/Untitled7.png" class="">
+
+<p>传递给方法的是个指针，指针本身指向另一个指向NSError对象的指针，或认为其为一个直接指向NSError对象的指针。在 ARC 中，指针所指向的对象会在方法执行完毕后自动释放。</p>
+<h2 id="第二十二节"><a href="#第二十二节" class="headerlink" title="第二十二节"></a>第二十二节</h2><ul>
+<li>使自己的类支持拷贝操作需要实现NSCopying协议，该协议只有一个方法且不必担心zone参数。覆写copy方法真正需要实现的是copyWithZone方法。</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span>*)zone</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span>*)zone &#123;</span><br><span class="line">		STFPerson *<span class="keyword">copy</span> = [[<span class="keyword">self</span> <span class="keyword">class</span>] allocWithZone:zone]initWithFirstName:_firstName andLastName:_lastName];</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">copy</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在可变对象上调用copy会返回一个不可变类的实例，可能会把NSMutableArray对象当作NSArray返回，为了安全起见使用copy和mutableCopy这两个方法复制对象</p>
+</li>
+<li><p>深拷贝与浅拷贝</p>
+<ul>
+<li><p>深拷贝：拷贝对象自身时一并拷贝其底层数据，需要新增一个专门执行深拷贝的方法</p>
+</li>
+<li><p>浅拷贝：只拷贝容器对象本身不拷贝其中数据；Foundation框架所有collection类执行拷贝的默认情况；实现copyWithZone方法</p>
+</li>
+<li><p>图解：</p>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled8.png" class="">
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第二十三节"><a href="#第二十三节" class="headerlink" title="第二十三节"></a>第二十三节</h2>   <img src="/2021/07/12/EffectiveObjcTips/Untitled9.png" class="">
+
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled10.png" class="">
+
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled11.png" class="">
+
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled12.png" class="">
+
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled13.png" class="">
+
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled14.png" class="">
+
+<p>存放委托对象的属性需要为weak（在对象销毁时自动清空）或unsafe_unretained（不需要自动清空）。</p>
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled15.png" class="">
+
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled16.png" class="">
+
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled17.png" class="">
+
+<ul>
+<li>某个对象从另一个对象获取数据可以使用委托模式，亦成为数据源模式，数据的流动如上图所示</li>
+<li>如果有必要可以实现有段位的结构体将委托对象是否能响应相关协议的信息缓存至其中</li>
+</ul>
+<h2 id="第二十四条"><a href="#第二十四条" class="headerlink" title="第二十四条"></a>第二十四条</h2><ul>
+<li><p>通过分类机制将代码划分为易于管理的小块</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled18.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled19.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled20.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled21.png" class="">
+</li>
+<li><p>可以创建名为Private的分类并将私有方法放在里面，这个分类的方法只在类和框架内部使用无需对外公布</p>
+</li>
+</ul>
+<h2 id="第二十五条"><a href="#第二十五条" class="headerlink" title="第二十五条"></a>第二十五条</h2><ul>
+<li><p>向第三方类中添加分类时给分类名与方法名加上前缀</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled22.png" class="">
+
+</li>
+</ul>
+<h2 id="第二十六条"><a href="#第二十六条" class="headerlink" title="第二十六条"></a>第二十六条</h2><ul>
+<li><p>在实现分类时所有属性都应该定义在主接口内，类所封装的所有数据都应该定义在主接口内</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled23.png" class="">
+
+</li>
+</ul>
+<h2 id="第二十七条"><a href="#第二十七条" class="headerlink" title="第二十七条"></a>第二十七条</h2><ul>
+<li><p>class-continuation 分类中可以定义方法和实例变量，如下方式中_anotherInstanceVariable 是隐藏的状态</p>
+  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">STFPerson</span>() </span>&#123;</span><br><span class="line">		<span class="built_in">NSString</span> *_anInstanceVariable;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Methods declaration</span></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">STFPerson</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> _anotherInstanceVariable;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Methods implementation </span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled24.png" class="">
+</li>
+<li><p>WebKit、CoreAnimation 底层大部分代码用C++编写，对外展示的为Objective-C接口</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled25.png" class="">
+</li>
+<li><p>上图方式可以随意调用setFirstName与setLastName方法与点语法设置属性，同时外界无法修改对象，完成了类型的拓展</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled26.png" class="">
+
+<ul>
+<li>不需要在公共接口中声明类遵从了私有协议，而应该改到 class-continuation 分类内进行声明</li>
+</ul>
+</li>
+</ul>
+<h2 id="第二十八条"><a href="#第二十八条" class="headerlink" title="第二十八条"></a>第二十八条</h2><ul>
+<li><p>协议可以在某种程度上提供匿名类型，具体的对象类型淡化成为遵从某个协议的id类型，协议离规定对象应该实现的方法。下图中与数据库连接相关的类名称就无法泄漏</p>
+  <img src="/2021/07/12/EffectiveObjcTips/Untitled27.png" class="">
+</li>
+<li><p>使用匿名对象实现类型名称的隐藏，需要注意的是对象需要能够响应定义在协议中的方法</p>
+</li>
+<li><p>下图中其中sectionInfo为匿名对象，把section数组中返回的内部状态对象视为遵从NSFetchedResultsSectionInfo的匿名对象，隐藏了相关实现细节。</p>
+  <img src="/2021/07/12/EffectiveObjcTips/Untitled28.png" class="">
+
+</li>
+</ul>
+<h2 id="第二十九条"><a href="#第二十九条" class="headerlink" title="第二十九条"></a>第二十九条</h2><ul>
+<li><p>对象创建完成后引用计数至少为1，如果需要保留该对象需要调用retain方法，如果不再需要该对象则调用release、autorelease方法，当引用计数归零时对象被回收</p>
+  <img src="/2021/07/12/EffectiveObjcTips/Untitled29.png" class="">
+</li>
+<li><p>为了避免使用无效对象一般在完成调用release之后清空指针，保证不会出现指向无效对象的指针</p>
+  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSNumber</span> *number = [[<span class="built_in">NSNumber</span> alloc]initWithInt: <span class="number">1234</span>];</span><br><span class="line">[array addObject: number];</span><br><span class="line">[number release];</span><br><span class="line">number = <span class="literal">nil</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="第三十条"><a href="#第三十条" class="headerlink" title="第三十条"></a>第三十条</h2><ul>
+<li>ARC会自动执行retain、release、autorelease等操作，不能直接对这些方法（还包括dealloc）进行调用</li>
+<li>ARC在调用这些方法并不通过Objective-C消息派发机制，而是直接调用底层C语言版本，能够带来更好的性能</li>
+<li>若方法名以以下的几个四个词语开头则表示返回的对象归调用者所有，反之返回的对象会自动释放<ul>
+<li>copy</li>
+<li>mutableCopy</li>
+<li>new</li>
+<li>alloc</li>
+</ul>
+</li>
+</ul>
+<h2 id="第三十一条"><a href="#第三十一条" class="headerlink" title="第三十一条"></a>第三十一条</h2>   <img src="/2021/07/12/EffectiveObjcTips/Untitled30.png" class="">
+
+<ul>
+<li>如果对象持有文件描述符等系统资源，应该专门写一个方法释放此类资源，用完使用close方法</li>
+<li>执行异步任务的方法和只能在正常状态下执行的方法不应在dealloc中调用</li>
+</ul>
+<h2 id="第三十二条"><a href="#第三十二条" class="headerlink" title="第三十二条"></a>第三十二条</h2><ul>
+<li><p>ARC不生成安全处理异常所需的清理代码，开启编译器标志后可以生成这种代码但是会导致应用程序变大，且会降低运行效率</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled31.png" class="">
+
+</li>
+</ul>
+<h2 id="第三十三条"><a href="#第三十三条" class="headerlink" title="第三十三条"></a>第三十三条</h2><ul>
+<li><p>当指向EOCClassA的实例引用移除后unsafe_unretained属性仍然指向已经回收的实例，而weak属性指向nil</p>
+  <img src="/2021/07/12/EffectiveObjcTips/Untitled32.png" class="">
+
+</li>
+</ul>
+<h2 id="第三十四条"><a href="#第三十四条" class="headerlink" title="第三十四条"></a>第三十四条</h2><p>系统会自动创建一些线程，如主线程或GCD机制中的线程都有自动释放池，这些线程都有autoreleasepool，每次执行event loop就会将其清空</p>
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled33.png" class="">
+
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled34.png" class="">
+
+<h2 id="第三十五条"><a href="#第三十五条" class="headerlink" title="第三十五条"></a>第三十五条</h2><ul>
+<li>系统在回收对象时可以将其转化为僵尸对象，通过环境变量NSZombieEnabled可以开启该功能，或在Xcode中开启</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled35.png" class="">
+
+<ul>
+<li>系统修改对象的isa指针指向特殊的僵尸类可以时该对象成为僵尸对鲜花，僵尸类能够响应所有的selector，在打印一条包含消息内容及接受者的消息后终止应用程序</li>
+</ul>
+<h2 id="第三十六条"><a href="#第三十六条" class="headerlink" title="第三十六条"></a>第三十六条</h2><p>在 ARC 下调用查询对象当前引用计数的方法会触发崩溃</p>
+<pre><code><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSUInteger</span>)retainCount</span><br></pre></td></tr></table></figure></code></pre><p>事实上该方法不应该调用，方法返回的retainCount是某个给定时间点上的数值，并未考虑系统会稍后清空自动释放池，无法反应对象生命期的全貌。</p>
+<h2 id="第三十七条"><a href="#第三十七条" class="headerlink" title="第三十七条"></a>第三十七条</h2><ul>
+<li><p>Block与定义它的函数共享同一个范围内的信息，块自有其相关类型，可以将块赋值给变量并使用它</p>
+  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> (^someBlock) () = ^ &#123;</span><br><span class="line">		<span class="comment">// Block implementation</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> other = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> (^addBlock) (<span class="keyword">int</span> a, <span class="keyword">int</span> b) = ^ (<span class="keyword">int</span> a, <span class="keyword">int</span> b) &#123;</span><br><span class="line">		<span class="keyword">return</span> other + a + b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> sum = addBlock(<span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>需要在Block内修改的变量需要加上 _block 修饰符，如果将块定义在Objective-C类的实例方法中，除了可以访问类的所有的实例变量外还可以使用self变量且无需添加_block。</li>
+<li>定义Block的时候分配的内存区域在栈上，即块只在定义的范围内有效，可以创建不会捕捉任何状态的全局块</li>
+</ul>
+</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled36.png" class="">
+
+<img src="/2021/07/12/EffectiveObjcTips/Untitled37.png" class="">
+
+<h2 id="第三十八条"><a href="#第三十八条" class="headerlink" title="第三十八条"></a>第三十八条</h2><img src="/2021/07/12/EffectiveObjcTips/Untitled38.png" class="">
+
+<ul>
+<li><p>以下展示了SDWebImage中Block的写法</p>
+  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^SDWebImageDownloaderProgressBlock)(<span class="built_in">NSUInteger</span> receivedSize, <span class="keyword">long</span> <span class="keyword">long</span> expectedSize);</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^SDWebImageDownloaderCompletedBlock)(<span class="built_in">UIImage</span> *image, <span class="built_in">NSData</span> *data, <span class="built_in">NSError</span> *error, <span class="built_in">BOOL</span> finished);</span><br><span class="line"></span><br><span class="line">****- (<span class="keyword">void</span>)setImageWithURL:(<span class="built_in">NSURL</span> *)url placeholderImage:(<span class="built_in">UIImage</span> *)placeholder options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletedBlock)completedBlock;</span><br><span class="line">- (<span class="keyword">id</span>&lt;SDWebImageOperation&gt;)downloadImageWithURL:(<span class="built_in">NSURL</span> *)url</span><br><span class="line">                                        options:(SDWebImageDownloaderOptions)options</span><br><span class="line">                                       progress:(SDWebImageDownloaderProgressBlock)progressBlock</span><br><span class="line">                                      completed:(SDWebImageDownloaderCompletedBlock)completedBlock;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>&lt;SDWebImageOperation&gt;)downloadImageWithURL:(<span class="built_in">NSURL</span> *)url</span><br><span class="line">                                timeOutInterval:(<span class="built_in">NSTimeInterval</span>)timeOutInterval</span><br><span class="line">                                        options:(SDWebImageDownloaderOptions)options</span><br><span class="line">                                       progress:(SDWebImageDownloaderProgressBlock)progressBlock</span><br><span class="line">                                      completed:(SDWebImageDownloaderCompletedBlock)completedBlock;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="第三十九条"><a href="#第三十九条" class="headerlink" title="第三十九条"></a>第三十九条</h2><ul>
+<li><p>简洁程度上Delegate与Block的对比</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled39.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled40.png" class="">
+</li>
+<li><p>处理多个请求时Delegate与Block的对比</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled41.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled42.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled43.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled44.png" class="">
+</li>
+<li><p>在处理请求时采用两个独立的处理Block（1/2）</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled45.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled46.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled47.png" class="">
+</li>
+<li><p>在处理请求时采用同一个处理Block，令Block更为灵活但更为冗长</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled48.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled49.png" class="">
+
+</li>
+</ul>
+<h2 id="第四十条"><a href="#第四十条" class="headerlink" title="第四十条"></a>第四十条</h2><p>大部分网络通信库写法</p>
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled50.png" class="">
+
+<p>为了使得在下载完成后通过以下方法执行调用者指定的Block，需要将completion handler保存至实例变量，一旦运行完completion handler之后没有必要对其进行保留，从而避免出现retain cycle</p>
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled51.png" class="">
+
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled52.png" class="">
+
+<h2 id="第四十一条"><a href="#第四十一条" class="headerlink" title="第四十一条"></a>第四十一条</h2><ul>
+<li><p>串行队列，将读取操作与写入操作安排到同个队列中保证数据同步，可以将设置方法由同步派发改为异步执派发</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled53.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled54.png" class="">
+
+<ul>
+<li><p>并发队列，读取与写入操作可以随时执行</p>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled55.png" class="">
+
+<p>创建栅栏使得barrier块单独执行不与其他Block并行，对并发队列有意义，因为串行Block按顺序逐个执行</p>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled56.png" class="">
+
+<img src="/2021/07/12/EffectiveObjcTips/Untitled57.png" class="">
+
+<img src="/2021/07/12/EffectiveObjcTips/Untitled58.png" class="">
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第四十二条"><a href="#第四十二条" class="headerlink" title="第四十二条"></a>第四十二条</h2><ul>
+<li><p>performSelector接受的参数类型为id，限定了传入参数必须是对象，不能是整数或者浮点数，并且最多只能接受两个参数</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled59.png" class="">
+</li>
+<li><p>延后执行某项任务，优先使用GCD的方式</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled60.png" class="">
+</li>
+<li><p>把任务放到主线程上执行，把任务封装至Block中用GCD相关方法更为合适</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled61.png" class="">
+</li>
+<li><p>performSelector在内存管理方面存在缺失，无法确定将执行的Selector具体是什么</p>
+</li>
+</ul>
+<h2 id="第四十三条"><a href="#第四十三条" class="headerlink" title="第四十三条"></a>第四十三条</h2><ul>
+<li><p>GCD是纯C的API，操作队列是Objective-C的对象</p>
+</li>
+<li><p>Block是轻量级的书籍结构而Operation是重量级的Objective-C对象</p>
+</li>
+<li><p>在执行后台任务时GCD并不一定是最佳方式</p>
+</li>
+<li><p>使用NSOperation与NSOperationQueue有以下好处，能够实现纯GCD具备的绝大部分功能</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled62.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled63.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled64.png" class="">
+</li>
+<li><p>NSNotificationCenter 的 addObserverForName: 方法接受的参数是块而不是Selector</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled65.png" class="">
+</li>
+<li><p>确定哪一种方法的最好方式是测试性能</p>
+<h2 id="第四十四条"><a href="#第四十四条" class="headerlink" title="第四十四条"></a>第四十四条</h2></li>
+<li><p>dispatch group 能够将任务分组，调用者可以等待这组任务执行完毕同时也可以在提供回调函数之后继续执行</p>
+</li>
+<li><p>如下函数是dispatch_async的变体</p>
+</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled66.png" class="">
+
+<ul>
+<li>如下函数用于等待 dispatch group 执行完毕，timeout 参数表示阻塞时间，若执行时间短于timeout返回0</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled67.png" class="">
+
+<ul>
+<li>如下函数中可以传入在特定线程上执行的Block</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled68.png" class="">
+
+<ul>
+<li>令数组每个对象都执行某个任务，并且等待每个任务都执行完毕可以使用如下GCD特性</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled69.png" class="">
+
+<ul>
+<li>若当前线程不阻塞可以使用notify函数取代wait</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled70.png" class="">
+
+<ul>
+<li>区分任务的优先级放置于不同的线程执行，同时将所有任务归于一个dispatch group，并且在执行完毕后获得通知（并发队列）</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled71.png" class="">
+
+<ul>
+<li>将任务提交到串行队列中并用dispatch group 跟踪执行情况</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled72.png" class="">
+
+<img src="/2021/07/12/EffectiveObjcTips/Untitled73.png" class="">
+
+<h2 id="第四十五条"><a href="#第四十五条" class="headerlink" title="第四十五条"></a>第四十五条</h2><ul>
+<li><p>常用的一种共享单例的方法</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled74.png" class="">
+</li>
+<li><p>使用GCD实现共享单例的方法</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled75.png" class="">
+</li>
+<li><p>使用 dispatch_once 能够简化代码并且彻底保证线程安全开发者无需关心加锁或同步，所有问题都由GCD在底层进行处理，static 作用域能够保证编译器在每次执行该方法时复用该变量而不是重复创建</p>
+</li>
+</ul>
+<h2 id="第四十六条"><a href="#第四十六条" class="headerlink" title="第四十六条"></a>第四十六条</h2><ul>
+<li>dispatch_get_current_queue 函数尽量不要使用</li>
+</ul>
+<h2 id="第四十七条"><a href="#第四十七条" class="headerlink" title="第四十七条"></a>第四十七条</h2><ul>
+<li><p>框架指一系列代码被封装为动态库，并且在其中放入描述接口的头文件，iOS平台的系统框架仍然采用了动态库</p>
+</li>
+<li><p>iOS应用程序不允许在其中包含动态库于是就出现了静态库</p>
+</li>
+<li><p>关于静态库与动态库的了解可以参考 <a href="https://juejin.cn/post/6844904031937101838" target="_blank" rel="noopener">细说iOS静态库和动态库</a></p>
+</li>
+<li><p>Cocoa 本身并不是框架而是集成了一批创建应用程序时需要用到的框架</p>
+</li>
+<li><p>Objective-C编程的一个重要特点是经常需要用到底层的C语言级API</p>
+</li>
+<li><p>CoreAnimation 使用Objective-C进行编写，而 CoreGraphics 框架采用C语言进行编写，两者均为 UI 框架之下的一等框架</p>
+</li>
+</ul>
+<h2 id="第四十八条"><a href="#第四十八条" class="headerlink" title="第四十八条"></a>第四十八条</h2><ul>
+<li><p>遍历方式</p>
+<ul>
+<li><p>for循环</p>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled76.png" class="">
+
+<p>字典与 set 均无顺序，无法根据下标访问数值。于是需要获取字典内所有键或 set 内所有对象，从而产生空间上的额外开销。然而执行反向遍历时 for 循环会更为方便。</p>
+</li>
+<li><p>NSEnumerator</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Dictionary</span></span><br><span class="line"><span class="built_in">NSDictionary</span> *dict = <span class="comment">/* ... */</span>;</span><br><span class="line"><span class="built_in">NSEnumerator</span> *enumerator = [dict keyEnumerator];</span><br><span class="line"><span class="keyword">id</span> key;</span><br><span class="line"><span class="keyword">while</span> ((key = [enumerator nextObject]) != <span class="literal">nil</span>) &#123;</span><br><span class="line">	<span class="keyword">id</span> value = dict[key];</span><br><span class="line">	<span class="comment">// do something here</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Set</span></span><br><span class="line"><span class="built_in">NSSet</span> *set = <span class="comment">/* ... */</span>;</span><br><span class="line"><span class="built_in">NSEnumerator</span> *enumerator = [set objectEnumerator];</span><br><span class="line"><span class="keyword">id</span> object;</span><br><span class="line"><span class="keyword">while</span> ((object = [enumerator nextObject]) != <span class="literal">nil</span>) &#123;</span><br><span class="line">	<span class="comment">// do something here</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Array</span></span><br><span class="line"><span class="built_in">NSArray</span> *array = <span class="comment">/* ... */</span>;</span><br><span class="line"><span class="built_in">NSEnumerator</span> *enumerator = [array reverseObjectEnumerator];</span><br><span class="line"><span class="keyword">id</span> object;</span><br><span class="line"><span class="keyword">while</span> ((object = [enumerator nextObject]) != <span class="literal">nil</span>) &#123;</span><br><span class="line">	<span class="comment">// do something here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于所有的collection都可以采用这套语法，在读法上更容易被理解</p>
+</li>
+<li><p>for in 快速遍历</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Dictionary</span></span><br><span class="line"><span class="built_in">NSDictionary</span> *dict = <span class="comment">/* ... */</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">id</span> key <span class="keyword">in</span> dict) &#123;</span><br><span class="line">	<span class="keyword">id</span> value = dict[key];</span><br><span class="line">	<span class="comment">// do something here</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Set</span></span><br><span class="line"><span class="built_in">NSSet</span> *set = <span class="comment">/* ... */</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">id</span> object <span class="keyword">in</span> set) &#123;</span><br><span class="line">	<span class="comment">// do something here</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Array</span></span><br><span class="line"><span class="built_in">NSArray</span> *array = <span class="comment">/* ... */</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">id</span> object <span class="keyword">in</span> array) &#123;</span><br><span class="line">	<span class="comment">// do something here</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">id</span> object <span class="keyword">in</span> [array reverseObjectEnumerator]) &#123;</span><br><span class="line">	<span class="comment">// do something here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>某个支持快速遍历的类的对象遵从 NSFastEnumeration 协议可以实现对象的迭代，而NSEnumerator 也实现了该协议，该遍历方法无法获取遍历操作针对的下标。</p>
+</li>
+<li><p>基于Block的遍历</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Dictionary</span></span><br><span class="line"><span class="built_in">NSDictionary</span> *dict = <span class="comment">/* ... */</span>;</span><br><span class="line">[array enumerateKeysAndObjectsUsingBlock:</span><br><span class="line">	^(<span class="keyword">id</span> key, <span class="keyword">id</span> object, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">		<span class="comment">// do something here</span></span><br><span class="line">			<span class="keyword">if</span> (shouldStopHere) &#123;</span><br><span class="line">				*stop = <span class="literal">YES</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Set</span></span><br><span class="line"><span class="built_in">NSSet</span> *set = <span class="comment">/* ... */</span>;</span><br><span class="line">[array enumerateObjectsUsingBlock:</span><br><span class="line">	^(<span class="keyword">id</span> object, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">		<span class="comment">// do something here</span></span><br><span class="line">			<span class="keyword">if</span> (shouldStopHere) &#123;</span><br><span class="line">				*stop = <span class="literal">YES</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Array</span></span><br><span class="line"><span class="built_in">NSArray</span> *array = <span class="comment">/* ... */</span>;</span><br><span class="line">[array enumerateObjectsUsingBlock:</span><br><span class="line">	^(<span class="keyword">id</span> object, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> *stop) &#123;</span><br><span class="line">		<span class="comment">// do something here</span></span><br><span class="line">			<span class="keyword">if</span> (shouldStopHere) &#123;</span><br><span class="line">				*stop = <span class="literal">YES</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+<p>使得遍历能够从Block中获取信息，并且可以在遍历数组获取数组的下标。</p>
+<p>NSEnumerationOptions 类型为enum，如果开启了NSEnumerationConcurrent 底层会使用GCD处理出发执行事宜，采用其他方法很难实现。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第四十九条"><a href="#第四十九条" class="headerlink" title="第四十九条"></a>第四十九条</h2><ul>
+<li><p>使用桥接技术可以实现定义在Foundation框架内的Objective-C类与CoreFoundation 框架中的 C 数据结构的相互转换</p>
+  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *anNSArray = @[@<span class="number">1</span>, @<span class="number">2</span>, @<span class="number">3</span>, @<span class="number">4</span>, @<span class="number">5</span>];</span><br><span class="line"><span class="built_in">CFArrayRef</span> *aCGArray = (__bridge <span class="built_in">CFArrayRef</span>)anNSArray;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"size of array = %li"</span>, <span class="built_in">CFArrayGetCount</span>(aCFArray)); </span><br><span class="line"></span><br><span class="line">gradientLayer.colors = @[(__bridge <span class="keyword">id</span>)[<span class="built_in">UIColor</span> ne_colorWithHexString:<span class="string">@"000000"</span> alpha:<span class="number">0.95</span>].CGColor,</span><br><span class="line">                                            (__bridge <span class="keyword">id</span>)[<span class="built_in">UIColor</span> ne_colorWithHexString:<span class="string">@"000000"</span> alpha:<span class="number">0.95</span>].CGColor,</span><br><span class="line">                                            (__bridge <span class="keyword">id</span>)[<span class="built_in">UIColor</span> ne_colorWithHexString:<span class="string">@"000000"</span> alpha:<span class="number">0.72</span>].CGColor,</span><br><span class="line">                                            (__bridge <span class="keyword">id</span>)[<span class="built_in">UIColor</span> ne_colorWithHexString:<span class="string">@"000000"</span> alpha:<span class="number">0.45</span>].CGColor,</span><br><span class="line">                                            (__bridge <span class="keyword">id</span>)[<span class="built_in">UIColor</span> ne_colorWithHexString:<span class="string">@"000000"</span> alpha:<span class="number">0.28</span>].CGColor,</span><br><span class="line">                                            ];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>bridge 含义为ARC具备该对象的所有权，</strong>bridge_retained表示ARC交出该对象的所有权， 通过__bridge告诉ARC如何处理转换涉及的Objective-C对象</p>
+</li>
+<li><p>Foundation 框架中的 Objective-C 类具备的某些功能是 CoreFoundation 框架中的 C语言数据结构不具备的</p>
+</li>
+</ul>
+<h2 id="第五十条"><a href="#第五十条" class="headerlink" title="第五十条"></a>第五十条</h2><ul>
+<li>NSCache 在系统资源耗尽时能够自动删减缓存，采用LRU策略</li>
+<li>NSCache并不会直接拷贝键，而是保留键</li>
+<li>NSCache是线程安全的，多个线程可以同时访问NSCache</li>
+<li>NSCache可以设置针对对象个数以及总成本的上限</li>
+</ul>
+<p>缓存的一般用法</p>
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled77.png" class="">
+
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled78.png" class="">
+
+<p>加入 NSPurgeable 的缓存用法</p>
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled79.png" class="">
+
+   <img src="/2021/07/12/EffectiveObjcTips/Untitled80.png" class="">
+
+<ul>
+<li>重复计算会带来性能开销的数据值得被放入缓存，从而提高应用程序的响应速度</li>
+<li>NSPurgeableData 与 NSCache 一起使用能够实现自动清除数据的功能</li>
+</ul>
+<h2 id="第五十一条"><a href="#第五十一条" class="headerlink" title="第五十一条"></a>第五十一条</h2><ul>
+<li>load 方法并不像普通的方法那样，她不遵从继承规则，如果某个类本身不实现load方法那么无论其各级超类是否实现此方法系统都不会调用</li>
+<li>load 与 initialize 方法务必精简实现，因为会产生阻塞从而使得应用程序无响应</li>
+<li>initialize 方法在程序首次用该类前调用一次，并且使用runtime进行调用，只应该用来设置内部数据而不应该调用其他方法</li>
+<li>如果某个类本身不实现 initialize 方法然而超类完成了就会调用超类的实现方法，如下图中初始化子类后由于该类未覆写该方法于是需要执行父类的实现代码，于是得到了通常的子类实现方法</li>
+</ul>
+<img src="/2021/07/12/EffectiveObjcTips/Untitled81.png" class="">
+
+<img src="/2021/07/12/EffectiveObjcTips/Untitled82.png" class="">
+
+<img src="/2021/07/12/EffectiveObjcTips/Untitled83.png" class="">
+
+<h2 id="第五十二条"><a href="#第五十二条" class="headerlink" title="第五十二条"></a>第五十二条</h2><ul>
+<li><p>NSTimer 对象会保留目标直到计时器失效，需要调用invalidate方法令其失效</p>
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled84.png" class="">
+
+ <img src="/2021/07/12/EffectiveObjcTips/Untitled85.png" class="">
+</li>
+<li><p>反复执行的计时器容易引入retain cycle，可以使用 Block 的方式打破，需要注意的是必须创建分类来加入相关实现代码</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+     <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2021/07/12/EffectiveObjcTips/">Effective Objective-C 总结</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问  的个人博客"></a></p>
+  <p><span>发布时间:</span>2021年07月12日 - 11:34</p>
+  <p><span>最后更新:</span>2021年07月26日 - 16:44</p>
+  <p><span>原始链接:</span><a href="/2021/07/12/EffectiveObjcTips/" title="Effective Objective-C 总结">https://stephefang.me/2021/07/12/EffectiveObjcTips/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://stephefang.me/2021/07/12/EffectiveObjcTips/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+      
+     </div>
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://twitter.com/username">
+                <span class="icon">
+                  <i class="fa fa-twitter"></i>
+                </span>
+
+                <span class="label">Twitter</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://t.me/joinchat/AAAAAFdtyKy69-Dr_ai7RQ">
+                <span class="icon">
+                  <i class="fa fa-telegram"></i>
+                </span>
+
+                <span class="label">Telegram</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/images/wechat_account.jpg">
+                <span class="icon">
+                  <i class="fa fa-wechat"></i>
+                </span>
+
+                <span class="label">Wechat</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Xcode/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/Objective-C/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/15/Muzik_Progress/" rel="prev" title="Muzik开发总结 — 设计与实现">
+      <i class="fa fa-chevron-left"></i> Muzik开发总结 — 设计与实现
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/15/SwiftUIExploration/" rel="next" title="SwiftUI开发初探">
+      SwiftUI开发初探 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82"><span class="nav-number">1.</span> <span class="nav-text">第一节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82"><span class="nav-number">2.</span> <span class="nav-text">第二节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82"><span class="nav-number">3.</span> <span class="nav-text">第三节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82"><span class="nav-number">4.</span> <span class="nav-text">第四节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%8A%82"><span class="nav-number">5.</span> <span class="nav-text">第五节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E8%8A%82"><span class="nav-number">6.</span> <span class="nav-text">第六节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E8%8A%82"><span class="nav-number">7.</span> <span class="nav-text">第七节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E8%8A%82"><span class="nav-number">8.</span> <span class="nav-text">第八节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E8%8A%82"><span class="nav-number">9.</span> <span class="nav-text">第九节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E8%8A%82"><span class="nav-number">10.</span> <span class="nav-text">第十节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E8%8A%82"><span class="nav-number">11.</span> <span class="nav-text">第十一节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%BA%8C%E8%8A%82"><span class="nav-number">12.</span> <span class="nav-text">第十二节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%89%E8%8A%82"><span class="nav-number">13.</span> <span class="nav-text">第十三节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%8A%82"><span class="nav-number">14.</span> <span class="nav-text">第十四节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%BA%94%E8%8A%82"><span class="nav-number">15.</span> <span class="nav-text">第十五节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E5%85%AD%E8%8A%82"><span class="nav-number">16.</span> <span class="nav-text">第十六节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%83%E8%8A%82"><span class="nav-number">17.</span> <span class="nav-text">第十七节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E5%85%AB%E8%8A%82"><span class="nav-number">18.</span> <span class="nav-text">第十八节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B9%9D%E8%8A%82"><span class="nav-number">19.</span> <span class="nav-text">第十九节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E8%8A%82"><span class="nav-number">20.</span> <span class="nav-text">第二十节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E8%8A%82"><span class="nav-number">21.</span> <span class="nav-text">第二十一节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E8%8A%82"><span class="nav-number">22.</span> <span class="nav-text">第二十二节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E8%8A%82"><span class="nav-number">23.</span> <span class="nav-text">第二十三节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E6%9D%A1"><span class="nav-number">24.</span> <span class="nav-text">第二十四条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E6%9D%A1"><span class="nav-number">25.</span> <span class="nav-text">第二十五条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E6%9D%A1"><span class="nav-number">26.</span> <span class="nav-text">第二十六条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E6%9D%A1"><span class="nav-number">27.</span> <span class="nav-text">第二十七条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E6%9D%A1"><span class="nav-number">28.</span> <span class="nav-text">第二十八条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B9%9D%E6%9D%A1"><span class="nav-number">29.</span> <span class="nav-text">第二十九条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E6%9D%A1"><span class="nav-number">30.</span> <span class="nav-text">第三十条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E6%9D%A1"><span class="nav-number">31.</span> <span class="nav-text">第三十一条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%BA%8C%E6%9D%A1"><span class="nav-number">32.</span> <span class="nav-text">第三十二条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%89%E6%9D%A1"><span class="nav-number">33.</span> <span class="nav-text">第三十三条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E5%9B%9B%E6%9D%A1"><span class="nav-number">34.</span> <span class="nav-text">第三十四条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%BA%94%E6%9D%A1"><span class="nav-number">35.</span> <span class="nav-text">第三十五条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E5%85%AD%E6%9D%A1"><span class="nav-number">36.</span> <span class="nav-text">第三十六条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E6%9D%A1"><span class="nav-number">37.</span> <span class="nav-text">第三十七条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E5%85%AB%E6%9D%A1"><span class="nav-number">38.</span> <span class="nav-text">第三十八条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B9%9D%E6%9D%A1"><span class="nav-number">39.</span> <span class="nav-text">第三十九条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E6%9D%A1"><span class="nav-number">40.</span> <span class="nav-text">第四十条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%80%E6%9D%A1"><span class="nav-number">41.</span> <span class="nav-text">第四十一条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%BA%8C%E6%9D%A1"><span class="nav-number">42.</span> <span class="nav-text">第四十二条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%89%E6%9D%A1"><span class="nav-number">43.</span> <span class="nav-text">第四十三条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%9B%9B%E6%9D%A1"><span class="nav-number">44.</span> <span class="nav-text">第四十四条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%BA%94%E6%9D%A1"><span class="nav-number">45.</span> <span class="nav-text">第四十五条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%85%AD%E6%9D%A1"><span class="nav-number">46.</span> <span class="nav-text">第四十六条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E6%9D%A1"><span class="nav-number">47.</span> <span class="nav-text">第四十七条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%85%AB%E6%9D%A1"><span class="nav-number">48.</span> <span class="nav-text">第四十八条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B9%9D%E6%9D%A1"><span class="nav-number">49.</span> <span class="nav-text">第四十九条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E5%8D%81%E6%9D%A1"><span class="nav-number">50.</span> <span class="nav-text">第五十条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E5%8D%81%E4%B8%80%E6%9D%A1"><span class="nav-number">51.</span> <span class="nav-text">第五十一条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E5%8D%81%E4%BA%8C%E6%9D%A1"><span class="nav-number">52.</span> <span class="nav-text">第五十二条</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stephen Fang"
+      src="/images/favicon.png">
+  <p class="site-author-name" itemprop="name">Stephen Fang</p>
+  <div class="site-description" itemprop="description">StephenFang's GitHub Page</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamstephenfang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fangxuanmiao@gmail.com" title="E-Mail → mailto:fangxuanmiao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/iamstephenfang" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/fangxuanmiao" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;fangxuanmiao" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/iamstephenfang" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+  </div>
+
+
+<div class="night-mode motion-element">
+  <a role="button" class="night-btn">
+    <i class="fa fa-lightbulb-o"></i>
+    Night Mode
+  </a>
+</div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stephen Fang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> 构建
+  <span id="busuanzi_container_site_uv">| 本站访客数:<span id="busuanzi_value_site_uv"></span>
+   <span class="post-count">| 博客全站共58.2k字</span>
+</span>
+  </div>
+  <span class="post-meta-divider"></span>
+  <div class="theme-info">
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+  ((w, d) => {
+    'use strict';
+      let userScheme = localStorage.getItem('Scheme');
+      if (userScheme) d.documentElement.className += ' darkScheme';
+      const btn = d.querySelector('.night-btn');
+      w.addEventListener('keydown', e => {
+        if (e.altKey && e.code === 'KeyX') btn.click();
+      });
+      btn.addEventListener('click', () => {
+        d.documentElement.classList.toggle('darkScheme');
+        if ( d.documentElement.classList.contains('darkScheme') ) {
+          localStorage.setItem('Scheme', 'Dark');
+          return;
+        }
+        localStorage.removeItem('Scheme');
+      });
+  })(window, document);
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'QnhiKXiUBCNtXH1MOoOB9EuB-MdYXbMMI',
+      appKey: '1oyNoEMdzuJrPz8c97G4vQQ0',
+      placeholder: "请留下您的见解.",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+
+var infoEle = document.querySelector("#valine-comments > div.info");
+if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+  infoEle.childNodes.forEach(function(item) {
+    item.parentNode.removeChild(item);
+  });
+}
+</script>
+
+</body>
+</html>
