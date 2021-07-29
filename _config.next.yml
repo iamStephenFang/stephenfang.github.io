@@ -86,7 +86,7 @@ menu:
   archives: /archives/ || archive
   # schedule: /schedule/ || calendar
   # sitemap: /sitemap.xml || sitemap
-  commonweal: /404/ || heartbeat
+  # commonweal: /404/ || heartbeat
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
@@ -137,15 +137,15 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
-  GitHub: https://github.com/iamstephenfang || github
-  E-Mail: mailto:fangxuanmiao@gmail.com || envelope
-  Weibo: https://weibo.com/iamstephenfang || weibo
+  GitHub: https://github.com/iamstephenfang || fab fa-github
+  E-Mail: mailto:fangxuanmiao@gmail.com || fa fa-envelope
+  Weibo: https://weibo.com/iamstephenfang || fab fa-weibo
   #Google: https://plus.google.com/yourname || google
-  Twitter: https://twitter.com/fangxuanmiao || twitter
+  Twitter: https://twitter.com/fangxuanmiao || fab fa-twitter
   #FB Page: https://www.facebook.com/yourname || facebook
   #StackOverflow: https://stackoverflow.com/yourname || stack-overflow
   #YouTube: https://youtube.com/yourname || youtube
-  Instagram: https://instagram.com/iamstephenfang || instagram
+  Instagram: https://instagram.com/iamstephenfang || fab fa-instagram
   #Skype: skype:yourname?call|chat || skype
 
 social_icons:
