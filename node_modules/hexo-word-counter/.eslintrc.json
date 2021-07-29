@@ -1,0 +1,7 @@
+{
+  "extends": "@next-theme",
+  "root": true,
+  "rules": {
+    "key-spacing": 0
+  }
+}
