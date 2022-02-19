@@ -20,7 +20,7 @@ copyright: true
 
 ### 1.安装 Xcode
 
-{% asset_img Xcode.png %}
+![](http://image.stephenfang.me/mweb/Xcode.png)
 
 从 App Store 安装 Xcode。目前 Xcode（11.3）的安装后大小约为19 GB，因此可能需要近半小时的下载与安装时间，具体取决于互联网速度与设备运行速度。
 
@@ -79,13 +79,13 @@ pkg-config --cflags --libs /usr/local/Cellar/opencv/<版本号>/lib/pkgconfig/op
 
 在正式运行 OpenCV C++代码之前，首先需要在 Xcode 中创建一个空的`C++`项目。具体创建过程不在这里叙述。
 
-{% asset_img Project.png %}
+![]( http://image.stephenfang.me/mweb/Project.png )
 
 需要注意的是项目的 *Language* 应选择为 C++。
 
 ### 7.设置 Header Search Paths
 
-{% asset_img Headers.png %}
+![]( http://image.stephenfang.me/mweb/Headers.png )
 
 在 Xcode 中设置 *Header Search Paths*，先单击 Xco​​de 项目，然后点击 *Build Settings*，然后搜索“Header Search Paths”。将 *Header Search Paths* 路径设置为刚才得到的输出结果“-I”之后的路径，如我需要对如下路径进行添加。
 
@@ -96,7 +96,7 @@ pkg-config --cflags --libs /usr/local/Cellar/opencv/<版本号>/lib/pkgconfig/op
 
 ### 8.设置 Library Search Paths
 
-{% asset_img Library.png %}
+![]( http://image.stephenfang.me/mweb/Library.png )
 
 类似地，在 *Build Settings* 中搜索“Library Search Paths”，将 *Library Search Paths* 路径设置为刚才得到的输出结果“-L”之后的路径，如我需要对如下路径进行添加。
 
@@ -106,7 +106,7 @@ pkg-config --cflags --libs /usr/local/Cellar/opencv/<版本号>/lib/pkgconfig/op
 
 ### 9.设置 Other Linker Flags
 
-{% asset_img linker.png %}
+![]( http://image.stephenfang.me/mweb/linker.png )
 
 同样，在 *Build Settings* 中搜索“Other Linker Flags”，将 *Other Linker Flags* 路径设置为刚才得到的输出结果中的其他内容，即 Linker Flags，我需要对如下 Linker Flags 进行添加。（无需手动输入，只需单击输入框粘贴相关内容）
 
@@ -149,7 +149,7 @@ int main()
 
 ### 使用相对路径
 
-{% asset_img dir.png %}
+![]( http://image.stephenfang.me/mweb/dir.png )
 
 Xcode使用图像或资源的绝对路径。为了设置相对路径需要设置*Working Directory*。依次点击 `菜单栏Product > Scheme > Edit Scheme ` 中转到*Run*中的*check Use Custom Working Directory*选项，然后自定义项目目录。
 
@@ -157,13 +157,13 @@ Xcode使用图像或资源的绝对路径。为了设置相对路径需要设置
 
 ### 出现 “Not a Doxygen trailing comment” 错误
 
-{% asset_img documention.png %}
+![](http://image.stephenfang.me/mweb/documention.png)
 
 在 *Build Settings* 中搜索 "Documentation Comments"，将 *Documentation Comments* 设置为"No"即可解决该问题。`Doxygen` 只是一种格式可以选择跳过检查。
 
 ### 出现 "dyld: Library not loaded..." 错误
 
-{% asset_img signature.png %}
+![](http://image.stephenfang.me/mweb/signature.png )
 
 在 *Signing & Capabilities* 中打开*Disable Library Validation*，即可解决该问题。问题的原因是`brew`安装的`OpenCV`存在签名问题，暂且可以先认可没有被签名的 Library。
 
@@ -175,3 +175,4 @@ Xcode使用图像或资源的绝对路径。为了设置相对路径需要设置
 [Not a Doxygen trailing comment](https://stackoverflow.com/questions/39929199/not-a-doxygen-trailing-comment)
 
 [Load and Display an Image](https://docs.opencv.org/2.4/doc/tutorials/introduction/display_image/display_image.html)
+e.html)

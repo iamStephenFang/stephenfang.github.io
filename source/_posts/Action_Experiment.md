@@ -36,7 +36,7 @@ tags:
 
 8、Struts2 还为 Action 接口提供了一个实现类：ActionSupport，该类提供了若干默认方法，包括：默认的处理用户请求的方法（excute()方法）、数据校验的方法、添加校验错误信息的方法、获取国际化信息的方法等，部分重要方法列表如下：
 
-![](1.png)
+![](http://image.stephenfang.me/mweb/java/1.png)
  
 9、Struts2 框架提供了校验器和手工编码两种方式对请求参数进行数据校验，当 Action 类继承了 ActionSupport 类，就可以通过定义名为“<ActionClassName>- <ActionAliasName>-validation.xml”的校验规则文件的方法进行校验器校验， 也可以通过重写 ActionSupport 类的 validate()方法或 validateXxx()方法进行手动校验； 
 
@@ -182,15 +182,15 @@ Action与Servlet API直接耦合，需要调用ServletContext和ServletRequest�
 
 10、查找相关资料， 尝试使用 Action 自定义方法的其它三种调用和配置方式：动态方法调用方式（DMI）、提交按钮的 method 属性、通配符配置 Action，并记录关键配置和运行结果； 
  
-![](DMI.png)
+![](http://image.stephenfang.me/mweb/java/DMI.png)
   
-![](button.png)
+![](http://image.stephenfang.me/mweb/java/button.png)
  
-![](uni.png)
+![](http://image.stephenfang.me/mweb/java/uni.png)
 
 11、修改 UserAction.java，增加 UserAction 类的构造方法 UserAction()，增加 count属性，用于测试 Action 的实例化情况
 
-![](2.png)
+![](http://image.stephenfang.me/mweb/java/2.png)
 
 12、修改 `loginSuccess.jsp`，在页面中使用<s:property>标签输出 Action 中的 count 值； 
 
@@ -200,7 +200,7 @@ Action与Servlet API直接耦合，需要调用ServletContext和ServletRequest�
 
 13、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 login.jsp 页面， 并刷新多次，记录运行结果； 
 
-![](3.png)
+![](http://image.stephenfang.me/mweb/java/3.png)
 
 14、修改 struts.xml 文件，将 UserAction 的页面导航设置为 redirect 结果类型；
 
@@ -210,28 +210,28 @@ Action与Servlet API直接耦合，需要调用ServletContext和ServletRequest�
 
 15、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 login.jsp 页面， 观察登录成功后 loginSuccess.jsp 页面的输出，并记录下来。
 
-![](4.png)
+![](http://image.stephenfang.me/mweb/java/4.png)
 
 ### 提高实验
 1、在 struts-prj2 中修改 UserAction 类，使其继承 ActionSupport 类，并在 UserAction 类中覆盖 ActionSupport 类的 validate()方法， 用于对用户登录的请求参 数 account 和 password 进行校验：若用户名或密码为空，则使用 addFieldError （域 级）添加错误信息。
 
-![](5.png)
+![](http://image.stephenfang.me/mweb/java/5.png)
 
 2、修改 `struts.xml` 文件，在 Action 的配置中增加 validate()方法校验出错时的页面导航`<result name="input">`
 
-![](6.png)
+![](http://image.stephenfang.me/mweb/java/6.png)
 
 3、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 `login.jsp` 页面，观察并记录运行结果；
 
-![](7.png)
+![](http://image.stephenfang.me/mweb/java/7.png)
 
 4、修改 `login.jsp` 页面，在表单前增加 fielderror 标签：`<s:fielderror/>`，再通过浏览器访问 login.jsp 页面，观察并记录运行结果
 
-![](8.png)
+![](http://image.stephenfang.me/mweb/java/8.png)
 
 5、修改 UserAction.java，在调用登录逻辑的 login()方法中，对登录情况进行校验： 若登录成功，使用 addActionMessage()方法添加“登录成功！”的 Action 提示消息，若 登录失败，使用 addActionError()方法添加 Action 级别的错误信息
 
-![](9.png)
+![](http://image.stephenfang.me/mweb/java/9.png)
 
 6、修改 login.jsp 页面，增加 actionerror 标签（<s:actionerror/>）Action 级别的 错 误信息；修改 `loginSuccess.jsp`，使用 actionmessage 标签`<s:actionmessage/>` 显示 Action 提示消息； 
 
@@ -239,13 +239,13 @@ Action与Servlet API直接耦合，需要调用ServletContext和ServletRequest�
 
 8、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 login.jsp 页面， 观察并记录运行结果；
 
-![](10.png)
+![](http://image.stephenfang.me/mweb/java/10.png)
 
 9、在工程 struts-prj2 中创建“UserAction-login-validation.xml”校验规则文件，使 其与 UserAction 类位于同一目录下，配置校验信息，使用校验器对请求参数进行校验 
 
 10、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 login.jsp 页面， 观察并记录运行结果；
 
-![](11.png)
+![](http://image.stephenfang.me/mweb/java/11.png)
 
 11、将 login.jsp、 loginSuccess.jsp、 loginFail.jsp 三个页面进行国际化处理，把需要进行国际化的内容 以键值对的形式写入资源文件 `message_zh_CN.properties` 和 `message_en_US.properties` 中； 
 
@@ -259,31 +259,31 @@ Action与Servlet API直接耦合，需要调用ServletContext和ServletRequest�
 
 16、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 `login.jsp` 页面， 观察并记录运行结果；
 
-![](12.png)
+![](http://image.stephenfang.me/mweb/java/12.png)
 
 17、修改 `UserBean.java`，将用于保存注册用户生日的变量类型改为 Date 类型，使用 Struts2 内置的类型转换器对请求参数进行校验； 
 
 18、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 `register.jsp` 页 面，当用户输入的生日不合法时，观察并记录运行结果；
 
-![](13.png)
+![](http://image.stephenfang.me/mweb/java/13.png)
 
 19、在工程 struts-prj2 的 cn.edu.zjut.action 包中创建局部属性文件`UserAction.properties`，修改类型转换的校验信息，并使用 native2ASCII 工具将 `UserAction.properties` 重新编码 
 
 20、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 `register.jsp` 页 面，当用户输入的生日不合法时，观察并记录运行结果；
 
-![](na.png)
+![](http://image.stephenfang.me/mweb/java/na.png)
 
 21、参考实验步骤 9，在工程 struts-prj2 的 cn.edu.zjut.action 包中创建 `UserAction-register-validation.xml` 文件，增加校验信息的配置，使用校验器对用户 注册的请求参数进行校验，要求注册时两次密码输入相同、email 地址格式符合要求等； 
 
 22、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 `register.jsp` 页 面，观察并记录运行结果；
 
-![](14.png)
+![](http://image.stephenfang.me/mweb/java/14.png)
 
 23、修改 UserAction 类， 将 validate()的方法名改为 validateLogin()， 并增加 validateRegister()方法，参考实验步骤 1，使用手工编码方式对请求参数进行数据校验； 
 
 24、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 `register.jsp` 页 面，观察并记录运行结果。
 
-![](15.png)
+![](http://image.stephenfang.me/mweb/java/15.png)
 
 ### 拓展实验
 
@@ -293,7 +293,7 @@ Action与Servlet API直接耦合，需要调用ServletContext和ServletRequest�
 
 3、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 `login.jsp` 页面，观察并记录运行结果；
 
-![](16.png)
+![](http://image.stephenfang.me/mweb/java/16.png)
 
 **每提交一次刷新，次数就会增加一次，只有重新部署访问次数才会重置** 
 
@@ -301,20 +301,20 @@ Action与Servlet API直接耦合，需要调用ServletContext和ServletRequest�
 
 5、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 `login.jsp` 页面，观察并记录运行结果；
 
-![](17.png)
+![](http://image.stephenfang.me/mweb/java/17.png)
 
 6、修改 UserAction 类，查找相关资料，尝试通过接口：ServletContextAware、 ServletRequestAware、ServletResponseAware 直接访问 Servlet API，实现以上实验步骤 1-3 的相同功能，重新运行并记录结果；
 
-![](18.png)
+![](http://image.stephenfang.me/mweb/java/18.png)
 
-![](19.png)
+![](http://image.stephenfang.me/mweb/java/19.png)
 
 
 7、修改 UserAction 类，查找相关资料，尝试通过 ServletActionContext 工具类直接访 问 Servlet API，实现以上实验步骤 1-3 的相同功能，重新运行并记录结果；
 
-![](20.png)
+![](http://image.stephenfang.me/mweb/java/20.png)
 
-![](21.png)
+![](http://image.stephenfang.me/mweb/java/21.png)
 
 8、尝试利用 Servlet API 添加购物车功能，在工程 struts-prj2 的 cn.edu.zjut.bean 包中创建 `Item.java` 用于记录商品信息
 
@@ -322,4 +322,4 @@ Action与Servlet API直接耦合，需要调用ServletContext和ServletRequest�
 
 10、重新将 struts-prj2 部署在 Tomcat 服务器上，通过浏览器访问 `login.jsp `页面， 观察并记录运行结果。
 
-![](22.png)
+![](http://image.stephenfang.me/mweb/java/22.png)

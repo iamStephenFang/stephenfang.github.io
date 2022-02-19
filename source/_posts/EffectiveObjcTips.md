@@ -200,7 +200,7 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
     - 第一阶段：动态方法解析
     - 第二阶段：消息转发机制
   
-    {% asset_img Untitled.png %}
+    ![](http://image.stephenfang.me/mweb/Untitled.png)
 
 - receiver在每一步都有机会处理消息且步骤越往后处理消息的代价越大
 - 如果对象没有办法响应某个selector则进入消息转发流程,runtime的动态方法解析可以在需要某个方法时将其加入类中，对象可以将无法解析的selector转交给其他对象处理。这一步结束后若仍然无法处理selector则启动消息转发机制
@@ -217,13 +217,13 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
 - 动态类型特性可以用于从 collection 中获取对象（类型信息查询方法）
 - 假设名为SomeClass的子类继承自NSObject可以得到以下继承体系
 
-{% asset_img Untitled1.png %}
+![](http://image.stephenfang.me/mweb/Untitled1.png)
 
 ## 第十五节
 
 - 类名、分类名都应该加上相应的前缀，如果使用三方库编写自己的代码并分发尤其需要注意重复符号问题
 
-{% asset_img Untitled2.png %}
+![](http://image.stephenfang.me/mweb/Untitled2.png)
 
 ## 第十六节
 
@@ -236,11 +236,11 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
 - 实现description方法能够返回一个有意义的字符串来描述实例，需要打印出类的名字和指针地址因为有时候会用到
 - 使用NSDictionary来编写description方法使代码更容易维护
 
-{% asset_img Untitled3.png %}
+![](http://image.stephenfang.me/mweb/Untitled3.png)
 
 - 在调试时打印更为详尽的对象描述信息应实现debugDescription方法
 
-{% asset_img Untitled4.png %}
+![](http://image.stephenfang.me/mweb/Untitled4.png)
 
 ## 第十八节
 
@@ -252,7 +252,7 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
 
 如果从其他框架中继承子类务必遵循命名惯例，如从UIView中继承自定义子类则类名末尾词为View，若创建自定义委托协议末尾应跟上Delegate一词。
 
-{% asset_img Untitled5.png %}
+![](http://image.stephenfang.me/mweb/Untitled5.png)
 
 ## 第二十节
 
@@ -263,7 +263,7 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
 
 - Objective-C对于异常采取的态度为：只有在极为罕见的情况下才抛出异常，并在异常抛出后无需考虑恢复问题，应用程序此时应该退出。异常应该运用于极其严重的问题
 
-{% asset_img Untitled6.png %}
+![](http://image.stephenfang.me/mweb/Untitled6.png)
 
 ```objectivec
 - (BOOL)doSomething:(NSError**) error
@@ -288,7 +288,7 @@ if (ret) {
 }
 ```
 
-{% asset_img Untitled7.png %}
+![](http://image.stephenfang.me/mweb/Untitled7.png)
 
 传递给方法的是个指针，指针本身指向另一个指向NSError对象的指针，或认为其为一个直接指向NSError对象的指针。在 ARC 中，指针所指向的对象会在方法执行完毕后自动释放。
 
@@ -311,29 +311,29 @@ if (ret) {
     - 浅拷贝：只拷贝容器对象本身不拷贝其中数据；Foundation框架所有collection类执行拷贝的默认情况；实现copyWithZone方法
     - 图解：
 
-   {% asset_img Untitled8.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled8.png)
 
 ## 第二十三节
 
-   {% asset_img Untitled9.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled9.png)
 
-   {% asset_img Untitled10.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled10.png)
 
-   {% asset_img Untitled11.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled11.png)
 
-   {% asset_img Untitled12.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled12.png)
 
-   {% asset_img Untitled13.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled13.png)
 
-   {% asset_img Untitled14.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled14.png)
 
 存放委托对象的属性需要为weak（在对象销毁时自动清空）或unsafe_unretained（不需要自动清空）。
 
-   {% asset_img Untitled15.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled15.png)
 
-   {% asset_img Untitled16.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled16.png)
 
-   {% asset_img Untitled17.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled17.png)
 
 - 某个对象从另一个对象获取数据可以使用委托模式，亦成为数据源模式，数据的流动如上图所示
 - 如果有必要可以实现有段位的结构体将委托对象是否能响应相关协议的信息缓存至其中
@@ -342,13 +342,13 @@ if (ret) {
 
 - 通过分类机制将代码划分为易于管理的小块
 
-   {% asset_img Untitled18.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled18.png)
 
-   {% asset_img Untitled19.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled19.png)
 
-   {% asset_img Untitled20.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled20.png)
 
-   {% asset_img Untitled21.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled21.png)
 
 - 可以创建名为Private的分类并将私有方法放在里面，这个分类的方法只在类和框架内部使用无需对外公布
 
@@ -356,13 +356,13 @@ if (ret) {
 
 - 向第三方类中添加分类时给分类名与方法名加上前缀
 
-   {% asset_img Untitled22.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled22.png)
 
 ## 第二十六条
 
 - 在实现分类时所有属性都应该定义在主接口内，类所封装的所有数据都应该定义在主接口内
 
-   {% asset_img Untitled23.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled23.png)
 
 ## 第二十七条
 
@@ -382,15 +382,15 @@ if (ret) {
     @end
     ```
 
-   {% asset_img Untitled24.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled24.png)
 
 - WebKit、CoreAnimation 底层大部分代码用C++编写，对外展示的为Objective-C接口
 
-   {% asset_img Untitled25.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled25.png)
 
 - 上图方式可以随意调用setFirstName与setLastName方法与点语法设置属性，同时外界无法修改对象，完成了类型的拓展
 
-   {% asset_img Untitled26.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled26.png)
 
     - 不需要在公共接口中声明类遵从了私有协议，而应该改到 class-continuation 分类内进行声明
 
@@ -398,18 +398,18 @@ if (ret) {
 
 - 协议可以在某种程度上提供匿名类型，具体的对象类型淡化成为遵从某个协议的id类型，协议离规定对象应该实现的方法。下图中与数据库连接相关的类名称就无法泄漏
 
-    {% asset_img Untitled27.png %}
+    ![](http://image.stephenfang.me/mweb/Untitled27.png)
 
 - 使用匿名对象实现类型名称的隐藏，需要注意的是对象需要能够响应定义在协议中的方法
 - 下图中其中sectionInfo为匿名对象，把section数组中返回的内部状态对象视为遵从NSFetchedResultsSectionInfo的匿名对象，隐藏了相关实现细节。
 
-    {% asset_img Untitled28.png %}
+    ![](http://image.stephenfang.me/mweb/Untitled28.png)
 
 ## 第二十九条
 
 - 对象创建完成后引用计数至少为1，如果需要保留该对象需要调用retain方法，如果不再需要该对象则调用release、autorelease方法，当引用计数归零时对象被回收
 
-    {% asset_img Untitled29.png %}
+    ![](http://image.stephenfang.me/mweb/Untitled29.png)
 
 - 为了避免使用无效对象一般在完成调用release之后清空指针，保证不会出现指向无效对象的指针
 
@@ -432,7 +432,7 @@ if (ret) {
 
 ## 第三十一条
 
-   {% asset_img Untitled30.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled30.png)
 
 - 如果对象持有文件描述符等系统资源，应该专门写一个方法释放此类资源，用完使用close方法
 - 执行异步任务的方法和只能在正常状态下执行的方法不应在dealloc中调用
@@ -441,27 +441,27 @@ if (ret) {
 
 - ARC不生成安全处理异常所需的清理代码，开启编译器标志后可以生成这种代码但是会导致应用程序变大，且会降低运行效率
 
-   {% asset_img Untitled31.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled31.png)
 
 ## 第三十三条
 
 - 当指向EOCClassA的实例引用移除后unsafe_unretained属性仍然指向已经回收的实例，而weak属性指向nil
 
-    {% asset_img Untitled32.png %}
+    ![](http://image.stephenfang.me/mweb/Untitled32.png)
 
 ## 第三十四条
 
 系统会自动创建一些线程，如主线程或GCD机制中的线程都有自动释放池，这些线程都有autoreleasepool，每次执行event loop就会将其清空
 
-   {% asset_img Untitled33.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled33.png)
 
-   {% asset_img Untitled34.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled34.png)
 
 ## 第三十五条
 
 - 系统在回收对象时可以将其转化为僵尸对象，通过环境变量NSZombieEnabled可以开启该功能，或在Xcode中开启
 
-{% asset_img Untitled35.png %}
+![](http://image.stephenfang.me/mweb/Untitled35.png)
 
 - 系统修改对象的isa指针指向特殊的僵尸类可以时该对象成为僵尸对鲜花，僵尸类能够响应所有的selector，在打印一条包含消息内容及接受者的消息后终止应用程序
 
@@ -494,13 +494,13 @@ if (ret) {
     - 需要在Block内修改的变量需要加上 _block 修饰符，如果将块定义在Objective-C类的实例方法中，除了可以访问类的所有的实例变量外还可以使用self变量且无需添加_block。
     - 定义Block的时候分配的内存区域在栈上，即块只在定义的范围内有效，可以创建不会捕捉任何状态的全局块
 
-{% asset_img Untitled36.png %}
+![](http://image.stephenfang.me/mweb/Untitled36.png)
 
-{% asset_img Untitled37.png %}
+![](http://image.stephenfang.me/mweb/Untitled37.png)
 
 ## 第三十八条
 
-{% asset_img Untitled38.png %}
+![](http://image.stephenfang.me/mweb/Untitled38.png)
 
 - 以下展示了SDWebImage中Block的写法
 
@@ -525,79 +525,79 @@ if (ret) {
 
 - 简洁程度上Delegate与Block的对比
 
-   {% asset_img Untitled39.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled39.png)
 
-   {% asset_img Untitled40.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled40.png)
 
 - 处理多个请求时Delegate与Block的对比
 
-   {% asset_img Untitled41.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled41.png)
 
-   {% asset_img Untitled42.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled42.png)
 
-   {% asset_img Untitled43.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled43.png)
 
-   {% asset_img Untitled44.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled44.png)
 
 - 在处理请求时采用两个独立的处理Block（1/2）
 
-   {% asset_img Untitled45.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled45.png)
 
-   {% asset_img Untitled46.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled46.png)
 
-   {% asset_img Untitled47.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled47.png)
 
 - 在处理请求时采用同一个处理Block，令Block更为灵活但更为冗长
 
-   {% asset_img Untitled48.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled48.png)
 
-   {% asset_img Untitled49.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled49.png)
 
 ## 第四十条
 
 大部分网络通信库写法
 
-   {% asset_img Untitled50.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled50.png)
 
 为了使得在下载完成后通过以下方法执行调用者指定的Block，需要将completion handler保存至实例变量，一旦运行完completion handler之后没有必要对其进行保留，从而避免出现retain cycle
 
-   {% asset_img Untitled51.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled51.png)
 
-   {% asset_img Untitled52.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled52.png)
 
 ## 第四十一条
 
 - 串行队列，将读取操作与写入操作安排到同个队列中保证数据同步，可以将设置方法由同步派发改为异步执派发
 
-   {% asset_img Untitled53.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled53.png)
 
-   {% asset_img Untitled54.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled54.png)
 
     - 并发队列，读取与写入操作可以随时执行
 
-   {% asset_img Untitled55.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled55.png)
 
     创建栅栏使得barrier块单独执行不与其他Block并行，对并发队列有意义，因为串行Block按顺序逐个执行
 
-   {% asset_img Untitled56.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled56.png)
 
-   {% asset_img Untitled57.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled57.png)
 
-   {% asset_img Untitled58.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled58.png)
 
 ## 第四十二条
 
 - performSelector接受的参数类型为id，限定了传入参数必须是对象，不能是整数或者浮点数，并且最多只能接受两个参数
 
-   {% asset_img Untitled59.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled59.png)
 
 - 延后执行某项任务，优先使用GCD的方式
 
-   {% asset_img Untitled60.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled60.png)
 
 - 把任务放到主线程上执行，把任务封装至Block中用GCD相关方法更为合适
 
-   {% asset_img Untitled61.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled61.png)
 
 - performSelector在内存管理方面存在缺失，无法确定将执行的Selector具体是什么
 
@@ -608,15 +608,15 @@ if (ret) {
 - 在执行后台任务时GCD并不一定是最佳方式
 - 使用NSOperation与NSOperationQueue有以下好处，能够实现纯GCD具备的绝大部分功能
 
-   {% asset_img Untitled62.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled62.png)
 
-   {% asset_img Untitled63.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled63.png)
 
-   {% asset_img Untitled64.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled64.png)
 
 - NSNotificationCenter 的 addObserverForName: 方法接受的参数是块而不是Selector
 
-   {% asset_img Untitled65.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled65.png)
 
 - 确定哪一种方法的最好方式是测试性能
 
@@ -625,43 +625,43 @@ if (ret) {
 - dispatch group 能够将任务分组，调用者可以等待这组任务执行完毕同时也可以在提供回调函数之后继续执行
 - 如下函数是dispatch_async的变体
 
-{% asset_img Untitled66.png %}
+![](http://image.stephenfang.me/mweb/Untitled66.png)
 
 - 如下函数用于等待 dispatch group 执行完毕，timeout 参数表示阻塞时间，若执行时间短于timeout返回0
 
-{% asset_img Untitled67.png %}
+![](http://image.stephenfang.me/mweb/Untitled67.png)
 
 - 如下函数中可以传入在特定线程上执行的Block
 
-{% asset_img Untitled68.png %}
+![](http://image.stephenfang.me/mweb/Untitled68.png)
 
 - 令数组每个对象都执行某个任务，并且等待每个任务都执行完毕可以使用如下GCD特性
 
-{% asset_img Untitled69.png %}
+![](http://image.stephenfang.me/mweb/Untitled69.png)
 
 - 若当前线程不阻塞可以使用notify函数取代wait
 
-{% asset_img Untitled70.png %}
+![](http://image.stephenfang.me/mweb/Untitled70.png)
 
 - 区分任务的优先级放置于不同的线程执行，同时将所有任务归于一个dispatch group，并且在执行完毕后获得通知（并发队列）
 
-{% asset_img Untitled71.png %}
+![](http://image.stephenfang.me/mweb/Untitled71.png)
 
 - 将任务提交到串行队列中并用dispatch group 跟踪执行情况
 
-{% asset_img Untitled72.png %}
+![](http://image.stephenfang.me/mweb/Untitled72.png)
 
-{% asset_img Untitled73.png %}
+![](http://image.stephenfang.me/mweb/Untitled73.png)
 
 ## 第四十五条
 
 - 常用的一种共享单例的方法
 
-   {% asset_img Untitled74.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled74.png)
 
 - 使用GCD实现共享单例的方法
 
-   {% asset_img Untitled75.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled75.png)
 
 - 使用 dispatch_once 能够简化代码并且彻底保证线程安全开发者无需关心加锁或同步，所有问题都由GCD在底层进行处理，static 作用域能够保证编译器在每次执行该方法时复用该变量而不是重复创建
 
@@ -684,7 +684,7 @@ if (ret) {
 - 遍历方式
     - for循环
 
-   {% asset_img Untitled76.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled76.png)
 
     字典与 set 均无顺序，无法根据下标访问数值。于是需要获取字典内所有键或 set 内所有对象，从而产生空间上的额外开销。然而执行反向遍历时 for 循环会更为方便。
 
@@ -814,15 +814,15 @@ if (ret) {
 
 缓存的一般用法
 
-   {% asset_img Untitled77.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled77.png)
 
-   {% asset_img Untitled78.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled78.png)
 
 加入 NSPurgeable 的缓存用法
 
-   {% asset_img Untitled79.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled79.png)
 
-   {% asset_img Untitled80.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled80.png)
 
 - 重复计算会带来性能开销的数据值得被放入缓存，从而提高应用程序的响应速度
 - NSPurgeableData 与 NSCache 一起使用能够实现自动清除数据的功能
@@ -834,18 +834,18 @@ if (ret) {
 - initialize 方法在程序首次用该类前调用一次，并且使用runtime进行调用，只应该用来设置内部数据而不应该调用其他方法
 - 如果某个类本身不实现 initialize 方法然而超类完成了就会调用超类的实现方法，如下图中初始化子类后由于该类未覆写该方法于是需要执行父类的实现代码，于是得到了通常的子类实现方法
 
-{% asset_img Untitled81.png %}
+![](http://image.stephenfang.me/mweb/Untitled81.png)
 
-{% asset_img Untitled82.png %}
+![](http://image.stephenfang.me/mweb/Untitled82.png)
 
-{% asset_img Untitled83.png %}
+![](http://image.stephenfang.me/mweb/Untitled83.png)
 
 ## 第五十二条
 
 - NSTimer 对象会保留目标直到计时器失效，需要调用invalidate方法令其失效
 
-   {% asset_img Untitled84.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled84.png)
 
-   {% asset_img Untitled85.png %}
+   ![](http://image.stephenfang.me/mweb/Untitled85.png)
 
 - 反复执行的计时器容易引入retain cycle，可以使用 Block 的方式打破，需要注意的是必须创建分类来加入相关实现代码

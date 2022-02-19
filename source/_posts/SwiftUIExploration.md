@@ -18,19 +18,19 @@ copyright: true
 
 - 基于知识图谱的推荐系统的设计与实现（客户端部分采用 SwiftUI 实现）
 
-{% asset_img Recommender.png %}
+![](http://image.stephenfang.me/mweb/Recommender.png)
 
-{% asset_img Structure.png %}
+![](http://image.stephenfang.me/mweb/Structure.png)
 
 - 知识图谱入门简介（UI 部分采用 SwiftUI 实现，WWDC Swift Student Challenge获奖项目）
 
 [iamStephenFang/KnowledgeGraph](https://github.com/iamStephenFang/KnowledgeGraph)
 
-{% asset_img KG.png %}
+![](http://image.stephenfang.me/mweb/KG.png)
 
 - FinMatters（一款采用 SwiftUI 编写的理财 App）
 
-{% asset_img Fin.png %}
+![](http://image.stephenfang.me/mweb/Fin.png)
 
 # 哪些优点
 
@@ -65,21 +65,21 @@ copyright: true
 - Model-View-ViewModel
 - 动画、效果、手势实现简单
 
-{% asset_img Code1.png %}
+![](http://image.stephenfang.me/mweb/Code1.png)
 
 ## 其他特性
 
 - 在 iPad 上的 Swift Playground编写 SwiftUI 相关代码
 
-{% asset_img PG.png %}
+![](http://image.stephenfang.me/mweb/PG.png)
 
 - 在 Xcode 中可以实现实时的、可响应的预览
 
-{% asset_img Demo.png %}
+![](http://image.stephenfang.me/mweb/Demo.png)
 
 - 跨端开发压力小，实现iOS、iPadOS、watchOS、macOS同步开发
 
-{% asset_img CP.png %}
+![](http://image.stephenfang.me/mweb/CP.png)
 
 # 哪些缺点
 
@@ -94,15 +94,15 @@ copyright: true
 
 表面上 SwiftUI 集成了很多可用的组件，但在实现自定义组件时还是需要自行编写元组件相关的代码，并且目前三方组件库可选择的项目较少。
 
-{% asset_img Code2.png %}
+![](http://image.stephenfang.me/mweb/Code2.png)
 
-{% asset_img Code3.png %}
+![](http://image.stephenfang.me/mweb/Code3.png)
 
-{% asset_img Fin2.png %}
+![](http://image.stephenfang.me/mweb/Fin2.png)
 
 原生组件可供更改的样式极其有限，有时候一些问题的解决方案代码并不优雅，比如导航栏只能手动隐藏、全屏状态下无法展示Modal、List 的分割线无法移除等等。
 
-{% asset_img Code4.png %}
+![](http://image.stephenfang.me/mweb/Code4.png)
 
 ```swift
 var body: some View {
@@ -127,7 +127,7 @@ var body: some View {
 
 - WKWebView 混编
 
-{% asset_img Code4.png %}
+![](http://image.stephenfang.me/mweb/Code4.png)
 
 - SwiftUIX [https://github.com/SwiftUIX/SwiftUIX](https://github.com/SwiftUIX/SwiftUIX)
 - SwiftUI-Introspect [https://github.com/SwiftUIX/SwiftUIX](https://github.com/SwiftUIX/SwiftUIX)

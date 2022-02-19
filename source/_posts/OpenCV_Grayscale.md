@@ -15,7 +15,7 @@ copyright: true
 直方图是图像的一种统计表达，反映了图像中灰度的分布情况。以概率论为基础的，通过改变图像的直方图来改变图象中像素的灰度，以达到图像增强的目标，常称直方图修正。
 
 <!--more-->
-{% asset_img 直方图.png %}
+![](http://image.stephenfang.me/mweb/Histogram.png)
 
 直方图均衡化原理即借助直方图变换实现（归一的）灰度映射，实现思想为对在图像中像素个数多的灰度级进行展宽，而对像素个数少的灰度级进行缩减。从而达到清晰图像的目的。
 
@@ -27,15 +27,15 @@ OutputArray 	dst
 )	
 ```
 
-{% asset_img equa.jpg %}
+![](http://image.stephenfang.me/mweb/equa.jpg)
 
 实现的图像直方图均衡化算法就是把直方图的每个灰度级进行归一化处理，求各个灰度的累积分布并得到一个映射的灰度映射表，最后根据相应的灰度值来修正原图中的每个像素的像素值。
 
 `OpenCV`中提供了`cvtColor`函数实现彩色图像转为灰度图像，给出如下函数原型及相关文档。
-{% asset_img cvcolor.png %}
+![](http://image.stephenfang.me/mweb/cvcolor.png)
 
 至于直方图的绘制方法，`OpenCV`中提供了`calcList`函数计算图像直方图，尝试使用函数来实现会更符合操作流程。
-{% asset_img calcHist.jpg %}
+![](http://image.stephenfang.me/mweb/calcHist.jpg)
 
 ## 说明
 本次实验需要完成以下任务：
@@ -131,7 +131,7 @@ int main()
 
 ## 实验结果
 
-{% asset_img result.png %}
+![](http://image.stephenfang.me/mweb/result.png)
 第一张图片为未处理过的原图，第二张图片为灰度处理后的图片。第三张图片为均衡化处理后的灰度图，从直方图很能看出区别。
 
 ## 参考
