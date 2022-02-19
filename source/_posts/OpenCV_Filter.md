@@ -16,7 +16,7 @@ copyright: true
 
 <!--more-->
 
-![滤波](http://images.stephenfang.xyz/mweb/滤波.png)
+![滤波](http://image.stephenfang.me/mweb/滤波.png)
 
 ## 理解滤波
 
@@ -32,9 +32,9 @@ copyright: true
 
 接下来给出均值滤波具体的操作方法：
 存在如下图片底板，可见图像中用蓝色标记的“99”为显著的噪声。
-![](http://images.stephenfang.xyz/mweb/15857298630296.jpg)
+![](http://image.stephenfang.me/mweb/15857298630296.jpg)
 尝试建立如下 3*3 邻域模版，模版可以暂且被理解为叠在图像上的内容，实为平滑卷积模版
-![](http://images.stephenfang.xyz/mweb/15857297422480.jpg)
+![](http://image.stephenfang.me/mweb/15857297422480.jpg)
 尝试对最左上角的重叠部分进行计算，计算方法为系数逐乘以邻域节点的数值：
 ```
  1/9 * (10x1 + 11x1 + 10x1 + 9x1 + 10x1 + 11x1 + 10x1 + 9x1 + 10x1) 
@@ -42,9 +42,9 @@ copyright: true
 = 10
 ```
 将运算结果“10”填充至中间位置，与原有结果相同。
-![](http://images.stephenfang.xyz/mweb/15857302402257.jpg)
+![](http://image.stephenfang.me/mweb/15857302402257.jpg)
 至此完成了卷积模版最基本操作，接下来尝试遍历扫描整个图像，即通过对模板的平移完成对整个图像的运算，如下图所示：
-![-w229](http://images.stephenfang.xyz/mweb/15857305800473.jpg)![-w229](http://images.stephenfang.xyz/mweb/15857305984728.jpg)
+![-w229](http://image.stephenfang.me/mweb/15857305800473.jpg)![-w229](http://image.stephenfang.me/mweb/15857305984728.jpg)
 此时运算过程为：
 ```
   1/9 *(10x1 + 0x1 + 0x1 + 11x1 + 1x1 + 0x1 + 10x1 + 0x1 + 2x1) 
@@ -52,7 +52,7 @@ copyright: true
 = 3.7778
 ```
 将小数量化后填充至中心位置，并重复操作，原则为逐行扫描，逐列增长。
-![-w229](http://images.stephenfang.xyz/mweb/15857308419472.jpg)![-w229](http://images.stephenfang.xyz/mweb/15857308571783.jpg)
+![-w229](http://image.stephenfang.me/mweb/15857308419472.jpg)![-w229](http://image.stephenfang.me/mweb/15857308571783.jpg)
 可以观察到运算进行到最下角的区域时，原来的“99”数值被填充为“20”，噪声被有效抑制。
 你可能会发现，当然边缘处的图像无法通过该算法进行处理，然而存在以下方法：
 1. **拓宽原图** :人为将边缘像素往外复制，图像外的第零列就被复制为与第一列相同，图像外的第零行被复制为与第一行相同，最后补全四个对角。如 6*6 的原图就被拓宽为 7*7 的图像，再对拓宽后的图像进行卷积处理。
@@ -60,23 +60,23 @@ copyright: true
 3. **保持原样** :这也是一种方法，毕竟三种方法都存在误差。
 
 其他还存在很多模版，简要理解中值滤波法：
-![-w229](http://images.stephenfang.xyz/mweb/15857320034469.jpg)![-w229](http://images.stephenfang.xyz/mweb/15857320145830.jpg)
+![-w229](http://image.stephenfang.me/mweb/15857320034469.jpg)![-w229](http://image.stephenfang.me/mweb/15857320145830.jpg)
 正如其名，其计算方法为：
 1. 对邻域 10,9,11,9,99,11,11,10,10 进行排序
 2. 在排序后的数字 9,9,10,10,10,11,11,11,99 中寻找中间像素
 3. 查找到中位数“10”对”99“进行替换
 
 卷积也被称为算子，以下为著名的Prewitt算子（垂直方向与水平方向）
-![-w229](http://images.stephenfang.xyz/mweb/15857327960667.jpg)![-w235](http://images.stephenfang.xyz/mweb/15857328571767.jpg)
+![-w229](http://image.stephenfang.me/mweb/15857327960667.jpg)![-w235](http://image.stephenfang.me/mweb/15857328571767.jpg)
 它可以显著降低边缘精度，对噪声具有平滑作用。下图为原图
-![](http://images.stephenfang.xyz/mweb/15857329308611.jpg)
+![](http://image.stephenfang.me/mweb/15857329308611.jpg)
 以下左图为处理后的x方向图片，右图为处理后的y方向图片。
-![-w229](http://images.stephenfang.xyz/mweb/15857329552320.jpg)![-w238](http://images.stephenfang.xyz/mweb/15857329695411.jpg)
+![-w229](http://image.stephenfang.me/mweb/15857329552320.jpg)![-w238](http://image.stephenfang.me/mweb/15857329695411.jpg)
 最后给出简单的Sobel边缘检测算子。
 > 索贝尔算子是计算机视觉领域的一种重要处理方法。主要用于获得数字图像的一阶梯度，常见的应用和物理意义是边缘检测。索贝尔算子是把图像中每个像素的上下左右四领域的灰度值加权差，在边缘处达到极值从而检测边缘。
 
 左图为垂直方向的Sobel边缘检测算子，右图为水平方向的Sobel边缘检测算子。
-![-w229](http://images.stephenfang.xyz/mweb/15857325986198.jpg)![-w229](http://images.stephenfang.xyz/mweb/15857327147059.jpg)
+![-w229](http://image.stephenfang.me/mweb/15857325986198.jpg)![-w229](http://image.stephenfang.me/mweb/15857327147059.jpg)
 
 对于邻域操作的概念这里不复再议，接下来尝试通过`OpenCV`的 filter2D() 函数实践 3*3 卷积模板。
 
@@ -85,7 +85,7 @@ copyright: true
 
 该程序通过循环生成 sizes 为3、5、7、9、11 时的*normalized box filter*，即均值滤波器（上文中已提及）。
 对于`size = 3` 的卷积核，应进行如下操作，其中 1/9 为系数。
-![](http://images.stephenfang.xyz/mweb/15857352054151.jpg)
+![](http://image.stephenfang.me/mweb/15857352054151.jpg)
 给出`OpenCV`中 filter2D() 的定义：
 ```objc
 
@@ -154,9 +154,9 @@ int main ( int argc, char** argv )
 ```
 ## 结果
 给出以下测试图片效果，可以看出效果已经相当明显。
-![-w599](http://images.stephenfang.xyz/mweb/15857364490707.jpg)
-![-w599](http://images.stephenfang.xyz/mweb/15857363805369.jpg)
-![-w599](http://images.stephenfang.xyz/mweb/15857364391479.jpg)
+![-w599](http://image.stephenfang.me/mweb/15857364490707.jpg)
+![-w599](http://image.stephenfang.me/mweb/15857363805369.jpg)
+![-w599](http://image.stephenfang.me/mweb/15857364391479.jpg)
 
 
 

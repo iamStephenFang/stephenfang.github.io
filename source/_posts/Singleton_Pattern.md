@@ -35,7 +35,7 @@ copyright: true
 - 设置为保护型或私有型的构造方法
 根据单例模式的成员可以画出相应的类图，其中包含引用单例对象的静态私有成员变量instance；公共静态方法getInstance()负责实现一次性的实例化并返回对单例对象的引用；设置私有型的构造方法Singleton()。
 
-![](http://images.stephenfang.xyz/mweb/15917501563785.jpg)
+![](http://image.stephenfang.me/mweb/15917501563785.jpg)
 图3.1 单例模式的类图
 
 在所有常见的设计模式中，singleton模式是唯一一个能够用短短几十行代码完成实现的模式，接下来以不同的例子探讨单例模式的解法。
@@ -196,7 +196,7 @@ public enum Singleton6 {
 
 ## 模式简例
 在JDK内部也存在对单例模式的运用。Runtime类就是十分典型的例子。
-![](http://images.stephenfang.xyz/mweb/15917515167469.jpg)
+![](http://image.stephenfang.me/mweb/15917515167469.jpg)
 
 
 图4.2  Runtime类图
@@ -233,7 +233,7 @@ public class Main {
 
 代码4.5  测试类
 运行结果符合预期，测试类通过getInstance()方法获得的是同一对象，因而哈希值是一致的。此特点适用于生产唯一序列号的场景。
-![](http://images.stephenfang.xyz/mweb/15917516893500.jpg)
+![](http://image.stephenfang.me/mweb/15917516893500.jpg)
 
 图4.3  测试结果
 	对于单例模式的应用与验证至此告一段落，显然单例模式的运用远不止于此，相关的还有Web计数器、数据库配置文件等等。
@@ -282,7 +282,7 @@ public class Client{
 即每次JVM进行垃圾回收时显示内存信息，JVM的内存设为固定20M。
 通过模拟J2EE容器，实例化大小为6M的单例类，然后不断的创建对象，迫使JVM进行垃圾回收，观察垃圾收集信息，如果进行垃圾收集后，内存仍然大于6M，则说明垃圾回收不会回收单例对象。
 
-![](http://images.stephenfang.xyz/java.png)
+![](http://image.stephenfang.me/java.png)
 
 图5.1  测试结果
 从运行结果中可以看到有6M空间没有被收集。达到GC的条件其一为该类所有的实例都已经被回收，即java堆中不存在该类的任何实例。单例的类不满足该条件，因此单例类也不会被回收。也就是说，只要单例类中的静态引用指向JVM堆中的单例对象，那么单例类和单例对象都不会被垃圾收集。所以“如果实例化的对象长时间不被利用，系统会认为它是垃圾，会自动销毁并回收资源，下次利用时又将重新实例化，这将导致对象状态丢失。”这一点目前无法在实验中验证。

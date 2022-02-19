@@ -28,7 +28,7 @@ NSFileManager 类能够完成以下对于文件的操作
 其中大部分操作对于目录同样适用同样，然而调用的方法不同。
 
 首先给出常见的 NSFileManager文件方法
-![](http://images.stephenfang.xyz/mweb/15872236886233.jpg)
+![](http://image.stephenfang.me/mweb/15872236886233.jpg)
 
 attributesOfItemAtPath:path 方法返回一个包含指定文件属性的字典,属性字典包括各种信息，如文件的所有者、文件大小、文件的创建日期等。字典的每个属性可以通过键值提取，而所有的键都定义在头文件<Foundation/NSFileManager.h>中,如表示文件大小的键值为NSFileSize，以下列举了一部分常见属性。
 ```
@@ -90,7 +90,7 @@ int main(int argc, char *argv[]){
 
 ```
 书中给出了常见的 NSFileManager 目录方法
-![](http://images.stephenfang.xyz/mweb/15872698118240.jpg)
+![](http://image.stephenfang.me/mweb/15872698118240.jpg)
 
 moveItemAtPath:toPath:方法可以将文件从一个目录移到另一个目录中，如果两个路径引用同一目录中的文件，其结果为重命名这个文件。使用示例代码实现了部分目录操作如下所示：
 
@@ -205,8 +205,8 @@ int main(int argc, char *argv[]){
 
 ###NSPathUtilities
 书中给出了常见的 NSPathUtilities 路径方法表。其中 components 是一个 NSArray 对象，包含路径每一部分的字符串对象；path是一个字符串对象，指定文件的路径; ext 是路径扩展名的字符串对象。
-![](http://images.stephenfang.xyz/mweb/15872706497596.jpg)
-![](http://images.stephenfang.xyz/mweb/15872707108256.jpg)
+![](http://image.stephenfang.me/mweb/15872706497596.jpg)
+![](http://image.stephenfang.me/mweb/15872707108256.jpg)
 以下为一段简单的 NSPathUtilities Demo代码：
 ```objc
 #import <Foundation/Foundation.h>
@@ -249,7 +249,7 @@ int main(int argc, char *argv[]){
 3. 关闭文件
 
 下图中给出了部分常用的NSFileHandle方法
-![](http://images.stephenfang.xyz/mweb/15872843161853.jpg)
+![](http://image.stephenfang.me/mweb/15872843161853.jpg)
 以下为一段简单的 NSFileHandle Demo代码：
 ```objc
 #import <Foundation/Foundation.h>
@@ -298,7 +298,7 @@ int main(int argc, char *argv[]){
 ```
 ### 其他
 书本中列出了部分 iOS 常用目录，内容略微过时但仍有参考意义。
-![](http://images.stephenfang.xyz/mweb/15872707572198.jpg)
+![](http://image.stephenfang.me/mweb/15872707572198.jpg)
 
 ### 参考
 [iOS中的文件管理（一）—— NSFileManager基础](https://www.jianshu.com/p/be80c46ab731)

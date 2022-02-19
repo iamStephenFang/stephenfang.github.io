@@ -36,7 +36,7 @@ int 类型的使用主要体现在循环的控制上，控制循环语句无需�
 NSNumber 是`Objective-C`的类，具体来说是 NSValue 的子类。如果需要存储基本数据类型（包括 signed 或 unsigned char类型和BOOL类型），可以使用 NSNumber 对其进行包装来满足需求，NSNumber 会根据数据的类型创建对象。在集合中也会使用到 NSNumber，如NSSArray、NSSet，因为这些需要对象参与。
 下图摘录了为 NSNumber 对象设值的类和实例方法以及获取这些数值的实例方法。
 
-![](http://images.stephenfang.xyz/mweb/15867486542169.jpg)
+![](http://image.stephenfang.me/mweb/15867486542169.jpg)
 
 #### 简单示例
 给出一个简单的测试示例。
@@ -89,7 +89,7 @@ int main(int argc, char* argv[]){
 Foundation 框架支持 NSString类用于处理字符串对象。C 样式的字符串 char 字符组成，NSString 对象由 unichar 字符组成。unichar 字符是符合 Unicode 标准的多字节字符。NSString 类能够自动处理字符串的内部表示。使用 NSString 类的方法更容易开发出具有本地化的应用程序，并且能够在不同的语言环境下使用。
 
 NSMutableString 类是 NSString 类的子类，可以用来创建可以更改字符的字符串对象，它可以使用 NSString 类所有方法。摘录常见 NSMutableString 方法
-![](http://images.stephenfang.xyz/mweb/15867813113647.jpg)
+![](http://image.stephenfang.me/mweb/15867813113647.jpg)
 
 #### 简单示例
 给出一个简单的测试示例。

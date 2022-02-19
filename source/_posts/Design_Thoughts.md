@@ -22,18 +22,18 @@ Notion招聘的标准为“Designer Who Can Code”，我将其视为也是一�
 ## 最近的设计
 由于并不是设计出身，我自学了 Design + Code 的设计课程，包括Sketch的使用、字体、动画的应用等等，并且学习了少数派的「比身边人多懂一点设计」课程，后者非常推荐没有设计基础的人仔细阅读。目前能做出一些符合我想发的、并不蹩脚的设计，如 App 的 icon 设计、UI设计等等。
 列举两个我发布在 Dribbble 上的作品，第一个是对 Notion 图标的重新设计。由于 Notion 是一款笔记应用，我能够联想到彩色的便签与装帧精美的册子，那如何体现 Notion 的品牌意义呢？我参考了原版 Notion 的图标，为了使得大写字母显得不那么突兀，我为其加上了阴影。最后参照 Logic Pro X等 App 给予其一个恰到好处的倾角。该图标被 Andreas Storm 等人Rebound，也算是一个不小的成就。
-![](http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2001.21.51.png)
+![](http://image.stephenfang.me/%E6%88%AA%E5%9B%BE2020-07-12%20at%2001.21.51.png)
 另一个设计方案就是我的音乐播放器设计，目前编码已经完成了1/2，是我目前完成的第一个“有设计”的App，至少MockUp看起来还不错。其设计理念十分简洁，一个页面只完成一个类别的功能，充分利用 UIKit，目前仍然有不少功能想做，包括接入 Apple Music、从LyricsKit获取歌词等等，无法确定何时上架。
-![](http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2001.33.30.png)
+![](http://image.stephenfang.me/%E6%88%AA%E5%9B%BE2020-07-12%20at%2001.33.30.png)
 最后放出我在 Dribbble 的地址： https://dribbble.com/stephenfang
 
 ## 最近的摄影
 因为疫情缘故今年并没有出门，连寒假旅行也连带取消了，只能通过 Unsplash 发一些先前的照片，我所理解的低阶摄影（也就是我目前实践的）满足于把画面交代清楚，以不一样的构图拍出比游客照更具有感觉的东西。好的照片应该是能够讲述故事的，这也是街头摄影之所以能打动人的原因，显然我并没有做到，但是我仍在不断尝试让平凡的照片看起来具有不平凡的内容。例如对于物体的拍摄，我希望画面能够传递一定的感情信息，例如以下的猫狗照片，你可能会思考它们此刻在想些什么。
-![](http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2013.52.32.png)
-![](http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2013.54.52.png)
+![](http://image.stephenfang.me/%E6%88%AA%E5%9B%BE2020-07-12%20at%2013.52.32.png)
+![](http://image.stephenfang.me/%E6%88%AA%E5%9B%BE2020-07-12%20at%2013.54.52.png)
 另一个要点就是构图，简单的构图方式可能得到不同的效果。构图方式可以简单复制，而建筑和你的视角则不会。
-![](http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2013.56.52.png)
-![](http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2013.59.12.png)
+![](http://image.stephenfang.me/%E6%88%AA%E5%9B%BE2020-07-12%20at%2013.56.52.png)
+![](http://image.stephenfang.me/%E6%88%AA%E5%9B%BE2020-07-12%20at%2013.59.12.png)
 罗伯特·卡帕说过“如果你拍得不够好，是因为你离得不够近”，不做这句话的过分解读，但我确实能够以此作为我玩摄影的一条箴言。以下为在上海人民英雄纪念碑下拍摄的照片，当时只是感觉自己被震撼到了就按下了快门，没有想到登上了 Unsplash 的信息流推荐，这也促使着我业余时间在该平台下继续深耕。
-![](http://images.stephenfang.xyz/%E6%88%AA%E5%9B%BE2020-07-12%20at%2014.00.55.png)
+![](http://image.stephenfang.me/%E6%88%AA%E5%9B%BE2020-07-12%20at%2014.00.55.png)
 最后放出我在 Unsplash 的地址： https://unsplash.com/@stephenfang

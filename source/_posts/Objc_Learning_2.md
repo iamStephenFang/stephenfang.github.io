@@ -157,7 +157,7 @@ calculator.accumulator = value1;
 #### 继承中存在的问题
 在子类中使用实例变量，必须现在接口部分声明变量，而不是在实现部分声明变量。在实现部分声明和合成(`@synthesize`)的实例变量为私有，无法在子类中访问。
 
-![](http://images.stephenfang.xyz/test1.png)
+![](http://image.stephenfang.me/test1.png)
 ## 其他总结
 ### 关于多态
 使不同的类共享相同方法名称的能力叫多态。
@@ -178,7 +178,7 @@ result = [dataValue1 add: dataValue2] ;
 当一个方法选取对象作为它的参数，而另一个方法选取浮点数作为参数时，很有可能发生这种情况。如果这两个方法之间的不一致仅在于对象类型的不同,编译器仍然能够生成正确的代码,因为传递给对象的引用是内存地址(即指针)。
 
 ### 关于类的问题
-![NSObject类支持的基本方法](http://images.stephenfang.xyz/Xnip2020-03-26_21-23-56.png)
+![NSObject类支持的基本方法](http://image.stephenfang.me/Xnip2020-03-26_21-23-56.png)
 
 对`isMemberOfClass`、`isKindOfClass`、`isSubclassOfClass`、`respondsToSelector`、`instancesRespondToSelector`的用法与意义应熟稔于心。
 

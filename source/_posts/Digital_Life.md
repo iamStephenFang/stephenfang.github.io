@@ -16,7 +16,7 @@ copyright: true
 
 <!--more-->
 
-![images.stephenfang.xyz/mweb/s1496668.jpg](http://images.stephenfang.xyz/mweb/s1496668.jpg)
+![image.stephenfang.me/mweb/s1496668.jpg](http://image.stephenfang.me/mweb/s1496668.jpg)
 
 尼古拉·尼葛洛庞帝的《数字化生存》封面
 
@@ -32,11 +32,11 @@ copyright: true
 
 作为一个平凡人，我勉强认为自己比较擅长鼓捣手机，并在鼓捣的过程中有所感悟。然而我也走过一些弯路，曾经下载过盗版的App，执着于哪款手机更优，庆幸的是这些我的行为或想法能够得到纠正，日常使用习惯也进而得到了培养。
 
-![images.stephenfang.xyz/mweb/C68FD435-10A6-449C-8DEB-329A9F4BEC24.jpeg](http://images.stephenfang.xyz/mweb/C68FD435-10A6-449C-8DEB-329A9F4BEC24.jpeg)
+![image.stephenfang.me/mweb/C68FD435-10A6-449C-8DEB-329A9F4BEC24.jpeg](http://image.stephenfang.me/mweb/C68FD435-10A6-449C-8DEB-329A9F4BEC24.jpeg)
 
 我所折腾过的一些数码物件
 
-![images.stephenfang.xyz/mweb/Untitled.png](http://images.stephenfang.xyz/mweb/Untitled.png)
+![image.stephenfang.me/mweb/Untitled.png](http://image.stephenfang.me/mweb/Untitled.png)
 
 我所折腾过的一些数码物件
 
@@ -48,7 +48,7 @@ copyright: true
 
 作为一个工具，那手机必然存在其好处及劣处，且每个人对于手机都有不同的使用习惯和评价标准，你完全可以认为某手机是你当下最好的选择，但他人也完全有理由认为你的看法是错误的。即使你是某个品牌的死忠，也应该客观看待其他厂商推出的各类产品，所谓“信仰”只是一种调侃，而为黑而黑更是没有意义。手机是如此，生活中的许多琐事亦是如此。
 
-![images.stephenfang.xyz/mweb/IMG_1485.jpeg](http://images.stephenfang.xyz/mweb/IMG_1485.jpeg)
+![image.stephenfang.me/mweb/IMG_1485.jpeg](http://image.stephenfang.me/mweb/IMG_1485.jpeg)
 
 我的iPod touch
 
@@ -60,7 +60,7 @@ copyright: true
 
 App Store是Apple生态的一个重要组成部分，相当一部分人选择Apple的平台看重的是优秀的iOS独占App。和很多人一样，我购买iPod touch的理由很大程度上是为了游戏。十年后的今天，我的手机中鲜有游戏，虽然有时也会在闲暇时间与朋友来上两把吃鸡，但是再也不会像以前一样为了打通Angry Birds费尽心思。
 
-![images.stephenfang.xyz/mweb/06CBDF84-B70A-4412-8F67-2D3C7CFD4E85.jpeg](http://images.stephenfang.xyz/mweb/06CBDF84-B70A-4412-8F67-2D3C7CFD4E85.jpeg)
+![image.stephenfang.me/mweb/06CBDF84-B70A-4412-8F67-2D3C7CFD4E85.jpeg](http://image.stephenfang.me/mweb/06CBDF84-B70A-4412-8F67-2D3C7CFD4E85.jpeg)
 
 iOS 4时代的 App Store
 
@@ -70,17 +70,17 @@ iOS 4时代的游戏以单机、逻辑简单的小游戏为主，但也不乏许
 
 现在的我会仍会刻意给所有的App分门别类，然而刚接触 iOS 时我总把首屏留给系统默认App，并且总是在结束App的使用后习惯性将它在后台清除，同时我还会出于自己对 Google 的向往，在自己的手机中安装所有 Google 系的App，这些行为在现在看来是相当愚蠢。
 
-![images.stephenfang.xyz/mweb/0A5E372C-83FF-429D-8B1D-12749EEB60DE.jpeg](http://images.stephenfang.xyz/mweb/0A5E372C-83FF-429D-8B1D-12749EEB60DE.jpeg)
+![image.stephenfang.me/mweb/0A5E372C-83FF-429D-8B1D-12749EEB60DE.jpeg](http://image.stephenfang.me/mweb/0A5E372C-83FF-429D-8B1D-12749EEB60DE.jpeg)
 
 iOS 6时代我的 iPod touch
 
-![images.stephenfang.xyz/mweb/604EE641-9BC7-48BA-BC4B-06DE45144E0A.jpeg](http://images.stephenfang.xyz/mweb/604EE641-9BC7-48BA-BC4B-06DE45144E0A.jpeg)
+![image.stephenfang.me/mweb/604EE641-9BC7-48BA-BC4B-06DE45144E0A.jpeg](http://image.stephenfang.me/mweb/604EE641-9BC7-48BA-BC4B-06DE45144E0A.jpeg)
 
 装满所有 Google 系 App 的 iPhone
 
 首先，更好的应用排布会带来更高的利用效率，试想一下你需要使用某个App记录信息，然而在不使用搜索的情况下每次都要滚动到第二屏，甚至还需要点开一个文件夹才能打开它，还有找不到App的风险，这势必会浪费一部分时间，让你显得手忙脚乱，可能你连需要记录什么都忘了。
 
-![images.stephenfang.xyz/mweb/s26872396.jpg](http://images.stephenfang.xyz/mweb/s26872396.jpg)
+![image.stephenfang.me/mweb/s26872396.jpg](http://image.stephenfang.me/mweb/s26872396.jpg)
 
 山下英子的断舍离封面
 
@@ -96,11 +96,11 @@ iOS 6时代我的 iPod touch
 
 前几天听说最新版本的 iOS 系统再次能够「越狱」了，然而对此新闻感到兴奋的人寥寥无几。从某种角度来说，「越狱」也是当时导致盗版猖獗的一大原因，然而「越狱」的最重要意义却是让 iOS 设备更具个性化，如 iOS 5 时期我会通过「越狱」去为自己的设备增加通知中心的功能，在 iOS 4 时期我会通过「越狱」给我的iPod touch增加虚拟内存。
 
-![http://images.stephenfang.xyz/mweb/223F237B-B3BB-4BF5-8361-F037537C98EC.jpeg](http://images.stephenfang.xyz/mweb/223F237B-B3BB-4BF5-8361-F037537C98EC.jpeg)
+![http://image.stephenfang.me/mweb/223F237B-B3BB-4BF5-8361-F037537C98EC.jpeg](http://image.stephenfang.me/mweb/223F237B-B3BB-4BF5-8361-F037537C98EC.jpeg)
 
 “Jailbreak”界面
 
-![http://images.stephenfang.xyz/mweb/C215DC38-4A0D-42F6-94A8-37EEE9EBD3C6.jpeg](http://images.stephenfang.xyz/mweb/C215DC38-4A0D-42F6-94A8-37EEE9EBD3C6.jpeg)
+![http://image.stephenfang.me/mweb/C215DC38-4A0D-42F6-94A8-37EEE9EBD3C6.jpeg](http://image.stephenfang.me/mweb/C215DC38-4A0D-42F6-94A8-37EEE9EBD3C6.jpeg)
 
 “奔跑的大菠萝”
 
@@ -110,7 +110,7 @@ iOS 的付费购买体系目前已经十分成熟，你可以通过各种支付�
 
 微软推出的 Office 365 是一个很有趣的例子，在高中的时候我开始每年为 Office 365 付费，我完全厌倦了 WPS 恼人的广告机制，能够用到正版 Office 令我十分开心，然而这样的行为当时为许多人所不解。近年来使用正版 Office 的成本不断降低，愿意使用正版的人群也逐渐壮大，微软也在努力提升该产品的价值，现在你能够以每年 70多元的价格购买到 Office 套件的全部功能，如果你确定Office能够提供你工作中的便利，那么其价格完全不构成经济上的负担，何况这其中还包括完善的云服务，我认为这是消费者与产品提供商实现的一种协调。当然如果你使用的是Mac，你完全可以用 Apple 的 iWork 套件替代 Office 的工作流，总是有合适的方案替代最坏的使用盗版的方案。你如果觉得购买 Mac 上的 Apps 太贵，可以选择订阅性质的 Setapp，只要你对于设备生产力的界定在“爱奇艺“之上，这些举措都是有意义的。
 
-![http://images.stephenfang.xyz/mweb/Xnip2020-04-12_00-33-00.png](http://images.stephenfang.xyz/mweb/Xnip2020-04-12_00-33-00.png)
+![http://image.stephenfang.me/mweb/Xnip2020-04-12_00-33-00.png](http://image.stephenfang.me/mweb/Xnip2020-04-12_00-33-00.png)
 
 采用订阅收费制度的Setapp
 
@@ -124,13 +124,13 @@ iOS 的付费购买体系目前已经十分成熟，你可以通过各种支付�
 
 我的一位高中同学对任何知识都满怀好奇，无论是他所不熟悉的电竞领域还是他所了解的电影市场，凡是能够引起讨论的内容他都略知一二，我暂且认定他的学习方法称之为“杂学”。起初我对这种学习方式不以为然，认为学习的重要方法在于精而不是杂，渐渐地，我开始觉得这种方式在信息爆炸的年代存在其合理性。
 
-![http://images.stephenfang.xyz/mweb/s1429010.jpg](http://images.stephenfang.xyz/mweb/s1429010.jpg)
+![http://image.stephenfang.me/mweb/s1429010.jpg](http://image.stephenfang.me/mweb/s1429010.jpg)
 
 许多人的理财启蒙读物——《富爸爸，穷爸爸》
 
 首先，他的学习内容仍然是以兴趣为第一导向，对于乏味、无用的内容他一概不学，确保了学习过程的积极性和主动性；其次，在阅读了《富爸爸穷爸爸》这本书后，我认为当时我当时的观点与书中穷爸爸对于停留在某种体制内、在某一方面成为专家的观点无异，而书中的富爸爸则倡导学习各方的知识，如财务知识、交谈经验等，这一出发点对该书的作者产生了深刻的影响，促成了其人生中的诸多机会，同时也造就了该书作者的经济地位——这也就是我想说的，求知欲以及交叉学科知识产生的影响。
 
-![http://images.stephenfang.xyz/mweb/999FB844-A92A-4852-BA27-6BC0091DCB8C.jpg](http://images.stephenfang.xyz/mweb/999FB844-A92A-4852-BA27-6BC0091DCB8C.jpg)
+![http://image.stephenfang.me/mweb/999FB844-A92A-4852-BA27-6BC0091DCB8C.jpg](http://image.stephenfang.me/mweb/999FB844-A92A-4852-BA27-6BC0091DCB8C.jpg)
 
 12年我的音乐资料库
 
