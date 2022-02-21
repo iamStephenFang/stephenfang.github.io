@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://stephefang.me/2022/01/20/Photo_Library/</loc>
+    
+    <lastmod>2022-02-21</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://stephefang.me/2022/02/20/Yunnan_Travelling/</loc>
     
     <lastmod>2022-02-20</lastmod>
@@ -228,7 +235,7 @@
 
   <url>
     <loc>https://stephefang.me/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -236,224 +243,245 @@
   
   <url>
     <loc>https://stephefang.me/tags/struts/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/Action/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/JavaEE/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/%E5%AE%9E%E9%AA%8C/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/Apple/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/Xcode/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/iOS/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/UI/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/%E6%95%B0%E5%AD%97%E7%94%9F%E6%B4%BB/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/%E6%9D%82%E6%96%87/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/Vue-js/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/OpenCV/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/Swift/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/Music/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/Hibernate/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/Java/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/AudioPlayer/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/Objective-C/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/ARC/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/Grayscale/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/workflow/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/SwiftUI/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/%E5%85%B3%E8%81%94%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/WEKA/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/travel/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/china/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/%E6%97%85%E8%A1%8C/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/tags/%E7%94%9F%E6%B4%BB/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/tags/Photo/</loc>
+    <lastmod>2022-02-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/tags/iOS-15/</loc>
+    <lastmod>2022-02-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://stephefang.me/tags/iOS-14/</loc>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -462,21 +490,21 @@
   
   <url>
     <loc>https://stephefang.me/categories/tech/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/categories/design/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://stephefang.me/categories/life/</loc>
-    <lastmod>2022-02-20</lastmod>
+    <lastmod>2022-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
