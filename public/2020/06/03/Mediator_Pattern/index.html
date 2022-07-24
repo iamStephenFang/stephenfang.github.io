@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"stephefang.me","root":"/","images":"/images","scheme":"Mist","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":true,"nav":null,"activeClass":"changyan"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="中介者模式(Mediator Pattern)，又称为调停者模式，是一种对象行为型模式。该设计模式使用一个中介对象（中介者）来封装一系列的对象交互，使得各对象不需要显式地相互引用，从而使其耦合松散、独立地改变它们之间的交互。本文以设计模式的四个要素出发系统性地研究中介者模式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件设计模式 - 中介者模式">
+<meta property="og:url" content="https://stephefang.me/2020/06/03/Mediator_Pattern/index.html">
+<meta property="og:site_name" content="StephenFang">
+<meta property="og:description" content="中介者模式(Mediator Pattern)，又称为调停者模式，是一种对象行为型模式。该设计模式使用一个中介对象（中介者）来封装一系列的对象交互，使得各对象不需要显式地相互引用，从而使其耦合松散、独立地改变它们之间的交互。本文以设计模式的四个要素出发系统性地研究中介者模式。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15917479538199.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15917479852765.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15917481238616.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15917481870001.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15917485113553.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15917485380247.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15917485453277.jpg">
+<meta property="article:published_time" content="2020-06-03T09:23:20.000Z">
+<meta property="article:modified_time" content="2022-07-24T15:20:03.844Z">
+<meta property="article:author" content="Stephen Fang">
+<meta property="article:tag" content="设计模式">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://image.stephenfang.me/mweb/15917479538199.jpg">
+
+
+<link rel="canonical" href="https://stephefang.me/2020/06/03/Mediator_Pattern/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://stephefang.me/2020/06/03/Mediator_Pattern/","path":"2020/06/03/Mediator_Pattern/","title":"软件设计模式 - 中介者模式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>软件设计模式 - 中介者模式 | StephenFang</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="StephenFang" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">StephenFang</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">模式目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">实现方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">模式简例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">模式总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stephen Fang"
+      src="/images/favicon.png">
+  <p class="site-author-name" itemprop="name">Stephen Fang</p>
+  <div class="site-description" itemprop="description">StephenFang's GitHub Page</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamstephenfang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fangxuanmiao@gmail.com" title="E-Mail → mailto:fangxuanmiao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/iamstephenfang" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/fangxuanmiao" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;fangxuanmiao" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/iamstephenfang" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+  <a href="https://github.com/iamstephenfang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stephefang.me/2020/06/03/Mediator_Pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.png">
+      <meta itemprop="name" content="Stephen Fang">
+      <meta itemprop="description" content="StephenFang's GitHub Page">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StephenFang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          软件设计模式 - 中介者模式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-03 17:23:20" itemprop="dateCreated datePublished" datetime="2020-06-03T17:23:20+08:00">2020-06-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-07-24 23:20:03" itemprop="dateModified" datetime="2022-07-24T23:20:03+08:00">2022-07-24</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2020/06/03/Mediator_Pattern/" class="post-meta-item leancloud_visitors" data-flag-title="软件设计模式 - 中介者模式" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/06/03/Mediator_Pattern/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2020/06/03/Mediator_Pattern/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>中介者模式(Mediator Pattern)，又称为调停者模式，是一种对象行为型模式。该设计模式使用一个中介对象（中介者）来封装一系列的对象交互，使得各对象不需要显式地相互引用，从而使其耦合松散、独立地改变它们之间的交互。本文以设计模式的四个要素出发系统性地研究中介者模式。</p>
+<span id="more"></span>
+
+<h2 id="模式目的"><a href="#模式目的" class="headerlink" title="模式目的"></a>模式目的</h2><p>中介的含义不难理解，以具体的生活场景为例，在租房、留学、找工作等时期或多或少都需要中介的帮助。互联网上实时更新的海量信息与错综复杂的关系让你无法分辨真实性与参考性，所以你无法躲避这些中介关系，只能够通过其获取你所需要的信息。<br>在软件世界也同样如此，当有多个对象彼此间相互交互的时候，自然就会想到对象间的耦合度过高，而中介者模式就是用来解决这一问题的，通过封装对象间的交互行为，来降低对象之间的耦合性，防止出现系统或模块内部过度耦合。以下的图片展现了具备复杂关联关系的对象模拟图。<br><img src="http://image.stephenfang.me/mweb/15917479538199.jpg"><br>图2.1 复杂关联关系模拟图<br>根据上图以及以往程序设计中的经验，我们可以推断出程序设计中存在过多复杂关联关系带来的问题：</p>
+<ol>
+<li>   系统结构复杂：对象之间存在大量的相互关联和调用，若其中一个对象发生变化，则需要跟踪和该对象关联的其他所有对象并进行相应处理。</li>
+<li>   对象可重用性差：由于一个对象和其他对象具有很强的关联，若不存在其他对象的支持，一个对象很难被另一个系统或模块重用，这些对象表现像一个不可分割的整体，职责较为混乱。</li>
+<li>   系统扩展性低：增加一个新对象需要在原有相关对象上增加引用，同时调整原有对象，系统耦合度高，对象操作很不灵活，扩展性差。</li>
+</ol>
+<p>在面向对象的软件设计与开发过程中，根据“单一职责原则”，我们应该尽量将对象细化，使其只负责或呈现单一的职责。对于一个可能由很多对象构成的模块，这些对象之间可能存在相互的引用，为了减少对象两两之间复杂的引用关系，使之成为一个松耦合的系统，我们需要使用中介者模式，下图十分生动地展现了中介者模式的意义。</p>
+<p><img src="http://image.stephenfang.me/mweb/15917479852765.jpg"><br>图2.2 中介者模式应用模拟图<br>由上述的描述可知，中介者模式的目的主要是为了降低模块内部之间类的相互引用，防止出现系统或模块内部过度耦合。</p>
+<h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><p>从问题出发，我们总结出中介者需要承担两方面的职责：</p>
+<ul>
+<li>中转作用（结构性）：<br>通过中介者提供的中转作用，各个同事对象就不再需要显式引用其他同事，当需要和其他同事进行通信时，通过中介者即可。</li>
+<li>协调作用（行为性）：<br>中介者可以更进一步的对同事之间的关系进行封装，同事可以一致地和中介者进行交互，而不需要指明中介者需要具体怎么做，中介者根据封装在自身内部的协调逻辑，对同事的请求进行进一步处理，将同事成员之间的关系行为进行分离和封装。</li>
+</ul>
+<p>从中介者模式的组成而言，其主要包含四个角色：</p>
+<ul>
+<li>Mediator（抽象中介者）：定义一个接口用于与各同事对象之间的通信</li>
+<li>   ConcreteMediator（具体中介者）：抽象中介者的子类，通过协调各个同事对象来实现协作行为，了解并维护它的各个同事对象的引用；</li>
+<li>   Colleague（抽象同事类）：定义各同事的公有方法；</li>
+<li>   ConcreteColleague（具体同事类）：抽象同事类的子类，每一个同事对象都引用一个中介者对象；每一个同事对象在需要和其他同事对象通信时，先与中介者通信，通过中介者来间接完成与其他同事类的通信；在具体同事类中实现了在抽象同事类中定义的方法。</li>
+</ul>
+<p>下图展示了中介者模式中的类结构，可以清楚地看到四种角色之间的关系。<br><img src="http://image.stephenfang.me/mweb/15917481238616.jpg"><br>图3.1 中介者模式类图</p>
+<p>中介者模式可以方便地应用于图形界面(GUI)开发中，在比较复杂的界面中可能存在多个界面组件之间的交互关系。对于这些复杂的交互关系，我们可以引入一个中介者类，将这些交互的组件作为具体的同事类，将它们之间的引用和控制关系交由中介者负责，在一定程度上简化系统的交互，<br>MVC架构中控制器（Controller）作为一种中介者，是数据模型对象与视图之间的桥梁，它监听视图上的交互动作并且对视图的状态作出反应，同时在Model通知数据发生改变的时候更新Model的状态。以移动应用开发为例，当用户点击按钮或在View中输入信息后视图会通知控制器，控制器解释用户交互逻辑，然后联系模型获取完成请求所需的信息。模型将信息提供给控制器，控制器将其中继到视图，视图将其显示给用户。</p>
+<p><img src="http://image.stephenfang.me/mweb/15917481870001.jpg"></p>
+<p>图3.2 MVC模式</p>
+<h2 id="模式简例"><a href="#模式简例" class="headerlink" title="模式简例"></a>模式简例</h2><p>科技发达之后家里所有设备都是智能化的，而小明在家洗澡的时候有个习惯就是喜欢听歌，而且洗澡时候还要把窗帘拉上。因此就有这种情形，小明拉上窗帘说明洗浴设备需要工作，并且音乐设备也将唤醒。因此我们希望小明家的洗浴设备、音响设备和窗帘设备能协同合作，不管操作哪种设备，其他两种设备都有响应。<br>现在很明显我们可以看出来，我们有三个对象，也就是三种设备，程序看起来也很简单，只要在启动一个设备时，能同时启动另外两个设备。那么我们只需在一个设备的类里放两个其他设备的引用，很容易就能解决这个问题，这样写出来的程序对象关系如下图。<br><img src="http://image.stephenfang.me/mweb/15917485113553.jpg"><br>图4.1 修改前模式<br>该程序最主要的功能就是在一个类里完成了对另外两个类的方法作用。但是这样设计，由耦合度过高的问题带来两个主要缺陷</p>
+<ul>
+<li>一旦窗帘设备损坏需要更换，那么就要让新的窗帘设备建立所有其他设备的连接</li>
+<li>若产生新的的需求，如洗澡的时候要把门锁住，那门锁的智能设备又要关联所有设备，这样的程序设计使得在扩展程序功能时更加麻烦。</li>
+</ul>
+<p>中介者模式的引入则极大的弥补了上述程序的两个缺陷，对象交互如下图：<br><img src="http://image.stephenfang.me/mweb/15917485380247.jpg"><br>图4.2 修改后模式</p>
+<p>中介者就好比智能家居的管家，所有对象的交互指令都通过它来传达。中介者负责与对象联系，对象与对象之间不再进行直接的交互，也就是对对象关系进行解耦。</p>
+<p> <img src="http://image.stephenfang.me/mweb/15917485453277.jpg"><br>图4.2 程序类图</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MusicDevice</span> <span class="keyword">extends</span> <span class="title">Device</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operateDevice</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(str != <span class="string">&quot;MusicDevice&quot;</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;音乐设备已启动&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(str == <span class="string">&quot;true&quot;</span>)&#123;</span><br><span class="line">            Mediator();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Mediator</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ConcreteMediator mediator = <span class="keyword">new</span> ConcreteMediator();</span><br><span class="line">        mediator.startUp(<span class="string">&quot;MusicDevice&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure>
+<p>音乐设备部分的代码如上，其他设备代码可以参照此例。设备类都继承自Device类，其中主要由两个方法组成，一个是operateDevice函数，用来启动设备，另一个是Mediator函数，用来调用中介者，并以中介者为媒介启动其他设备。Mediator由operateDevice函数进行调用，并设置了判断条件，防止反复调用中介者类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteMediator</span> <span class="keyword">extends</span> <span class="title">SmartMediator</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startUp</span><span class="params">(String item)</span></span>&#123;</span><br><span class="line">        MusicDevice musicDevice = <span class="keyword">new</span> MusicDevice();</span><br><span class="line">        CurtainDevice curtainDevice = <span class="keyword">new</span> CurtainDevice();</span><br><span class="line">        BathDevice bathDevice = <span class="keyword">new</span> BathDevice();</span><br><span class="line"></span><br><span class="line">        musicDevice.operateDevice(item);</span><br><span class="line">        curtainDevice.operateDevice(item);</span><br><span class="line">        bathDevice.operateDevice(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>中介者类如上，即程序最为重要的部分。当它的startUp方法被某一设备调用之后，它会新建所有设备的类，并且调用除了已启动的设备之外，所有其他设备的启动方法。在启动方法中设置了参数，以防止循环调用。当我们想要添加新的设备的时候，只需要编写新设备类，并且在中介者类中添加该类的启动方法，就能完成修改。从而降低代码之间的耦合性，提高了程序的可维护性。</p>
+<p>程序分析：</p>
+<ol>
+<li>该程序解决了上述两个缺陷，现在所有设备都只与中介者相关联，不管是新增设备还是替换设备，只需要改变设备与中介者之间的关系，降低了代码之间的耦合性。</li>
+<li>改变设计之后所有设备的启动项都由中介者管理，用户可以通过中介者方便地启动所有设备，而不需要将所有设备之间连接起来。避免了随着设备的增多，设备之间的联系变得无比复杂的情况。</li>
+</ol>
+<h2 id="模式总结"><a href="#模式总结" class="headerlink" title="模式总结"></a>模式总结</h2><ol>
+<li><p>   中介者模式优点：    - 简化了对象之间的交互。    - 将各同事解耦，减少子类生成，增加对象的复用性。    - 简化各同事类的设计和实现，便于系统维护。</p>
+</li>
+<li><p>   中介者模式缺点：    - 在具体中介者类中包含了同事之间的交互细节，如果中介者类设计的不好，可能会导致具体中介者类非常复杂，使得系统难以维护。    - 中介者对象本身需要整理系统内部的对象之间的交互，可能会导致其本身会变得臃肿和复杂，进而变得难以维护</p>
+</li>
+<li><p>中介者模式的适用环境：</p>
+<ul>
+<li>系统中对象之间存在复杂的引用关系，产生的相互依赖关系结构混乱且难以理解。</li>
+<li>一个对象引用了很多对象并且直接和这些对象通信，导致难以复用该对象。</li>
+<li>希望通过一个中间类来封装多个类中的行为，而又不想生成太多的子类。可以通过引入中介者类来实现，在中介者中定义对象。</li>
+<li>交互的公共行为，如果需要改变行为则可以增加新的中介者类。</li>
+</ul>
+</li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F">中介者模式-维基百科</a><br><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/mediator.html">中介者模式— Graphic Design Patterns - 图说设计模式</a><br><a target="_blank" rel="noopener" href="https://juejin.im/post/5bd275dc51882529290fe2c5">设计模式 | 中介者模式及典型应用</a><br><a target="_blank" rel="noopener" href="https://storm.cis.fordham.edu/~gweiss/data-mining/datasets.html">中介者模式 - jyqdaisy - 博客园</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/06/07/Singleton_Pattern/" rel="bookmark">软件设计模式 - 单例模式</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请作者喝一杯咖啡</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Stephen Fang 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Stephen Fang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/Fangxuanmiao">
+          <span class="icon">
+            <i class="twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/stephenfang">
+          <span class="icon">
+            <i class="telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat_account.jpg">
+          <span class="icon">
+            <i class="wechat"></i>
+          </span>
+
+          <span class="label">Wechat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/04/24/Objc_Learning_8/" rel="prev" title="Objective-C 学习笔记(八）">
+                  <i class="fa fa-chevron-left"></i> Objective-C 学习笔记(八）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/06/07/Singleton_Pattern/" rel="next" title="软件设计模式 - 单例模式">
+                  软件设计模式 - 单例模式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stephen Fang</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">180k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:43</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"QnhiKXiUBCNtXH1MOoOB9EuB-MdYXbMMI","app_key":"1oyNoEMdzuJrPz8c97G4vQQ0","server_url":"stephenfang.me","security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvA2uszA","appkey":"19e7b9db2888f0b395999a5c42574f4e"}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"stephefang.me","root":"/","images":"/images","scheme":"Mist","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":true,"nav":null,"activeClass":"changyan"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="我希望有一款 Tab Based 的 iOS App 带来简约轻量的音乐播放体验，作为一个有一些 iOS 基础的人，我决定自己开发一个简单的本地音乐播放器，正好实践一些 UIKit 控件的使用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Muzik开发总结 — 设计与实现">
+<meta property="og:url" content="https://stephefang.me/2020/07/15/Muzik_Progress/index.html">
+<meta property="og:site_name" content="StephenFang">
+<meta property="og:description" content="我希望有一款 Tab Based 的 iOS App 带来简约轻量的音乐播放体验，作为一个有一些 iOS 基础的人，我决定自己开发一个简单的本地音乐播放器，正好实践一些 UIKit 控件的使用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://image.stephenfang.me/sketch.png">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958622925026.png">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958623328077.png">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958624669288.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/strc.png">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958633632257.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958635741661.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958637814033.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958640618143.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958641787194.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958647723869.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958648056682.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958650862897.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958640040336.jpg">
+<meta property="og:image" content="http://image.stephenfang.me/mweb/15958655245499.jpg">
+<meta property="article:published_time" content="2020-07-15T11:15:20.000Z">
+<meta property="article:modified_time" content="2022-07-24T15:20:23.603Z">
+<meta property="article:author" content="Stephen Fang">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="音乐App">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://image.stephenfang.me/sketch.png">
+
+
+<link rel="canonical" href="https://stephefang.me/2020/07/15/Muzik_Progress/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://stephefang.me/2020/07/15/Muzik_Progress/","path":"2020/07/15/Muzik_Progress/","title":"Muzik开发总结 — 设计与实现"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Muzik开发总结 — 设计与实现 | StephenFang</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="StephenFang" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">StephenFang</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E7%BB%87"><span class="nav-number">4.</span> <span class="nav-text">组织</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.</span> <span class="nav-text">页面实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B2%BE%E9%80%89%E9%A1%B5%E9%9D%A2"><span class="nav-number">5.1.</span> <span class="nav-text">精选页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%93%E8%BE%91%E9%A1%B5%E9%9D%A2"><span class="nav-number">5.2.</span> <span class="nav-text">专辑页面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%8C%E6%9B%B2%E9%A1%B5%E9%9D%A2"><span class="nav-number">6.</span> <span class="nav-text">歌曲页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9F%B3%E4%B9%90%E4%BA%BA%E9%A1%B5%E9%9D%A2"><span class="nav-number">7.</span> <span class="nav-text">音乐人页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E9%A1%B5%E9%9D%A2"><span class="nav-number">8.</span> <span class="nav-text">播放列表页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E9%A1%B5%E9%9D%A2"><span class="nav-number">9.</span> <span class="nav-text">搜索页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%9C%A8%E6%92%AD%E6%94%BE%E9%A1%B5%E9%9D%A2"><span class="nav-number">10.</span> <span class="nav-text">正在播放页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">11.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stephen Fang"
+      src="/images/favicon.png">
+  <p class="site-author-name" itemprop="name">Stephen Fang</p>
+  <div class="site-description" itemprop="description">StephenFang's GitHub Page</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/iamstephenfang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fangxuanmiao@gmail.com" title="E-Mail → mailto:fangxuanmiao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/iamstephenfang" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/fangxuanmiao" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;fangxuanmiao" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/iamstephenfang" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;iamstephenfang" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+  <a href="https://github.com/iamstephenfang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stephefang.me/2020/07/15/Muzik_Progress/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.png">
+      <meta itemprop="name" content="Stephen Fang">
+      <meta itemprop="description" content="StephenFang's GitHub Page">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StephenFang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Muzik开发总结 — 设计与实现
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-15 19:15:20" itemprop="dateCreated datePublished" datetime="2020-07-15T19:15:20+08:00">2020-07-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-07-24 23:20:23" itemprop="dateModified" datetime="2022-07-24T23:20:23+08:00">2022-07-24</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2020/07/15/Muzik_Progress/" class="post-meta-item leancloud_visitors" data-flag-title="Muzik开发总结 — 设计与实现" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/07/15/Muzik_Progress/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2020/07/15/Muzik_Progress/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>我希望有一款 Tab Based 的 iOS App 带来简约轻量的音乐播放体验，作为一个有一些 iOS 基础的人，我决定自己开发一个简单的本地音乐播放器，正好实践一些 UIKit 控件的使用。</p>
+<span id="more"></span>
+
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>本系列文章是开发一个简易的音乐播放器（暂时命名为“Muzik”）的博客记录，本篇目的在于展示设计与实现方面的进度。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>iOS 13.6</li>
+<li>Xcode 11.6</li>
+</ul>
+<h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><p><img src="http://image.stephenfang.me/sketch.png" alt="截图2020-07-27 at 22.58.20"><br>在项目开始编写代码前，我使用 Sketch 对整个App 进行设计，确定了字体与元素的使用规范，方便之后针对我想要实现的设计进行微调。其实这一步也可以直接在 StoryBoard 中完成，然而添加阴影等操作在 Sketch 等原型创作工具中更为直观。<br>在完成设计后我尝试使用 Sketch Mirror、MockUp工具对 App 上手的感受进行评估，并发送原型给朋友了解他们提出的一些建议。<br><img src="http://image.stephenfang.me/mweb/15958622925026.png"><br>至少在 MockUp 效果下 App的整体观感还让我比较满意。我希望这种简单的风格贯穿整个 App，使得我能够用 UIKit 较为轻松地实现 App 的功能。<br> <img src="http://image.stephenfang.me/mweb/15958623328077.png"></p>
+<p>支持 Dark Mode 也是大势所趋，针对 iOS 13 之后的 App 都应该加入支持。为了给 iPhone X设备带来更好的视觉观感，我选择了纯黑作为 App 的底色。<br><img src="http://image.stephenfang.me/mweb/15958624669288.jpg"></p>
+<h2 id="组织"><a href="#组织" class="headerlink" title="组织"></a>组织</h2><p>按照 Sketch 中的页面设计，我将整体 App 分为精选、专辑、歌曲、音乐人、播放列表、正在播放这几个部分，其中我希望有一个小组件能像原生音乐App一样能够看到当前播放进度以及进行快捷操作，于是我将包含显示当前播放内容的 UIView 置于App的顶层位置，其中UIView中包含 UIProgressView 等控件。这是我目前能够想到且实现的理想方法，缺点即需要为下层的所有视图添加 Offset。<br>Tab + Navigation 是 iOS 开发中一种非常常见的模式，每一个页面依次对应了精选、专辑、歌曲、音乐人、播放列表的功能。<br><img src="http://image.stephenfang.me/strc.png"></p>
+<h2 id="页面实现"><a href="#页面实现" class="headerlink" title="页面实现"></a>页面实现</h2><h3 id="精选页面"><a href="#精选页面" class="headerlink" title="精选页面"></a>精选页面</h3><p>页面包含最近添加的专辑、收听最多的歌曲、常听的播放列表等栏目组成，点击不同栏目的项目可以触发不同的二级功能。从此页面可以简述我的设计理念，即专辑使用卡片式的设计语言，更契合 iOS 13 的设计风格。<br><img src="http://image.stephenfang.me/mweb/15958633632257.jpg" alt="-w301"></p>
+<h3 id="专辑页面"><a href="#专辑页面" class="headerlink" title="专辑页面"></a>专辑页面</h3><p>卡片式的专辑页面，点击不同的专辑进入详情页面。需要注意的是我为该页面添加了可隐藏的索引栏，避免索引栏与专辑页面重合，显得过于拥挤，这一点在歌曲页面可以看到。<br><img src="http://image.stephenfang.me/mweb/15958635741661.jpg" alt="-w301"></p>
+<p>点击专辑卡片进入相应的详情页面，简单的 TableView 实现。<br><img src="http://image.stephenfang.me/mweb/15958637814033.jpg" alt="-w301"></p>
+<h2 id="歌曲页面"><a href="#歌曲页面" class="headerlink" title="歌曲页面"></a>歌曲页面</h2><p>从歌曲页面可以看到右侧的可隐藏的索引栏，这里学习了 Ecoute 的设计。App 整体的设计风格十分统一，无论是字体还是网格。<br><img src="http://image.stephenfang.me/mweb/15958640618143.jpg" alt="-w301"></p>
+<h2 id="音乐人页面"><a href="#音乐人页面" class="headerlink" title="音乐人页面"></a>音乐人页面</h2><p>这个页面是我目前不满意的一个页面，因为 iOS 的MediaLibrary 框架中并没有提供获取 <code>albumArtist</code>的 <code>artwork</code> 的方法。目前有改进的方案，即通过请求 iTunes Store 数据库返回 JSON，获取其中的艺人封面 url 并缓存其中的艺人封面。思路有一些类似于 <a target="_blank" rel="noopener" href="https://github.com/SDWebImage/SDWebImage">SDWebImage</a>，然而希望以自己的方式进行简单实现。<br><img src="http://image.stephenfang.me/mweb/15958641787194.jpg" alt="-w301"></p>
+<p>同样，点击不同的 row 进入相应的音乐人详情页面，区别是这个采用 CollectionView 实现。<br><img src="http://image.stephenfang.me/mweb/15958647723869.jpg" alt="-w301"></p>
+<h2 id="播放列表页面"><a href="#播放列表页面" class="headerlink" title="播放列表页面"></a>播放列表页面</h2><p>根据播放列表的实际需求实现了显示页面，由于时间过于仓促没有认真适配播放列表的缩略图。<br>正打算自己花时间写一个类似于原声音乐播放器的播放列表的缩略图效果，我在 GitHub 上找到了一个类似的开源项目: <a target="_blank" rel="noopener" href="https://github.com/zhengjinghua/StitchingImage"><br>StitchingImage</a><br><img src="http://image.stephenfang.me/mweb/15958648056682.jpg" alt="-w301"></p>
+<p>然而实现语言为 Objective-C，我正在尝试用 Swift 将其进行重写，之后会开源到 GitHub 上。</p>
+<p>详情页还是同样的味道，目前做的仍然十分粗糙，我会尝试对 UI 进行持续改进。<br><img src="http://image.stephenfang.me/mweb/15958650862897.jpg" alt="-w301"></p>
+<h2 id="搜索页面"><a href="#搜索页面" class="headerlink" title="搜索页面"></a>搜索页面</h2><p>点击任意一级页面导航栏的搜索按钮会激活搜索页面，使用框架的方法调用实现了简单的检索。<br><img src="http://image.stephenfang.me/mweb/15958640040336.jpg" alt="-w301"></p>
+<h2 id="正在播放页面"><a href="#正在播放页面" class="headerlink" title="正在播放页面"></a>正在播放页面</h2><p>类似于原生的播放页面，目前正在对整个页面进行重构，包括 UI 部分与代码部分。<br>目前主要通过 Timer 与 Observer 实现了简单的功能实现，但是为了达到优雅听歌的目标功能远不于此，我正在尝试接入<a target="_blank" rel="noopener" href="https://github.com/ddddxxx/LyricsKit">LyricsKit</a> 使得页面具有显示歌词的功能，这里需要用到 ScrollView 与 PageControl的加持。<br><img src="http://image.stephenfang.me/mweb/15958655245499.jpg" alt="-w301"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上为目前的进度总结，我会持续更新 App 的开发过程，包括代码总结与功能实现。</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/01/Haze-Free/" rel="bookmark">iOS 图像处理 App - OpenCV 与 Swift 开发</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/08/Muzik_GettingStarted/" rel="bookmark">Muzik开发总结 — AVAudioPlayer 实践</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2022/01/20/Photo_Library/" rel="bookmark">iOS14 & iOS 15 相册适配</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请作者喝一杯咖啡</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Stephen Fang 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Stephen Fang 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/Fangxuanmiao">
+          <span class="icon">
+            <i class="twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/stephenfang">
+          <span class="icon">
+            <i class="telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat_account.jpg">
+          <span class="icon">
+            <i class="wechat"></i>
+          </span>
+
+          <span class="label">Wechat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/iOS/" rel="tag"># iOS</a>
+              <a href="/tags/Swift/" rel="tag"># Swift</a>
+              <a href="/tags/%E9%9F%B3%E4%B9%90App/" rel="tag"># 音乐App</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/07/08/Muzik_GettingStarted/" rel="prev" title="Muzik开发总结 — AVAudioPlayer 实践">
+                  <i class="fa fa-chevron-left"></i> Muzik开发总结 — AVAudioPlayer 实践
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/12/EffectiveObjcTips/" rel="next" title="Effective Objective-C 总结">
+                  Effective Objective-C 总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stephen Fang</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">180k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:43</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"QnhiKXiUBCNtXH1MOoOB9EuB-MdYXbMMI","app_key":"1oyNoEMdzuJrPz8c97G4vQQ0","server_url":"stephenfang.me","security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvA2uszA","appkey":"19e7b9db2888f0b395999a5c42574f4e"}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>
