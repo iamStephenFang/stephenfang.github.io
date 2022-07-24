@@ -2,7 +2,7 @@
 title: OpenCV 图像直方图与均衡化
 date: 2020-03-16 16:20:20
 categories: 
-- tech
+- 技术
 tags: 
 - OpenCV
 - Xcode

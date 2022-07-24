@@ -2,10 +2,9 @@
 title: 控制器组件 Action 实验
 date: 2020-02-26 11:10:20
 categories: 
-- tech
+- 技术
 tags: 
 - struts
-- Action
 - JavaEE
 - 总结
 - 实验

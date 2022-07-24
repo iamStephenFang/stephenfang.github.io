@@ -2,12 +2,11 @@
 title: 云南旅行流水账
 date: 2022-02-20 16:00:00
 categories: 
-- life
-tags: 
-- travel
-- china
-- 旅行
 - 生活
+tags: 
+- 旅行
+- 云南
+- 中国
 copyright: true
 ---
 

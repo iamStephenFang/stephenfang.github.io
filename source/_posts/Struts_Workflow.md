@@ -2,7 +2,7 @@
 title: Struts 工作流程总结
 date: 2020-02-24 11:10:20
 categories: 
-- tech
+- 技术
 tags: 
 - struts
 - workflow

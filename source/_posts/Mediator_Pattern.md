@@ -2,7 +2,7 @@
 title: 软件设计模式 - 中介者模式
 date: 2020-06-03 17:23:20
 categories: 
-- tech
+- 技术
 tags: 
 - 设计模式
 - Java

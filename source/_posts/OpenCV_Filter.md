@@ -2,7 +2,7 @@
 title: OpenCV 图像滤波
 date: 2020-04-01 18:40:20
 categories: 
-- tech
+- 技术
 tags: 
 - OpenCV
 - Xcode

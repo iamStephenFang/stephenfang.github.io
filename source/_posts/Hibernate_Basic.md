@@ -2,7 +2,7 @@
 title: Hibernate 基础总结
 date: 2020-02-25 13:11:20
 categories: 
-- tech
+- 技术
 tags: 
 - Hibernate
 - JavaEE

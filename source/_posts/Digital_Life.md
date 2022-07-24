@@ -2,11 +2,10 @@
 title: 数字生活启示录
 date: 2020-04-12 02:43:20
 categories: 
-- tech
+- 技术
 tags: 
 - iOS
 - 数字生活
-- 杂文
 copyright: true
 ---
 

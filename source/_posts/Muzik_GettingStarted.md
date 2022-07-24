@@ -2,7 +2,7 @@
 title: Muzik开发总结 — AVAudioPlayer 实践
 date: 2020-07-08 19:20:20
 categories: 
-- tech
+- 技术
 tags: 
 - iOS
 - AudioPlayer

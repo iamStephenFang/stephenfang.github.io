@@ -2,7 +2,7 @@
 title: iOS14 & iOS 15 相册适配
 date: 2022-01-20 17:10:20
 categories: 
-- tech
+- 技术
 tags: 
 - iOS
 - Photo

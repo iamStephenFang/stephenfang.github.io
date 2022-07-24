@@ -2,7 +2,7 @@
 title: 在Mac上配置OpenCV与Xcode开发环境
 date: 2020-02-26 16:20:20
 categories: 
-- tech
+- 技术
 tags: 
 - OpenCV
 - Xcode

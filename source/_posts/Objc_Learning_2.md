@@ -2,7 +2,7 @@
 title: Objective-C 学习笔记(二）
 date: 2020-03-26 21:43:20
 categories: 
-- tech
+- 技术
 tags: 
 - iOS
 - Xcode

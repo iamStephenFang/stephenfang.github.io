@@ -2,7 +2,7 @@
 title: WEKA数据挖掘 - 关联算法
 date: 2020-04-22 12:23:20
 categories: 
-- tech
+- 技术
 tags: 
 - 数据挖掘
 - 关联算法

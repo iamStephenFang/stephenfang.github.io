@@ -2,7 +2,7 @@
 title: 软件设计模式 - 单例模式
 date: 2020-06-07 13:23:20
 categories: 
-- tech
+- 技术
 tags: 
 - 设计模式
 - Java

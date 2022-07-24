@@ -2,7 +2,7 @@
 title: SwiftUI开发初探
 date: 2021-07-15 15:20:20
 categories: 
-- tech
+- 技术
 tags: 
 - iOS
 - SwiftUI

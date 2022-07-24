@@ -2,7 +2,7 @@
 title: iOS 图像处理 App - OpenCV 与 Swift 开发
 date: 2020-07-01 09:20:20
 categories: 
-- tech
+- 技术
 tags: 
 - iOS
 - OpenCV

@@ -2,7 +2,7 @@
 title: Struts 2 基础应用实验
 date: 2020-02-23 18:10:20
 categories: 
-- tech
+- 技术
 tags: 
 - struts
 - JavaEE

@@ -2,7 +2,7 @@
 title: Effective Objective-C 总结
 date: 21-07-14 14:21:22
 categories: 
-- tech
+- 技术
 tags: 
 - iOS
 - Objective-C

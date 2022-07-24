@@ -2,11 +2,11 @@
 title: Muzik开发总结 — 设计与实现
 date: 2020-07-15 19:15:20
 categories: 
-- tech
+- 技术
 tags: 
 - iOS
-- Music
 - Swift
+- 音乐App
 copyright: true
 ---
 

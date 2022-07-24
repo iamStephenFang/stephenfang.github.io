@@ -2,7 +2,7 @@
 title: Design+Code 的 Vue.js 课程学习摘录
 date: 2020-02-11 01:20:20
 categories: 
-- tech
+- 技术
 tags: 
 - Vue.js
 - 前端框架
