@@ -4,7 +4,7 @@
 
 # Site
 title: "StephenFang"
-subtitle: ""
+subtitle: "Live a more than desultory life."
 description: "StephenFang's GitHub Page"
 keywords:
 author: Stephen Fang
@@ -15,7 +15,7 @@ timezone: "Asia/Shanghai"
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 # url: https://github.com/iamStephenFang/stephenfang.github.io
 # root: /stephenfang.github.io/
-url: https://stephefang.me
+url: https://stephenfang.me
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

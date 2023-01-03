@@ -70,6 +70,19 @@ creative_commons:
   # CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org
   language:
 
+# Open graph settings
+# See: https://hexo.io/docs/helpers#open-graph
+open_graph:
+  enable: true
+  options:
+    #twitter_card: <twitter:card>
+    #twitter_id: <twitter:creator>
+    #twitter_site: <twitter:site>
+    #twitter_image: <twitter:image>
+    #google_plus: <g+:profile_link>
+    #fb_admins: <fb:admin_id>
+    #fb_app_id: <fb:app_id>
+
 # ---------------------------------------------------------------
 # Menu Settings
 # ---------------------------------------------------------------
@@ -337,8 +350,10 @@ text_align:
 # Reduce padding / margin indents on devices with narrow width.
 mobile_layout_economy: false
 
-# Android Chrome header panel color ($brand-bg / $headband-bg => $black-deep).
-android_chrome_color: "#222"
+# Browser header panel color.
+theme_color:
+  light: "#222"
+  dark: "#222"
 
 # Override browsers' default behavior.
 body_scrollbar:
@@ -559,6 +574,7 @@ comments:
   storage: true
   # Lazyload all comment systems.
   lazyload: true
+  count: true
   # Modify texts or order for any navs, here are some examples.
   nav:
     #disqus:
@@ -876,7 +892,7 @@ vendors:
   copy_tex_css:
 
   # Pjax
-  pjax:
+  pjax: true
 
   # FancyBox
   jquery:
