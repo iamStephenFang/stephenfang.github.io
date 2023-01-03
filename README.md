@@ -1,19 +1,18 @@
 # stephenfang.me
 
-[![Build Status](https://www.travis-ci.com/iamStephenFang/stephenfang.github.io.svg?branch=master)](https://www.travis-ci.com/iamStephenFang/stephenfang.github.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 ## 项目介绍
 
-使用 [Hexo](https://hexo.io/zh-cn/docs/) 搭建的GitHub Pages。
+使用 [Hexo](https://hexo.io/zh-cn/docs/) 与 [NexT Theme](https://theme-next.js.org/) 搭建的GitHub Pages。
 相关文章与主题定制正在更新。
 
 ## 搭建技术
 
 - [Hexo](https://hexo.io/zh-cn/docs/) 
+- [NexT Theme](https://theme-next.js.org/) 
 - [GitHub Pages](https://pages.github.com/)
-- [Travis CLI](https://travis-ci.org/)
 
 ##  内容链接
 
