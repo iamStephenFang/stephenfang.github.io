@@ -54,6 +54,8 @@ favicon:
   safari_pinned_tab: /images/logo.svg
   #android_manifest: /manifest.json
 
+# or use https://realfavicongenerator.net/
+
 # Custom Logo (Warning: Do not support scheme Mist)
 custom_logo: #/uploads/custom-logo.jpg
 
@@ -489,7 +491,7 @@ yandex_site_verification:
 
 # Baidu Webmaster tools verification.
 # See: https://ziyuan.baidu.com/site
-baidu_site_verification:
+baidu_site_verification: Tyt5ph67IW3S8YJy
 
 # ---------------------------------------------------------------
 # Third Party Plugins & Services Settings
