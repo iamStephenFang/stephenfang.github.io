@@ -7,6 +7,8 @@ tags:
 - iOS
 - Swift
 - WWDC
+- WWDC22
+- UIKit
 copyright: true
 ---
 
@@ -55,10 +57,8 @@ copyright: true
 
 iOS 16 为 配备了 M1 芯片的 iPad 以及 Mac 带来了 Stage Manager （台前调度）功能，作为应用开发者无需对代码进行改动即可适用该功能。
 
-<aside>
-💡 在 iOS 13 前开发单窗口的 App，由 `UIApplication` 负责 App 状态，`UIApplicationDelegate`（`AppDelegate`）负责 App 事件和生命周期，然而这种模式不适用于开发多窗口的 iPad App 或 Mac Catalyst App。 iOS 13 引入了构建多窗口应用的 `UIScene`，并对功能职责进行了重新拆分，将 UI 相关的状态、事件和生命周期交与 `UIWindowScene` 和 `UIWindowSceneDelegate`（`SceneDelegate`）负责，`UISceneSession` 负责持久化的 UI 状态。
+>  💡 在 iOS 13 前开发单窗口的 App，由 `UIApplication` 负责 App 状态，`UIApplicationDelegate`（`AppDelegate`）负责 App 事件和生命周期，然而这种模式不适用于开发多窗口的 iPad App 或 Mac Catalyst App。 iOS 13 引入了构建多窗口应用的 `UIScene`，并对功能职责进行了重新拆分，将 UI 相关的状态、事件和生命周期交与 `UIWindowScene` 和 `UIWindowSceneDelegate`（`SceneDelegate`）负责，`UISceneSession` 负责持久化的 UI 状态。
 
-</aside>
 
 如果仍在使用旧版本的 UIScreen API，有必要迁移到新的 `UITraitCollection` 和 `UIScene` API
 
