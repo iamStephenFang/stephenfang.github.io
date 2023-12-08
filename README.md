@@ -3,13 +3,11 @@
 
 ## 🚀 项目介绍
 
-使用 [Astro](https://astro.build/) 与 [AstroPaper 📄](https://github.com/satnaing/astro-paper)) 搭建的个人主页，是我个人的第一个产品。
+使用 [Astro](https://astro.build/) 与 [AstroPaper 📄](https://github.com/satnaing/astro-paper) 搭建的个人主页，是我个人的第一个产品。
 
 ## 📜 更新日志
 
-```
-2023-12-08: 2.0.0 由 Hexo 替换为 Astro
-```
+- 2023-12-08: 2.0.0 由 Hexo 替换为 Astro
 
 
 ## 💻 搭建技术
