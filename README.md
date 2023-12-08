@@ -1,22 +1,33 @@
 # stephenfang.me
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## 🚀 项目介绍
+
+使用 [Astro](https://astro.build/) 与 [AstroPaper 📄](https://github.com/satnaing/astro-paper)) 搭建的个人主页，是我个人的第一个产品。
+
+## 📜 更新日志
+
+```
+2023-12-08: 2.0.0 由 Hexo 替换为 Astro
+```
 
 
-## 项目介绍
+## 💻 搭建技术
 
-使用 [Hexo](https://hexo.io/zh-cn/docs/) 与 [NexT Theme](https://theme-next.js.org/) 搭建的GitHub Pages。
-相关文章与主题定制正在更新。
-
-## 搭建技术
-
-- [Hexo](https://hexo.io/zh-cn/docs/) 
-- [NexT Theme](https://theme-next.js.org/) 
+- [Astro](https://astro.build/)  
+- [TypeScript](https://www.typescriptlang.org/)  
+- [ReactJS](https://reactjs.org/)  
+- [TailwindCSS](https://tailwindcss.com/)  
 - [GitHub Pages](https://pages.github.com/)
 
-##  内容链接
+## ✨ 内容链接
 
 网站已经部署在 [stephenfang.me](https://stephenfang.me)。
 
-## 关于作者
-- StephenFang - [iamStephenFang](https://github.com/iamStephenFang)
+## 📜 License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+---
+
+Made with 🤍 by [StephenFang](https://github.com/iamStephenFang) in Hangzhou.
+
