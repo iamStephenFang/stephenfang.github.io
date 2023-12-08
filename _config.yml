@@ -111,7 +111,7 @@ deploy:
 
 # Extensions
 ## Plugins: http://hexo.io/plugins/
-plugins: hexo-generate-feed
+plugins: [hexo-generate-feed]
 
 # 自动生成sitemap
 sitemap:
