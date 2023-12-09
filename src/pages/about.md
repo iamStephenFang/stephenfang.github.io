@@ -22,11 +22,6 @@ I'm StephenFang, who like programming lovely mobile applications.
 - Prototype Design [Sketch | Figma]
 - Unit Testing
 
-<div>
-  <img src="/assets/dev.svg" class="sm:w-1/2 mx-auto" alt="coding dev illustration">
-</div>
-
-
 ## 📮 How to reach me
 - Telegram [https://t.me/stephenfang](https://t.me/stephenfang)
 - LinkedIn [https://www.linkedin.com/in/stephen-fang-aa811a32/](https://www.linkedin.com/in/stephen-fang-aa811a32/)

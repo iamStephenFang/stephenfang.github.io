@@ -10,7 +10,7 @@ copyright: true
 description: 尼古拉·尼葛洛庞帝在他1995年发布的的著作《Being Digital》中描绘了未来数字生活的诸多情景，其中VR、AI、智能家居、个人助理等，无一不是近几年研究的热门领域，这些技术的出现深深影响了现代人的日常生活，换句话说，数字生活成为了当今时代人们生活的一部分。
 ---
 
-<!--more-->
+尼古拉·尼葛洛庞帝在他1995年发布的的著作《Being Digital》中描绘了未来数字生活的诸多情景，其中VR、AI、智能家居、个人助理等，无一不是近几年研究的热门领域，这些技术的出现深深影响了现代人的日常生活，换句话说，数字生活成为了当今时代人们生活的一部分。
 
 ![image.stephenfang.me/mweb/s1496668.jpg](http://image.stephenfang.me/mweb/s1496668.jpg)
 
@@ -29,10 +29,6 @@ description: 尼古拉·尼葛洛庞帝在他1995年发布的的著作《Being D
 作为一个平凡人，我勉强认为自己比较擅长鼓捣手机，并在鼓捣的过程中有所感悟。然而我也走过一些弯路，曾经下载过盗版的App，执着于哪款手机更优，庆幸的是这些我的行为或想法能够得到纠正，日常使用习惯也进而得到了培养。
 
 ![image.stephenfang.me/mweb/C68FD435-10A6-449C-8DEB-329A9F4BEC24.jpeg](http://image.stephenfang.me/mweb/C68FD435-10A6-449C-8DEB-329A9F4BEC24.jpeg)
-
-我所折腾过的一些数码物件
-
-![image.stephenfang.me/mweb/Untitled.png](http://image.stephenfang.me/mweb/Untitled.png)
 
 我所折腾过的一些数码物件
 

@@ -10,11 +10,9 @@ tags:
 - Swift
 - iOS 15
 - iOS 14
-description: 开发迭代为了解决测试提出的「选中的照片」权限适配问题，花时间研究了[Handle the Limited Photos Library in your app](https://developer.apple.com/videos/play/wwdc2020/10641) 和 [Meet the new Photos picker](https://developer.apple.com/videos/play/wwdc2020/10652/?time=841) session，整理需求内容汇总并实现，同时还解决了一处 iOS 15.2 下可能导致崩溃的相册权限问题。
+description: 开发迭代为了解决测试提出的「选中的照片」权限适配问题，花时间研究了「Handle the Limited Photos Library in your app」和 「Meet the new Photos picker」两个session，整理需求内容汇总并实现，同时还解决了一处 iOS 15.2 下可能导致崩溃的相册权限问题。
 ---
 
-
-<!--more-->
 
 # 崩溃问题
 
@@ -28,8 +26,6 @@ description: 开发迭代为了解决测试提出的「选中的照片」权限�
 ![POPO20220118-144240.jpg](http://image.stephenfang.me/mweb/POPO20220118-144240.jpg)
 
 回到图片框架上，MZAssetsLibrary在init后执行了`[PHPPhotoLibrary registerChangeObserver:]`，于是有理由怀疑是不是这一行代码相关的API执行了变动。
-
-![Untitled](http://image.stephenfang.me/mweb/Untitled.png)
 
 在苹果开发者论坛找到了答案：
 

@@ -3,24 +3,19 @@ import { Resvg } from "@resvg/resvg-js";
 import { type CollectionEntry } from "astro:content";
 import postOgImage from "./og-templates/post";
 import siteOgImage from "./og-templates/site";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const fetchFonts = async () => {
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
+const fetchFont = async () => {
   // Regular Font
-  const fontFileRegular = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf"
-  );
-  const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
-
-  // Bold Font
-  const fontFileBold = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf"
-  );
-  const fontBold: ArrayBuffer = await fontFileBold.arrayBuffer();
-
-  return { fontRegular, fontBold };
+  const fontRegular = fs.readFileSync(path.resolve(__dirname, '../assets/fonts/SmileySans-Oblique.ttf'));
+  return { fontRegular };
 };
 
-const { fontRegular, fontBold } = await fetchFonts();
+const { fontRegular } = await fetchFont();
 
 const options: SatoriOptions = {
   width: 1200,
@@ -28,17 +23,11 @@ const options: SatoriOptions = {
   embedFont: true,
   fonts: [
     {
-      name: "IBM Plex Mono",
+      name: "SmileySans-Oblique",
       data: fontRegular,
       weight: 400,
       style: "normal",
-    },
-    {
-      name: "IBM Plex Mono",
-      data: fontBold,
-      weight: 600,
-      style: "normal",
-    },
+    }
   ],
 };
 

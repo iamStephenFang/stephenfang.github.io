@@ -200,8 +200,6 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
 - 消息转发分为两个阶段
     - 第一阶段：动态方法解析
     - 第二阶段：消息转发机制
-  
-    ![](http://image.stephenfang.me/mweb/Untitled.png)
 
 - receiver在每一步都有机会处理消息且步骤越往后处理消息的代价越大
 - 如果对象没有办法响应某个selector则进入消息转发流程,runtime的动态方法解析可以在需要某个方法时将其加入类中，对象可以将无法解析的selector转交给其他对象处理。这一步结束后若仍然无法处理selector则启动消息转发机制

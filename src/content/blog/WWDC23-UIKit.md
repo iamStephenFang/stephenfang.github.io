@@ -12,7 +12,7 @@ tags:
 - UIKit
 copyright: true
 featured: true
-description: WWDC 23 大家的目光都被 visionOS 吸引了，作为 UIKit 开发者关注一下目前今年的 [What’s New in UIKit](https://developer.apple.com/videos/play/wwdc2022/10068/) session 实为必要。~~尽管今年更新的内容似乎并没有那么吸引人。~~
+description: WWDC 23 大家的目光都被 visionOS 吸引了，作为 UIKit 开发者关注一下目前今年的 「What’s New in UIKit」session 实为必要。
 ---
 
 笔者参照官方给出的代码片段复现了一些简单页面实现，**并且将代码整合到仓库**[WhatsNewInUIKit](https://github.com/iamStephenFang/WhatsNewInUIKit)，希望可以帮助你更快上手和理解这些新特性。笔者还按照业务理解和适配进度的优先级，对 session 内容进行了重新排序和整理。
