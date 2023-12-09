@@ -3,15 +3,13 @@ import { Resvg } from "@resvg/resvg-js";
 import { type CollectionEntry } from "astro:content";
 import postOgImage from "./og-templates/post";
 import siteOgImage from "./og-templates/site";
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const fetchFont = async () => {
   // Regular Font
-  const fontRegular = fs.readFileSync(path.resolve(__dirname, './SmileySans-Oblique.ttf'));
+  const fontFileRegular = await fetch(
+    "https://image.stephenfang.me/fonts/SmileySans-Oblique.ttf"
+  );
+  const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
   return { fontRegular };
 };
 
