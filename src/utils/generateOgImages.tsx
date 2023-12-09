@@ -11,7 +11,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const fetchFont = async () => {
   // Regular Font
-  const fontRegular = fs.readFileSync(path.resolve(__dirname, '../assets/fonts/SmileySans-Oblique.ttf'));
+  const fontRegular = fs.readFileSync(path.resolve(__dirname, './SmileySans-Oblique.ttf'));
   return { fontRegular };
 };
 
