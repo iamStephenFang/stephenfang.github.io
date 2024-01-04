@@ -20,8 +20,8 @@ const {
   ogImage,
   canonicalURL,
   pubDatetime,
+  modDatetime,
   tags,
-  readingTime,
 } = post.data;
 
 const { Content } = await post.render();
@@ -31,15 +31,20 @@ const ogUrl = new URL(
   ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,
   Astro.url.origin
 ).href;
+
+const layoutProps = {
+  title,
+  author,
+  description,
+  pubDatetime,
+  modDatetime,
+  canonicalURL,
+  ogImage: ogUrl,
+  scrollSmooth: true,
+};
 ---
 
-<Layout
-  title={title}
-  author={author}
-  description={description}
-  ogImage={ogUrl}
-  canonicalURL={canonicalURL}
->
+<Layout {...layoutProps}>
   <Header />
   <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
     <button
@@ -55,14 +60,32 @@ const ogUrl = new URL(
   </div>
   <main id="main-content">
     <h1 transition:name={slugifyStr(title)} class="post-title">{title}</h1>
-    <Datetime datetime={pubDatetime} size="lg" className="my-2" />
+    <Datetime
+      pubDatetime={pubDatetime}
+      modDatetime={modDatetime}
+      size="lg"
+      className="my-2"
+    />
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <Content />
     </article>
 
-    <ul class="tags-container">
-      {tags.map(tag => <Tag name={slugifyStr(tag)} />)}
+    <ul class="my-8">
+      {tags.map(tag => <Tag tag={slugifyStr(tag)} />)}
     </ul>
+    <div class="flex justify-end">
+      <button
+        id="back-to-top"
+        class="focus-outline whitespace-nowrap hover:opacity-75"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="rotate-90">
+          <path
+            d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+          ></path>
+        </svg>
+        <span>Back to Top</span>
+      </button>
+    </div>
   </main>
   <Footer />
 </Layout>
@@ -74,7 +97,13 @@ const ogUrl = new URL(
   .post-title {
     @apply text-2xl font-semibold text-skin-accent;
   }
-  .tags-container {
-    @apply my-8;
-  }
 </style>
+
+<script is:inline>
+  /* When the user clicks on the "Back to Top" button,
+   * scroll to the top of the document */
+  document.querySelector("#back-to-top")?.addEventListener("click", () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  });
+</script>
