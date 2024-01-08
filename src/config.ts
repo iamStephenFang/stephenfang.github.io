@@ -49,4 +49,10 @@ export const SOCIALS: SocialObjects = [
     linkTitle: `${SITE.author} on Telegram`,
     active: true,
   },
+  {
+    name: "Jike",
+    href: "https://okjk.co/LZFasc",
+    linkTitle: `${SITE.author} on Jike`,
+    active: true,
+  },
 ];
