@@ -130,7 +130,7 @@ Meta 给出了这几个模型在 MusicCaps 数据集上的表现，有四个指�
 - Pytorch 2.0.0 （或更高版本，官方文档使用2.1.0）
 - ffmpeg （可以使用 apt-get 或 conda 进行安装，Mac上可以使用brew）
 
-```
+```py
 # 如果还没有安装Pytorch
 python -m pip install 'torch==2.1.0'
 
@@ -166,7 +166,7 @@ python -m demos.musicgen_app --share
 
 AudioCraft 会启动服务让你能够在本机和远程访问GUI，如果顺利启动了，你会看到如下的提示：
 
-```
+```bash
 Running on local URL:  http://127.0.0.1:7860
 Running on public URL: https://{XXXXXXXXXXXXXX}.gradio.live
 ```
@@ -410,7 +410,7 @@ with gr.Row():
 
 - [MusicGen](https://audiocraft.metademolab.com/musicgen.html) 暂时还不能用中文作为输入，如果你希望获得更多生成音乐的 prompt 可以让ChatGPT为你做这件事，例如“假设你是一个熟悉 MusicGen 模型的prompt大师，现在需要使用 MusicGen 模型生成一些 Lo-Fi 音乐，风格类似于Lo-Fi girl提供的那些音乐，请尝试用英语给出十条优质的prompt”
 
-```
+```markdown
 "Generate a Lo-Fi music snippet with a gentle electric piano and soft drum beats, creating a warm and relaxed atmosphere."
 "Produce a Lo-Fi music piece emphasizing soothing guitar and natural ambient sounds, evoking a sense of tranquility and comfort."
 "Compose a Lo-Fi music track using smooth synthesizers and soft percussion, aiming for a relaxed and pleasant vibe."

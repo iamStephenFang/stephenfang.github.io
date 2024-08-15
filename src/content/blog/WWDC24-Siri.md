@@ -20,7 +20,7 @@ tags:
   - Assistant Schemas
 copyright: true
 featured: true
-description: 2024年的 WWDC 压轴的就是由 LLM 赋能的 AI 能力，苹果甚至玩了个谐音梗将其命名为「[Apple Intelligence](https://developer.apple.com/apple-intelligence)」，它包括了文生图（Image Playground）、文生文（Writing Tools）、图生图（Clean Up tool）以及屏上感知等多项能力。其中文生图、文声文将作为系统级别的能力集成到iOS 18的组件中，本文想与你探讨的是如何让你的应用与这个“AI”更深度集成，这里不得不把目光转回Siri。
+description: 2024年的 WWDC 压轴的就是由 LLM 赋能的 AI 能力，苹果甚至玩了个谐音梗将其命名为「Apple Intelligence」，它包括了文生图（Image Playground）、文生文（Writing Tools）、图生图（Clean Up tool）以及屏上感知等多项能力。其中文生图、文声文将作为系统级别的能力集成到iOS 18 的组件中，本文想与你探讨的是如何让你的应用与这个“AI”更深度集成，这里不得不把目光转回Siri。
 ---
 
 经过这几年 SwiftUI 的发展和推广，笔者已经很难再从「[What‘s New in UIKit](https://developer.apple.com/videos/play/wwdc2024/10118/)」中提炼出很多有价值的新内容，今年的 WWDC 给了我们一个新的方向，那就是AI。
