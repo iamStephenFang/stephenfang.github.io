@@ -31,7 +31,7 @@ description: 准备开始写 Objective-C 之前花了一些时间重新阅读这
 
 - 尽量使用字面量语法创建字符串、数值、数组、字典
 
-```objectivec
+```objc
 NSNumber *intNumber = @1;
 NSNumber *floatNumber = @1.1f;
 NSNumber *doubleNumber = @1.123456;
@@ -52,7 +52,7 @@ NSDictionary *personData = @{@"firstName" : @"Stephen",
 - NSArray 的 arrayWithObjects 方法依次处理各个参数直到发现nil，而如果使用字面量的方法在创建时就会抛出异常终止程序执行，需要确保创建的数组与字典中不含有nil
 - 尽量使用取下标的方式来访问数组或字典中的元素
 
-```objectivec
+```objc
 NSString *dog = animals[1];
 NSString *lastName = personData[@"lastName"];
 ```
@@ -62,13 +62,13 @@ NSString *lastName = personData[@"lastName"];
 - #define预处理指令声明全局变量尽量少用，编译器只会执行查找和替换操作，不会产生重复定义的警告信息
 - 尽量使用 static const 声明的方式来完成变量的声明，static表示该变量在定义此变量的编译单元中可见，而static const不会创建符号，只是将变量替换为常量
 
-```objectivec
+```objc
 static const NSTimeInterval kAnimationDuration = 0.3;
 ```
 
 - 编译器看到extern关键字得知全局符号表中包含该符号无需查看该定义就允许只用该常量，该类常量只可以定义一次，命名最好使用与之相关的类名作为前缀
 
-```objectivec
+```objc
 // In the header file
 extern NSString *const EOCStringConstant;
 
@@ -81,7 +81,7 @@ NSString *const EOCStringConstant = @"DEMO";
 - 保证枚举由底层数据类型实现，不采用编译器所选类型
 - 凡是需要以按位或操作来组合的枚举都应使用NS_OPTIONS定义，若枚举不需要相互组合应使用NS_ENUM来定义
 
-```objectivec
+```objc
 typedef NS_ENUM(NSUInteger, STFFeedPageType) {
     STFFeedPageTypeNone = 0,             // 未知
     STFFeedPageTypeFollow = 1,           // 关注页
@@ -124,7 +124,7 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
 - 在初始化方法及dealloc方法中，应该直接通过实例变量读取数据，即_
 - 懒加载方式中必须使用getter的方式访问属性，如果在没有用getter的情况下直接访问实例变量会导致得到是尚未设置好的变量
 
-```objectivec
+```objc
 - (STFComponent*)component {
 		if (!_component) {
 					_component = [SFComponent new];
@@ -140,7 +140,7 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
 - 检测对象的等同性需要提供 isEqual 与 hash 方法，NSObject对于两个方法默认实现是仅当指针值完全相等才返回相等，需要针对具体的需求制定检测方案
 - 编写hash方法时需要使用计算速度快且哈希碰撞低的算法
 
-```objectivec
+```objc
 - （BOOL）isEqual:(id)object {
 		if (self == object) return YES; // 指向同一个对象必然相等
 		if ([self class] != [object class]) return NO; //不属于同一个类不相等
@@ -167,7 +167,7 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
 - NSArray有等同性判定方法"isEqualToArray:"，而NSDictionary有等同性判定方法"isEqualToDictionary:"， NSArray检测方式为首先核对两个数组包含对象的个数是否相等，若相等在每个对应位置调用"isEqual:"方法
 - 在编写判定方法时应一并覆写"isEqual:"方法，如果接收该消息的对象与受测参数来自一个类就调用自己编写的判定方法，负责交由超类判定
 
-```objectivec
+```objc
 -  (BOOL)isEqual:(id)object {
 		if ([self class] == [object class]) 
 				return [self isEqualToPerson:(STFPerson*)object];
@@ -264,7 +264,7 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
 
 ![](http://image.stephenfang.me/mweb/Untitled6.png)
 
-```objectivec
+```objc
 - (BOOL)doSomething:(NSError**) error
 
 - (BOOL)doSomething:(NSError**) error {
@@ -295,7 +295,7 @@ if (ret) {
 
 - 使自己的类支持拷贝操作需要实现NSCopying协议，该协议只有一个方法且不必担心zone参数。覆写copy方法真正需要实现的是copyWithZone方法。
 
-```objectivec
+```objc
 - (id)copyWithZone:(NSZone*)zone
 
 - (id)copyWithZone:(NSZone*)zone {
@@ -367,7 +367,7 @@ if (ret) {
 
 - class-continuation 分类中可以定义方法和实例变量，如下方式中_anotherInstanceVariable 是隐藏的状态
 
-    ```objectivec
+    ```objc
     @interface STFPerson() {
     		NSString *_anInstanceVariable;
     }
@@ -412,7 +412,7 @@ if (ret) {
 
 - 为了避免使用无效对象一般在完成调用release之后清空指针，保证不会出现指向无效对象的指针
 
-    ```objectivec
+    ```objc
     NSNumber *number = [[NSNumber alloc]initWithInt: 1234];
     [array addObject: number];
     [number release];
@@ -468,7 +468,7 @@ if (ret) {
 
 在 ARC 下调用查询对象当前引用计数的方法会触发崩溃
 
-    ```objectivec
+    ```objc
     - (NSUInteger)retainCount
     ```
 
@@ -478,7 +478,7 @@ if (ret) {
 
 - Block与定义它的函数共享同一个范围内的信息，块自有其相关类型，可以将块赋值给变量并使用它
 
-    ```objectivec
+    ```objc
     void (^someBlock) () = ^ {
     		// Block implementation
     };
@@ -503,7 +503,7 @@ if (ret) {
 
 - 以下展示了SDWebImage中Block的写法
 
-    ```objectivec
+    ```objc
     typedef void(^SDWebImageDownloaderProgressBlock)(NSUInteger receivedSize, long long expectedSize);
     typedef void(^SDWebImageDownloaderCompletedBlock)(UIImage *image, NSData *data, NSError *error, BOOL finished);
 
@@ -689,7 +689,7 @@ if (ret) {
 
     - NSEnumerator
 
-    ```objectivec
+    ```objc
     // Dictionary
     NSDictionary *dict = /* ... */;
     NSEnumerator *enumerator = [dict keyEnumerator];
@@ -720,7 +720,7 @@ if (ret) {
 
     - for in 快速遍历
 
-    ```objectivec
+    ```objc
     // Dictionary
     NSDictionary *dict = /* ... */;
     for (id key in dict) {
@@ -748,7 +748,7 @@ if (ret) {
 
     - 基于Block的遍历
 
-    ```objectivec
+    ```objc
     // Dictionary
     NSDictionary *dict = /* ... */;
     [array enumerateKeysAndObjectsUsingBlock:
@@ -788,7 +788,7 @@ if (ret) {
 
 - 使用桥接技术可以实现定义在Foundation框架内的Objective-C类与CoreFoundation 框架中的 C 数据结构的相互转换
 
-    ```objectivec
+    ```objc
     NSArray *anNSArray = @[@1, @2, @3, @4, @5];
     CFArrayRef *aCGArray = (__bridge CFArrayRef)anNSArray;
     NSLog(@"size of array = %li", CFArrayGetCount(aCFArray)); 

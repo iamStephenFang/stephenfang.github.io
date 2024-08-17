@@ -35,7 +35,7 @@ description: 最近几年的 WWDC 每年都能看到很多 SwiftUI 的新能力�
 
 - 为了防止用户留下指纹， `UIDevice.name` 现在会报告模型名称而非用户自定义的设备名称。 使用自定义名称需要获得授权。
     
-    ```objectivec
+    ```objc
     // iOS 16 之前 (e.g. "My iPhone")
     // iOS 16 (e.g. "iPhone 13")
     UIDevice().name
@@ -43,7 +43,7 @@ description: 最近几年的 WWDC 每年都能看到很多 SwiftUI 的新能力�
     
 - 不再支持 `UIDevice.orientation`， 应使用 `UIViewController` 相关API， 如 `preferredInterfaceOrientation` 来获取应用界面的预期呈现方向。
     
-    ```objectivec
+    ```objc
     // UIDeviceOrientation(rawValue: 0) -> .unknown
     UIDevice().orientation
     

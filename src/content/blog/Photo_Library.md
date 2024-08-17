@@ -60,7 +60,7 @@ description: 开发迭代为了解决测试提出的「选中的照片」权限�
 
 列举出的请求权限共以下几种，其中`PHAuthorizationStatusLimited`的注释中给出了适配方法。
 
-```objectivec
+```objc
 typedef NS_ENUM(NSInteger, PHAuthorizationStatus) {
     PHAuthorizationStatusNotDetermined = 0, // User has not yet made a choice with regards to this application
     PHAuthorizationStatusRestricted,        // This application is not authorized to access photo data.
@@ -78,7 +78,7 @@ typedef NS_ENUM(NSInteger, PHAuthorizationStatus) {
 - 如果使用以前的API来获取权限状态，`PHAuthorizationStatusLimited` 状态下返回`PHAuthorizationStatusAuthorized`
 - 在请求权限的时候需要给予读写权限参数`PHAccessLevel`，可选值为`PHAccessLevelAddOnly` 与 `PHAccessLevelReadWrite`，仅在`PHAccessLevelReadWrite` 下才能够获取到`PHAuthorizationStatusLimited` 权限
 
-```objectivec
+```objc
 #pragma mark - Library access authorization status
 
 /// Replaces \c +authorizationStatus to support add-only/read-write access level status
@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, PHAccessLevel) {
 
 针对业务需求对代码进行了部分重构，原代码采用if-else结构进行控制，还需要判断iOS版本结构会过于混乱。
 
-```objectivec
+```objc
 void (^setUpUI)(PHAuthorizationStatus status) = ^(PHAuthorizationStatus status){
             switch (status) {
                 case PHAuthorizationStatusNotDetermined: {
@@ -146,13 +146,13 @@ void (^setUpUI)(PHAuthorizationStatus status) = ^(PHAuthorizationStatus status){
 
 若要在应用内唤起访问系统受限相册的选择面板需要调用以下API，并且监听图片变化做相应处理。
 
-```objectivec
+```objc
 - (void)presentLimitedLibraryPickerFromViewController:(UIViewController *)controller;
 ```
 
 在 iOS 15 中还针对以上API提供了回调。
 
-```objectivec
+```objc
 - (void)presentLimitedLibraryPickerFromViewController:(UIViewController *)controller 
                                     completionHandler:(void (^)(NSArray<NSString *> *))completionHandler;
 ```
@@ -198,7 +198,7 @@ void (^setUpUI)(PHAuthorizationStatus status) = ^(PHAuthorizationStatus status){
 
 在调用方法上，需要首先声明 `PHPickerConfiguration` 并进行配置，再将其传递给`PHPickerViewController` 完成调用。
 
-```objectivec
+```objc
 PHPickerConfiguration *config = [[PHPickerConfiguration alloc] init];
 config.selectionLimit = 3;  // 可选择的资源数量，0表示不设限制，默认为1
 config.filter = [PHPickerFilter imagesFilter]; // 只显示图片，默认全选，可选择imagesFilter、livePhotosFilter、videosFilter
@@ -215,7 +215,7 @@ pickerViewController.delegate = self;
 
 `PHPickerConfiguration`、`PHPickerFilter` 和 `PHPickerResult` 都是作为结构体而不是作为类桥接到 Swift 中，从`PHPickerViewController` 返回使用`NSItemProvider`,与 `UIImagePickerController` 不同
 
-```objectivec
+```objc
 -(void)picker:(PHPickerViewController *)picker didFinishPicking:(NSArray<PHPickerResult *> *)results{
    [picker dismissViewControllerAnimated:YES completion:nil];
     

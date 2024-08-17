@@ -6,7 +6,9 @@ export const SITE: Site = {
   desc: "stephenfang.me",
   title: "StephenFang's Blog",
   lightAndDarkMode: true,
+  postPerIndex: 5,
   postPerPage: 5,
+  scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
 };
 
 export const LOCALE = ["zh-CN"];
