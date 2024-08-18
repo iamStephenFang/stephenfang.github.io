@@ -1,8 +1,10 @@
 import type { CollectionEntry } from "astro:content";
+import getPostsWithRT from "./getPostsWithRT";
 import postFilter from "./postFilter";
 
-const getSortedPosts = (posts: CollectionEntry<"blog">[]) => {
-  return posts
+const getSortedPosts = async (posts: CollectionEntry<"blog">[]) => {
+  const postsWithRT = await getPostsWithRT(posts);
+  return postsWithRT
     .filter(postFilter)
     .sort(
       (a, b) =>

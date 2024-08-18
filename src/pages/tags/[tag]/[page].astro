@@ -17,15 +17,20 @@ export async function getStaticPaths() {
 
   const tags = getUniqueTags(posts);
 
-  return tags.flatMap(({ tag, tagName }) => {
-    const tagPosts = getPostsByTag(posts, tag);
-    const totalPages = getPageNumbers(tagPosts.length);
+  // Make sure to await the promises
+  const paths = await Promise.all(
+    tags.map(async ({ tag, tagName }) => {
+      const tagPosts = await getPostsByTag(posts, tag);
+      const totalPages = getPageNumbers(tagPosts.length);
 
-    return totalPages.map(page => ({
-      params: { tag, page },
-      props: { tag, tagName },
-    }));
-  });
+      return totalPages.map(page => ({
+        params: { tag, page: String(page) },
+        props: { tag, tagName },
+      }));
+    })
+  );
+
+  return paths.flat();
 }
 
 const { page } = Astro.params;
@@ -33,7 +38,7 @@ const { tag, tagName } = Astro.props;
 
 const posts = await getCollection("blog", ({ data }) => !data.draft);
 
-const postsByTag = getPostsByTag(posts, tag);
+const postsByTag = await getPostsByTag(posts, tag);
 
 const pagination = getPagination({
   posts: postsByTag,
