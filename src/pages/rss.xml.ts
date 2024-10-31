@@ -16,5 +16,11 @@ export async function GET() {
       description: data.description,
       pubDate: new Date(data.modDatetime ?? data.pubDatetime),
     })),
+    customData: `
+      <follow_challenge>
+        <feedId>74697475128089603</feedId>
+        <userId>73919898718524416</userId>
+      </follow_challenge>
+    `,
   });
 }
