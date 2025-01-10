@@ -41,16 +41,25 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         <span class="sr-only">RSS Feed</span>
       </a>
 
-      <p>👋 你好</p>
-      <p>I'm StephenFang, who like programming lovely mobile applications.</p>
+      <p>👋 Hello 您好</p>
       <p>
-        Read the blog posts or check
+        I'm StephenFang, who like programming lovely mobile applications. Read
+        the blog posts or check
         <LinkButton
           className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
           href="/about"
         >
           About
         </LinkButton> for more info.
+      </p>
+      <p>
+        我是 StephenFang，一名移动应用开发者。敬请阅读我的博客或点击
+        <LinkButton
+          className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
+          href="/about"
+        >
+          About
+        </LinkButton> 与我取得联系.
       </p>
       {
         // only display if at least one social link is enabled
