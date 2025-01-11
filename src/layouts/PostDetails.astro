@@ -7,6 +7,7 @@ import Datetime from "@components/Datetime";
 import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import ShareLinks from "@components/ShareLinks.astro";
+import Comments from "@components/Comments";
 import { SITE } from "@config";
 
 export interface Props {
@@ -113,6 +114,10 @@ const nextPost =
 
       <ShareLinks />
     </div>
+
+    <hr class="my-6 border-dashed" />
+
+    <Comments client:only="react" />
 
     <hr class="my-6 border-dashed" />
 
