@@ -6,8 +6,6 @@ import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 
-import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs";
-
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
@@ -16,12 +14,13 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     react(),
-    sitemap(),
+    sitemap({
+      filter: page => SITE.showArchives || !page.endsWith("/archives"),
+    }),
   ],
   markdown: {
     remarkPlugins: [
       remarkToc,
-      remarkReadingTime,
       [
         remarkCollapse,
         {
@@ -41,4 +40,7 @@ export default defineConfig({
     },
   },
   scopedStyleStrategy: "where",
+  experimental: {
+    contentLayer: true,
+  },
 });

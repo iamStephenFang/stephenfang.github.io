@@ -6,9 +6,10 @@ export const SITE: Site = {
   desc: "stephenfang.me",
   title: "StephenFang's Blog",
   lightAndDarkMode: true,
-  postPerIndex: 5,
-  postPerPage: 5,
+  postPerIndex: 4,
+  postPerPage: 3,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
+  showArchives: true,
 };
 
 export const LOCALE = ["zh-CN"];
@@ -40,9 +41,9 @@ export const SOCIALS: SocialObjects = [
     active: true,
   },
   {
-    name: "Twitter",
-    href: "https://twitter.com/fangxuanmiao",
-    linkTitle: `${SITE.author} on Twitter`,
+    name: "X",
+    href: "https://x.com/fangxuanmiao",
+    linkTitle: `${SITE.author} on X`,
     active: true,
   },
   {

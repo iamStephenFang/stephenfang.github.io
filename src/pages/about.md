@@ -29,7 +29,7 @@ I'm StephenFang, who like programming lovely mobile applications.
 
 - Telegram [https://t.me/stephenfang](https://t.me/stephenfang)
 - LinkedIn [https://www.linkedin.com/in/stephen-fang-aa811a32/](https://www.linkedin.com/in/stephen-fang-aa811a32/)
-- Twitter [https://twitter.com/Fangxuanmiao](https://twitter.com/Fangxuanmiao)
+- X [https://x.com/Fangxuanmiao](https://x.com/Fangxuanmiao)
 - GitHub [https://github.com/iamStephenFang](https://github.com/iamStephenFang)
 
 ## 📁 Related Links

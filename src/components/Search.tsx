@@ -58,7 +58,7 @@ export default function SearchBar({ searchList }: Props) {
   useEffect(() => {
     // Add search result only if
     // input value is more than one character
-    let inputResult = inputVal.length > 1 ? fuse.search(inputVal) : [];
+    const inputResult = inputVal.length > 1 ? fuse.search(inputVal) : [];
     setSearchResults(inputResult);
 
     // Update search string in URL
@@ -70,6 +70,13 @@ export default function SearchBar({ searchList }: Props) {
       history.replaceState(history.state, "", newRelativePathQuery);
     } else {
       history.replaceState(history.state, "", window.location.pathname);
+    }
+  }, [inputVal]);
+
+  useEffect(() => {
+    // focus on text input when search bar is displayed
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
   }, [inputVal]);
 
