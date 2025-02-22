@@ -125,7 +125,7 @@ iLife 是 Apple 为创意工作者打造的一整套多媒体应用，包括 iPh
 
 如果你和我一样，在学生时代曾使用教育优惠购买过 Apple 的 Pro App 套装，那么你可以直接从 已购列表 中下载到这些专业应用的经典版本，包括 Final Cut Pro 10、Logic Pro X 10、Motion 5 以及 Compressor 4，在 OS X Mavericks 上继续体验 Apple 为创意工作者打造的高端工具。
 
-![](https://image.stephenfang.me/mweb/proimage.stephenfang.me/mweb/image.stephenfang.me/mweb/apps.png)
+![](https://image.stephenfang.me/mweb/apps.png)
 
 Final Cut Pro 对于专业视频编辑工作者来说一定不陌生。虽然 OS X Mavericks 时代的 Final Cut Pro 10 与当前版本在功能和性能上存在差距，但它依然具备直观的界面与强大的非线性编辑能力。尽管缺少现代版本中的 AI 自动剪辑、HDR 处理 等高级功能，但对于基础剪辑需求，它依旧可以高效完成任务，并保持 Apple 一贯流畅的用户体验。
 
