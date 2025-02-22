@@ -1,23 +1,21 @@
 ---
 title: iOS14 & iOS 15 相册适配
 pubDatetime: 2022-01-20 17:10:20
-categories: 
-- 技术
-tags: 
-- iOS
-- Photo
-- Objective-C
-- Swift
-- iOS 15
-- iOS 14
+categories:
+  - 技术
+tags:
+  - iOS
+  - Photo
+  - Objective-C
+  - Swift
+  - iOS 15
+  - iOS 14
 description: 开发迭代为了解决测试提出的「选中的照片」权限适配问题，花时间研究了「Handle the Limited Photos Library in your app」和 「Meet the new Photos picker」两个session，整理需求内容汇总并实现，同时还解决了一处 iOS 15.2 下可能导致崩溃的相册权限问题。
 ---
-
 
 # 崩溃问题
 
 > 15.2 系统版本下在使用调用本地相册相关的功能后（上传作品、更换头像、歌房玩法公屏...） app 就会卡死。
-> 
 
 ---
 
@@ -74,7 +72,7 @@ typedef NS_ENUM(NSInteger, PHAuthorizationStatus) {
 
 请求权限的方法也得到了更新，需要注意的是
 
-- 只有使用新的`requestAuthorizationForAccessLevel:(PHAccessLevel)accessLevel` 方法才能正确获取到  `PHAuthorizationStatusLimited` 权限
+- 只有使用新的`requestAuthorizationForAccessLevel:(PHAccessLevel)accessLevel` 方法才能正确获取到 `PHAuthorizationStatusLimited` 权限
 - 如果使用以前的API来获取权限状态，`PHAuthorizationStatusLimited` 状态下返回`PHAuthorizationStatusAuthorized`
 - 在请求权限的时候需要给予读写权限参数`PHAccessLevel`，可选值为`PHAccessLevelAddOnly` 与 `PHAccessLevelReadWrite`，仅在`PHAccessLevelReadWrite` 下才能够获取到`PHAuthorizationStatusLimited` 权限
 
@@ -120,7 +118,7 @@ void (^setUpUI)(PHAuthorizationStatus status) = ^(PHAuthorizationStatus status){
                 }
             }
         };
-        
+
         if (status == PHAuthorizationStatusNotDetermined) {
             if (@available(iOS 14, *)) {
                 [PHPhotoLibrary requestAuthorizationForAccessLevel:PHAccessLevelReadWrite handler:^(PHAuthorizationStatus status) {
@@ -153,7 +151,7 @@ void (^setUpUI)(PHAuthorizationStatus status) = ^(PHAuthorizationStatus status){
 在 iOS 15 中还针对以上API提供了回调。
 
 ```objc
-- (void)presentLimitedLibraryPickerFromViewController:(UIViewController *)controller 
+- (void)presentLimitedLibraryPickerFromViewController:(UIViewController *)controller
                                     completionHandler:(void (^)(NSArray<NSString *> *))completionHandler;
 ```
 
@@ -182,17 +180,11 @@ void (^setUpUI)(PHAuthorizationStatus status) = ^(PHAuthorizationStatus status){
 ## 功能一览
 
 - 支持缩放
-    
-    ![IMG_9246.PNG](http://image.stephenfang.me/mweb/IMG_9246.png)
-    
+  ![IMG_9246.PNG](http://image.stephenfang.me/mweb/IMG_9246.png)
 - 支持搜索
-    
-    ![IMG_9248.PNG](http://image.stephenfang.me/mweb/IMG_9248.png)
-    
+  ![IMG_9248.PNG](http://image.stephenfang.me/mweb/IMG_9248.png)
 - 支持分类
-    
-    ![IMG_9247.PNG](http://image.stephenfang.me/mweb/IMG_9247.png)
-    
+  ![IMG_9247.PNG](http://image.stephenfang.me/mweb/IMG_9247.png)
 
 ## 调用方法
 
@@ -218,7 +210,7 @@ pickerViewController.delegate = self;
 ```objc
 -(void)picker:(PHPickerViewController *)picker didFinishPicking:(NSArray<PHPickerResult *> *)results{
    [picker dismissViewControllerAnimated:YES completion:nil];
-    
+
    for (PHPickerResult *result in results) {
       // Get UIImage
       [result.itemProvider loadObjectOfClass:[UIImage class] completionHandler:^(__kindof id<NSItemProviderReading>  _Nullable object, NSError * _Nullable error) {
@@ -239,7 +231,7 @@ pickerViewController.delegate = self;
 
 # 引用
 
-[Handle the Limited Photos Library in your app](https://developer.apple.com/videos/play/wwdc2020/10641) 
+[Handle the Limited Photos Library in your app](https://developer.apple.com/videos/play/wwdc2020/10641)
 
 [Meet the new Photos picker](https://developer.apple.com/videos/play/wwdc2020/10652/?time=841)
 

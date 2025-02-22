@@ -1,20 +1,19 @@
 ---
 title: 在2025年重新体验 OS X Mavericks
 pubDatetime: 2025-02-22 17:54:12
-categories: 
-- 技术
-tags: 
-- 数码
-- 怀旧
-- iOS
-- Mac
-- 折腾
-- macOS
+categories:
+  - 技术
+tags:
+  - 数码
+  - 怀旧
+  - iOS
+  - Mac
+  - 折腾
+  - macOS
 copyright: true
 featured: true
 description: 在 2025 年重新体验 OS X Mavericks，它的 UI 设计依然优雅、直观，甚至带着一丝禅意。那些拟物化的图标、毛玻璃质感、不仅不过时，反而仍然是许多桌面美化方案的灵感来源。在这个云计算、人工智能与跨平台协同盛行的时代，尝试用一款 12 年前的操作系统 进行日常工作，不仅仅是一种怀旧体验，更像是一场属于自己的挑战。
 ---
-
 
 ## 缘起
 
@@ -31,7 +30,6 @@ description: 在 2025 年重新体验 OS X Mavericks，它的 UI 设计依然优
 ![](https://image.stephenfang.me/mweb/wallpaper.png)
 
 在这个云计算、人工智能与跨平台协同盛行的时代，尝试用一款 12 年前的操作系统 进行日常工作，不仅仅是一种怀旧体验，更像是一场属于自己的挑战。
-
 
 ## 系统概述
 
@@ -51,7 +49,6 @@ OS X Mavericks（OS X 10.9）是苹果公司于2013年10月发布的操作系统
 
 ![](https://image.stephenfang.me/mweb/wwdc.png)
 
-
 目前，OS X Mavericks 已无法直接从 Apple 官网获取系统镜像，而相邻的 OS X Mountain Lion 和 OS X Yosemite 仍然可以轻松在官网检索到。这一点在 [Reddit 讨论帖](https://www.reddit.com/r/osx/comments/jb5oyr/i_need_osx_mavericks/) 中也得到了证实，许多用户都在寻找 Mavericks 的官方下载渠道。
 
 不过，好消息是，我们仍然可以通过 [Internet Archive](https://archive.org/details/os-x-mavericks-10.9.5) 找到系统镜像。如果你在安装过程中遇到 “无法验证安装包” 之类的错误，需要将系统时间修改为 2014 年，因为 Apple 在 2015 年更改了签名证书，导致较旧的安装程序无法正常运行。
@@ -60,7 +57,7 @@ OS X Mavericks（OS X 10.9）是苹果公司于2013年10月发布的操作系统
 
 ![](https://image.stephenfang.me/mweb/iCloud.png)
 
-或许你已经得出了一个结论：如果是为了日常使用，OS X  Mavericks 可能并不是一个理想的选择。但如果你和我一样，只是单纯地想体验这款经典的老系统，沉浸在它的拟物化设计与独特氛围中，那么请继续往下看，探索 Mavericks 依然闪光的地方。
+或许你已经得出了一个结论：如果是为了日常使用，OS X Mavericks 可能并不是一个理想的选择。但如果你和我一样，只是单纯地想体验这款经典的老系统，沉浸在它的拟物化设计与独特氛围中，那么请继续往下看，探索 Mavericks 依然闪光的地方。
 
 ## 软件安装
 
@@ -77,8 +74,6 @@ OS X Mavericks（OS X 10.9）是苹果公司于2013年10月发布的操作系统
 - 下载站点
 
   另一个途径是通过第三方下载站点（如MacUpdate）和 Internet Archive 这样的工具。通过这种方式能够找到很多 Mac App Store 或官网上都不在能够提供下载的旧版软件，但同时也存在潜在的安全风险，在安装之前需要自行甄别。
-
-  
 
 ## 网页浏览
 
@@ -100,7 +95,7 @@ OS X Mavericks（OS X 10.9）是苹果公司于2013年10月发布的操作系统
 
 ## 生产力
 
-###  iWork
+### iWork
 
 iWork 是 Apple 专为 Mac 用户打造的一套生产力工具，包括 Pages（文档处理）、Numbers（电子表格）和 Keynote（演示文稿）。在 OS X Mavericks 时代，iWork ’09 版本 仍能顺利运行，这意味着你可以继续使用这一经典的办公套件，享受它带来的高效排版和直观的编辑体验。
 
@@ -126,7 +121,6 @@ iLife 是 Apple 为创意工作者打造的一整套多媒体应用，包括 iPh
 
 ![](https://image.stephenfang.me/mweb/iPhoto.png)
 
-
 ### Pro App 套装
 
 如果你和我一样，在学生时代曾使用教育优惠购买过 Apple 的 Pro App 套装，那么你可以直接从 已购列表 中下载到这些专业应用的经典版本，包括 Final Cut Pro 10、Logic Pro X 10、Motion 5 以及 Compressor 4，在 OS X Mavericks 上继续体验 Apple 为创意工作者打造的高端工具。
@@ -140,7 +134,6 @@ Final Cut Pro 对于专业视频编辑工作者来说一定不陌生。虽然 OS
 除了视频编辑，Apple 还曾推出一款极具影响力的图像处理软件 —— Aperture。这款软件曾是许多摄影师和创意人士的心头好，凭借强大的 RAW 处理能力和便捷的照片管理系统，成为专业摄影工作流中的重要一环。然而，随着 Apple 将重心转向 Photos 应用，Aperture 逐渐淡出历史舞台，但在许多摄影爱好者的记忆中，它仍然是那个时代不可替代的利器。
 
 ![](https://image.stephenfang.me/mweb/aperture.png)
-
 
 ### Office
 
@@ -192,7 +185,6 @@ iBooks 自 OS X Mavericks 第一次来到 OS X 上，为用户提供简洁、直
 
 ![](https://image.stephenfang.me/mweb/GPT.png)
 
-
 尽管如此，App Store 现已不允许上传 iOS 6 兼容的应用，因此只能通过内部部署（通过 Ad Hoc 或企业签名）或者越狱设备侧载（使用 ipa 和 Cydia Impactor）等方式发行应用。对于没有经历过MRC时代的开发者来说这反而是一种尝鲜，有机会可以开一篇为iOS 6 编写应用的新博客。
 
 ![](https://image.stephenfang.me/mweb/Coding.png)
@@ -214,7 +206,6 @@ iTerm 是一款非常强大的 Mac 终端替代品，它提供了比默认的Ter
 ![](https://image.stephenfang.me/mweb/iTerm.png)
 OS X Mavericks 上的旧版本 iTerm 可以更新到 2017 年发布的 3.0.14 版本，依然提供了非常流畅的用户体验和极高的效率。值得一题的是，2024年的发布的 3.5 版本还引入了原生集成 ChatGPT，允许用户配置 OpenAI 的 ChatGPT API，以使用 AI 编写命令、解释命令输出并指导实现目标。
 
-
 ## 工具
 
 ### Things
@@ -231,12 +222,11 @@ OS X Mavericks 上 的 Things 2 允许用户创建清晰的任务列表，分配
 
 Day One 是一款全平台的日记应用，最早于 2011 年 3 月发布，它允许用户记录每天的生活、思考和感受，并提供丰富的格式选项（文本、照片、音频等）来创建个性化的日记条目。
 
-在奖项方面，Day One 曾获得多项殊荣。2012 年，Mac 版本被 Mac App Store 评为“年度最佳应用”。2014 年，Day One 荣获 Apple Design Award，苹果公司称其在 OS X 平台上设计出色，功能恰到好处，这也就是能在 OS X Mavericks 上体验的版本。 
+在奖项方面，Day One 曾获得多项殊荣。2012 年，Mac 版本被 Mac App Store 评为“年度最佳应用”。2014 年，Day One 荣获 Apple Design Award，苹果公司称其在 OS X 平台上设计出色，功能恰到好处，这也就是能在 OS X Mavericks 上体验的版本。
 
 ![](https://image.stephenfang.me/mweb/DayOne.png)
 
 老版本的 Day One 的界面非常简洁但也保证了基本的功能，我也将这款应用使用至今（Day One 2025）。2021 年 6 月 14 日，Day One 被 WordPress.com 的母公司 Automattic 收购，自此在 UI 和运营上有了一些变动，但仍然保持着独立维护的模式。相比苹果的手记，Day One 的优势在于多平台支持、丰富的多媒体记录功能、自动元数据记录、多日记本管理、以及多样的编辑器选项。
-
 
 ### Fantastical
 
@@ -246,7 +236,6 @@ Fantastical 是一款优秀的日历和任务管理应用，它不仅支持传�
 
 我最中意的就是菜单栏的快捷输入功能，相比打开日历应用再一步步添加事件、时间、重复等信息，Fantastical 几乎可以做到一步到位。在2024年末，这款软件甚至开发出了适配 Windows 的版本，即使你不付费也仍然可以使用基础功能，这种跨平台的体验非常不错。
 
-
 ### CleanMyMac
 
 CleanMyMac 是 MacPaw 开发的一款优化和清理 Mac 系统的工具，它可以帮助用户清理垃圾文件、优化性能、卸载不需要的应用等。在 OS X Mavericks 上可以安装和使用 CleanMyMac 3。和现在的版本一样，它包含了垃圾清理、软件卸载、扩展管理等核心功能，区别是在设计上保留了更多细节，或者说 CleanMyMac 3 的设计风格更加与 OS X Yosemite 靠拢。
@@ -255,14 +244,13 @@ CleanMyMac 是 MacPaw 开发的一款优化和清理 Mac 系统的工具，它�
 
 很多人认为 CleanMyMac 这款软件是智商税，但是对于当时刚接触 Mac 的我来说这款软件精致且便捷，确实能够在当时给我 128G 的 Mac 解决燃眉之急。在 2014 年针对 Mac 的正版软件授权选择并不多，CleanMyMac 3也就成为了我第一个为之付费的 Mac 软件，没想到在 2025 年还可以继续启用这个 Key 在这台老设备上继续服役。
 
-### Pixelmator Classic 
+### Pixelmator Classic
 
 OS X Mavericks 受支持的 Pixelmator Classic 功能算不上全面，但最基本的图层编辑、修图、图像合成、色彩风格等功能还是支持的。它的拟物化的直观界面，以及快速的处理能力，使其成为许多Mac用户日常图像处理的首选工具。
 
 ![](https://image.stephenfang.me/mweb/Pixelmator.png)
 
 Pixelmator 与 Adobe Photoshop 相比，Pixelmator 的学习曲线较为平缓，界面简洁，并且采用买断制，在 Mavericks 时代它被视为 Photoshop 的“轻量级”替代品。Pixelmator Team 于 2017 年 11 月 29 日推出了全新的 Pixelmator Pro，作为 Pixelmator 的继任者，Pixelmator 转而被命名为 Pixelmator Classic。
-
 
 ### Alfred 3
 
@@ -278,8 +266,6 @@ Alfred 3 相比 Spotlight 提供了强大的应用启动、文件搜索、剪贴
 
 ![](https://image.stephenfang.me/mweb/AlfredPower.png)
 
-
-
 ### Sketch
 
 Sketch是一款专为 UI/UX 设计师设计的矢量图形编辑工具，它提供了强大的设计工具和高效的工作流程，特别适合创建界面设计、图标设计、原型制作等。与 Adobe Illustrator 相比，Sketch 在功能上更加专注于移动端 UI 设计，提供了更简洁的工具集和更符合现代设计需求的工作流程。
@@ -293,7 +279,6 @@ Sketch是一款专为 UI/UX 设计师设计的矢量图形编辑工具，它提�
 Sketch 在2010年代初期非常流行，并成为 UI/UX 设计的标配工具，但随着 Figma 的崛起，Sketch 逐渐失去了部分市场份额。Figma 的实时协作功能和云端设计让许多团队转向了这款工具。但是由于最近 Figma 更改了收费模式，一部分 Sketch 的老用户们又回流了回来。
 
 ![](https://image.stephenfang.me/mweb/SketchDraw.png)
-
 
 ### Reeder
 
@@ -319,8 +304,7 @@ iA Writer 是一款专注于写作的应用程序，它能够给提供简洁、�
 
 随着其他写作工具（如Ulysses、Bear等）的兴起，iA Writer 的市场份额逐渐减少，但它依然保持更新，并且继续在写作工具领域占有一席之地。iA Writer 在最近更新了他们的品牌标识，并且推出了 Windows、Android 的版本，缺点就是每个端都需要单独付费并且价格不菲。
 
-
-##  总结
+## 总结
 
 ### 一些发现
 
@@ -331,19 +315,19 @@ iA Writer 是一款专注于写作的应用程序，它能够给提供简洁、�
 
 - 部分 App 的老版本仍然能够正常使用，例如网易云音乐，我的老东家的API的可维护性和拓展性很好，不仅是可以正常登录和听歌，所有的功能几乎都能够正常使用，这个体验和 iOS 6 上的网易云音乐是持平的。
 
-	![](https://image.stephenfang.me/mweb/NetEase.png)
+  ![](https://image.stephenfang.me/mweb/NetEase.png)
 
 - 部分系统级别的依赖网络的应用已经不提供支持了，例如 GameCenter 已经禁止了登录，iCloud Drive 也在这个版本上不再可用。
 
-	![](https://image.stephenfang.me/mweb/GameCenter.png)
-	
+  ![](https://image.stephenfang.me/mweb/GameCenter.png)
+
 - 很多人或许不知道 Apple 很早就布局了小组件。Dashboard 这项功能首次引入于 OS X Tiger，在 OS X Yosemite 中，Dashboard 默认被关闭，最终在 macOS Catalina 中 Dashboard 被完全移除。然而，Dashboard 在 OS X Mavercisks也并非完全可用的状态，一些依赖网络的服务，譬如天气、汇率转换和翻译已经停止了更新。开发者 Jonathan 通过更换API推出了[Projects For Old Versions of OS X](https://jonathanalland.com/old-osx-projects.html) 兼容了这些功能，这个项目中还包含了不少使用的工具，能够为你使用 OS X 提供更好的体验。
 
-	![](https://image.stephenfang.me/mweb/Widget.png)
+  ![](https://image.stephenfang.me/mweb/Widget.png)
 
 - 部分 App 因为各种原因逐步淡出了人们的视线，例如 Evernote，当时是一个小而美的笔记应用，几乎是所有笔记应用中功能最全、设计最优雅的。之所以没有选择这款应用进行体验，是因为官方很早[停止了支持](https://discussion.evernote.com/forums/topic/147047-where-can-i-download-old-versions-of-evernote/)。而 Evernote 后来的故事大家都知道，随着在线文档浪潮兴起我也转投 Notion 和 飞书文档的怀抱。
 
-	![](https://image.stephenfang.me/mweb/Evernote.png)
+  ![](https://image.stephenfang.me/mweb/Evernote.png)
 
 ### 小众和大众
 
@@ -376,6 +360,7 @@ Dashboard 的小组件、Cover Flow 的文件浏览——这些功能或许已�
 或许，这就是科技发展的必然。但对于老 Mac 用户来说，回到 OS X Mavericks，就像是回到一个有质感、有温度的时代。如果你仔细观察，会发现 macOS Sonoma 甚至在某种程度上回归了拟物化的影子——控制中心的圆角设计、窗口的磨砂玻璃感、更加生动的动效，都在向当年的视觉风格致敬。macOS 仍然在进化，但那些 Mavericks 时代的理念，从未真正消失。
 
 # 其他链接
+
 - [OS X Yosemite 宣传片：bilibili](https://www.bilibili.com/video/BV1ms411x7mK)
 - [Is macOS X Mavericks still usable? : Youtube](https://www.youtube.com/watch?v=zED29xsejtY&t=159s)
 - [OS X 10.9 Mavericks: The Ars Technica Review](https://arstechnica.com/gadgets/2013/10/os-x-10-9/)

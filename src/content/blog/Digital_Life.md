@@ -1,11 +1,11 @@
 ---
 title: 数字生活启示录
 pubDatetime: 2020-04-12 02:43:20
-categories: 
-- 技术
-tags: 
-- iOS
-- 数字生活
+categories:
+  - 技术
+tags:
+  - iOS
+  - 数字生活
 copyright: true
 description: 尼古拉·尼葛洛庞帝在他1995年发布的的著作《Being Digital》中描绘了未来数字生活的诸多情景，其中VR、AI、智能家居、个人助理等，无一不是近几年研究的热门领域，这些技术的出现深深影响了现代人的日常生活，换句话说，数字生活成为了当今时代人们生活的一部分。
 ---

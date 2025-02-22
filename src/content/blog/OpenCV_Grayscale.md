@@ -1,20 +1,20 @@
 ---
 title: OpenCV 图像直方图与均衡化
 pubDatetime: 2020-03-16 16:20:20
-categories: 
-- 技术
-tags: 
-- OpenCV
-- Xcode
-- Grayscale
+categories:
+  - 技术
+tags:
+  - OpenCV
+  - Xcode
+  - Grayscale
 copyright: true
 description: 直方图是图像的一种统计表达，反映了图像中灰度的分布情况。以概率论为基础的，通过改变图像的直方图来改变图象中像素的灰度，以达到图像增强的目标，常称直方图修正。
 ---
 
 > 如果您不知道如何在 Mac 上使用 Xcode 配置 `OpenCV`，可以参考我写的上一篇博文。
 
-
 <!--more-->
+
 ![](http://image.stephenfang.me/mweb/Histogram.png)
 
 直方图均衡化原理即借助直方图变换实现（归一的）灰度映射，实现思想为对在图像中像素个数多的灰度级进行展宽，而对像素个数少的灰度级进行缩减。从而达到清晰图像的目的。
@@ -23,8 +23,8 @@ description: 直方图是图像的一种统计表达，反映了图像中灰度�
 
 ```cpp
 void cv::equalizeHist	(	InputArray src,
-OutputArray 	dst 
-)	
+OutputArray 	dst
+)
 ```
 
 ![](http://image.stephenfang.me/mweb/equa.jpg)
@@ -38,11 +38,13 @@ OutputArray 	dst
 ![](http://image.stephenfang.me/mweb/calcHist.jpg)
 
 ## 说明
+
 本次实验需要完成以下任务：
+
 1. 完成直方图的绘制
 2. 使 RGB 图像变为灰度图像
 3. 完成图像直方图均衡化
-给出如下代码：
+   给出如下代码：
 
 ```cpp
 #include <opencv2/opencv.hpp>
@@ -93,28 +95,28 @@ int main()
 
     namedWindow("RGB",WINDOW_AUTOSIZE);   // 创建图片显示自动调整大小的窗口
     imshow("RGB",src);    // 在窗口显示原始图片
-    
+
     cvtColor(src, gray, COLOR_BGR2GRAY);
     namedWindow("GRAY",WINDOW_AUTOSIZE);
     imshow("GRAY",gray);    // 在窗口显示灰度图片
-    
+
     grayHistogram = getHistogramImage(gray);
     //获得灰度图直方图
     namedWindow("FirstHistogram",WINDOW_AUTOSIZE);
     imshow("FirstHistogram",grayHistogram); // 在窗口显示灰度图直方图
-    
+
     equalizeHist(gray, equa);
-    namedWindow("EQUA",WINDOW_AUTOSIZE); 
+    namedWindow("EQUA",WINDOW_AUTOSIZE);
     imshow("EQUA",equa);    // 在窗口显示均衡化处理后图片
-    
+
     imwrite("result.jpg", equa); // 存储实验结果
-    
+
     equaHistogram = getHistogramImage(equa);  //获得均衡化处理后直方图
-    namedWindow("SecondHistogram",WINDOW_AUTOSIZE; 
+    namedWindow("SecondHistogram",WINDOW_AUTOSIZE;
  imshow("SecondHistogram",equaHistogram);    // 在窗口显示均衡化处理后
-    
+
     waitKey(0); // 按键等待，需要在窗口任意输入字符退出，0代表永久等待
-    
+
     src.release();
     gray.release();
     equa.release();
@@ -135,6 +137,7 @@ int main()
 第一张图片为未处理过的原图，第二张图片为灰度处理后的图片。第三张图片为均衡化处理后的灰度图，从直方图很能看出区别。
 
 ## 参考
+
 [OpenCV官方文档](https://docs.opencv.org/master/)
 [Dongcheng Lai的知乎专栏](https://zhuanlan.zhihu.com/p/73201428)
 [opencv图像直方图的计算及绘制-Naruto_Q的博客](https://blog.csdn.net/piaoxuezhong/article/details/54588270)

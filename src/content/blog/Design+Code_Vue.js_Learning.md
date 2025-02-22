@@ -1,21 +1,19 @@
 ---
 title: Design+Code 的 Vue.js 课程学习摘录
 pubDatetime: 2020-02-11 01:20:20
-categories: 
-- 技术
-tags: 
-- Vue.js
-- 前端框架
+categories:
+  - 技术
+tags:
+  - Vue.js
+  - 前端框架
 description: 收录 Vue.js 课程学习中的若干收获，包含遇到的问题、收获总结等。
 ---
-
 
 <!--more-->
 
 ## 配置组件的data属性
 
 课程初提及的定义**data**的方法经过测试不可行，即如下代码片段。
-
 
 ```js
 <script>
@@ -38,7 +36,7 @@ export default {
 
 后文中解释了需要作出的更改：
 
->为了让效果工作，我们需要的data属性是一个函数。这是 Vue组件的规则，并不是`App.vue`的规则。因此需要将当前数据属性替换为：
+> 为了让效果工作，我们需要的data属性是一个函数。这是 Vue组件的规则，并不是`App.vue`的规则。因此需要将当前数据属性替换为：
 
 ```js
 data() {
@@ -50,7 +48,7 @@ data() {
 
 经查阅官方文档，了解到 data 必须是一个函数。
 
->当我们定义 <button-counter> 组件时，你可能会发现它的 data 并不是直接提供一个对象，取而代之的是，一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝。如果 Vue 没有这条规则，点击一个按钮就可能会影响到其它所有实例。
+> 当我们定义 <button-counter> 组件时，你可能会发现它的 data 并不是直接提供一个对象，取而代之的是，一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝。如果 Vue 没有这条规则，点击一个按钮就可能会影响到其它所有实例。
 
 解释得非常清楚，学习 `Vue.js` 等前端技术或许可以速成，但文档一定是不可或缺的一块。
 
@@ -63,17 +61,17 @@ data() {
 ```js
 // vue.config.js
 module.exports = {
-    css: {
-        loaderOptions: {
-            sass: {
-                data: `
+  css: {
+    loaderOptions: {
+      sass: {
+        data: `
                     @import "@/global-styles/colors.scss";
                     @import "@/global-styles/typography.scss";
-                `
-            }
-        }
-    }
-}
+                `,
+      },
+    },
+  },
+};
 ```
 
 如果使用的是最新版本的 `Vue CLI`，尽管进行了到 **Vue CLI > in Project Tasks > serve** 重新运行任务，还是会提示报错无法运行。
@@ -92,12 +90,12 @@ module.exports = {
       sass: {
         // @/ 是 src/ 的别名
         // 假设存在 `src/variables.sass` 这个文件
-        prependData: `@import "~@/variables.sass"`
+        prependData: `@import "~@/variables.sass"`,
       },
       scss: {
-        prependData: `@import "~@/variables.scss";`
-      }
-    }
-  }
-}
+        prependData: `@import "~@/variables.scss";`,
+      },
+    },
+  },
+};
 ```

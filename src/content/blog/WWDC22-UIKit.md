@@ -1,14 +1,14 @@
 ---
 title: WWDC22 UIKit 新变化
 pubDatetime: 2022-07-24 23:15:00
-categories: 
-- 技术
-tags: 
-- iOS
-- Swift
-- WWDC
-- WWDC22
-- UIKit
+categories:
+  - 技术
+tags:
+  - iOS
+  - Swift
+  - WWDC
+  - WWDC22
+  - UIKit
 copyright: true
 description: 最近几年的 WWDC 每年都能看到很多 SwiftUI 的新能力，但不能忽略的是 UIKit 框架的更新。
 ---
@@ -26,7 +26,6 @@ description: 最近几年的 WWDC 每年都能看到很多 SwiftUI 的新能力�
 
 [https://github.com/iamStephenFang/WhatsNewInUIKit](https://github.com/iamStephenFang/WhatsNewInUIKit)
 
-
 ## API 改进
 
 在 iOS 16 中部分 API 废弃，需要开发者进行适配，同时有一些新能力可以实现。
@@ -34,30 +33,25 @@ description: 最近几年的 WWDC 每年都能看到很多 SwiftUI 的新能力�
 ### UIDevice
 
 - 为了防止用户留下指纹， `UIDevice.name` 现在会报告模型名称而非用户自定义的设备名称。 使用自定义名称需要获得授权。
-    
-    ```objc
-    // iOS 16 之前 (e.g. "My iPhone")
-    // iOS 16 (e.g. "iPhone 13")
-    UIDevice().name
-    ```
-    
+  ```objc
+  // iOS 16 之前 (e.g. "My iPhone")
+  // iOS 16 (e.g. "iPhone 13")
+  UIDevice().name
+  ```
 - 不再支持 `UIDevice.orientation`， 应使用 `UIViewController` 相关API， 如 `preferredInterfaceOrientation` 来获取应用界面的预期呈现方向。
-    
-    ```objc
-    // UIDeviceOrientation(rawValue: 0) -> .unknown
-    UIDevice().orientation
-    
-    // UIInterfaceOrientation(rawValue: 1) -> .portrait (iPhone)
-    UIViewController().preferredInterfaceOrientationForPresentation
-    ```
-    
+  ```objc
+  // UIDeviceOrientation(rawValue: 0) -> .unknown
+  UIDevice().orientation
+
+  // UIInterfaceOrientation(rawValue: 1) -> .portrait (iPhone)
+  UIViewController().preferredInterfaceOrientationForPresentation
+  ```
 
 ### UIScreen
 
 iOS 16 为 配备了 M1 芯片的 iPad 以及 Mac 带来了 Stage Manager （台前调度）功能，作为应用开发者无需对代码进行改动即可适用该功能。
 
->  💡 在 iOS 13 前开发单窗口的 App，由 `UIApplication` 负责 App 状态，`UIApplicationDelegate`（`AppDelegate`）负责 App 事件和生命周期，然而这种模式不适用于开发多窗口的 iPad App 或 Mac Catalyst App。 iOS 13 引入了构建多窗口应用的 `UIScene`，并对功能职责进行了重新拆分，将 UI 相关的状态、事件和生命周期交与 `UIWindowScene` 和 `UIWindowSceneDelegate`（`SceneDelegate`）负责，`UISceneSession` 负责持久化的 UI 状态。
-
+> 💡 在 iOS 13 前开发单窗口的 App，由 `UIApplication` 负责 App 状态，`UIApplicationDelegate`（`AppDelegate`）负责 App 事件和生命周期，然而这种模式不适用于开发多窗口的 iPad App 或 Mac Catalyst App。 iOS 13 引入了构建多窗口应用的 `UIScene`，并对功能职责进行了重新拆分，将 UI 相关的状态、事件和生命周期交与 `UIWindowScene` 和 `UIWindowSceneDelegate`（`SceneDelegate`）负责，`UISceneSession` 负责持久化的 UI 状态。
 
 如果仍在使用旧版本的 UIScreen API，有必要迁移到新的 `UITraitCollection` 和 `UIScene` API
 
@@ -95,7 +89,7 @@ class UICollectionView {
 - 若不使用 `UIListContentConfiguration` 配置cell，可以调用 cell 的 `invalidateIntrinsicContentSize` 方法手动执行 invalidation。
 - 若使用 Auto Layout 布局cell，可以通过设置 `selfSizingInvalidation` 属性为`enabledInclingConstraints` 来使其接收 Auto Layout 变更。即当 cell 检测到 contentView 内部的任何自动布局变化时，将自动调用 `invalidateIntrinsicContentSize` 方法。
 
-默认情况下 cell 自适应调整大小会伴随着动画，可以在 `invalidateIntrinsicContentSize` 方法外包一层 `performWithoutAnimation` 从而取消调整大小时的动画。 
+默认情况下 cell 自适应调整大小会伴随着动画，可以在 `invalidateIntrinsicContentSize` 方法外包一层 `performWithoutAnimation` 从而取消调整大小时的动画。
 
 ```swift
 @objc private func didTapCollapseButton() {
@@ -198,18 +192,18 @@ fileprivate lazy var pasteControl: UIPasteControl = {
         pasteControlConfig.baseForegroundColor = .white
         pasteControlConfig.cornerRadius = 5.0
         pasteControlConfig.displayMode = .iconAndLabel
-        
+
         let pasteControl = UIPasteControl(configuration: pasteControlConfig)
         pasteControl.target = self
         return pasteControl
     } ()
 
 // MARK: UIPasteConfigurationSupporting
-    
+
     override func canPaste(_ itemProviders: [NSItemProvider]) -> Bool {
         return true
     }
-    
+
     override func paste(itemProviders: [NSItemProvider]) {
         if let itemProvider = itemProviders.first {
             if itemProvider.canLoadObject(ofClass: NSString.self) {
@@ -233,51 +227,49 @@ fileprivate lazy var pasteControl: UIPasteControl = {
 
 [https://twitter.com/cyanapps/status/1535187013611438081](https://twitter.com/cyanapps/status/1535187013611438081)
 
-
 ### UIPageControl
 
 `UIPageControl` 在 iOS 16 上得到了增强，主要包括以下两点
 
 1. 可以针对不同的选中状态展示不同的图像
-    
-    ```swift
-    /// The preferred image for the current page indicator. Symbol images are recommended. Default is nil.
-        /// If this value is nil, then UIPageControl will use \c preferredPageIndicatorImage (or its per-page variant) as
-        /// the indicator image.
-        @available(iOS 16.0, *)
-        open var preferredCurrentPageIndicatorImage: UIImage?
-    ```
-    
+
+   ```swift
+   /// The preferred image for the current page indicator. Symbol images are recommended. Default is nil.
+       /// If this value is nil, then UIPageControl will use \c preferredPageIndicatorImage (or its per-page variant) as
+       /// the indicator image.
+       @available(iOS 16.0, *)
+       open var preferredCurrentPageIndicatorImage: UIImage?
+   ```
+
 2. 可以设置布局方向为水平或垂直
-    
-    ```swift
-    /// The layout direction of the page indicators. The default value is \c UIPageControlDirectionNatural.
-        @available(iOS 16.0, *)
-        open var direction: UIPageControl.Direction
-    
-    @available(iOS 16.0, *)
-        public enum Direction : Int, @unchecked Sendable {
-    
-            
-            /// Page indicators are laid out in the natural direction of the system locale.
-            /// By default, this is equivalent to @c UIPageControlDirectionLeftToRight on LTR locales, and
-            /// @c UIPageControlDirectionRightToLeft on RTL locales.
-            case natural = 0
-    
-            /// Page indicators are laid out from left to right.
-            case leftToRight = 1
-    
-            /// Page indicators are laid out from right to left.
-            case rightToLeft = 2
-    
-            /// Page indicators are laid out from top to bottom.
-            case topToBottom = 3
-    
-            /// Page indicators are laid out from bottom to top.
-            case bottomToTop = 4
-        }
-    ```
-    
+
+   ```swift
+   /// The layout direction of the page indicators. The default value is \c UIPageControlDirectionNatural.
+       @available(iOS 16.0, *)
+       open var direction: UIPageControl.Direction
+
+   @available(iOS 16.0, *)
+       public enum Direction : Int, @unchecked Sendable {
+
+
+           /// Page indicators are laid out in the natural direction of the system locale.
+           /// By default, this is equivalent to @c UIPageControlDirectionLeftToRight on LTR locales, and
+           /// @c UIPageControlDirectionRightToLeft on RTL locales.
+           case natural = 0
+
+           /// Page indicators are laid out from left to right.
+           case leftToRight = 1
+
+           /// Page indicators are laid out from right to left.
+           case rightToLeft = 2
+
+           /// Page indicators are laid out from top to bottom.
+           case topToBottom = 3
+
+           /// Page indicators are laid out from bottom to top.
+           case bottomToTop = 4
+       }
+   ```
 
 GitHub上的 [@ferhanakkan](https://github.com/ferhanakkan) 提供了以下 Demo。
 
@@ -350,7 +342,7 @@ func multiDateSelection(
 ```swift
 // Configuring Decorations
 func calendarView(
-    _ calendarView: UICalendarView, 
+    _ calendarView: UICalendarView,
     decorationFor dateComponents: DateComponents
 ) -> UICalendarView.Decoration? {
     switch myDatabase.eventType(on: dateComponents) {
@@ -410,11 +402,11 @@ navigationItem.customizationIdentifier = "editorViewCustomization"
 
 - 若需创建用户无法移动或移除的 item，需要调用 `UIBarButtonItem` 的实例方法 `createFixedGroup()`
 - 若需创建可调整的 `BarButtonItemGroup`
-    - 拟定 `customizationIdentifier` 作为唯一标识
-    - `UIBarButtonItems` 一次只能在一个 `UIBarButtonItemGroup` 中
-    - 将一个 bar button item添加到一个 group 中会将其从之前的任何 group 中移除
-    - `isInDefaultCustomization`属性设置默认是否出现在导航栏中
-    - `BarButtonItemGroup` 通常包含多个可以提供定制能力的 `UIAction`
+  - 拟定 `customizationIdentifier` 作为唯一标识
+  - `UIBarButtonItems` 一次只能在一个 `UIBarButtonItemGroup` 中
+  - 将一个 bar button item添加到一个 group 中会将其从之前的任何 group 中移除
+  - `isInDefaultCustomization`属性设置默认是否出现在导航栏中
+  - `BarButtonItemGroup` 通常包含多个可以提供定制能力的 `UIAction`
 
 ```swift
 
@@ -437,7 +429,7 @@ private func configureCenterItemGroups() {
                     barButtonItem.image = syncScrollingImage
                 }
             }).creatingFixedGroup(),
-            
+
            UIBarButtonItem(primaryAction: UIAction(title: "Add Link", image: UIImage(systemName: "link")) { [unowned self] _ in
                 insertTag(.link)
             }).creatingOptionalGroup(customizationIdentifier: "addLink")
@@ -473,7 +465,7 @@ center items 针对 Mac Catalyst 的 NSToolbar 和 iPad 并排模式能够实现
 当用户点击导航项目的标题时会出现文件菜单，从上到下可以将其拆分成三部分
 
 1. Document header：包含文件名、文件类型、文件大小、分享菜单等
-2. Suggested  title menu：与当前文档相关的建议操作
+2. Suggested title menu：与当前文档相关的建议操作
 3. Custom title menu：自定义操作
 
 ![TitleMenu](http://image.stephenfang.me/mweb/TitleMenu.png)
@@ -486,27 +478,27 @@ Document header 显示当前文档相关的信息，包括标题、文件类型�
 @available(iOS 16.0, *)
 @MainActor open class UIDocumentProperties : NSObject {
 
-    
+
     /// When initializing with a url, UIKit will automatically lookup metadata based on the data at that url.
     public init(url: URL)
 
-    
+
     /// Initialize with metadata directly when the item is not backed by a url.
     public init(metadata: LPLinkMetadata)
 
-    
+
     /// The metadata to use. UIKit will generate this automatically if a url is given at initialization time.
     @NSCopying open var metadata: LPLinkMetadata
 
-    
+
     /// To support drag & drop, assign a closure to return an array of drag items corresponding to the represented document.
     open var dragItemsProvider: ((UIDragSession) -> [UIDragItem])?
 
-    
+
     /// To support sharing, assign a closure to return a UIActivityViewController configured to share the represented document.
     open var activityViewControllerProvider: (() -> UIActivityViewController)?
 
-    
+
     /// If enabled, shows an icon representation of the document in the navigation bar.
     open var wantsIconRepresentation: Bool
 }
@@ -599,7 +591,6 @@ navigationItem.renameDelegate = self
 editorTextView.isFindInteractionEnabled = true
 ```
 
-
 ### UIEditMenu
 
 Edit menu 交互菜单能够针对当前展示的内容提供诸如剪切、粘贴和粘贴等编辑动作。系统会针对当前用户的交互方式提供符合交互的菜单展示形式。
@@ -658,10 +649,9 @@ override func viewDidLoad() {
 
 ![Sidebar](http://image.stephenfang.me/mweb/Sidebar.png)
 
-
 ### SFSymbols
 
-SFSymbols 在 iOS 16 上支持四种 `renderingMode`，分别是 
+SFSymbols 在 iOS 16 上支持四种 `renderingMode`，分别是
 
 - monochrome
 - multicolor

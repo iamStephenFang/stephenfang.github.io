@@ -4,7 +4,7 @@ on:
   # Trigger the workflow every time you push to the `main` branch
   # Using a different branch name? Replace `main` with your branch’s name
   push:
-    branches: [ master ]
+    branches: [master]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
@@ -17,27 +17,15 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-
-      - name: "🔧 Setup Node.js ${{ matrix.node-version }}"
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-
-      - name: "📦 Install dependencies"
-        run: npm ci
-
-      - name: "🚀 Build the project"
-        run: npm run build
+      - name: Install, build, and upload your site
+        uses: withastro/action@v3
+        # with:
+        # path: . # The root location of your Astro project inside the repository. (optional)
+        # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
+        # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
 
   deploy:
     needs: build

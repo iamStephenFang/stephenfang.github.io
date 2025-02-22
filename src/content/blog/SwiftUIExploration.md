@@ -1,16 +1,15 @@
 ---
 title: SwiftUI开发初探
 pubDatetime: 2021-07-15 15:20:20
-categories: 
-- 技术
-tags: 
-- iOS
-- SwiftUI
-- Swift
+categories:
+  - 技术
+tags:
+  - iOS
+  - SwiftUI
+  - Swift
 copyright: true
 description: 最近使用 SwiftUI 完成了一部分项目的编写，我将完成项目时使用 SwiftUI 进行开发的体验做简单的总结。本文也同时发表于网易KM平台。
 ---
-
 
 <!--more-->
 
@@ -44,7 +43,7 @@ description: 最近使用 SwiftUI 完成了一部分项目的编写，我将完�
 
 ## 声明式编程教会计算机**做什么，**注重于**描述结果**
 
-- Map： let squares = nums.map {$0* $0}
+- Map： let squares = nums.map {$0\* $0}
 - Reduce： let total = nums.reduce(10.0,+)
 - Filter： let evens = nums.filter { $0% 2 == 0 }
 
