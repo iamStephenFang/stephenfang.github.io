@@ -1,6 +1,6 @@
 ---
 title: 在2025年重新体验 OS X Mavericks
-pubDatetime: 2025-02-22 17:54:12
+pubDatetime: 2025-02-22T12:34:40.971Z
 categories:
   - 技术
 tags:
