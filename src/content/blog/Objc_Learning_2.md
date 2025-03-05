@@ -170,7 +170,7 @@ calculator.accumulator = value1;
 
 在子类中使用实例变量，必须现在接口部分声明变量，而不是在实现部分声明变量。在实现部分声明和合成(`@synthesize`)的实例变量为私有，无法在子类中访问。
 
-![](http://image.stephenfang.me/test1.png)
+![](https://image.stephenfang.me/mweb/objc_test1.png)
 
 ## 其他总结
 
@@ -199,7 +199,7 @@ result = [dataValue1 add: dataValue2] ;
 
 ### 关于类的问题
 
-![NSObject类支持的基本方法](http://image.stephenfang.me/Xnip2020-03-26_21-23-56.png)
+![NSObject类支持的基本方法](https://image.stephenfang.me/mweb/NSObject_basic.png)
 
 对`isMemberOfClass`、`isKindOfClass`、`isSubclassOfClass`、`respondsToSelector`、`instancesRespondToSelector`的用法与意义应熟稔于心。
 

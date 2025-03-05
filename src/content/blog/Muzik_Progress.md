@@ -24,7 +24,7 @@ description: 我希望有一款 Tab Based 的 iOS App 带来简约轻量的音�
 
 ## 设计
 
-![截图2020-07-27 at 22.58.20](http://image.stephenfang.me/sketch.png)
+![截图2020-07-27 at 22.58.20](https://image.stephenfang.me/mweb/muzik_sketch.png)
 在项目开始编写代码前，我使用 Sketch 对整个App 进行设计，确定了字体与元素的使用规范，方便之后针对我想要实现的设计进行微调。其实这一步也可以直接在 StoryBoard 中完成，然而添加阴影等操作在 Sketch 等原型创作工具中更为直观。
 在完成设计后我尝试使用 Sketch Mirror、MockUp工具对 App 上手的感受进行评估，并发送原型给朋友了解他们提出的一些建议。
 ![](http://image.stephenfang.me/mweb/15958622925026.png)
@@ -38,7 +38,7 @@ description: 我希望有一款 Tab Based 的 iOS App 带来简约轻量的音�
 
 按照 Sketch 中的页面设计，我将整体 App 分为精选、专辑、歌曲、音乐人、播放列表、正在播放这几个部分，其中我希望有一个小组件能像原生音乐App一样能够看到当前播放进度以及进行快捷操作，于是我将包含显示当前播放内容的 UIView 置于App的顶层位置，其中UIView中包含 UIProgressView 等控件。这是我目前能够想到且实现的理想方法，缺点即需要为下层的所有视图添加 Offset。
 Tab + Navigation 是 iOS 开发中一种非常常见的模式，每一个页面依次对应了精选、专辑、歌曲、音乐人、播放列表的功能。
-![](http://image.stephenfang.me/strc.png)
+![](https://image.stephenfang.me/mweb/strc.png)
 
 ## 页面实现
 

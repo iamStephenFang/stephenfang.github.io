@@ -155,7 +155,7 @@ id _objc_rootInit(id obj) {
 
 Objective-C 中声明的语法较为特别，方法名以冒号结束告诉编译器该方法有参数，在一对圆括号内指定参数的类型，与指定返回值的方法类似，和 C 类似整个声明以一个分号结束，给出一张图展示声明方法。
 
-![](http://image.stephenfang.me/obj1.jpg)
+![](https://image.stephenfang.me/mweb/obj_declaration.jpg)
 
 ## 规范注意
 

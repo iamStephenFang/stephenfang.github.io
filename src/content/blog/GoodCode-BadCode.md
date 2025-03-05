@@ -25,4 +25,4 @@ description: 记得初入公司的时候mentor在审核我的代码的时候会�
 目前看到这本书的中文版也出版了，由于我看的是英文原版书，在整理的时候自己的翻译难免会存在一些错误，欢迎在下面评论指正。
 https://image.stephenfang.me/GoodCode.jpg
 
-![GoodCode](https://image.stephenfang.me/GoodCode.jpg)
+![GoodCode](https://image.stephenfang.me/mweb/GoodCode.jpg)

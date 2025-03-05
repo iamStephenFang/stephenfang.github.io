@@ -17,7 +17,7 @@ description: 本文总结了 WEKA 中 Apriori关联 与 FPgrowth关联 的操作
 
 关联规则表示不同数据项目在同一事件中出现的相关性，下图中超市市场分析员分析顾客购买商品的场景可以直观地理解关联规则。
 
-![](http://image.stephenfang.me/mweb/15877849125580.jpg)
+![](https://image.stephenfang.me/mweb/15877849125580.jpg)
 
 顾客购买面包同时也购买牛奶的购物模式可以用以下关联规则表示：
 
@@ -51,7 +51,7 @@ FP-Growth算法针对Apriori算法在挖掘长频繁模式时性能低下的特�
 
 本次实验的数据我参照Waikato大学的数据挖掘教程，选择了vote.arff 数据集，这是一个关于1984年美国国会投票记录数据集，其中包含投票者的身份（民主党人或共和党人）以及多项议题的投票结果，如下图所示：
 ![](http://image.stephenfang.me/mweb/15877850041138.jpg)
-![](http://image.stephenfang.me/test-1.png)
+![](https://image.stephenfang.me/mweb/weka-test-1.png)
 这个数据集包含435条实例（投票信息），其中包含 267 位民主党人投票信息, 168 位共和党人投票信息。投票结果中有移民（immigration）、教育开支（education-spending）、、免税出口（duty-free-exports）等共16个议题。议员对于议题的表决不仅仅只用简单的“Y”、“N”标记，需要注意的是，被标记为“？”的数据并不是代表数据的缺失，可能代表议员持保留意见没有表决，部分数据集摘录如下：
 
 ![](http://image.stephenfang.me/mweb/15877851693946.jpg)
