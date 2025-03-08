@@ -1,28 +1,18 @@
-import type { Site, SocialObjects } from "./types";
-import type { GiscusProps } from "@giscus/react";
-
-export const SITE: Site = {
+export const SITE = {
   website: "https://stephenfang.me",
-  author: "StephenFang",
+  author: "Stephen Fang",
+  profile: "https://jike.city/stephenfang",
   desc: "stephenfang.me",
   title: "StephenFang's Blog",
   lightAndDarkMode: true,
   postPerIndex: 4,
-  postPerPage: 3,
+  postPerPage: 4,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
   showArchives: true,
+  showBackButton: true
 };
 
-export const LOCALE = ["zh-CN"];
-
-export const LOGO_IMAGE = {
-  enable: false,
-  svg: true,
-  width: 216,
-  height: 46,
-};
-
-export const SOCIALS: SocialObjects = [
+export const SOCIALS = [
   {
     name: "Github",
     href: "https://github.com/iamstephenfang",
@@ -60,16 +50,3 @@ export const SOCIALS: SocialObjects = [
     active: true,
   },
 ];
-
-export const GISCUS: GiscusProps = {
-  repo: "iamStephenFang/stephenfang.github.io",
-  repoId: "MDEwOlJlcG9zaXRvcnkyMzg4NzI1MjU=",
-  category: "Blog Post Comments",
-  categoryId: "DIC_kwDODjznzc4CcOye",
-  mapping: "title",
-  reactionsEnabled: "1",
-  emitMetadata: "0",
-  inputPosition: "top",
-  lang: "zh-CN",
-  loading: "lazy",
-};
