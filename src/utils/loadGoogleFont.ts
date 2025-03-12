@@ -42,8 +42,8 @@ async function loadGoogleFonts(
       style: "normal",
     },
     {
-      name: "IBM Plex Mono",
-      font: "IBM+Plex+Mono:wght@700",
+      name: "Source Han Serif",
+      font: "Noto+Serif+SC:wght@700",
       weight: 700,
       style: "bold",
     },
