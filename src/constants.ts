@@ -2,10 +2,10 @@ import IconMail from "@/assets/icons/IconMail.svg";
 import IconGitHub from "@/assets/icons/IconGitHub.svg";
 import IconBrandX from "@/assets/icons/IconBrandX.svg";
 import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
-import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconInstagram from "@/assets/icons/IconInstagram.svg";
 import IconJike from "@/assets/icons/IconJike.svg";
+import type { GiscusProps } from "@giscus/react";
 import { SITE } from "@/config";
 
 export const LOCALE = {
@@ -78,3 +78,16 @@ export const SHARE_LINKS = [
     icon: IconMail,
   },
 ] as const;
+
+export const GISCUS: GiscusProps = {
+  repo: "iamStephenFang/stephenfang.github.io",
+  repoId: "MDEwOlJlcG9zaXRvcnkyMzg4NzI1MjU=",
+  category: "Blog Post Comments",
+  categoryId: "DIC_kwDODjznzc4CcOye",
+  mapping: "title",
+  reactionsEnabled: "1",
+  emitMetadata: "0",
+  inputPosition: "top",
+  lang: "zh-CN",
+  loading: "lazy",
+};

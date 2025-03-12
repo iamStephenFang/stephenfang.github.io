@@ -11,6 +11,7 @@ import BackButton from "@/components/BackButton.astro";
 import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
+import Comments from "@/components/Comments";
 import { SITE } from "@/config";
 
 export interface Props {
@@ -130,6 +131,8 @@ const nextPost =
       </button>
     </div>
 
+    <Comments client:only="react" />
+
     <hr class="my-6 border-dashed" />
 
     <!-- Previous/Next Post Buttons -->
@@ -163,23 +166,6 @@ const nextPost =
         )
       }
     </div>
-
-    <script
-      src="https://giscus.app/client.js"
-      data-repo="iamStephenFang/stephenfang.github.io"
-      data-repo-id="MDEwOlJlcG9zaXRvcnkyMzg4NzI1MjU="
-      data-category="Blog Post Comments"
-      data-category-id="DIC_kwDODjznzc4CcOye"
-      data-mapping="title"
-      data-strict="0"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      data-input-position="top"
-      data-theme="preferred_color_scheme"
-      data-lang="zh-CN"
-      data-loading="lazy"
-      crossorigin="anonymous"
-      async></script>
   </main>
   <Footer />
 </Layout>
