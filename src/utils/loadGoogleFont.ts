@@ -4,7 +4,6 @@ async function loadGoogleFont(
   weight: number
 ): Promise<ArrayBuffer> {
   const API = `https://fonts.googleapis.com/css2?family=${font}:wght@${weight}&text=${encodeURIComponent(text)}`;
-
   const css = await (
     await fetch(API, {
       headers: {
@@ -36,16 +35,16 @@ async function loadGoogleFonts(
 > {
   const fontsConfig = [
     {
-      name: "Source Han Serif",
+      name: "Noto Serif Simplified Chinese",
       font: "Noto+Serif+SC",
       weight: 400,
       style: "normal",
     },
     {
-      name: "Source Han Serif",
-      font: "Noto+Serif+SC:wght@700",
+      name: "Noto Serif Simplified Chinese",
+      font: "Noto+Serif+SC",
       weight: 700,
-      style: "bold",
+      style: "normal",
     },
   ];
 
