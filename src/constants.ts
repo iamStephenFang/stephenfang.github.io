@@ -1,13 +1,11 @@
 import IconMail from "@/assets/icons/IconMail.svg";
 import IconGitHub from "@/assets/icons/IconGitHub.svg";
 import IconBrandX from "@/assets/icons/IconBrandX.svg";
-import IconLinkedin from "@/assets/icons/IconLinkedin.svg";
 import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
-import IconPinterest from "@/assets/icons/IconPinterest.svg";
-// import IconInstagram from "@/assets/icons/IconInstagram.svg";
-// import IconJike from "@/assets/icons/IconJike.svg";
+import IconInstagram from "@/assets/icons/IconInstagram.svg";
+import IconJike from "@/assets/icons/IconJike.svg";
 import { SITE } from "@/config";
 
 export const LOCALE = {
@@ -22,12 +20,12 @@ export const SOCIALS = [
     linkTitle: ` ${SITE.title} on Github`,
     icon: IconGitHub,
   },
-  // {
-  //   name: "Instagram",
-  //   href: "https://instagram.com/iamstephenfang",
-  //   linkTitle: `${SITE.author} on Instagram`,
-  //   icon: IconInstagram,
-  // },
+  {
+    name: "Instagram",
+    href: "https://instagram.com/iamstephenfang",
+    linkTitle: `${SITE.author} on Instagram`,
+    icon: IconInstagram,
+  },
   {
     name: "X",
     href: "https://x.com/fangxuanmiao",
@@ -46,12 +44,12 @@ export const SOCIALS = [
     linkTitle: `${SITE.author} on Telegram`,
     icon: IconTelegram,
   },
-  // {
-  //   name: "Jike",
-  //   href: "https://okjk.co/LZFasc",
-  //   linkTitle: `${SITE.author} on Jike`,
-  //   icon: IconJike,
-  // },
+  {
+    name: "Jike",
+    href: "https://okjk.co/LZFasc",
+    linkTitle: `${SITE.author} on Jike`,
+    icon: IconJike,
+  },
 ] as const;
 
 export const SHARE_LINKS = [
@@ -60,12 +58,6 @@ export const SHARE_LINKS = [
     href: "https://wa.me/?text=",
     linkTitle: `Share this post via WhatsApp`,
     icon: IconWhatsapp,
-  },
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/sharer.php?u=",
-    linkTitle: `Share this post on Facebook`,
-    icon: IconFacebook,
   },
   {
     name: "X",
