@@ -1,7 +1,7 @@
-<svg viewBox="0 0 24 24" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" 
-    class="icon-tabler" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" 
-    fill="none" stroke-width="2">
+<svg viewBox="0 0 24 24" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="icon-tabler"
+    stroke-linecap="round" stroke-linejoin="round" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
-    <path d="M10 8h4v6a2 2 0 1 1 -4 0"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
 </svg>

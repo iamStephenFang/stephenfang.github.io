@@ -12,7 +12,7 @@ export const SITE = {
   showArchives: true,
   showBackButton: true,
   editPost: {
-    url: "https://github.com/iamStephenFang/stephenfang.github.io/edit/main/src/content/blog",
+    url: "https://github.com/iamStephenFang/stephenfang.github.io/edit/master/src/data/blog",
     text: "Suggest Changes",
     appendFilePath: true,
   },
