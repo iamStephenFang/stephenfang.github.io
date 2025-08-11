@@ -1,3 +1,4 @@
+import type { Props } from "astro";
 import IconMail from "@/assets/icons/IconMail.svg";
 import IconGitHub from "@/assets/icons/IconGitHub.svg";
 import IconBrandX from "@/assets/icons/IconBrandX.svg";
@@ -8,16 +9,18 @@ import IconJike from "@/assets/icons/IconJike.svg";
 import type { GiscusProps } from "@giscus/react";
 import { SITE } from "@/config";
 
-export const LOCALE = {
-  lang: "zh", // html lang code. Set this empty and default will be "en"
-  langTag: ["zh-CN"], // BCP 47 Language Tags. Set this empty [] to use the environment default
-} as const;
+interface Social {
+  name: string;
+  href: string;
+  linkTitle: string;
+  icon: (_props: Props) => Element;
+}
 
-export const SOCIALS = [
+export const SOCIALS: Social[] = [
   {
-    name: "Github",
+    name: "GitHub",
     href: "https://github.com/iamstephenfang",
-    linkTitle: ` ${SITE.title} on Github`,
+    linkTitle: `${SITE.title} on GitHub`,
     icon: IconGitHub,
   },
   {
@@ -52,7 +55,7 @@ export const SOCIALS = [
   },
 ] as const;
 
-export const SHARE_LINKS = [
+export const SHARE_LINKS: Social[] = [
   {
     name: "WhatsApp",
     href: "https://wa.me/?text=",

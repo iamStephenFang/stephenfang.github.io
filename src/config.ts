@@ -12,9 +12,12 @@ export const SITE = {
   showArchives: true,
   showBackButton: true,
   editPost: {
-    url: "https://github.com/iamStephenFang/stephenfang.github.io/edit/master/src/data/blog",
-    text: "Suggest Changes",
-    appendFilePath: true,
+    enabled: false,
+    text: "Edit page",
+    url: "https://github.com/iamStephenFang/stephenfang.github.io/edit/master",
   },
   dynamicOgImage: true,
-};
+  dir: "auto", // "rtl" | "auto"
+  lang: "en", // html lang code. Set this empty and default will be "en"
+  timezone: "Asia/Shanghai", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+} as const;
