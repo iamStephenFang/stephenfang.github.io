@@ -14,7 +14,6 @@ tags:
 copyright: true
 featured: true
 description: 在 2025 年的 WWDC 上 Apple 正式推出了全新的 Foundation Models 框架，这是一个与 Swift 深度集成、面向客户端的大语言模型开发框架。不同于传统以 REST API 为核心的 LLM 接入方式，Apple 提供了一套围绕 Swift 类型系统与 Xcode 工具链打造的原生开发体验，使得 AI 能力首次具备了“系统级 API”的形态。
-
 ---
 
 ![](https://image.stephenfang.me/FoundationModel/Frame.png)
@@ -23,11 +22,11 @@ description: 在 2025 年的 WWDC 上 Apple 正式推出了全新的 Foundation 
 
 借助 Foundation Models 框架，开发者不仅可以通过简洁直观的 API 调用完成文本生成、对话管理、结构化数据输出等任务，还可以结合 Swift 的类型安全机制与 `@Generable` 宏定义强约束的数据模型，实现与传统编程范式高度一致的模型交互体验。与此同时，Tool Calling、Snapshot Streaming、Dynamic Generation Schema 等机制也为构建 AI 原生应用提供了丰富的能力扩展手段。
 
-需要说明的是，截至目前，Apple Intelligence 尚未在中国大陆正式推出，国行设备用户暂无法体验 Foundation Model 的实际功能。因此，本文不会涉及该模型的开发实操与使用体验，而是聚焦于另一个核心议题: 苹果究竟是如何对LLM进行合理且高效的封装设计*。
+需要说明的是，截至目前，Apple Intelligence 尚未在中国大陆正式推出，国行设备用户暂无法体验 Foundation Model 的实际功能。因此，本文不会涉及该模型的开发实操与使用体验，而是聚焦于另一个核心议题: 苹果究竟是如何对LLM进行合理且高效的封装设计\*。
 
 > 以下 Demo 代码来自 [Apple官方文档](https://developer.apple.com/documentation/foundationmodels/languagemodelsession)。
 
-截止目前 Apple Intelligence 尚未在中国大陆正式推出，如果你购买的设备是国行的那更是遥遥无期了。所以本文并不会讨论 Foundation Model 实际的开发和使用体验， 本分享主要探讨的是 Apple 如何实现一个合理的封装。 
+截止目前 Apple Intelligence 尚未在中国大陆正式推出，如果你购买的设备是国行的那更是遥遥无期了。所以本文并不会讨论 Foundation Model 实际的开发和使用体验， 本分享主要探讨的是 Apple 如何实现一个合理的封装。
 
 ## 前言：传统封装
 
@@ -83,7 +82,7 @@ func callOpenAI(prompt: String) async throws -> String {
 ```swift
 class OpenAIService {
     static let shared = OpenAIService(apiKey: "<key>")
-    
+
     private let apiKey: String
     init(apiKey: String) {
         self.apiKey = apiKey
@@ -154,15 +153,13 @@ print(answer)
 
 在我看来，Apple Foundation Models 代表了一种 系统级 AI 接口设计模式的转变：从调用“某个模型”，过渡为调用“完成某种任务”的 API。这种变化对 Swift 开发者尤其友好。接下来我们就看看 Apple 是怎么做的。
 
-  
-
 ## Stateful Session
 
 为了支持多轮对话和保持上下文连贯性，Foundation Model 框架提供了 `LanguageModelSession` 这个有状态的会话对象，提供了
 
--   `instructions`：一组开发者设定的静态“系统指令”，用于指导模型总体行为，优先于用户 prompt
--   `prompt`: 用户向模型发出的输入请求，类似用户的一句话或任务指令。被用作 `respond(to:)`的输入参数
--   `transcript`: 记录整个对话历史（包括 Prompt 和响应）的数据结构, 开发者可用于调试、重用上下文或多轮对话展示
+- `instructions`：一组开发者设定的静态“系统指令”，用于指导模型总体行为，优先于用户 prompt
+- `prompt`: 用户向模型发出的输入请求，类似用户的一句话或任务指令。被用作 `respond(to:)`的输入参数
+- `transcript`: 记录整个对话历史（包括 Prompt 和响应）的数据结构, 开发者可用于调试、重用上下文或多轮对话展示
 
 ```swift
 let session = LanguageModelSession(instructions: "You are a poet.")
@@ -186,14 +183,13 @@ You are a motivational workout coach that provides quotes to inspire \
 and motivate athletes.
 """
 )
- 
+
 let prompt = "Generate a motivational quote for my next workout."
 let response = try await session.respond(
     to: prompt,
     options: options
 )
 ```
-
 
 ### 上下文管理
 
@@ -237,9 +233,6 @@ private func newSession(previousSession: LanguageModelSession) -> LanguageModelS
 }
 ```
 
-  
-
-
 ### 控制会话行为
 
 开发者可以通过 `GenerationOptions` 等参数，对会话中的模型行为进行细粒度控制，例如设置`temperature`、`sampling`、`maximumResponseTokens`。
@@ -250,13 +243,13 @@ let response = try await session.respond(
   to: prompt,
   options: GenerationOptions(sampling: .greedy)
 )
-                
+
 // Low-variance output
 let response = try await session.respond(
   to: prompt,
   options: GenerationOptions(temperature: 0.5)
 )
-                
+
 // High-variance output
 let response = try await session.respond(
   to: prompt,
@@ -295,9 +288,6 @@ struct HaikuView: View {
 }
 ```
 
-  
-
-
 ## 适配器
 
 除了默认的通用模型，框架还提供了内置的专用用例（如内容标签、实体抽取等），通过适配器（adapter）实现。可在初始化时指定：
@@ -323,7 +313,6 @@ let session = LanguageModelSession(
 | `codeCompletion`    | 提供代码补全建议，当前支持 Swift、Python 等语言。                            |
 | `grammarCorrection` | 识别并纠正文本中的拼写和语法错误，用于输入优化和教育场景。                   |
 | `questionAnswering` | 基于上下文内容回答具体问题，常用于搜索引擎、聊天机器人、RAG 系统等。         |
-
 
 ## Guided Generation
 
@@ -357,17 +346,11 @@ let response = try await session.respond(
 
 开发者可以像定义普通 Swift 数据模型一样定义结构化数据，并与`LanguageModelSession` 搭配完成生成任务。这种封装方式使得开发者可以直接操作 Swift 对象而不是解析字符串，从而避免了潜在的 runtime 错误和繁琐的字符串处理逻辑。
 
-  
-
-
 框架支持使用基本的 Swift 类型（ 如 Bool、Int、Float、Double、Decimal 和 Array）生成内容，并且允许嵌套（自定义 Generable 类型嵌套在其他 Generable 类型中），简化了业务逻辑的开发。以下为 NatashaTheRobot 提供的[Demo代码](https://www.natashatherobot.com/p/swift-prompt-engineering-apples-foundationmodels)，开发者可以使用 Playground 直接看到生成的结果。
 
 ![](https://image.stephenfang.me/FoundationModel/Demo.jpg)
 
 此外，Foundation Model 还支持通过 `DynamicGenerationSchema` 在运行时动态构建模型的输出格式，包括你希望生成的数据长什么样、字段有哪些、类型是什么、每个字段是否可选、字段之间有没有依赖关系等等，都可以以声明式方式在运行时定义结构。
-
-  
-
 
 ### `DynamicGenerationSchema`
 
@@ -401,8 +384,6 @@ let response = try await session.respond(
 )
 ```
 
-
-
 ### 实现思路
 
 第三方的 [LLM.swift](https://github.com/eastriverlee/LLM.swift) 也提供了类似的能力，在使用上相比 Apple 的实现还是缺失了一些灵活性，以下是它的`@Generatable` 使用方法。
@@ -420,7 +401,7 @@ struct Address {
     let zipCode: String
 }
 
-@Generatable 
+@Generatable
 struct Task {
     let title: String
     let priority: Priority
@@ -446,19 +427,19 @@ let result = try await bot.respond(to: "Create a software project plan", as: Pro
 
 当一个类型（struct / enum）使用 `@Generatable` 宏时，自动插入以下成员函数：
 
--   `jsonSchema`：自动生成 `static var jsonSchema: String`
--   `init`：合成一个默认构造器
--   `encode`：合成一个编码方法（可能用于 JSON encoding）
+- `jsonSchema`：自动生成 `static var jsonSchema: String`
+- `init`：合成一个默认构造器
+- `encode`：合成一个编码方法（可能用于 JSON encoding）
 
 自动为它添加协议遵循：
 
--   `Codable`: 确保符合序列化需求
--   `Generatable`: 自己本身
--   `CaseIterable`: 如果是 enum 类型，生成 .allCases 等功能（如果适用）
+- `Codable`: 确保符合序列化需求
+- `Generatable`: 自己本身
+- `CaseIterable`: 如果是 enum 类型，生成 .allCases 等功能（如果适用）
 
 ```swift
 // Sources/LLMMacros/Generatable.swift
-import SwiftSyntaxMacros 
+import SwiftSyntaxMacros
 
 public protocol Generatable: Codable {
     static var jsonSchema: String { get }
@@ -466,7 +447,7 @@ public protocol Generatable: Codable {
 
 @attached(member, names: named(jsonSchema), named(init), named(encode))
 @attached(extension, conformances: Codable, Generatable, CaseIterable)
-public macro Generatable() = #externalMacro(module: "LLMMacrosImplementation", type: "GeneratableMacro") 
+public macro Generatable() = #externalMacro(module: "LLMMacrosImplementation", type: "GeneratableMacro")
 ```
 
 `GeneratableMacro` 的实现部分在 `GeneratableMacro.swift`，使用了 Swift 的 SwiftSyntaxMacros 来进行 结构化代码生成。以下是宏最核心的逻辑之一，即当类型使用了 `@Generatable`，这部分负责为其生成成员（目前是 `jsonSchema`）。
@@ -545,26 +526,22 @@ Foundation Model 的另一个值得称道的封装在于其“工具调用”机
 protocol Tool: Codable, Hashable {
     var name: String { get }
     var description: String { get }
-    
+
     func call(arguments: Arguments) async throws -> String
 }
 ```
 
 当模型在处理用户请求时，它会根据当前上下文和用户意图，自主判断是否需要调用某个工具来获取信息或执行操作。如果模型决定调用工具，它会生成一个符合工具定义的参数列表，并由框架负责实际执行该工具。工具执行的结果会返回给模型，模型再根据结果生成最终的用户响应。
 
-
 ![](https://image.stephenfang.me/FoundationModel/ToolCalling.png)
 
 这种封装方式的特点在于：
 
-* **能力扩展**：模型不再局限于其内部知识，可以通过工具调用与外部系统进行交互，极大地扩展了其解决问题的能力。
+- **能力扩展**：模型不再局限于其内部知识，可以通过工具调用与外部系统进行交互，极大地扩展了其解决问题的能力。
 
-* **模块化**：开发者可以将复杂的功能封装成独立的工具，提高了代码的复用性和可维护性。
+- **模块化**：开发者可以将复杂的功能封装成独立的工具，提高了代码的复用性和可维护性。
 
-* **自主性**：模型能够自主决定何时以及如何使用工具，降低了开发者在业务逻辑中显式调用工具的复杂性。
-
-  
-
+- **自主性**：模型能够自主决定何时以及如何使用工具，降低了开发者在业务逻辑中显式调用工具的复杂性。
 
 ### 使用方法
 
@@ -627,12 +604,11 @@ print(response.content)
 // It’s 71˚F in Cupertino!
 ```
 
-
 ## Snapshot Streaming
 
 ### `streamResponse`
 
-在 Foundation Model 中 开发者可以通过 ` session.streamResponse(to:)  `启动生成模型的实时响应，模型会分批产出 token（部分文本），并让 UI 随之渲染，形成一句一句“边生成边展示”的交互体验。这种机制非常适合聊天机器人、行程规划、段落生成等需要即时反馈的场景。
+在 Foundation Model 中 开发者可以通过 `session.streamResponse(to:) `启动生成模型的实时响应，模型会分批产出 token（部分文本），并让 UI 随之渲染，形成一句一句“边生成边展示”的交互体验。这种机制非常适合聊天机器人、行程规划、段落生成等需要即时反馈的场景。
 
 ![](https://image.stephenfang.me/FoundationModel/Streaming.gif)
 
@@ -648,7 +624,7 @@ for delta in model.stream(prompt: "Hello") {
 
 这种方式在处理结构化数据时非常繁琐，尤其是需要在 UI 中实时展示部分结构化内容时，开发者不得不不断解析和修正中间状态，更加容易出错。
 
-Foundation Models 框架引入了“快照流”（Snapshot Streaming）机制。其核心思想是：每次流式输出的不是原始 token 增量，而是“部分生成的结构体快照”。这些快照类型由 ` @Generable  `宏自动生成，所有属性均为 Optional，随着模型生成进度逐步填充。
+Foundation Models 框架引入了“快照流”（Snapshot Streaming）机制。其核心思想是：每次流式输出的不是原始 token 增量，而是“部分生成的结构体快照”。这些快照类型由 `@Generable `宏自动生成，所有属性均为 Optional，随着模型生成进度逐步填充。
 
 假设你有如下结构体：
 
@@ -685,7 +661,6 @@ for try await partial in stream {
 }
 ```
 
-
 ### 应用方式
 
 这种快照流非常适合与 SwiftUI 等声明式 UI 框架结合。开发者可以将快照作为 `@State` 变量，随着流式生成自动刷新界面：
@@ -695,10 +670,10 @@ struct ItineraryView: View {
     let session: LanguageModelSession
     let dayCount: Int
     let landmarkName: String
-  
+
     @State
     private var itinerary: Itinerary.PartiallyGenerated?
-  
+
     var body: some View {
         //...
         Button("Start") {
@@ -708,17 +683,17 @@ struct ItineraryView: View {
                         Generate a (dayCount) itinerary \
                         to (landmarkName).
                         """
-                  
+
                     let stream = session.streamResponse(
                         to: prompt,
                         generating: Itinerary.self
                     )
-                  
+
                     for try await partial in stream {
                         self.itinerary = partial
                     }
                 } catch {
-                    print(error)  
+                    print(error)
                 }
             }
         }
@@ -727,7 +702,6 @@ struct ItineraryView: View {
 ```
 
 具体来说，当用户点击按钮后，View 通过`session.streamResponse(to:)` 发起流式请求，模型逐步生成 token，`session` 将 token 累积为结构化快照，且每生成一部分，`session` 通过异步序列把最新快照传递给 View，而 View 触发 UI 实时刷新直到生成完成，View 展示最终内容。
-
 
 ![](https://image.stephenfang.me/FoundationModel/Streamimg.png)
 
@@ -739,12 +713,9 @@ struct ItineraryView: View {
 
 对于开发者而言，这一套从语言级支持、UI 交互到本地执行完整链路的封装，极大地降低了 AI 能力的集成成本，也预示着应用形态将在未来发生深刻变革。尽管 Apple 的 Foundation Model 框架目前国行设备尚无法直接接入和使用，但这套LLM 交互体系依然为我们提供了极具价值的参考范本。作为中国的开发者，我们可以跳脱“如何使用”的局限，深入思考 Apple 在原生化集成、类型安全、功能组合等方面的设计思路，打造更加稳健、易用且贴近系统级体验的 AI 原生能力。
 
-  
-
-
 若你也对这一框架的技术细节感兴趣，推荐按照以下 session 顺序深入学习：
 
--   [Meet the Foundation Models framework](https://developer.apple.com/videos/play/wwdc2025/286/)
--   [Deep dive into the Foundation Models framework](https://developer.apple.com/videos/play/wwdc2025/301/))
--   [Explore prompt design & safety for on-device foundation models](https://developer.apple.com/videos/play/wwdc2025/248/)
--   [Code-along: Bring on-device AI to your app using the Foundation Models framework](https://developer.apple.com/videos/play/wwdc2025/259/?time=1472)
+- [Meet the Foundation Models framework](https://developer.apple.com/videos/play/wwdc2025/286/)
+- [Deep dive into the Foundation Models framework](https://developer.apple.com/videos/play/wwdc2025/301/))
+- [Explore prompt design & safety for on-device foundation models](https://developer.apple.com/videos/play/wwdc2025/248/)
+- [Code-along: Bring on-device AI to your app using the Foundation Models framework](https://developer.apple.com/videos/play/wwdc2025/259/?time=1472)

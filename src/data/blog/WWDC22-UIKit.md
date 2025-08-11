@@ -39,6 +39,7 @@ description: 最近几年的 WWDC 每年都能看到很多 SwiftUI 的新能力�
   UIDevice().name
   ```
 - 不再支持 `UIDevice.orientation`， 应使用 `UIViewController` 相关API， 如 `preferredInterfaceOrientation` 来获取应用界面的预期呈现方向。
+
   ```objc
   // UIDeviceOrientation(rawValue: 0) -> .unknown
   UIDevice().orientation

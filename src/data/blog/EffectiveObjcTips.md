@@ -196,7 +196,6 @@ typedef NS_OPTIONS(NSUInteger, AgoraAudioSessionOperationRestriction) {
 ## 第十二节
 
 - 消息转发分为两个阶段
-
   - 第一阶段：动态方法解析
   - 第二阶段：消息转发机制
 
@@ -305,7 +304,6 @@ if (ret) {
 
 - 在可变对象上调用copy会返回一个不可变类的实例，可能会把NSMutableArray对象当作NSArray返回，为了安全起见使用copy和mutableCopy这两个方法复制对象
 - 深拷贝与浅拷贝
-
   - 深拷贝：拷贝对象自身时一并拷贝其底层数据，需要新增一个专门执行深拷贝的方法
   - 浅拷贝：只拷贝容器对象本身不拷贝其中数据；Foundation框架所有collection类执行拷贝的默认情况；实现copyWithZone方法
   - 图解：
@@ -390,7 +388,6 @@ if (ret) {
 - 上图方式可以随意调用setFirstName与setLastName方法与点语法设置属性，同时外界无法修改对象，完成了类型的拓展
 
   ![](http://image.stephenfang.me/mweb/Untitled26.png)
-
   - 不需要在公共接口中声明类遵从了私有协议，而应该改到 class-continuation 分类内进行声明
 
 ## 第二十八条
@@ -571,7 +568,6 @@ if (ret) {
   ![](http://image.stephenfang.me/mweb/Untitled53.png)
 
   ![](http://image.stephenfang.me/mweb/Untitled54.png)
-
   - 并发队列，读取与写入操作可以随时执行
 
   ![](http://image.stephenfang.me/mweb/Untitled55.png)
@@ -681,13 +677,11 @@ if (ret) {
 ## 第四十八条
 
 - 遍历方式
-
   - for循环
 
   ![](http://image.stephenfang.me/mweb/Untitled76.png)
 
   字典与 set 均无顺序，无法根据下标访问数值。于是需要获取字典内所有键或 set 内所有对象，从而产生空间上的额外开销。然而执行反向遍历时 for 循环会更为方便。
-
   - NSEnumerator
 
   ```objc
@@ -718,7 +712,6 @@ if (ret) {
   ```
 
   对于所有的collection都可以采用这套语法，在读法上更容易被理解
-
   - for in 快速遍历
 
   ```objc
@@ -746,7 +739,6 @@ if (ret) {
   ```
 
   某个支持快速遍历的类的对象遵从 NSFastEnumeration 协议可以实现对象的迭代，而NSEnumerator 也实现了该协议，该遍历方法无法获取遍历操作针对的下标。
-
   - 基于Block的遍历
 
   ```objc
