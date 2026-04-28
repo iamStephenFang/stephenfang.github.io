@@ -45,8 +45,8 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
       // Init pagefind ui
       const search = new PagefindUI({
         element: "#pagefind-search",
-        showSubResults: true,
         showImages: false,
+        showSubResults: true,
         processTerm: function (term: string) {
           params.set("q", term); // Update the `q` parameter in the URL
           history.replaceState(history.state, "", "?" + params.toString()); // Push the new URL without reloading
@@ -91,7 +91,7 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
 
 <style is:global>
   #pagefind-search {
-    --pagefind-ui-font: var(--font-mono);
+    --pagefind-ui-font: var(--font-app);
     --pagefind-ui-text: var(--foreground);
     --pagefind-ui-background: var(--background);
     --pagefind-ui-border: var(--border);
@@ -119,6 +119,8 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
       color: var(--accent);
       outline-offset: 1px;
       outline-color: var(--accent);
+      text-decoration-style: dashed;
+      text-underline-offset: 4px;
     }
 
     .pagefind-ui__result-title a:focus-visible,

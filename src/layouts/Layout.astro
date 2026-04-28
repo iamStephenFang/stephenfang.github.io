@@ -1,10 +1,11 @@
 ---
+import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import { SITE } from "@/config";
 import "@/styles/global.css";
 
-export interface Props {
+type Props = {
   title?: string;
   author?: string;
   profile?: string;
@@ -14,7 +15,7 @@ export interface Props {
   pubDatetime?: Date;
   modDatetime?: Date | null;
   scrollSmooth?: boolean;
-}
+};
 
 const {
   title = SITE.title,
@@ -59,6 +60,12 @@ const structuredData = {
     <link rel="icon" type="image" href="/favicon.png" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Load Font -->
+    <Font
+      cssVariable="--font-google-sans-code"
+      preload={[{ subset: "latin", weight: 400, style: "normal" }]}
+    />
 
     <!-- General Meta Tags -->
     <title>{title}</title>
@@ -136,18 +143,40 @@ const structuredData = {
 
     <ClientRouter />
 
-    <script is:inline src="/toggle-theme.js"></script>
+    <!-- Minimal inline script to prevent FOUC - sets theme immediately -->
+    <script is:inline>
+      (function () {
+        const initialColorScheme = ""; // "light" | "dark"
+        const currentTheme = localStorage.getItem("theme");
+
+        function getPreferTheme() {
+          if (currentTheme) return currentTheme;
+          if (initialColorScheme) return initialColorScheme;
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+
+        const themeValue = getPreferTheme();
+
+        // Set theme immediately to prevent flash
+        document.firstElementChild?.setAttribute("data-theme", themeValue);
+
+        // Export minimal API for external script
+        window.theme = {
+          themeValue: themeValue,
+          getTheme: () => window.theme.themeValue,
+          setTheme: val => {
+            window.theme.themeValue = val;
+          },
+        };
+      })();
+    </script>
   </head>
   <body>
     <slot />
+
+    <!-- Load full theme logic -->
+    <script src="../scripts/theme.ts"></script>
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

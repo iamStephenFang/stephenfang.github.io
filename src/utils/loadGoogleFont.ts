@@ -1,3 +1,18 @@
+import { access, readFile } from "node:fs/promises";
+import { constants } from "node:fs";
+
+type FontDefinition = {
+  name: string;
+  weight: number;
+  style: string;
+};
+
+const SYSTEM_FONT_CANDIDATES = [
+  "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
+  "/System/Library/Fonts/Supplemental/NISC18030.ttf",
+  "/System/Library/Fonts/Apple Symbols.ttf",
+];
+
 async function loadGoogleFont(
   font: string,
   text: string,
@@ -28,12 +43,31 @@ async function loadGoogleFont(
   return res.arrayBuffer();
 }
 
+async function loadLocalFont(
+  path: string,
+  { name, weight, style }: FontDefinition
+): Promise<{ name: string; data: ArrayBuffer; weight: number; style: string }> {
+  await access(path, constants.R_OK);
+  const data = await readFile(path);
+  const fontBytes = Uint8Array.from(data);
+  return {
+    name,
+    data: fontBytes.buffer,
+    weight,
+    style,
+  };
+}
+
 async function loadGoogleFonts(
   text: string
 ): Promise<
   Array<{ name: string; data: ArrayBuffer; weight: number; style: string }>
 > {
-  const fontsConfig = [
+  const fontsConfig: Array<
+    FontDefinition & {
+      font: string;
+    }
+  > = [
     {
       name: "Noto Serif Simplified Chinese",
       font: "Noto+Serif+SC",
@@ -47,6 +81,19 @@ async function loadGoogleFonts(
       style: "normal",
     },
   ];
+
+  for (const fontPath of SYSTEM_FONT_CANDIDATES) {
+    try {
+      const fonts = await Promise.all(
+        fontsConfig.map(({ name, weight, style }) =>
+          loadLocalFont(fontPath, { name, weight, style })
+        )
+      );
+      return fonts;
+    } catch {
+      // Try the next local candidate before falling back to remote fonts.
+    }
+  }
 
   const fonts = await Promise.all(
     fontsConfig.map(async ({ name, font, weight, style }) => {
