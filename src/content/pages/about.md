@@ -1,6 +1,6 @@
 ---
-layout: ../layouts/AboutLayout.astro
-title: "👋 你好 "
+title: "你好"
+description: "A bit about Stephen Fang and this blog."
 ---
 
 I'm StephenFang, who like programming lovely mobile applications.
