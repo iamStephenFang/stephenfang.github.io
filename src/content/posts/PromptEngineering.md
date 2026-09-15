@@ -11,7 +11,6 @@ tags:
   - Google
   - 学习
 copyright: true
-featured: true
 description: 随着大语言模型（LLMs）如 Gemini、GPT、Claude 的快速进化，Prompt Engineering（提示词工程）已经从简单的“写一句话让模型回答”演变为一门系统性、可调优、可实验的技术艺术。它不仅是 AI 从业者的必备技能，也逐渐成为产品经理、运营和内容创作者日常工作的重要工具。
 ---
 
@@ -432,16 +431,16 @@ Few-shot 示例胜过任何冗长说明，在提示中提供示例是最有效�
 
 提示工程是一个迭代的过程。精心设计并测试不同的提示，分析并记录结果。根据模型的表现优化您的提示。持续实验直至获得理想的输出。当更换模型或调整模型配置时，需重新对先前使用的提示进行实验验证。
 
-|             |     |
-| :---------- | :-- |
-| 目标        |     |
-| 模型        |     |
-| Temperature |     |
-| Token Limit |     |
-| Top-K       |     |
-| Top-P       |     |
-| Prompt      |     |
-| Output      |     |
+|             |      |
+| :---------- | :--- |
+| 目标        |      |
+| 模型        |      |
+| Temperature |      |
+| Token Limit |      |
+| Top-K       |      |
+| Top-P       |      |
+| Prompt      |      |
+| Output      |      |
 
 ## 回顾
 

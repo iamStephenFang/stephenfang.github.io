@@ -12,7 +12,6 @@ tags:
   - URL
   - Foundation
 copyright: true
-featured: true
 description: 最近在处理业务上问题时遇到了一些NSURL上的问题，期望通过这篇博客一同梳理梳理一下对于NSURL的理解。
 ---
 

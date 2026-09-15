@@ -12,7 +12,6 @@ tags:
   - 操作系统
   - Apps
 copyright: true
-featured: true
 description: 本文将系统梳理苹果在历年 WWDC 和 iOS 大版本更新中，陆续取代、吸收第三方 App 与越狱插件的历史，归纳总结几种典型的“收编”路径，并回顾这些应用及背后团队的后续命运。
 ---
 

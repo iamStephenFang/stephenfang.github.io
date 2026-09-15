@@ -9,7 +9,6 @@ tags:
   - 产品设计
   - 乔布斯
 copyright: true
-featured: true
 description: 从 Macintosh、QuickTime、iPod 和 iPhone，到 Apple Watch 与未能上市的 Apple Car，这本书记录了 Apple 五十年间的产品、技术与人物，也带来了一些关于产品开发和日常工作的思考。
 ---
 

@@ -14,7 +14,6 @@ tags:
   - 适配
   - 设计
 copyright: true
-featured: true
 description: iPhone Duo 不是简单的“更大屏幕”，而是 App 运行环境会在多显示屏、折痕、Split View 和相机语义上持续变化。本文从布局、系统 Bar、Safe Area、Reserved Region 和多 Scene 出发，梳理适配底线与可扩展体验，并以相机 App 为例讨论新 API。
 ---
 

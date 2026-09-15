@@ -9,7 +9,6 @@ tags:
   - 幸福
   - 锻炼
 copyright: true
-featured: true
 description: “灵感本易逝，行动应当时”，无论是想提高财务自由，还是追求个人成长，都能从《纳瓦尔宝典》中获得启发，以下是这本书的60条摘录。
 ---
 

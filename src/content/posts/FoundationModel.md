@@ -12,7 +12,6 @@ tags:
   - 大模型
   - Foundation Model
 copyright: true
-featured: true
 description: 在 2025 年的 WWDC 上 Apple 正式推出了全新的 Foundation Models 框架，这是一个与 Swift 深度集成、面向客户端的大语言模型开发框架。不同于传统以 REST API 为核心的 LLM 接入方式，Apple 提供了一套围绕 Swift 类型系统与 Xcode 工具链打造的原生开发体验，使得 AI 能力首次具备了“系统级 API”的形态。
 ---
 
