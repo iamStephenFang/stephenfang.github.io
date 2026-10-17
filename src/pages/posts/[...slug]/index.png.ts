@@ -6,6 +6,10 @@ import satori from "satori";
 import sharp from "sharp";
 import { getFontPathByWeight } from "@/utils/getFontPathByWeight";
 import { getPostSlug } from "@/utils/getPostPaths";
+import {
+  getOgFallbackFonts,
+  ogTitleFontFamily,
+} from "@/utils/getOgFallbackFonts";
 import config from "@/config";
 
 export async function getStaticPaths() {
@@ -44,6 +48,10 @@ export const GET: APIRoute = async ({ props, url }) => {
       res.arrayBuffer()
     ),
   ]);
+
+  const fallbackFonts = await getOgFallbackFonts(
+    [props.data.title, props.data.author, config.site.title].join(" ")
+  );
 
   const markup = {
       type: "div",
@@ -105,6 +113,7 @@ export const GET: APIRoute = async ({ props, url }) => {
                       type: "p",
                       props: {
                         style: {
+                          fontFamily: ogTitleFontFamily,
                           fontSize: 72,
                           fontWeight: "bold",
                           maxHeight: "84%",
@@ -187,6 +196,7 @@ export const GET: APIRoute = async ({ props, url }) => {
           weight: 700,
           style: "normal",
         },
+        ...fallbackFonts,
       ],
     }
   );

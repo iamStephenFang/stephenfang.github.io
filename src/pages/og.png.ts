@@ -4,6 +4,10 @@ import satori from "satori";
 import sharp from "sharp";
 import { fontData, experimental_getFontFileURL } from "astro:assets";
 import { getFontPathByWeight } from "@/utils/getFontPathByWeight";
+import {
+  getOgFallbackFonts,
+  ogTitleFontFamily,
+} from "@/utils/getOgFallbackFonts";
 import config from "@/config";
 
 export const GET: APIRoute = async context => {
@@ -23,6 +27,14 @@ export const GET: APIRoute = async context => {
       res.arrayBuffer()
     ),
   ]);
+
+  const fallbackFonts = await getOgFallbackFonts(
+    [
+      config.site.title,
+      config.site.description,
+      new URL(config.site.url).hostname,
+    ].join(" ")
+  );
 
   const markup = {
       type: "div",
@@ -98,7 +110,11 @@ export const GET: APIRoute = async context => {
                           {
                             type: "p",
                             props: {
-                              style: { fontSize: 72, fontWeight: "bold" },
+                              style: {
+                                fontFamily: ogTitleFontFamily,
+                                fontSize: 72,
+                                fontWeight: "bold",
+                              },
                               children: config.site.title,
                             },
                           },
@@ -159,6 +175,7 @@ export const GET: APIRoute = async context => {
           weight: 700,
           style: "normal",
         },
+        ...fallbackFonts,
       ],
     }
   );
