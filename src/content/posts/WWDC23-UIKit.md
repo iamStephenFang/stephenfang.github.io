@@ -25,7 +25,7 @@ description: WWDC 23 大家的目光都被 visionOS 吸引了，作为 UIKit 开
 
 <!--more-->
 
-> 💡 2022年笔者在云音乐组内和博客分享了 [WWDC22 UIKit 新功能](https://stephenfang.me/2022/07/24/WWDC22-UIKit/)，有兴趣可以先回顾一下这篇文章，这个系列会一直保持更新。
+> 💡 2022年笔者在云音乐组内和博客分享了 [WWDC22 UIKit 新功能](https://stephenfang.me/posts/wwdc22-uikit/)，有兴趣可以先回顾一下这篇文章，这个系列会一直保持更新。
 
 ## 开发体验
 
