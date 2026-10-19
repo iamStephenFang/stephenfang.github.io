@@ -11,7 +11,7 @@ import {
 import config from "@/config";
 
 export const GET: APIRoute = async context => {
-  const fonts = fontData["--font-google-sans-code"];
+  const fonts = fontData["--font-google-sans-code-og"];
   const regularFontPath = getFontPathByWeight(fonts, 400);
   const boldFontPath = getFontPathByWeight(fonts, 700);
 

@@ -7,7 +7,37 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-app: var(--font-google-sans-code);
+  --font-app:
+    system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --font-code: var(--font-google-sans-code);
+  --font-reading: "Reading CJK Serif", ui-serif, "Times New Roman", serif;
+}
+
+/* Limit local Chinese faces to CJK glyphs so Latin uses the system serif. */
+@font-face {
+  font-family: "Reading CJK Serif";
+  src:
+    local("NotoSerifCJKsc-Regular"), local("NotoSerifSC-Regular"),
+    local("SourceHanSerifSC-Regular"), local("STSongti-SC-Regular"),
+    local("STSong"), local("SimSun");
+  font-style: normal;
+  font-weight: 400;
+  unicode-range:
+    U+2E80-9FFF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF,
+    U+20000-323AF;
+}
+
+@font-face {
+  font-family: "Reading CJK Serif";
+  src:
+    local("NotoSerifCJKsc-Bold"), local("NotoSerifSC-Bold"),
+    local("SourceHanSerifSC-Bold"), local("STSongti-SC-Bold");
+  font-style: normal;
+  font-weight: 700;
+  unicode-range:
+    U+2E80-9FFF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF,
+    U+20000-323AF;
 }
 
 /* Light theme values */

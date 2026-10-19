@@ -17,7 +17,7 @@ const { title, description, ...props } = data;
   <a
     href={getPostUrl(id, filePath, Astro.currentLocale)}
     class:list={[
-      "text-accent inline-block text-lg font-medium",
+      "text-foreground hover:text-accent inline-block text-xl leading-normal font-semibold",
       "decoration-dashed underline-offset-4 hover:underline",
       "focus-visible:no-underline focus-visible:underline-offset-0",
     ]}
@@ -27,5 +27,5 @@ const { title, description, ...props } = data;
     </Heading>
   </a>
   <Datetime {...props} />
-  <p>{description}</p>
+  <p class="font-reading leading-[1.8]">{description}</p>
 </li>

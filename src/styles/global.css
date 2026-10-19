@@ -6,6 +6,27 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
+  body {
+    /* Keep years and version numbers aligned instead of old-style figures. */
+    font-variant-numeric: lining-nums;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-reading;
+  }
+
+  code,
+  pre,
+  kbd,
+  samp {
+    @apply font-code;
+  }
+
   * {
     @apply border-border outline-accent/75;
     scrollbar-width: auto;
@@ -27,6 +48,18 @@
 
 @utility app-layout {
   @apply max-w-app mx-auto w-full px-4;
+}
+
+@utility ui-nav {
+  @apply font-reading text-[0.9375rem] leading-6 font-semibold;
+}
+
+@utility ui-action {
+  @apply font-app text-base leading-6 font-medium;
+}
+
+@utility ui-meta {
+  @apply text-muted-foreground font-app text-sm leading-6 font-normal;
 }
 
 @utility active-nav {

@@ -3,18 +3,24 @@
 @layer base {
   /* ===== Override default Tailwind Typography styles ===== */
   .app-prose {
-    @apply prose;
+    @apply prose font-reading;
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    line-break: strict;
 
     h1,
     h2,
     h3,
     h4,
-    th {
-      @apply text-foreground mb-3;
+    h5,
+    h6 {
+      @apply text-foreground mb-3 font-semibold not-italic;
+      line-height: 1.45;
+      text-wrap: pretty;
     }
 
-    h3 {
-      @apply italic;
+    th {
+      @apply text-foreground mb-3 font-semibold;
     }
 
     p,

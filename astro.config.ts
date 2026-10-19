@@ -73,9 +73,21 @@ export default defineConfig({
       cssVariable: "--font-google-sans-code",
       provider: fontProviders.google(),
       fallbacks: ["monospace"],
-      weights: [300, 400, 500, 600, 700],
+      // One variable WOFF2 covers all code weights; reading fonts are local.
+      weights: ["300 700"],
       styles: ["normal", "italic"],
-      formats: ["woff", "ttf"],
+      formats: ["woff2"],
+      // Keep the first rendered font when a slow connection misses first paint.
+      display: "optional",
+    },
+    {
+      // Satori needs static TrueType fonts for build-time social images.
+      name: "Google Sans Code",
+      cssVariable: "--font-google-sans-code-og",
+      provider: fontProviders.google(),
+      weights: [400, 700],
+      styles: ["normal"],
+      formats: ["ttf"],
     },
   ],
   env: {

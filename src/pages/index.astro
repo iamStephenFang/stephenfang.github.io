@@ -33,8 +33,10 @@ const homePath = getRelativeLocaleUrl(locale, "");
     data-home-path={homePath}
     class="app-layout"
   >
-    <section id="hero" class="border-border border-b pt-8 pb-6">
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
+    <section id="hero" class="border-border border-b pt-4 pb-6 leading-[1.8]">
+      <h1
+        class="my-4 inline-block text-2xl leading-snug font-medium tracking-tight sm:mb-6 sm:text-3xl"
+      >
         stephenfang.me
       </h1>
       <a
@@ -52,19 +54,8 @@ const homePath = getRelativeLocaleUrl(locale, "");
         <span class="sr-only">RSS Feed</span>
       </a>
 
-      <p>👋 Hello 您好</p>
-      <p>
-        I'm StephenFang, who like programming lovely mobile applications. Read
-        the blog posts or check
-        <LinkButton
-          class="hover:text-accent underline decoration-dashed underline-offset-4"
-          href={getRelativeLocaleUrl(locale, "about")}
-        >
-          About
-        </LinkButton> for more info.
-      </p>
-      <p class="mt-2">
-        我是 StephenFang，一名移动应用开发者。敬请阅读我的博客或点击
+      <p class="font-reading mt-2">
+        你好👋 我是 StephenFang，一名移动应用开发者。敬请阅读我的博客或点击
         <LinkButton
           class="hover:text-accent underline decoration-dashed underline-offset-4"
           href={getRelativeLocaleUrl(locale, "about")}
@@ -72,12 +63,20 @@ const homePath = getRelativeLocaleUrl(locale, "");
           About
         </LinkButton> 与我取得联系。
       </p>
+
+      <p class="font-reading">
+        Hello, I'm StephenFang, who like programming lovely mobile applications.
+        Read the blog posts or check
+        <LinkButton
+          class="hover:text-accent underline decoration-dashed underline-offset-4"
+          href={getRelativeLocaleUrl(locale, "about")}
+        >
+          About
+        </LinkButton> for more info.
+      </p>
       {
         socials.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">
-              {t.home.socialLinks}:
-            </div>
+          <div class="mt-5 flex gap-x-3 gap-y-1 max-sm:flex-col sm:items-center">
             <Socials />
           </div>
         )
@@ -93,9 +92,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
             { "border-border border-b": recentPosts.length > 0 },
           ]}
         >
-          <h2 class="text-2xl font-semibold tracking-wide">
-            {t.home.featured}
-          </h2>
+          <h2 class="text-2xl font-semibold">{t.home.featured}</h2>
           <ul>
             {featuredPosts.map(data => (
               <Card variant="h3" {...data} />
@@ -108,9 +105,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
     {
       recentPosts.length > 0 && (
         <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">
-            {t.home.recentPosts}
-          </h2>
+          <h2 class="text-2xl font-semibold">{t.home.recentPosts}</h2>
           <ul>
             {recentPosts.slice(0, postsConfig.perIndex).map(data => (
               <Card variant="h3" {...data} />
@@ -121,7 +116,10 @@ const homePath = getRelativeLocaleUrl(locale, "");
     }
 
     <div class="my-8 text-center">
-      <LinkButton href={getRelativeLocaleUrl(locale, "posts")}>
+      <LinkButton
+        class="ui-action gap-2 py-2"
+        href={getRelativeLocaleUrl(locale, "posts")}
+      >
         {t.home.allPosts}
         <IconArrowRight class="inline-block rtl:-rotate-180" />
       </LinkButton>
