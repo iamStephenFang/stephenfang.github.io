@@ -4,10 +4,9 @@ pubDatetime: 2020-02-26 11:10:20
 categories:
   - 技术
 tags:
-  - struts
+  - Java
   - JavaEE
-  - 总结
-  - 实验
+  - Struts
 description: 包含 控制器组件 Action 知识梳理、实验步骤、实验整理方面的总结。
 ---
 

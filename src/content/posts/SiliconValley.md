@@ -6,7 +6,6 @@ categories:
 tags:
   - 旅行
   - 硅谷
-  - 计算机历史博物馆
   - 科技史
   - Apple
 copyright: true

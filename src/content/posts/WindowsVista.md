@@ -4,14 +4,9 @@ pubDatetime: 2025-07-13T12:34:40.971Z
 categories:
   - 技术
 tags:
-  - 数码
   - 怀旧
   - Windows
-  - Windows Vista
-  - Windows 7
-  - Mac
-  - 折腾
-  - macOS
+  - 操作系统
 copyright: true
 featured: true
 description: 回头再看，Vista 真的那么糟糕吗？还是只是太超前，太过生不逢时？尤其当 iOS 26 发布，Apple 又在移动系统中加入大量动态毛玻璃、拟物化细节与丰富动效，重新唤起人们对“视觉质感”和“界面空间感”的兴趣。对比之下，Vista 所代表的 Frutiger Aero 美学，与今天这场设计回潮竟有着某种微妙的呼应，这篇文章便是想带你重新看看这款曾经被痛骂的系统。

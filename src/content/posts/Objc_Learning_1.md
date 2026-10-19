@@ -5,7 +5,6 @@ categories:
   - 技术
 tags:
   - iOS
-  - Xcode
   - Objective-C
 copyright: true
 description: 最近开始学习 Objective-C 夯实基础，并在学习基础上尝试开发出简单的 iOS 应用程序。有 C 语言基础的同学应该能够比较快上手。在此处总结可以方便本人更好地记忆。

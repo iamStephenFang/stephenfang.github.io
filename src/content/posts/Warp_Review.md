@@ -4,12 +4,9 @@ pubDatetime: 2023-03-04 16:40:00
 categories:
   - 技术
 tags:
-  - Rust
-  - Terminal
-  - Mac
-  - GPT
   - AI
   - 终端
+  - macOS
   - Warp
 copyright: true
 description: Warp自称是“21世纪的终端”，这是一款基于Rust开发的原生终端应用，兼容主流的 zsh（默认）、bash 以及 fish，主打功能是块编辑以及 GPT 模型下的命令搜索，在最近受到了不少关注。

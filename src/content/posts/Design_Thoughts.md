@@ -5,8 +5,8 @@ categories:
   - 设计
 tags:
   - iOS
-  - UI
-  - UX
+  - 产品设计
+  - 摄影
 copyright: true
 description: 学习了一部分 Design + Code 课程，在 Dribbble 发布了一部分用 Sketch 设计的东西，加之十分喜欢 Notion 这款笔记应用，使得我产生了对于设计与编码的一些零碎的思考。Notion招聘的标准为“Designer Who Can Code”，我将其视为也是一种社会需求的反馈，相较于强调编码的能力，他们的团队更强调设计师的属性。随着应用程序的同质化越来越明显，优秀的设计、优秀的交互能够给用户带来耳目一新的体验，有时能够获得更好的回报。
 ---

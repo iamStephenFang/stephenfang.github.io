@@ -4,10 +4,9 @@ pubDatetime: 2020-02-24 11:10:20
 categories:
   - 技术
 tags:
-  - struts
-  - workflow
+  - Java
   - JavaEE
-  - 总结
+  - Struts
 description: 包含Struts 工作流程知识梳理、实验总结、实验步骤三方面的总结。
 ---
 

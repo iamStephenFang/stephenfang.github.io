@@ -5,7 +5,6 @@ categories:
   - 技术
 tags:
   - iOS
-  - Xcode
   - Objective-C
   - ARC
 copyright: true

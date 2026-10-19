@@ -7,7 +7,6 @@ tags:
   - iOS
   - Swift
   - WWDC
-  - WWDC22
   - UIKit
 copyright: true
 description: 最近几年的 WWDC 每年都能看到很多 SwiftUI 的新能力，但不能忽略的是 UIKit 框架的更新。

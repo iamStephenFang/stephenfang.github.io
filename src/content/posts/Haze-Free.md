@@ -7,6 +7,7 @@ tags:
   - iOS
   - OpenCV
   - Swift
+  - 图像处理
 copyright: true
 description: 本篇内容主要包含在 iOS 项目项目中添加 OpenCV 库、Objective-C++ 与 Swift 的结合使用，及桥接文件的添加等等，为 OpenCV 系列的第四篇文章。
 ---

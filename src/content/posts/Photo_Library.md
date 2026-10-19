@@ -5,11 +5,9 @@ categories:
   - 技术
 tags:
   - iOS
-  - Photo
   - Objective-C
   - Swift
-  - iOS 15
-  - iOS 14
+  - 相册
 description: 开发迭代为了解决测试提出的「选中的照片」权限适配问题，花时间研究了「Handle the Limited Photos Library in your app」和 「Meet the new Photos picker」两个session，整理需求内容汇总并实现，同时还解决了一处 iOS 15.2 下可能导致崩溃的相册权限问题。
 ---
 

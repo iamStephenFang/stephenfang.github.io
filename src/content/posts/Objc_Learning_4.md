@@ -5,7 +5,6 @@ categories:
   - 技术
 tags:
   - iOS
-  - Xcode
   - Objective-C
 copyright: true
 description: 最近开始学习 `Objective-C` 夯实基础，在此处总结可以方便本人更好地整理学习内容，此文为本系列的第四篇文章，主要复习了 `Objective-C`中C语言特性。

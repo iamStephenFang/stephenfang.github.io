@@ -6,7 +6,8 @@ categories:
 tags:
   - iOS
   - Swift
-  - 音乐App
+  - 音乐
+  - 产品设计
 copyright: true
 description: 我希望有一款 Tab Based 的 iOS App 带来简约轻量的音乐播放体验，作为一个有一些 iOS 基础的人，我决定自己开发一个简单的本地音乐播放器，正好实践一些 UIKit 控件的使用。
 ---

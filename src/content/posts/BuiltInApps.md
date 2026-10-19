@@ -4,14 +4,11 @@ pubDatetime: 2025-04-19T12:34:40.971Z
 categories:
   - 技术
 tags:
-  - 怀旧
-  - iOS
-  - Mac
-  - 折腾
+  - 操作系统
   - macOS
   - Windows
-  - UIUX
-  - 操作系统
+  - iOS
+  - 产品设计
 copyright: true
 description: 本文将从“互联网考古”的视角出发，回顾内置应用的发展历程，分析它们在技术与设计层面的演化逻辑，并试图展望一个由 AI 重构的操作系统应用生态的未来图景。
 ---

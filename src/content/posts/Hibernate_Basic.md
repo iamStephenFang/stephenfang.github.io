@@ -4,9 +4,9 @@ pubDatetime: 2020-02-25 13:11:20
 categories:
   - 技术
 tags:
-  - Hibernate
+  - Java
   - JavaEE
-  - 总结
+  - Hibernate
 description: 包含 Hibernate 知识梳理、实验总结方面的总结。
 ---
 

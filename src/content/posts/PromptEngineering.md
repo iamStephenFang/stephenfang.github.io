@@ -4,12 +4,9 @@ pubDatetime: 2025-05-06T12:34:40.971Z
 categories:
   - 技术
 tags:
-  - LLM
   - AI
-  - DeepSeek
-  - GPT
-  - Google
-  - 学习
+  - LLM
+  - 提示词工程
 copyright: true
 description: 随着大语言模型（LLMs）如 Gemini、GPT、Claude 的快速进化，Prompt Engineering（提示词工程）已经从简单的“写一句话让模型回答”演变为一门系统性、可调优、可实验的技术艺术。它不仅是 AI 从业者的必备技能，也逐渐成为产品经理、运营和内容创作者日常工作的重要工具。
 ---

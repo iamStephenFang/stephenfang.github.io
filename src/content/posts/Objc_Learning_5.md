@@ -5,7 +5,6 @@ categories:
   - 技术
 tags:
   - iOS
-  - Xcode
   - Objective-C
 copyright: true
 description: 最近开始学习 `Objective-C` 夯实基础，在此处总结可以方便本人更好地整理学习内容，此文为本系列的第五篇文章，主要复习了 `Objective-C` Foundation 框架中关于数字对象、字符串对象以及数组对象的内容。

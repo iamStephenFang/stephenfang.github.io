@@ -4,11 +4,11 @@ pubDatetime: 2026-07-17T08:48:00.000Z
 categories:
   - 技术
 tags:
-  - A2UI
+  - AI
   - Agent
+  - A2UI
   - iOS
-  - UIKit
-  - UIUX
+  - 产品设计
 copyright: true
 featured: true
 description: 从客户端视角理解 A2UI：Agent 负责描述界面意图，客户端负责用受控的原生组件渲染 UI，并通过 Catalog、Data Model 和 Action 建立安全边界。

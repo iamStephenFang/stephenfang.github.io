@@ -5,12 +5,9 @@ categories:
   - 技术
 tags:
   - 怀旧
-  - 折腾
-  - MetroUI
-  - WindowsPhone
-  - Windows
-  - UIUX
+  - Windows Phone
   - 操作系统
+  - 产品设计
 copyright: true
 featured: true
 description: 在 Windows 的产品史中，很少有功能能像动态磁贴这样富有戏剧性。动态磁贴不仅是一项界面特性，更是微软试图重新定义人机交互的重大探索，希望借动态磁贴来重塑操作系统与信息之间的关系。

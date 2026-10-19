@@ -4,10 +4,9 @@ pubDatetime: 2020-02-23 18:10:20
 categories:
   - 技术
 tags:
-  - struts
+  - Java
   - JavaEE
-  - 总结
-  - 实验
+  - Struts
 description: 包含Struts 2知识梳理、实验总结、实验步骤三方面的总结。
 ---
 

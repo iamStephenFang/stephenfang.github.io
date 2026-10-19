@@ -4,14 +4,10 @@ pubDatetime: 2023-12-27 00:20:20
 categories:
   - 技术
 tags:
-  - MusicGen
-  - Lo-Fi
-  - AudioCraft
-  - AIGC
   - AI
-  - 人工智能
   - 音乐
   - Python
+  - MusicGen
 copyright: true
 description: 在网上冲浪的时候看到了 lofi generator 这个网站，试听了半小时音乐感觉质量都还可以，几乎与其他音乐平台听到的没差。从这个网站的 Licensing 页面了解到网站上所有音乐都是由AI生成的，并且网站还提供了付费的音乐下载选项。作为一个同时喜欢听Lo-Fi又喜欢鼓捣新鲜事物的人，有这样一个网站让我很是兴奋，但是我也很好奇这个网站是怎么做到的，于是我开始了我的探索之旅。
 ---

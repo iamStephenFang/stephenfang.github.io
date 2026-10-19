@@ -5,12 +5,9 @@ categories:
   - 技术
 tags:
   - 怀旧
-  - WindowsPhone
-  - 微软
-  - 折腾
-  - Windows
-  - UIUX
+  - Windows Phone
   - 操作系统
+  - 产品设计
 copyright: true
 featured: true
 description: 在梳理「动态磁贴」文章资料的时候时，我忽然意识到自己已经很多年没有真正摸过一台 Windows Phone 设备了，于是我在二手平台上买回了一台 Lumia 1020，重新体验一次 Windows Phone 8.1 —— 这个曾被微软寄予厚望、最终却悄然退场的移动操作系统。

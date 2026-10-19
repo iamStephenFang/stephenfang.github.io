@@ -4,11 +4,9 @@ pubDatetime: 2026-07-21T07:00:00.000Z
 categories:
   - 技术
 tags:
-  - Fedora
   - Linux
+  - Fedora
   - Surface
-  - GNOME
-  - 微软
 copyright: true
 featured: true
 description: 给 Surface Pro 5 安装上仍在积极更新的 Linux 发行版，它会成为一台更可用的设备吗？

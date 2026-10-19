@@ -4,13 +4,10 @@ pubDatetime: 2025-06-02 10:30:12
 categories:
   - 技术
 tags:
-  - WWDC
   - Apple
   - iOS
-  - 越狱
-  - App Store
+  - WWDC
   - 操作系统
-  - Apps
 copyright: true
 description: 本文将系统梳理苹果在历年 WWDC 和 iOS 大版本更新中，陆续取代、吸收第三方 App 与越狱插件的历史，归纳总结几种典型的“收编”路径，并回顾这些应用及背后团队的后续命运。
 ---

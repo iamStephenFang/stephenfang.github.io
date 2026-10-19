@@ -6,9 +6,7 @@ categories:
 tags:
   - iOS
   - Swift
-  - Preview
   - WWDC
-  - WWDC23
   - UIKit
 copyright: true
 description: WWDC 23 大家的目光都被 visionOS 吸引了，作为 UIKit 开发者关注一下目前今年的 「What’s New in UIKit」session 实为必要。

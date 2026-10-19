@@ -5,7 +5,7 @@ categories:
   - 技术
 tags:
   - OpenCV
-  - Xcode
+  - 图像处理
 copyright: true
 description: OpenCV 图像滤波实践
 ---

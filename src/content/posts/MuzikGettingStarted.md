@@ -5,8 +5,9 @@ categories:
   - 技术
 tags:
   - iOS
-  - AudioPlayer
   - Swift
+  - 音乐
+  - AVAudioPlayer
 copyright: true
 description: 最近又放弃了使用 Apple Music，作为一个从音乐下载时代过来的人，我仍然保持着将歌曲同步至 iPhone 再聆听的习惯，即使我仍然无法摆脱流媒体的束缚。话说回来，Apple 原生的 Music.app 的体验除了交互，于我而言是糟糕的，我更希望有一款 Tab Based 的 iOS App 支撑这种体验，作为一个有一些 iOS 基础的人，我决定自己开发一个简单的本地音乐播放器，正好学习一些 UIKit 控件。
 ---

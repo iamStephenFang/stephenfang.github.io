@@ -5,7 +5,6 @@ categories:
   - 技术
 tags:
   - 数据挖掘
-  - 关联算法
   - WEKA
 copyright: true
 description: 本文总结了 WEKA 中 Apriori关联 与 FPgrowth关联 的操作方法。

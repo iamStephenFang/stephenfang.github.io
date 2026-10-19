@@ -4,11 +4,10 @@ pubDatetime: 2026-06-12 00:04:12
 categories:
   - 阅读
 tags:
-  - Instagram
-  - Facebook
+  - 读书
   - 社交网络
   - 创业
-  - 产品
+  - 产品设计
 copyright: true
 description: Instagram 从一个带滤镜的拍照应用，成长为拥有十亿月活用户的社交网络。这本书真正有意思的地方，不只是讲它如何成功，而是讲一个产品在获得巨大影响力之后，如何一步步被增长、商业化和组织政治改写。
 ---

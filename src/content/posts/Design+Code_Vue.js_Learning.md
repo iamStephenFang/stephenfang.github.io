@@ -5,7 +5,7 @@ categories:
   - 技术
 tags:
   - Vue.js
-  - 前端框架
+  - 前端开发
 description: 收录 Vue.js 课程学习中的若干收获，包含遇到的问题、收获总结等。
 ---
 

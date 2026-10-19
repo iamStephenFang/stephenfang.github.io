@@ -6,7 +6,6 @@ categories:
 tags:
   - iOS
   - Objective-C
-  - Xcode
 copyright: true
 description: 准备开始写 Objective-C 之前花了一些时间重新阅读这本经典的《Effective Objective-C》，在阅读的过程中对重点内容进行了一些摘录，在方便自己复习的同时将相关内容在博客分享出来供参考。
 ---

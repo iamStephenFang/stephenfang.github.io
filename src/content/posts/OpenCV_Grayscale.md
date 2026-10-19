@@ -5,8 +5,7 @@ categories:
   - 技术
 tags:
   - OpenCV
-  - Xcode
-  - Grayscale
+  - 图像处理
 copyright: true
 description: 直方图是图像的一种统计表达，反映了图像中灰度的分布情况。以概率论为基础的，通过改变图像的直方图来改变图象中像素的灰度，以达到图像增强的目标，常称直方图修正。
 ---
