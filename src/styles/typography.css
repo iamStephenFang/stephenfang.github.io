@@ -51,6 +51,12 @@
 
     img {
       @apply border-border mx-auto border;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: min(55vh, 560px);
+      max-height: min(55svh, 560px);
+      object-fit: contain;
     }
 
     img[role="button"] {
