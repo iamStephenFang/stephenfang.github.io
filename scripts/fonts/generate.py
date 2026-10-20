@@ -1,0 +1,122 @@
+"""Generate CJK-only WOFF2 subsets of the pinned Adobe Source Han Serif font."""
+
+import argparse
+from collections import Counter
+import hashlib
+import io
+import json
+from pathlib import Path
+import subprocess
+import urllib.request
+
+from fontTools import subset
+from fontTools.ttLib import TTFont
+from fontTools.varLib.instancer import instantiateVariableFont
+
+ROOT = Path(__file__).resolve().parents[2]
+OUTPUT = ROOT / "public/fonts/reading"
+MANIFEST = OUTPUT / "manifest.json"
+CSS = ROOT / "src/styles/reading-fonts.css"
+COMMIT = "7889f11bf31170b5d092a083b357c8c8130f89e0"
+SOURCE = f"https://raw.githubusercontent.com/adobe-fonts/source-han-serif/{COMMIT}/Variable/TTF/Subset/SourceHanSerifCN-VF.ttf"
+SHA256 = "8e052cbcdbd0f03496c9ad05da7d57901549286d5efd30f3caf66a393f6c389b"
+RANGES = [(0x2E80, 0x9FFF), (0xF900, 0xFAFF), (0xFE10, 0xFE1F),
+          (0xFE30, 0xFE4F), (0xFF00, 0xFFEF), (0x20000, 0x323AF)]
+EXTENSIONS = {".md", ".mdx", ".astro", ".ts", ".json"}
+COMMON = ROOT / "scripts/fonts/common-characters.txt"
+
+
+def unicode_ranges(chars):
+    numbers = sorted(map(ord, chars))
+    runs = []
+    for number in numbers:
+        if runs and number == runs[-1][1] + 1:
+            runs[-1][1] = number
+        else:
+            runs.append([number, number])
+    return ", ".join(f"U+{a:X}" if a == b else f"U+{a:X}-{b:X}" for a, b in runs)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", type=Path, help="Reuse a local upstream TTF")
+    args = parser.parse_args()
+    data = args.source.read_bytes() if args.source else urllib.request.urlopen(SOURCE, timeout=60).read()
+    if hashlib.sha256(data).hexdigest() != SHA256:
+        raise SystemExit("Upstream font checksum does not match the pinned source")
+
+    counts = Counter()
+    for path in sorted((ROOT / "src").rglob("*")):
+        if path.suffix in EXTENSIONS:
+            counts.update(c for c in path.read_text() if any(a <= ord(c) <= b for a, b in RANGES))
+    baseline = set(COMMON.read_text()) - {"\n", "\r"}
+    if len(baseline) != 3755 or any(not 0x4E00 <= ord(c) <= 0x9FFF for c in baseline):
+        raise SystemExit("Expected 3,755 GB2312 level-1 characters in common-characters.txt")
+    # Reserve common characters even before they appear in an article.
+    for character in baseline:
+        counts.setdefault(character, 0)
+    original = TTFont(io.BytesIO(data))
+    missing = set(map(ord, counts)) - set(original.getBestCmap())
+    if missing:
+        raise SystemExit(f"Upstream font lacks: {''.join(map(chr, sorted(missing)))}")
+
+    # Preserve existing chunk membership so a new article does not invalidate every file.
+    previous = json.loads(MANIFEST.read_text())["chunks"] if MANIFEST.exists() else []
+    groups = [[c for c in chunk["characters"] if c in counts] for chunk in previous]
+    known = {c for group in groups for c in group}
+    added = sorted(set(counts) - known, key=lambda c: (-counts[c], ord(c)))
+    while added:
+        group = next((group for group in groups if len(group) < 256), None)
+        if group is None:
+            group = []
+            groups.append(group)
+        take = min(256 - len(group), len(added))
+        group.extend(added[:take])
+        added = added[take:]
+
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+    chunks, rules = [], []
+    for group in filter(None, groups):
+        font = TTFont(io.BytesIO(data))
+        options = subset.Options()
+        options.hinting = False
+        cutter = subset.Subsetter(options=options)
+        cutter.populate(unicodes=map(ord, group))
+        cutter.subset(font)
+        instantiateVariableFont(font, {"wght": (400, 700)}, inplace=True)
+        # The OFL reserves "Source"; modified subsets use their own internal names.
+        names = {1: "Blog CJK Serif", 3: "BlogCJKSerif-2.003", 4: "Blog CJK Serif",
+                 6: "BlogCJKSerif", 16: "Blog CJK Serif", 25: "BlogCJKSerif"}
+        for record in font["name"].names:
+            if record.nameID in names:
+                record.string = names[record.nameID].encode(record.getEncoding())
+        font.recalcTimestamp = False
+        font.flavor = "woff2"
+        buffer = io.BytesIO()
+        font.save(buffer)
+        binary = buffer.getvalue()
+        filename = f"cjk-{hashlib.sha256(binary).hexdigest()[:12]}.woff2"
+        (OUTPUT / filename).write_bytes(binary)
+        chunks.append({"file": filename, "characters": "".join(sorted(group)), "bytes": len(binary)})
+        rules.append(f'''@font-face {{
+  font-family: "Reading CJK Serif";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/reading/{filename}") format("woff2");
+  unicode-range: {unicode_ranges(group)};
+}}''')
+    manifest = {"source": SOURCE, "sha256": SHA256,
+                "baseline": "GB2312 level 1", "baselineCount": len(baseline), "chunks": chunks}
+    MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
+    CSS.write_text("/* Generated by scripts/fonts/generate.py; see scripts/fonts/README.md. */\n" + "\n\n".join(rules) + "\n")
+    keep = {chunk["file"] for chunk in chunks}
+    for path in OUTPUT.glob("*.woff2"):
+        if path.name not in keep:
+            path.unlink()
+    subprocess.run([str(ROOT / "node_modules/.bin/prettier"), "--write", str(CSS), str(MANIFEST)], check=True)
+    print(f"{len(counts)} CJK characters, {len(chunks)} chunks, {sum(c['bytes'] for c in chunks):,} bytes")
+
+
+if __name__ == "__main__":
+    main()

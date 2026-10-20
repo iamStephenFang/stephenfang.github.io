@@ -73,7 +73,7 @@ export default defineConfig({
       cssVariable: "--font-google-sans-code",
       provider: fontProviders.google(),
       fallbacks: ["monospace"],
-      // One variable WOFF2 covers all code weights; reading fonts are local.
+      // One variable WOFF2 covers all code weights.
       weights: ["300 700"],
       styles: ["normal", "italic"],
       formats: ["woff2"],

@@ -11,16 +11,17 @@
     system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC",
     "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   --font-code: var(--font-google-sans-code);
-  --font-reading: "Reading CJK Serif", ui-serif, "Times New Roman", serif;
+  --font-reading:
+    "Reading CJK Serif", "Reading CJK Local", ui-serif, "Times New Roman", serif;
 }
 
-/* Limit local Chinese faces to CJK glyphs so Latin uses the system serif. */
+/* Local CJK fallback if the self-hosted reading fonts cannot load. */
 @font-face {
-  font-family: "Reading CJK Serif";
+  font-family: "Reading CJK Local";
   src:
-    local("NotoSerifCJKsc-Regular"), local("NotoSerifSC-Regular"),
-    local("SourceHanSerifSC-Regular"), local("STSongti-SC-Regular"),
-    local("STSong"), local("SimSun");
+    local("SourceHanSerifSC-Regular"), local("NotoSerifCJKsc-Regular"),
+    local("NotoSerifSC-Regular"), local("STSongti-SC-Regular"),
+    local("Songti SC"), local("STSong"), local("SimSun");
   font-style: normal;
   font-weight: 400;
   unicode-range:
@@ -29,10 +30,10 @@
 }
 
 @font-face {
-  font-family: "Reading CJK Serif";
+  font-family: "Reading CJK Local";
   src:
-    local("NotoSerifCJKsc-Bold"), local("NotoSerifSC-Bold"),
-    local("SourceHanSerifSC-Bold"), local("STSongti-SC-Bold");
+    local("SourceHanSerifSC-Bold"), local("NotoSerifCJKsc-Bold"),
+    local("NotoSerifSC-Bold"), local("STSongti-SC-Bold");
   font-style: normal;
   font-weight: 700;
   unicode-range:
