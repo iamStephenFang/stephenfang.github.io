@@ -24,6 +24,10 @@
 
 网站已经部署在 [stephenfang.me](https://stephenfang.me)。
 
+## 文章整理
+
+新增或迁移文章时，参照[博客文章整理流程](docs/post-preparation.md)，统一 YAML、全文引子和图片域名地址。
+
 ## 📜 License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
