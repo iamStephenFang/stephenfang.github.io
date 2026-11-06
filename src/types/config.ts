@@ -27,8 +27,9 @@ interface PostsConfig {
   /** Posts shown on the index/home page */
   perIndex?: number;
   /**
-   * Scheduled posts within this window (ms) of their pubDatetime
-   * are shown as published. Defaults to 15 minutes.
+   * @deprecated No longer has any effect. Publishing is day-granular: a post is
+   * listed from the start of its `pubDatetime` day in the site timezone, so
+   * there is no sub-day boundary left for a margin to cover. Safe to remove.
    */
   scheduledPostMargin?: number;
 }
@@ -59,6 +60,12 @@ interface FeaturesConfig {
    * Set to false to disable search entirely.
    */
   search?: "pagefind" | false;
+  /**
+   * Table of contents on posts with 2+ h2/h3 headings: beside the post from
+   * 1280px, in the floating button below that. Defaults to true. Turn it off
+   * for one post with `hideToc: true` in its frontmatter.
+   */
+  toc?: boolean;
 }
 
 interface SocialLink {

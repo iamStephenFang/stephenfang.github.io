@@ -17,6 +17,7 @@ export default {
     sharePostViaEmail: "通过邮件分享这篇文章",
     tagLabel: "标签",
     backToTop: "回到顶部",
+    tableOfContents: "目录",
     goBack: "返回",
     editPage: "编辑页面",
     previousPost: "上一篇",
@@ -55,6 +56,7 @@ export default {
   },
   a11y: {
     skipToContent: "跳到正文",
+    skipTableOfContents: "跳过目录",
     openMenu: "打开菜单",
     closeMenu: "关闭菜单",
     toggleTheme: "切换主题",

@@ -1,5 +1,4 @@
 import type { APIRoute } from "astro";
-import type { ReactNode } from "react";
 import { getCollection } from "astro:content";
 import { fontData, experimental_getFontFileURL } from "astro:assets";
 import satori from "satori";
@@ -10,6 +9,7 @@ import {
   getOgFallbackFonts,
   ogTitleFontFamily,
 } from "@/utils/getOgFallbackFonts";
+import { postFilter } from "@/utils/postFilter";
 import config from "@/config";
 
 export async function getStaticPaths() {
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
   }
 
   const posts = await getCollection("posts").then(p =>
-    p.filter(({ data }) => !data.draft && !data.ogImage)
+    p.filter(post => postFilter(post) && !post.data.ogImage)
   );
 
   return posts.map(post => ({
@@ -54,152 +54,147 @@ export const GET: APIRoute = async ({ props, url }) => {
   );
 
   const markup = {
-      type: "div",
-      props: {
-        style: {
-          background: "#fefbfb",
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        },
-        children: [
-          {
-            type: "div",
-            props: {
-              style: {
-                position: "absolute",
-                top: "-1px",
-                right: "-1px",
-                border: "4px solid #000",
-                background: "#ecebeb",
-                opacity: "0.9",
-                borderRadius: "4px",
-                display: "flex",
-                justifyContent: "center",
-                margin: "2.5rem",
-                width: "88%",
-                height: "80%",
-              },
-            },
-          },
-          {
-            type: "div",
-            props: {
-              style: {
-                border: "4px solid #000",
-                background: "#fefbfb",
-                borderRadius: "4px",
-                display: "flex",
-                justifyContent: "center",
-                margin: "2rem",
-                width: "88%",
-                height: "80%",
-              },
-              children: {
-                type: "div",
-                props: {
-                  style: {
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    margin: "20px",
-                    width: "90%",
-                    height: "90%",
-                  },
-                  children: [
-                    {
-                      type: "p",
-                      props: {
-                        style: {
-                          fontFamily: ogTitleFontFamily,
-                          fontSize: 72,
-                          fontWeight: "bold",
-                          maxHeight: "84%",
-                          overflow: "hidden",
-                        },
-                        children: props.data.title,
-                      },
-                    },
-                    {
-                      type: "div",
-                      props: {
-                        style: {
-                          display: "flex",
-                          justifyContent: "space-between",
-                          width: "100%",
-                          marginBottom: "8px",
-                          fontSize: 28,
-                        },
-                        children: [
-                          {
-                            type: "span",
-                            props: {
-                              children: [
-                                "by ",
-                                {
-                                  type: "span",
-                                  props: {
-                                    style: { color: "transparent" },
-                                    children: '"',
-                                  },
-                                },
-                                {
-                                  type: "span",
-                                  props: {
-                                    style: {
-                                      overflow: "hidden",
-                                      fontWeight: "bold",
-                                    },
-                                    children: props.data.author,
-                                  },
-                                },
-                              ],
-                            },
-                          },
-                          {
-                            type: "span",
-                            props: {
-                              style: { overflow: "hidden", fontWeight: "bold" },
-                              children: config.site.title,
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            },
-          },
-        ],
+    key: null,
+    type: "div",
+    props: {
+      style: {
+        background: "#fefbfb",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       },
-    } as ReactNode;
-
-  const svg = await satori(
-    markup,
-    {
-      width: 1200,
-      height: 630,
-      embedFont: true,
-      fonts: [
+      children: [
         {
-          name: "Google Sans Code",
-          data: regularData,
-          weight: 400,
-          style: "normal",
+          type: "div",
+          props: {
+            style: {
+              position: "absolute",
+              top: "-1px",
+              right: "-1px",
+              boxSizing: "border-box",
+              border: "4px solid #000",
+              background: "#ecebeb",
+              opacity: "0.9",
+              borderRadius: "4px",
+              display: "flex",
+              justifyContent: "center",
+              margin: "2.5rem",
+              width: "88%",
+              height: "80%",
+            },
+          },
         },
         {
-          name: "Google Sans Code",
-          data: boldData,
-          weight: 700,
-          style: "normal",
+          type: "div",
+          props: {
+            style: {
+              position: "relative",
+              boxSizing: "border-box",
+              border: "4px solid #000",
+              background: "#fefbfb",
+              borderRadius: "4px",
+              display: "flex",
+              justifyContent: "center",
+              margin: "2rem",
+              width: "88%",
+              height: "80%",
+            },
+            children: {
+              type: "div",
+              props: {
+                style: {
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  margin: "20px",
+                  width: "90%",
+                  height: "90%",
+                },
+                children: [
+                  {
+                    type: "p",
+                    props: {
+                      style: {
+                        fontFamily: ogTitleFontFamily,
+                        fontSize: 72,
+                        fontWeight: "bold",
+                        margin: "17px 0 0",
+                        maxHeight: "80%",
+                        overflow: "hidden",
+                      },
+                      children: props.data.title,
+                    },
+                  },
+                  {
+                    type: "div",
+                    props: {
+                      style: {
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                        marginBottom: "8px",
+                        fontSize: 28,
+                      },
+                      children: [
+                        {
+                          type: "span",
+                          props: {
+                            children: [
+                              "by ",
+                              {
+                                type: "span",
+                                props: {
+                                  style: {
+                                    overflow: "hidden",
+                                    fontWeight: "bold",
+                                  },
+                                  children: props.data.author,
+                                },
+                              },
+                            ],
+                          },
+                        },
+                        {
+                          type: "span",
+                          props: {
+                            style: { overflow: "hidden", fontWeight: "bold" },
+                            children: config.site.title,
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          },
         },
-        ...fallbackFonts,
       ],
-    }
-  );
+    },
+  } as Parameters<typeof satori>[0];
+
+  const svg = await satori(markup, {
+    width: 1200,
+    height: 630,
+    embedFont: true,
+    fonts: [
+      {
+        name: "Google Sans Code",
+        data: regularData,
+        weight: 400,
+        style: "normal",
+      },
+      {
+        name: "Google Sans Code",
+        data: boldData,
+        weight: 700,
+        style: "normal",
+      },
+      ...fallbackFonts,
+    ],
+  });
 
   const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
 

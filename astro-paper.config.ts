@@ -15,7 +15,6 @@ export default defineAstroPaperConfig({
   posts: {
     perPage: 5,
     perIndex: 5,
-    scheduledPostMargin: 15 * 60 * 1000,
   },
   features: {
     lightAndDarkMode: true,
@@ -26,6 +25,7 @@ export default defineAstroPaperConfig({
       enabled: false,
     },
     search: "pagefind",
+    toc: true,
   },
   socials: [
     { name: "github", url: "https://github.com/iamstephenfang" },
