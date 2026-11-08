@@ -17,7 +17,7 @@ tags:
   - Apple
 copyright: true
 featured: true
-ogImage: https://image.stephenfang.me/California/cover-california-macos.png
+ogImage: https://image.stephenfang.me/California/cover-california-macos.jpg
 description: 用一两句话写清文章涉及的地点、内容和个人视角。
 ---
 ```
@@ -53,7 +53,17 @@ YAML 后先放一至两段引子，交代写作缘由、文章范围和个人视
 - PNG 应返回 `image/png`，JPG/JPEG 应返回 `image/jpeg`。如果返回 `application/octet-stream`，可先读取文件签名确认真实格式，再在云端修正文件类型信息，避免直接打开时触发下载或影响第三方预览。
 - 地址替换不等于上传；云端缺文件时先核对上传目录和扩展名，不根据猜测重命名。
 
-## 4. 验证与交付
+## 4. 压缩与上传（需要时）
+
+先保留原图，再生成独立的网页版本。先核对云端原文件与本机原图的校验值，确认处理的是同一份内容。照片可以导出为 JPEG；地图等含有文字和细线的图片可保留 PNG。格式改变时同步更新正文和 `ogImage`，不要只修改扩展名。
+
+HDR 不能仅凭扩展名、P3 色域或色深判断。使用支持 HDR 的解码器检查增益图、色彩空间和可解码的亮度范围。压缩 HDR 时使用支持 HDR 输出的工具，并在导出后再次解码，确认 HDR 信息和亮度范围仍然存在。压缩会改变像素细节；保留 HDR 不等于无损压缩。未实际检查 HDR 屏幕时，不声称已完成 HDR 显示效果验证。
+
+此次 California 文章采用 macOS Image I/O：照片长边上限 2560 像素，宽高比超过 2:1 的全景上限 3840 像素，不放大小图；JPEG 使用原生质量参数 `0.70`（不同软件的质量数值不可直接换算）。17 张 HDR 图片输出后仍可解码为 HDR，亮度范围与原图一致；3 张地图保留 PNG。61 张图片合计由约 152 MB 降至约 47.1 MB。该设置是此次文章的取舍，不是所有文章的固定要求。
+
+上传到已确认的 R2 存储桶和目录，明确指定 `image/jpeg` 或 `image/png`。只上传核验通过的版本；上传后检查对象大小、校验值及类型。替换同名文件后，按具体图片 URL 清理 Cloudflare 缓存，再通过公开域名检查结果，避免误将旧缓存当作新文件。保留本地原图和处理清单以便恢复；不删除其他文章或目录里的文件。
+
+## 5. 验证与交付
 
 1. 检查差异，确认改动限于元信息、引子、平台语境调整和图片地址，保留原有正文及来源。
 2. 对改动文件运行格式检查，例如 `npx --no-install prettier --ignore-path /dev/null --check src/content/posts/CaliforniaWallpaperTrip.md docs/post-preparation.md`。

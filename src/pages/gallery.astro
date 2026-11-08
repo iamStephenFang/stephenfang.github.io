@@ -1,0 +1,230 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+import { fetchGalleryPhotos, photoUrl, unsplashProfile } from "@/data/gallery";
+
+const accessKey = import.meta.env.UNSPLASH_ACCESS_KEY?.trim();
+if (!accessKey && import.meta.env.PROD) {
+  throw new Error("请在 GitHub Actions Secrets 中配置 UNSPLASH_ACCESS_KEY。");
+}
+const galleryPhotos = accessKey ? await fetchGalleryPhotos(accessKey) : [];
+
+const description = "一些我拍下的风景与日常，发布于 Unsplash。";
+---
+
+<Layout title={`摄影 | ${config.site.title}`} description={description}>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle="摄影" pageDesc={description}>
+    <p class="ui-meta mb-8">
+      <a
+        class="hover:text-accent underline underline-offset-4"
+        href={unsplashProfile}
+      >
+        Stephen Fang on Unsplash ↗
+      </a>
+    </p>
+
+    {
+      galleryPhotos.length === 0 && (
+        <p class="ui-meta mb-8">
+          {!accessKey
+            ? "本地预览请先在 .env 中配置 UNSPLASH_ACCESS_KEY。"
+            : "暂时没有照片，可以前往 Unsplash 主页查看。"}
+        </p>
+      )
+    }
+    <div class="gallery" aria-label="摄影作品">
+      {
+        galleryPhotos.map((photo, index) => (
+          <a
+            class="gallery-photo"
+            href={photo.pageUrl}
+            data-full-image={photoUrl(photo.imageUrl, 2400)}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-gallery-photo
+            aria-label={`查看大图：${photo.alt ?? `摄影作品 ${index + 1}`}`}
+          >
+            <img
+              src={photoUrl(photo.imageUrl, 720)}
+              srcset={`${photoUrl(photo.imageUrl, 360)} 360w, ${photoUrl(photo.imageUrl, 720)} 720w, ${photoUrl(photo.imageUrl, 1080)} 1080w`}
+              width={photo.width}
+              height={photo.height}
+              sizes="(min-width: 1024px) 320px, (min-width: 640px) 31vw, (min-width: 420px) 47vw, 100vw"
+              alt={photo.alt ?? `Stephen Fang 的摄影作品 ${index + 1}`}
+              loading={index < 3 ? "eager" : "lazy"}
+              decoding="async"
+            />
+            <span class="photo-fallback" hidden>
+              照片暂时无法加载 · 查看原图 ↗
+            </span>
+          </a>
+        ))
+      }
+    </div>
+
+    <p class="ui-meta border-border my-8 border-t pt-6">
+      <a
+        class="hover:text-accent underline underline-offset-4"
+        href={unsplashProfile}
+      >
+        在 Unsplash 查看全部作品 ↗
+      </a>
+    </p>
+
+    <dialog class="photo-viewer" aria-label="照片大图">
+      <form method="dialog">
+        <button class="viewer-close" aria-label="关闭大图">关闭 ×</button>
+      </form>
+      <img class="viewer-image" alt="" />
+      <a class="viewer-source" href={unsplashProfile}
+        >Stephen Fang / Unsplash ↗</a
+      >
+    </dialog>
+  </Main>
+  <Footer />
+</Layout>
+
+<style>
+  .gallery {
+    columns: 3;
+    column-gap: 1rem;
+  }
+  .gallery-photo {
+    display: block;
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .gallery-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .gallery-photo img[hidden] {
+    display: none;
+  }
+  .gallery-photo:hover {
+    opacity: 0.9;
+  }
+  .photo-fallback {
+    padding: 2rem 1rem;
+    font-size: 0.875rem;
+    background: var(--color-muted);
+  }
+  .photo-fallback:not([hidden]) {
+    display: block;
+  }
+  .photo-viewer {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    padding: 3rem 1rem 2.5rem;
+    width: min(96vw, 1400px);
+    max-width: 96vw;
+    max-height: 96dvh;
+    color: var(--color-foreground);
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+  }
+  .photo-viewer::backdrop {
+    background: rgb(0 0 0 / 85%);
+  }
+  .viewer-image {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 78dvh;
+    object-fit: contain;
+  }
+  .viewer-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+  }
+  .viewer-source {
+    display: block;
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  @media (max-width: 639px) {
+    .gallery {
+      columns: 2;
+      column-gap: 0.75rem;
+    }
+    .gallery-photo {
+      margin-bottom: 0.75rem;
+    }
+  }
+  @media (max-width: 419px) {
+    .gallery {
+      columns: 1;
+    }
+  }
+</style>
+
+<script>
+  function initGallery() {
+    const dialog = document.querySelector<HTMLDialogElement>(".photo-viewer");
+    const image = dialog?.querySelector<HTMLImageElement>(".viewer-image");
+    const sourceLink =
+      dialog?.querySelector<HTMLAnchorElement>(".viewer-source");
+    if (!dialog || !image || !sourceLink) return;
+
+    document
+      .querySelectorAll<HTMLAnchorElement>("[data-gallery-photo]")
+      .forEach(link => {
+        const thumbnail = link.querySelector("img");
+        const fallback = link.querySelector<HTMLElement>(".photo-fallback");
+        const showFallback = () => {
+          if (thumbnail) thumbnail.hidden = true;
+          if (fallback) fallback.hidden = false;
+        };
+        thumbnail?.addEventListener("error", showFallback);
+        if (thumbnail?.complete && thumbnail.naturalWidth === 0) showFallback();
+
+        link.addEventListener("click", event => {
+          if (
+            event.defaultPrevented ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey ||
+            event.button !== 0
+          )
+            return;
+          // Failed thumbnails keep the direct link as a fallback.
+          if (thumbnail?.hidden) return;
+          event.preventDefault();
+          image.src = link.dataset.fullImage!;
+          sourceLink.href = link.href;
+          image.alt = thumbnail?.alt ?? "";
+          dialog.showModal();
+        });
+      });
+
+    dialog.addEventListener("click", event => {
+      if (event.target !== dialog) return;
+      const bounds = dialog.getBoundingClientRect();
+      if (
+        event.clientX < bounds.left ||
+        event.clientX > bounds.right ||
+        event.clientY < bounds.top ||
+        event.clientY > bounds.bottom
+      )
+        dialog.close();
+    });
+  }
+
+  initGallery();
+  document.addEventListener("astro:after-swap", initGallery);
+</script>

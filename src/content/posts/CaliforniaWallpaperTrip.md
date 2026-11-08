@@ -10,11 +10,11 @@ tags:
   - Apple
 copyright: true
 featured: true
-ogImage: https://image.stephenfang.me/California/cover-california-macos.png
+ogImage: https://image.stephenfang.me/California/cover-california-macos.jpg
 description: 过去十几年里，我在 Mac 桌面上看过 Yosemite 的 Half Dome、Sierra Nevada 的群山和 Big Sur 的海岸，这次去加州我终于亲眼见到了这些风景。
 ---
 
-![文章封面](https://image.stephenfang.me/California/cover-california-macos.png)
+![文章封面](https://image.stephenfang.me/California/cover-california-macos.jpg)
 
 ## 缘起
 
@@ -44,13 +44,13 @@ Basic Apple Guy 整理的 [《macOS California Camino》](https://basicappleguy.
 
 我的旅程从洛杉矶开始，离开城市后公路两侧逐渐变成大片金黄色的山丘。十月加州的阳光仍然十分充足，路面在强烈的日照下显得格外明亮。
 
-![前往 Sequoia 的路上，三河城](https://image.stephenfang.me/California/three-rivers-road.png)
+![前往 Sequoia 的路上，三河城](https://image.stephenfang.me/California/three-rivers-road.jpg)
 
 前往 Sequoia 的路上，三河城
 
 随着车子继续向北，沿途的景色开始慢慢变化。开阔的草坡逐渐让位于山地，公路不断爬升，树林也变得越来越茂密，几个小时后就进入了这趟旅程的第一座国家公园——Sequoia。
 
-![前往 Sequoia 的路上，三河城](https://image.stephenfang.me/California/three-rivers-mountain-road.png)
+![前往 Sequoia 的路上，三河城](https://image.stephenfang.me/California/three-rivers-mountain-road.jpg)
 
 前往 Sequoia 的路上，三河城
 
@@ -58,25 +58,25 @@ Basic Apple Guy 整理的 [《macOS California Camino》](https://basicappleguy.
 
 2024 年发布的 macOS Sequoia 把巨杉林带到了 Mac 桌面上。其中的「Sequoia Sunrise」延续了 Sonoma 将屏保与桌面背景衔接起来的方式，以穿行于树林间的动态画面展现巨杉林。镜头缓缓向前，阳光透过高大的树冠洒落下来，一棵棵巨杉从画面两侧掠过，也让人更直观地感受到这片森林的幽深与壮观。
 
-![macOS Sequoia Sunrise 巨杉林画面](https://image.stephenfang.me/California/wallpaper-sequoia-sunrise.png)
+![macOS Sequoia Sunrise 巨杉林画面](https://image.stephenfang.me/California/wallpaper-sequoia-sunrise.jpg)
 
 macOS Sequoia 的「Sequoia Sunrise」壁纸画面，来自 [512 Pixels](https://512pixels.net/projects/default-mac-wallpapers-in-5k/)
 
 巨杉的大小远比照片里看到的夸张。来这里之前我知道巨杉是世界上体积最大的树木之一，也看过不少游客站在树下的照片。
 
-![经典的游客打卡位](https://image.stephenfang.me/California/sequoia-tourist-stop.png)
+![经典的游客打卡位](https://image.stephenfang.me/California/sequoia-tourist-stop.jpg)
 
 经典的游客打卡位
 
 当那些粗大的红褐色树干真正出现在眼前时，还是很难立刻建立起对它们尺寸的认识。
 
-![Giant Forest](https://image.stephenfang.me/California/giant-forest-tree.png)
+![Giant Forest](https://image.stephenfang.me/California/giant-forest-tree.jpg)
 
 Giant Forest
 
 回头看照片，树干与周围植被的层次还在，但站在树下仰望时感受到的巨大尺度，很难通过照片传达。苹果用移动的镜头展现了巨杉林的纵深，我的照片却只能记录其中一个角度。
 
-![站在树下仰望](https://image.stephenfang.me/California/sequoia-looking-up.png)
+![站在树下仰望](https://image.stephenfang.me/California/sequoia-looking-up.jpg)
 
 站在树下仰望
 
@@ -90,7 +90,7 @@ Grant Grove
 
 沿途的景色也逐渐发生变化。茂密的森林之外开始出现更多裸露的浅灰色岩壁，公路沿着山坡起伏，偶尔能从高处望见远方层层叠叠的山脊。和刚才那些需要站在树下仰望的巨杉不同，这里的风景开始变得开阔，视线也能延伸到更远的地方。
 
-![Kings Canyon National Park](https://image.stephenfang.me/California/kings-canyon-mountains.png)
+![Kings Canyon National Park](https://image.stephenfang.me/California/kings-canyon-mountains.jpg)
 
 Kings Canyon National Park
 
@@ -136,7 +136,7 @@ OS X Yosemite，图片来自 Apple
 
 虽然我看到的 Half Dome 山顶光线和构图与壁纸完全不同，但是那道圆弧状的山顶与陡峭岩壁相接的轮廓还是很容易辨认。
 
-![Yosemite Valley](https://image.stephenfang.me/California/yosemite-valley-cliffs.png)
+![Yosemite Valley](https://image.stephenfang.me/California/yosemite-valley-cliffs.jpg)
 
 Yosemite Valley
 
@@ -216,7 +216,7 @@ Tenaya Lake
 
 离开 Tenaya Lake 后，我继续向东，沿着 Tioga Road 翻过山口。随着海拔逐渐下降，周围的森林开始变得稀疏，山坡也越来越干燥。
 
-![Lee Vining](https://image.stephenfang.me/California/lee-vining-valley.png)
+![Lee Vining](https://image.stephenfang.me/California/lee-vining-valley.jpg)
 
 Lee Vining
 
@@ -244,7 +244,7 @@ macOS Tahoe 壁纸，图片来自 [512 Pixels](https://512pixels.net/projects/de
 
 Lake Tahoe 位于加州与内华达州交界处，湖面海拔约 1900 米，以清澈的湖水闻名。湖水在不同深度和光线下呈现出从浅绿到深蓝的渐变，岸边则散布着圆润的花岗岩和高大的松树。
 
-![Lake Tahoe 湖景](https://image.stephenfang.me/California/lake-tahoe-overlook.png)
+![Lake Tahoe 湖景](https://image.stephenfang.me/California/lake-tahoe-overlook.jpg)
 
 Lake Tahoe 湖景
 
@@ -262,7 +262,7 @@ Speedboat Beach
 
 站在岸边，可以看到清澈的湖水漫过水底的石块，近处呈现出浅浅的青绿色，向远处逐渐变成深蓝色。松树沿着岩石生长，远处则是连绵的山峰。
 
-![Speedboat Beach](https://image.stephenfang.me/California/speedboat-beach-rocks.png)
+![Speedboat Beach](https://image.stephenfang.me/California/speedboat-beach-rocks.jpg)
 
 Speedboat Beach
 
@@ -298,7 +298,7 @@ macOS Golden Gate 壁纸，图片来自 [512 Pixels](https://512pixels.net/proje
 
 以前在照片里看金门大桥，总觉得那两座橙红色的桥塔是旧金山最容易辨认的标志。真正来到这里才发现，即使站在能够俯瞰整座大桥的位置，也要有一点运气才能看清它。
 
-![走上金门大桥](https://image.stephenfang.me/California/golden-gate-walk.png)
+![走上金门大桥](https://image.stephenfang.me/California/golden-gate-walk.jpg)
 
 走上金门大桥
 
@@ -320,7 +320,7 @@ macOS Monterey 壁纸，图片来自 [512 Pixels](https://512pixels.net/projects
 
 这里没有抽象壁纸里那些整齐、流畅的曲线，倒是很适合沿着海岸慢慢走走停停。
 
-![Monterey 日落](https://image.stephenfang.me/California/monterey-sunset.png)
+![Monterey 日落](https://image.stephenfang.me/California/monterey-sunset.jpg)
 
 Monterey 日落
 
@@ -418,7 +418,7 @@ Mojave 的沙丘只有连绵起伏的沙脊和远处的山峰，很适合展现�
 
 | Mac OS X Tiger：Aqua                                                                       | Mac OS X Leopard：星空                                                                       |
 | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| ![Tiger 的蓝色 Aqua 默认壁纸](https://image.stephenfang.me/California/wallpaper-tiger.png) | ![Leopard 的紫色星空默认壁纸](https://image.stephenfang.me/California/wallpaper-leopard.png) |
+| ![Tiger 的蓝色 Aqua 默认壁纸](https://image.stephenfang.me/California/wallpaper-tiger.jpg) | ![Leopard 的紫色星空默认壁纸](https://image.stephenfang.me/California/wallpaper-leopard.jpg) |
 
 早期 Mac OS X 也并不缺少自然风景照片，系统自带的桌面图片中也收录过植物、岩石、海洋和山地摄影。不过对我来说，这些照片与系统名称之间的联系并不鲜明。2013 年的 OS X Mavericks 改变了这一点。苹果开始以加州地名命名 Mac 操作系统，也让系统名称与默认壁纸中的真实风景建立了直接联系。从 Big Sur 起，抽象设计重新成为这组壁纸的重要部分，后来的系统也有抽象图案与风景画面并存的情况，而以加州地名命名系统的传统仍在延续。
 
@@ -436,7 +436,7 @@ Yosemite Valley
 
 我的很多照片都不是苹果壁纸里的角度，例如这张照片里山峰没有占满画面，河岸的树林也已经暗了下来，水面倒映着远处的岩壁和天空，这就是那天我在 Yosemite 看到的景色。
 
-![Yosemite 夜晚](https://image.stephenfang.me/California/yosemite-night-sky.png)
+![Yosemite 夜晚](https://image.stephenfang.me/California/yosemite-night-sky.jpg)
 
 Yosemite 夜晚
 
